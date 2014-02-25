@@ -1,0 +1,64 @@
+<!--{include file="../header.html" page_title="$page_title"}-->
+<div class="wrapper">
+	<div class="tips"><span>{$position}</span></div>
+	<div class="qiugoucontent clearfix">
+	<div class="qiugoucontentleft">
+    <div class="base_title">
+       <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang search_result}</span><span class="corner_t_r"></span></h2>
+	</div>
+		<div class="qiugouleftcon box_bord">
+			<form>
+            <table width="100%" border="0">
+              <tr>
+                <th>{lang title}</th>
+                <th>{lang user_name_n}</th>
+                <th>{lang the_price}</th>
+              </tr>
+              <!--{loop $Prices item}-->
+              <tr>
+                <td class="offer_info title_link"><span><a href="index.php?do=product&action=price&id={$item.id}" title="{$item.title}">{$item.title}</a></span>[{$item.created|date_format:"%Y-%m-%d"}]<br />
+						{lang abstract}{$item.description|truncate:50}<br /></td>
+                <td>{if $item.companyname}<a href="{the_url module=space userid=$item.username}">{$item.companyname}</a>{else}{$item.username}{/if}</td>
+                <td>
+                <em class="value">{$item.price|number_format:0}</em>{$Monetaries[$item.currency]}/{$Measuries[$item.units]}
+               </td>
+              </tr>
+              	<!--{/loop}-->
+            </table>
+
+			<div>
+				<span><div class="pagination2"><!-- {pager rowcount=$paging.total} --></div></span>
+			</div>
+			</form>
+		</div>
+	</div>
+	<div class="qiugoucontentright">
+		<div class="recommendcompany">
+			<div class="recommendcompanytop"><img src="{$theme_img_path}images/lhighs.gif" />&nbsp;{lang latest_new} {lang prices}</div>
+			{pb:price row=10 name="item"}
+			<p>{$item.link}</p>
+			{/pb:price}
+			<div class="clear"></div>
+		</div>
+		<div class="recommendcompany">
+			<div class="recommendcompanytop"><img src="{$theme_img_path}images/lhighs.gif" />&nbsp;{lang commend} {lang product}</div>
+			{pb:product row=10 type="commend" name="item"}
+			<p><a href="{$item.url}">{$item.name}</a></p>
+			{/pb:product}
+			<div class="clear"></div>
+		</div>
+		<div class="recommendcompany">
+			<div class="recommendcompanytop"><img src="{$theme_img_path}images/lhighs.gif" />&nbsp;{lang recommended_company}</div>
+			{pb:company row=15 name=company}
+			<p>{$company.link}</p>
+			{/pb:company}
+			<div class="clear"></div>
+		</div>
+</div>
+</div>
+<script>
+$("#SearchFrm").attr("action","{the_url module=search}");
+$("#hdModule").val("product");
+$("#topMenuProduct").addClass("lcur");
+</script>
+<!--{include file="../footer.html"}-->

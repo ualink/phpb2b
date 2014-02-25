@@ -1,0 +1,45 @@
+{block name="title" prepend}{#companynews#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <div class="hint"><span class="btn_hint"><a href="news.php?do=edit" class="btn_publish">{lang post_companynews}</a></span>{lang add_news_show}</div>  
+		<form name="newsfrm" action="{$smarty.server.PHP_SELF}" method="post">
+		<!-- {formhash} -->
+            <table class="news">
+                <tr>
+                  <th><input name="newsidAll" type="checkbox" id="check_all" title="{lang all_select}"></th>
+                  <th>{lang title}</th>
+                  <th>{lang category}</th>
+                  <th>{lang state}</th>
+                  <th>{lang time}</th>
+                  <th>{lang operation}</th>
+                </tr>
+				<!--{foreach from=$Items item=item}-->
+                <tr align="center" class="bggray">
+                  <td><input name="newsid[]" type="checkbox" id="newsid[]" rel="checkk_item" value="{$item.CompanynewsId}"></td>
+                  <td><a href="news.php?do=edit&id={$item.CompanynewsId}">{$item.CompanynewsTitle|truncate:25}</a></td>
+                  <td>{$CompanynewsTypes[$item.type_id]}</td>
+                  <td>{$CheckStatus[$item.status]}</td>
+                  <td>{$item.pubdate}</td>
+                  <td><a href="news.php?do=edit&id={$item.CompanynewsId}">{lang modify}</a></td>
+                </tr>
+				<!--{foreachelse}-->
+				<!--{/foreach}-->
+            </table>
+            <table class="room_pages">
+          <tr>
+            <td>{$ByPages}</td>
+          </tr>
+          </table>
+            <table class="trade_line">
+                <tr>
+                  <td height="1" background="{$office_theme_path}images/index_trade_line.gif"></td>
+                </tr>
+          
+          <tr align="center" valign="bottom">
+            <td height="40"><input name="del" type="submit" id="delete" value="{lang delete_select}"></td>
+          </tr>
+        </table>
+		</form>
+{/block}

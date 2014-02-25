@@ -1,0 +1,21 @@
+{extends file="layout.html"} 
+{block name="title" prepend}{#honour#}{/block}
+{block name="content"}
+			<div class="rightbarcontact">
+					<div class="playercontact">
+					<div class="playerheadcontact"><span class="playlistcontact">{lang honour}</span><span class="player_head_concontact"></span><img src="{$SpaceUrl}images/contactus_13.jpg" /></div>
+					<div class="clear"></div>
+					<div class="player_concontact">
+						<ul>
+						<!--{loop $Items item}-->
+							<li><div><a href="{$item.middleimage}" rel="facebox"><img src="{$item.image}" width="80" height="80" alt="{$item.title}" border="0"></a></div><div><p>{$item.title|truncate:20}</p></div></li>
+						<!--{/loop}-->				
+						</ul>
+						<div class="clear"></div>
+						<p class="page">{$ByPages}</p>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+{/block}

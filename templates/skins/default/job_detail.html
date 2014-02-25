@@ -1,0 +1,21 @@
+{extends file="layout.html"} 
+{block name="title" prepend}{$item.name}{/block}
+{block name="content"}
+<!-- {get do="cache" var="options" name="typeoption"} -->
+			<div class="rightbarcontact">
+			    <div class="company_job">
+                    <p class="title">{lang job_name}{$item.name}</p>
+                        <p><strong>{lang require_gender}</strong>{$options.gender[$item.require_gender_id]}</p>
+						<p><strong>{lang job_peoples}</strong>{$item.peoples}</p>
+						<p><strong>{lang require_education}</strong>{$options.education[$item.require_education_id]}</p>
+						<p><strong>{lang require_age}</strong>{$item.require_age}</p>
+						<p><strong>{lang salary_scope}</strong>{$options.salary[$item.salary_id]}</p>
+						<p><strong>{lang work_station}</strong>{$item.work_station}</p>
+						<p><strong>{lang work_type}</strong>{$options.work_type[$item.worktype_id]}</p>
+						<p><strong>{lang publish_date}</strong>{$item.created|date_format:"%Y-%m-%d"}</p>
+						<p><strong>{lang job_content}</strong>{$item.content}</p>
+                   </div>
+			</div>
+			<div class="clear"></div>
+		</div>
+{/block}

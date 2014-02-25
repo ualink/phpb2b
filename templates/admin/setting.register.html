@@ -1,0 +1,113 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang reg_and_visit}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang reg_and_visit}</h3>
+    <ul class="subnav">
+		<li><a href="setting.php?do=register" class="btn1"><span>{lang register}</span></a></li>
+        <li><a href="setting.php?do=registerfile">{lang default}{lang setting}</a></li>
+    </ul>
+</div>
+<div class="info"> 
+    <form method="post" name="edit_frm" action="setting.php"> 
+    <input type="hidden" name="data[reg_filename]" value="{$item.REG_FILENAME}" />
+    <input type="hidden" name="data[post_filename]" value="{$item.POST_FILENAME}" />
+        <table class="infoTable"> 
+         	<tr> 
+                <th class="paddingT15">{lang allow_new_user_registration}</th> 
+              	<td class="paddingT15 wordSpacing5">
+                <label for="close_register"><input type="radio" name="data[setting][register_type]" id="close_register" value="close_register" onclick="$('#tbRegItem').hide();" />{lang close} {lang register}</label>
+  <br />
+  <label for="open_common_reg"><input type="radio" name="data[setting][register_type]" id="open_common_reg" value="open_common_reg" onclick="$('#tbRegItem').show();" />{lang open} {lang general} {lang register}</label>
+  <br />
+  <label for="open_invite_reg"><input type="radio" name="data[setting][register_type]" id="open_invite_reg" value="open_invite_reg" onclick="$('#tbRegItem').show();" />{lang open} {lang invite} {lang register}</label></td> 
+          	</tr> 
+            <tbody id="tbRegItem" style="display: none">
+			<tr> 
+                <th class="paddingT15">{lang register} {lang agreement}</th> 
+       			<td class="paddingT15 wordSpacing5"><textarea name="data[setting][agreement]" style="width:600px;" class="mceEditor">{$item.AGREEMENT}</textarea></td> 
+          	</tr> 
+         	<tr> 
+                <th class="paddingT15">{lang new_user_registration_check}</th> 
+              	<td class="paddingT15 wordSpacing5">
+                  <select name="data[setting][new_userauth]" id="NewUserauth">
+                  <option value="0" {if $item.NEW_USERAUTH==0}selected="selected"{/if}>{lang no}</option>
+                  <option value="1" {if $item.NEW_USERAUTH==1}selected="selected"{/if}>{lang email_verification}</option>
+                  <option value="2" {if $item.NEW_USERAUTH==2}selected="selected"{/if}>{lang audit_verification}</option>
+                  </select>
+                </td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang exclude_ip_address_list}</th> 
+       			<td class="paddingT15 wordSpacing5"><textarea name="data[forbid_ip]">{$item.forbid_ip}</textarea></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang title_keywords} {lang shield}</th> 
+       			<td class="paddingT15 wordSpacing5"><textarea name="data[forbid_word]">{$item.forbid_word}</textarea></td> 
+          	</tr> 
+         	<tr> 
+                <th class="paddingT15">{lang ip_registration_interval}</th> 
+              	<td class="paddingT15 wordSpacing5"><input type="text" name="data[setting][ip_reg_sep]" id="IP_REG_SEP" value="{$item.IP_REG_SEP|default:0}" class="infoTableInput" /><label class="field_notice">{lang units_per_hour}</label></td> 
+          	</tr>
+         	<tr> 
+                <th class="paddingT15">{lang send_welcome_message}</th> 
+              	<td class="paddingT15 wordSpacing5">
+				  <label for="welcome_msg0"><input type="radio" name="data[setting][welcome_msg]" id="welcome_msg0" value="0" onclick="$('#tbWelcomeMsg').hide();" />{lang not} {lang send}</label>
+				  <br />
+				  <label for="welcome_msg1"><input type="radio" name="data[setting][welcome_msg]" id="welcome_msg1" value="1" onclick="$('#tbWelcomeMsg').show();" />{lang send} {lang welcome} {lang pms}</label>
+				  <br />
+				  <label for="welcome_msg2"><input type="radio" name="data[setting][welcome_msg]" id="welcome_msg2" value="2" onclick="$('#tbWelcomeMsg').hide();" />{lang send} {lang welcome} Email</label>
+				</td> 
+          	</tr> 
+            <tbody id="tbWelcomeMsg" style="display: none">
+         	<tr> 
+                <th class="paddingT15">{lang welcome} {lang the_title}{lang colon}</th> 
+              	<td class="paddingT15 wordSpacing5"><input type="text" name="data[welcome_msg_title]" id="welcome_msg_title" value="{$item.WELCOME_MSG_TITLE|default:#welcome_title#}" class="infoTableInput" /></td> 
+          	</tr> 
+         	<tr> 
+                <th class="paddingT15">{lang welcome} {lang content}</th> 
+              	<td class="paddingT15 wordSpacing5"><textarea name="data[welcome_msg_content]" style="width:600px;" class="mceEditor">{$item.WELCOME_MSG_CONTENT|default:#welcome_content#}</textarea></td> 
+          	</tr> 
+            </tbody>
+            </tbody>
+            <tr> 
+            <th></th> 
+            <td class="ptb20"> 
+                <input class="formbtn" type="submit" name="saveregister" value="{lang submit}" /> 
+                <input class="formbtn" type="reset" name="reset" value="{lang reset}" /> 
+            </td> 
+        </tr> 
+        </table> 
+    </form> 
+</div> 
+{editor type="tinymce" mode="specific_textareas"}
+<script>
+var register_type = "{$item.REGISTER_TYPE|default:open_common_reg}";
+var welcome_msg = "{$item.WELCOME_MSG|default:0}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	if(register_type=="close_register"){
+		$("#close_register").attr("checked","checked");
+	}else if(register_type=="open_common_reg"){
+		$("#open_common_reg").attr("checked", "checked");
+		$("#tbRegItem").show();
+	}else if(register_type=="open_invite_reg"){
+		$("#open_invite_reg").attr("checked", "checked");
+		$("#tbRegItem").show();
+	}
+	if(welcome_msg=="1"){
+		$("#welcome_msg1").attr("checked","checked");
+		$("#tbWelcomeMsg").show();
+	}else if(welcome_msg=="2"){
+		$("#welcome_msg2").attr("checked","checked");
+		$("#tbWelcomeMsg").show();
+	}else{
+		$("#welcome_msg0").attr("checked", "checked");
+	}
+})
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

@@ -1,0 +1,40 @@
+<!--{include file="site/$theme_name/header.html" page_title="$_site_map" nav_id="$nav_id"}-->
+<div class="wrapper">
+  <div class="content">
+    <div class="tips"><span>{$position}</span></div>
+    <div class="webmap">
+      <div class="webmap_left">
+      <div class="base_title">
+       <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang basic_info}</span><span class="corner_t_r"></span></h2>
+	</div>
+        <div class="base_content">
+          <div class="webmap_left_con1">
+            <h2>{lang offer_info}</h2>
+            <p><a href="index.php?do=offer&action=lists&typeid=1&navid=2">{lang Buy}</a> <a href="index.php?do=offer&action=lists&typeid=2&navid=3">{lang supply}</a> <a href="index.php?do=offer&action=lists&typeid=8">{lang inventory}</a> <a href="index.php?do=offer&action=lists&typeid=5">{lang merchants}</a> 
+			<a href="index.php?do=offer&action=lists&typeid=6">{lang join}</a> <a href="index.php?do=offer&action=lists&typeid=4">{lang cooperation}</a> <a href="index.php?do=offer&action=lists&typeid=3">{lang agent}</a>
+			<a href="index.php?do=offer&action=lists&typeid=7">{lang wholesale}</a></p>
+          </div>
+          <div class="webmap_left_con2">
+            <h2>{lang important_channel}</h2>
+            <p><a href="index.php?do=company">{lang yellow_page}</a>&nbsp;<a href="{the_url action=lists module=search do=company type=commend}">{lang recommend_company_database}</a>&nbsp;<a href="index.php?do=product">{lang nventory}</a>&nbsp;<a href="index.php?do=news">{lang information}</a>&nbsp;<a href="index.php?do=market">{lang professional_market}</a>&nbsp;<a href="index.php?do=fair">{lang fair}</a>&nbsp;<a href="index.php?do=job">{lang hr}</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="webmap_right">
+       <div class="title_bar_s4">
+              <span class="title_top_s4"><span></span></span>
+              <h3>{lang quick_navigation}</h3>
+           </div>
+      
+        <div class="webmap_right_con">
+          <ul>
+            <li><a href="index.php?do=offer&actino=post">{lang release_supply_offer}</a></li>
+            <li><a href="service.php">{lang client_terms_Service}</a></li>
+            <li><a href="{the_url module=page title=agreement}" target="_blank">{lang web_login_pact}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div><br clear="all"/>
+  </div>
+</div>
+<!--{include file="site/$theme_name/footer.html"}-->

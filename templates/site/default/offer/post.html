@@ -1,0 +1,212 @@
+<!--{include file="../header.html" page_title=#free_release_offer#}-->
+<script src="data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<script src="static/scripts/jquery/jquery.textbox.js" charset="{$charset}"></script>
+<link rel="stylesheet" type="text/css" href="static/scripts/jquery/jquery-ui.css" />
+<script src="static/scripts/jquery/jquery-ui.min.js" type="text/javascript"></script>
+<script src="static/scripts/jquery/jquery.ld.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="static/css/reset.css" />
+<script>
+var app_language = '{$AppLanguage}';
+var default_typeid = '{$type_id|default:1}';
+var industry_id1 = {$industry_id|default:0};
+var allows_maximum_input = "{lang allows_maximum_input}";
+var can_also_enter = "{lang can_also_enter}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#multi_lang_tabs").tabs();
+	$("#trade_content").textbox({
+		maxLength: 255,
+		onInput: function(event, status) {
+			$("#txtTip").html(allows_maximum_input+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.maxLength + "</strong> "+can_also_enter+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.leftLength + "</strong>");
+		}
+	});
+	/**
+	$("#PostFrm").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+	**/
+	$("#DataTradeTypeId").val(default_typeid);
+    $(".ld-select-1").ld({ajaxOptions : {"url" : "ajax.php", data:{action:"selection",module:"industry"}}});
+    $(".ld-select-2").ld({ajaxOptions : {"url" : "ajax.php", data:{action:"selection",module:"area"}}});
+})
+function htmlspecialchars(str) {
+	return preg_replace(['&', '<', '>', '"'], ['&amp;', '&lt;', '&gt;', '&quot;'], str);
+}
+</script>
+<!--{/literal}-->
+<div class="wrapper">
+      <div class="subnav">{$position}</div>
+      <div class="blank6"></div>
+      <div class="content clearfix">
+	  <!--{if $pb_username==""}-->
+      <div class="main_left_w180">
+         <div class="offer_login_title">
+            <div class="title_bar_s3">
+              <span class="title_top_s3"><span></span></span>
+              <h3>{lang pls_login}</h3>
+           </div>  
+         </div>
+         <div class="offer_login_content">
+           <p>{#free_post_tip#|sprintf:$site_name}</p>
+			<form name="loggingfrm" id="LoggingFrm" method="post" action="logging.php">
+				<input type="hidden" name="action" value="logging">
+				<!-- {formhash} -->
+				<input type="hidden" name="forward" value="index.php?do=offer&action=post" />
+			   <table class="user_login">
+			  <tr>
+				<th>{lang user_name}</th>
+				<td><input type="text" name="data[login_name]" id="LoginName" value="" tabindex="1" class="required"></td>
+			  </tr>
+			  <tr>
+				<th>{lang password}</th>
+				<td><input name="data[login_pass]" type="password" id="LoginPass" value="" tabindex="2" class="required"></td>
+			  </tr>
+			  <tr>
+				<th>&nbsp;</th>
+				<td><input type="button" onclick="$('#LoggingFrm').submit();" name="log_in" id="LogIn" value="{lang login}" class="submit_w91"/></td>
+			  </tr>
+			</table>
+		   </form>
+			<div class="user_reg">
+			 <h3>{lang i_not_member}</h3>
+			 <p><a href="member.php" class="reg_orange">{lang join_now}</a></p>    
+			 </div>
+         </div><!-- //offer_login_content -->
+      </div><!-- //main_left_w180 -->
+	  <!--{/if}-->
+      <div class="<!--{if !$pb_username}-->main_right_w770<!-- {/if} -->">
+		{if $Errors}{$Errors}{/if}
+         <div class="base_title">
+           <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang base_info}</span><span class="corner_t_r"></span><div class="title_step">{lang post_offer_steps}<span class="step1">{lang write_base_info}</span><span class="step2">{lang write_contact}</span><span class="step3">{lang release_complete}</span></div></h2> 
+        </div>
+        <div class="base_info_content clearfix">
+		<form name="post_frm" id="PostFrm" enctype="multipart/form-data" method="post" action="index.php?do=offer&action=add">
+		<input type="hidden" name="visit_post" value="visit_post" id="VisitPost" />
+		<!-- {formhash} -->
+            <table class="base_info">
+              <tr>
+                <th>{lang offer_direction}<span class="star">*</span></th>
+                <td>
+						<select name="data[trade][type_id]" id="DataTradeTypeId" class="required">
+							<!-- {foreach from=$select_tradetypes item=f1 name=f1} -->
+							<!-- {if $f1.child} -->
+							<optgroup label="{$f1.name}">
+							<!-- {foreach from=$f1.child item=f2 name=f2} -->
+								<option value="{$f2.id}">{$f2.name}</option>
+							<!-- {/foreach} -->
+							</optgroup>
+							<!-- {else} -->
+							<option value="{$f1.id}">{$f1.name}</option>
+							<!-- {/if} -->
+							<!-- {/foreach} -->
+						</select>
+				
+				</td>
+              </tr>
+              <tr>
+                <th>{lang info_title}<span class="star">*</span></th>
+                <td>
+				<div id="multi_lang_tabs">
+				<!-- {pl frm="input" size="32" required=y maxlength="16"} -->
+				</div>
+				<span class="gray">{lang within_sixteen_words}</span>
+				</td>
+              </tr>
+              <tr>
+                <th>{lang details}</th>
+                <td><textarea name="data[trade][content]" id="trade_content" cols="60" rows="8" wrap="virtual" class="required"></textarea>
+				<div id="txtTip">
+                    <p class="gray">{lang product_description}</p>
+                    <p class="gray">{lang product_description_using_image}</p>
+				</div>
+					</td>
+              </tr>
+              <tr>
+                <th>{lang expire_date}</th>
+                <td><span class="expires">{html_radios name="expire_days" options=$OfferExpires checked="30" separator=" "}</span></td>
+              </tr>
+              <tr>
+                <th>{lang area}<span class="star">*</span></th>
+                <td>
+                <p id="dataArea">
+					<select name="area[id][1]" id="dataTradeAreaId1" class="ld-select-1" style="width:120px;" ><option value="">{lang please_select}</option></select>
+					<select name="area[id][2]" id="dataTradeAreaId2" class="ld-select-1" style="width:120px;"><option value="">{lang please_select}</option></select>
+					<select name="area[id][3]" id="dataTradeAreaId3" class="ld-select-1" style="width:120px;"><option value="">{lang please_select}</option></select>
+				</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="bg"><span class="bold">{lang not_must_content}</span></td>
+              </tr>
+              <tr>
+                <th>{lang belong_industry}</th>
+                <td>
+                <p id="dataIndustry">
+					<select name="industry[id][1]" id="dataTradeIndustryId1" class="ld-select-2" style="width:120px;" ><option value="">{lang please_select}</option></select>
+					<select name="industry[id][2]" id="dataTradeIndustryId2" class="ld-select-2" style="width:120px;"><option value="">{lang please_select}</option></select>
+					<select name="industry[id][3]" id="dataTradeIndustryId3" class="ld-select-2" style="width:120px;"><option value="">{lang please_select}</option></select>
+				</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="bg"><span class="bold">{lang contact}</span>{lang content_required}</td>
+              </tr>
+              <tr>
+                <th>{lang contact}<span class="star">*</span></th>
+                <td><input type="text" name="data[tradefield][link_man]" id="link_man" value="" class="required"></td>
+              </tr>
+              <tr>
+                <th>{lang contact_address}<span class="star">*</span></th>
+                <td><input name="data[tradefield][address]" id="OfferAddress" type="text" value="" class="required"/></td>
+              </tr>
+              <tr>
+                <th>{lang email_addr}<span class="star">*</span></th>
+                <td><p class="gray"><input name="data[tradefield][email]" id="OfferEmail" type="text" value="" class="required email"/>&nbsp;{lang contact_required}</p></td> 
+              </tr>
+                <tr>
+                <th>{lang company_name}</th>
+                <td><input name="data[tradefield][company_name]" id="OfferAddress" type="text" value="{$item.company_name}" />
+                <p class="gray">{lang inner_business_name}{$company_name}</p>
+                <p class="gray">{lang no_company_should_name}</p>
+                </td>
+              </tr>
+               <tr>
+                <th>{lang preferred_tel}</th>
+                <td><select name="data[tradefield][prim_tel]" id="OfferPrimTel">
+                {html_options options=$PhoneTypes selected="1"}
+              </select>{lang number}<input type="text" name="data[tradefield][prim_telnumber]" id="prim_telnumber" value="{$item.prim_telnumber}"></td>
+              </tr>
+               <tr>
+                <th>{lang preferred_im}</th>
+                <td><select name="data[tradefield][prim_im]">
+                {html_options options=$ImTypes selected="1"}
+              </select>{lang number}<input type="text" name="data[tradefield][prim_imaccount]" id="prim_imaccount" value="{$item.prim_imaccount}"></td>
+              </tr>
+              {if $ifcapt}
+              <tr>
+                <th>{lang code}</th>
+                <td><a href="javascript:;" onclick="$('#imgcaptcha').attr('src','captcha.php?sid=' + Math.random());return false;"><img id="imgcaptcha" src="captcha.php" width="128"></a><p class="gray"><input type="text" name="data[capt_post_free]" id="VisitAuthNumber" value="">&nbsp;{lang enter_the_words_in_pic}</p></td>
+              </tr>
+              {/if}
+              <tr>
+                <th>&nbsp;</th>
+                <td><input name="post" id="Post" type="submit" value="{lang immediate_release}" class="btn_submit" /><input name="reset" type="reset" value="{lang reset}"  class="btn_submit"/></td>
+              </tr>
+            </table>
+			</form>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script src="static/scripts/jquery/jquery.validate.js"></script>
+<script>
+$("#hdModule").val("offer");
+$("#topMenuOffer").addClass("lcur");
+</script>
+<!--{include file="../footer.html"}-->

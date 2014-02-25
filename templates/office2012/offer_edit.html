@@ -1,0 +1,228 @@
+{block name="title" prepend}{#offer#}{/block}
+{block name="main"}
+<script src="{$SiteUrl}static/scripts/jquery/jquery.colorbox.js" type="text/javascript"></script>
+<link href="{$SiteUrl}static/scripts/jquery/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="{$SiteUrl}static/scripts/jquery/jquery-ui.css" />
+<script src="{$SiteUrl}static/scripts/jquery/jquery-ui.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="{$SiteUrl}static/css/reset.css" />
+<script>
+var SiteUrl = "{$SiteUrl}";
+var enter_title = "{lang enter_title}";
+</script>
+{editor type="tinymce"}
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$( "#multi_lang_tabs" ).tabs();
+	$( "#tabs-ta" ).tabs();
+	$('a[rel*=lightbox]').colorbox({maxWidth:600,opacity:0.1});
+	$('#CountryId').change(function(){
+        $("#CountryImage").attr("src",$("#CountryId").find('option:selected').attr("title"));
+    });
+	$("#Frm1").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+})
+</script>
+<!--{/literal}-->
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+		<form name="TradeFrm" id="Frm1" enctype="multipart/form-data" method="post" action="{$smarty.server.PHP_SELF}">
+		<!-- {formhash} -->
+		<input type="hidden" name="id" value="{$item.id}">
+		<input type="hidden" name="do" value="save" />
+        <div class="hint">{lang must_input_with_star}</div>
+			 <table class="offer_info_content">
+				  <!--{if $item.id}-->
+                      <tr>
+                        <th class="circle_left">{lang direction}</th>
+                        <td class="circle_right"><!--{if $item.if_urgent=="1"}-->{lang urgent}<!--{/if}-->{$TradeTypes[$item.type_id]}</td>
+                      </tr>
+                      <tr>
+                        <th>{lang theme_n}</th>
+                        <td>{$item.title|pl}</td>
+                      </tr>
+                      <tr>
+                        <th>{lang adwords}</th>
+                        <td>{if $item.adwords}{$item.adwords}{else}<input name="data[trade][adwords]" id="trade_adwords" type="text" value="{$item.adwords}"/>{/if}</td>
+                      </tr>
+                      <tr>
+                        <th>{lang duration}</th>
+                        <td>{$item.expire_date}</td>
+                      </tr>
+				<!-- {else} -->
+                      <tr>
+                        <th class="circle_left"><font class="red">*</font>{lang direction}</th>
+                        <td class="circle_right">
+						<select name="data[trade][type_id]" id="DataTradeTypeId" class="required">
+							<!-- {foreach from=$select_tradetypes name=f1 item=f1} -->
+							<!-- {if $f1.child} -->
+							<optgroup label="{$f1.name}">
+							<!-- {foreach from=$f1.child name=f2 item=f2} -->
+								<option value="{$f2.id}">{$f2.name}</option>
+							<!-- {/foreach} -->
+							</optgroup>
+							<!-- {else} -->
+							<option value="{$f1.id}">{$f1.name}</option>
+							<!-- {/if} -->
+							<!-- {/foreach} -->
+						</select>
+                        {lang emergency}<input type="checkbox" name="data[trade][if_urgent]" value="1" {if $item.if_urgent=="1"}checked{/if}></td>
+                      </tr>
+                      <tr>
+                        <th><font class="red">*</font>{lang theme_n}</th>
+                        <td>
+						<div id="multi_lang_tabs">
+						<!-- {pl frm="input" values=$item.title} -->
+						</div>
+						<font color="#666666">
+{lang optimal_number}</font></td>
+                      </tr>
+                      <tr>
+                        <th>{lang adwords}</th>
+                        <td><input name="data[trade][adwords]" id="trade_adwords" type="text" value="{$item.adwords}"/></td>
+                      </tr>
+                      <tr>
+                        <th>{lang duration}</th>
+                        <td>{html_radios name="expire_days" options=$OfferExpires checked=$item.expire_days|default:30 separator=" "}</td>
+                      </tr>
+				<!--{/if}-->
+                      <tr>
+                        <th>{lang tags_n}</th>
+                        <td><input name="data[tag]" type="text" id="tag" value="{$item.tag}" /><font color="#666666">{lang space_separate}</font></td>
+                      </tr>
+                      <tr>
+                        <th>{lang the_price_n}</th>
+                        <td><input name="data[trade][price]" type="text" id="DataTradePrice" value="{$item.price}"/></td>
+                      </tr>
+					  <!--{foreach from=$Forms name=form item=item1 key=key1}-->
+                      <tr>
+                        <th> {$item1.label}{lang colon}</th>
+                        <td><font color="#666666">
+                          <input name="data[formitem][{$key1}]" type="text" id="{$item1.id}" value="{$item1.value}"></font></td>
+                      </tr>
+					  <!--{/foreach}-->
+                      <tr>
+                        <th>{lang country}:</th>
+                        <td><select name="data[trade][country_id]" id="CountryId">
+							<option>{lang please_select}</option>
+						<!--{foreach from=$Countries name=Countries item=country}-->
+							<option value="{$country.id}" title="../static/images/country/{$country.picture}" {if $country.id==$item.country_id}selected="selected"{/if}>{$country.name}</option>
+						<!--{/foreach}-->
+                        </select>&nbsp;&nbsp;<img src="../static/images/country/{$item.country}" id="CountryImage"></td>
+                      </tr>
+                      <tr>
+                        <th>{lang industry}</th>
+                        <td>
+						<div id="dataIndustry">
+							<select name="industry[id][1]" id="dataTradeIndustryId1" class="level_1" ></select>
+							<select name="industry[id][2]" id="dataTradeIndustryId2" class="level_2" ></select>
+							<select name="industry[id][3]" id="dataTradeIndustryId3" class="level_3" ></select>
+						</div>						
+						</td>
+                      </tr>
+                      <tr>
+                        <th>{lang area}</th>
+                        <td>
+						<div id="dataArea">
+							<select name="area[id][1]" id="dataTradeAreaId1" class="level_1" ></select>
+							<select name="area[id][2]" id="dataTradeAreaId2" class="level_2" ></select>
+							<select name="area[id][3]" id="dataTradeAreaId3" class="level_3" ></select>
+						</div>
+
+						</td>
+                      </tr>
+                      <tr>
+                        <th ><font class="red"> *</font>{lang details_n}</th>
+                        <td class="tdright">
+							<div id="tabs-ta">
+							<!-- {pl frm="textarea" values=$item.content style="width:570px;" rows="8" wrap="VIRTUAL" class="required"} -->
+							</div>
+						<br /><font color="#FF3300">{lang attention_explain}<br>
+                        </font></td>
+                      </tr>
+                      <tr>
+                        <th>{lang image}</th>
+                        <td><input name="pic" type="file" id="uploadfile" onchange="showPreview(uploadpic,this.form.pic);" />
+                            <span class="gray"><br>
+                    {lang image_size_format_provision}</span></td>
+                      </tr>
+                      <tr>
+                        <th>{lang now_image}</th>
+                        <td class="tdright">
+						<div class="img-preview">
+						<a href="{$item.image|default:"javascript:;"}" id="uploadpic_hover" rel="lightbox"><img id="uploadpic" src="{if $item.image}{$item.image|cat:'.small.jpg'}{else}../static/images/nopicture_small.gif{/if}" style='{if !$item.image}display:none;{/if}width: 80px;' alt="{$item.title|default:#preview_image#}"  /></a>
+						<div>
+						<div style="display:none"></div>
+						</td>
+                     </tr>
+                  <tr>
+                      <th></th>
+                       <td>{lang check_information}<br>
+                        {lang need_click}<a href="personal.php" target="_self" class="font14b_org"><strong>{lang modify_information}</strong></a></td>
+                   </tr>
+
+                   <tr>
+                        <th >{lang contact_people}</td>
+                        <td>{$COMPANYINFO.link_man|default:$MemberInfo.last_name}<font color="#999999">{lang full_name} </font> </td>
+                    </tr>
+					<!--{if $CompanyId!=""}-->
+                  <tr>
+                    <th>{lang company_name_n}</th>
+                    <td>{$COMPANYINFO.name}<font color="#999999">{lang company_full_name}</font></td>
+                  </tr>
+					<!--{/if}-->
+                      <tr>
+                        <th>{lang first_contact_phone}</th>
+                        <td><select name="data[prim_tel]">
+        {html_options options=$PhoneTypes selected=$item.prim_tel}
+      </select>&nbsp;{lang number_n}<input type="text" name="data[prim_telnumber]" id="prim_telnumber" value="{$item.prim_telnumber|default:$MemberInfo.tel}" /></td>
+                      </tr>
+                      <tr>
+                        <th>{lang first_instant_message}</th>
+                        <td><select name="data[prim_im]">
+        {html_options options=$ImTypes selected=$item.prim_im}
+      </select>&nbsp;{lang number_n}<input type="text" name="data[prim_imaccount]" id="prim_imaccount" value="{$item.prim_imaccount|default:$MemberInfo.qq}" /></td>
+                      </tr>
+                      
+                      <tr >
+                        <th>{lang email_addr}</th>
+                        <td>{$MemberInfo.email}</td>
+                      </tr>
+                      <tr>
+                      <th class="circle_bottomleft"></th>
+                        <td class="circle_bottomright"><input type="hidden" name="edit_trade" id="EditTrade" value="y" />
+                        <input type="submit" name="save" id="Save" value="{lang finish_release}">
+						<!--{if $item.id}-->
+						&nbsp;<a href="{the_url module=offer id=$item.id}" title="{lang preview}{$item.title}" target="_blank" style="text-decoration:underline;color:blue;">{lang preview}</a>
+						<!--{/if}-->
+						</td>
+                      </tr>
+               </table>
+		</form>
+<script>
+var cache_path = "../";
+var app_language = '{$AppLanguage}';
+var area_id1 = {$item.area_id1|default:0} ;
+var area_id2 = {$item.area_id2|default:0} ;
+var area_id3 = {$item.area_id3|default:0} ;
+var industry_id1 = {$item.industry_id1|default:0} ;
+var industry_id2 = {$item.industry_id2|default:0} ;
+var industry_id3 = {$item.industry_id3|default:0} ;
+var type_id = {$type_id|default:2} ;
+</script>
+<!-- {literal} -->
+<script>
+$(function(){
+  $('#DataTradeTypeId').attr('value', type_id);
+});
+</script>
+<!-- {/literal} -->
+<script src="../static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="../static/scripts/script_area.js"></script>
+<script src="../static/scripts/script_industry.js"></script>
+{/block}

@@ -1,0 +1,76 @@
+{block name="title" prepend}{#offer#}{/block}
+{block name="main"}
+	 <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <table class="offer_count">
+        <tr>
+          <td class="orange"><span class="gray">{lang tips_no_repeat}</td>
+          <td></td>
+        </tr>
+         <tr>
+          <td><strong>{lang success_release}<span class="font14b_org"> {$Amount}</span> {lang number}{$ActionName}{lang information_g}</strong></td>
+          <td class="height35"><a title="{lang release}{$ActionName}" href="offer.php?do=edit" class="btn_publish">{lang release_supply}</a></td>
+        </tr>
+      </table>      
+      <form name="listfrm" action="{$smarty.server.PHP_SELF}" method="post">
+	  <!-- {formhash} -->
+      <table class="offer_publish_list">
+        <tr>
+          <td>
+          <table class="bglist">
+            <tr>
+              <th>{lang type}</th>
+              <th>{lang theme}</th>
+              <th>{lang due_date}</th>
+              <th>{lang state}</th>
+              <th>{lang operation}</th>
+              <th>{lang choose}</th>
+            </tr>
+			<!--{foreach from=$Items item=item}-->
+            <tr>
+              <td>[<a href="offer.php?typeid={$item.type_id}">{$TradeTypes[$item.type_id]}</a>]</td>
+              <td><div style="text-align:left; font-weight:bold;"><a href="offer.php?do=edit&id={$item.id}">{$item.title|pl}</a></div></td>
+              <td><!--{if $item.expire_time<$TimeStamp}-->{lang has_expired}{else}{$item.expire_date}<!--{/if}--></td>
+              <td>{$CheckStatus[$item.status]}</td>
+              <td><a href="offer.php?do=edit&id={$item.id}">{lang modify}</a>&nbsp;&nbsp;<!--{if $item.status==1}--><a href="offer.php?do=refresh&id={$item.id}" title="{lang extension_time}">{lang repeating}</a>&nbsp;&nbsp;<a href="offer.php?do=update&id={$item.id}" title="{lang update_site}">{lang update}</a><!--{/if}-->&nbsp;&nbsp;<a href="offer.php?do=moderate&id={$item.id}"  onclick="return window.confirm('{lang you_should_pay_for_this}');">{lang bump_to_top}</a>&nbsp;&nbsp;<a href="{the_url module=offer id=$item.id}" target="_blank">{lang preview}</a></td>
+              <td><input name="tradeid[]" type="checkbox" id="id_{$item.id}" value="{$item.id}"></td>
+            </tr>
+			<!--{foreachelse}-->
+			<!--{/foreach}-->
+          </table></td>
+        </tr>
+        <tr>
+          <td>
+          <table class="offer_publish_submit">
+            <tr>
+              <td>
+				<div align="right">
+                <input type="submit" name="del" value="{lang delete_message}" onclick="return window.confirm('{lang ok_delete}');">&nbsp;
+				<input type="submit" name="refresh" value="{lang repeating_information}" onclick="return window.confirm{lang ok_repeating_information}">
+				</div>
+			  </td>
+              </tr>
+          </table>
+          </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>
+          <table class="room_pages">
+              <tr>
+                <td><!-- {the_page limit=10 rowcount=$Amount class_active="pagination-active"} --></td>
+              </tr>
+          </table>
+          </td>
+        </tr>
+      </table>
+      </form>
+      <table class="attentions" >     
+          <tr>
+            <td class="bottom">{lang offer_post_attention}</td>
+          </tr>
+    </table>
+{/block}

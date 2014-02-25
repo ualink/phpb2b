@@ -1,0 +1,81 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang area}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang area}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="area.php"><span>{lang management}</span></a></li>
+        <li><a href="area.php?do=edit">{lang add_or_edit}</a></li>
+        <li><a href="area.php?do=country">{lang country}</a></li>
+        <li><a href="areatype.php">{lang sorts}</a></li>
+        <li><a href="area.php?do=clear">{lang clearing}</a></li>
+        <li><a href="area.php?do=refresh">{lang update_cache}</a></li>
+    </ul>
+</div>
+<div class="mrightTop"> 
+	<div class="fontl">
+		<!--{foreach from=$LevelStats item=stat_item}-->
+		<span><a href="{$smarty.server.PHP_SELF}?do=search&level={$stat_item.level}">{#area_levels#|sprintf:$stat_item.level}</a><em>({$stat_item.amount})</em></span>
+		<!--{/foreach}-->
+	</div>
+    <div class="fontr"> 
+        <form name="search_frm" id="SearchFrm" method="get"> 
+        <input type="hidden" name="do" value="search" />
+             <div> 
+				{lang title_keyword}<input class="queryInput" type="text" name="name" value="" /> 
+                <input type="submit" name="search" id="Search" class="formbtn" value="{lang searching}" /> 
+            </div> 
+        </form> 
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="area.php" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th><label for="idAll">{lang naming}</label></th>
+		  <th>{lang display_order}</th>
+		  <th>{lang grade_sample}</th>
+		  <th>{lang area}</th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2">
+		  <td class="firstCell"><input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}">
+		  <input type="hidden" name="aid[]" value="{$item.id}" />
+		  </td>
+		  <td><input type="text" name="data[aname][]" value="{$item.name}"></td>
+		  <td><input type="text" name="data[display_order][]" value="{$item.display_order}"></td>
+		  <td>{$item.title|pl}</td>
+		  <td><a title="{$Types[$item.areatype_id]}" href="area.php?do=search&typeid={$item.areatype_id}">{$Types[$item.areatype_id]}</a></td>
+		  <td class="handler">
+          <ul id="handler_icon">
+            <li><a class="btn_up" href="area.php?do=level&action=up&id={$item.id}{$addParams}" title="{lang throw_up}">{lang throw_up}</a></li>
+            <li><a class="btn_down" href="area.php?do=level&action=down&id={$item.id}{$addParams}" title="{lang throw_down}">{lang throw_down}</a></li>
+            <li><a class="btn_edit" href="area.php?do=edit&id={$item.id}{$addParams}" title="{lang edit}">{lang edit}</a></li>
+          </ul>  
+		  </td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="5">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="submit" name="del" value="{lang delete}" class="formbtn batchButton"/>
+	  <input type="submit" name="update_batch" value="{lang updating}" class="formbtn batchButton"/>
+    </div>
+    <div class="pageLinks">{$ByPages}</div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

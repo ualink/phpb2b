@@ -1,0 +1,31 @@
+<!--{include file="header.html" page_title=#reg_success#}-->
+<div class="wrapper">
+  <div class="subnav"> 
+    <div class="member_register"><span class="step_11">{lang fill_reg_info}</span><span class="step_12">{lang reg_success}</span></div>
+  </div>
+  <div class="blank6"></div>
+  <div class="blank6"></div>
+  <div class="content clearfix">
+   <div class="blank6"></div>
+   <div class="reg_sucess"><img src="{$theme_img_path}images/reg_sucess.jpg" /></div>
+   <div class="reg_proinfo">
+	 <div class="reg_bj"></div>
+	 <div class="reg_proinfo_content">
+		<!-- {if $result===true} -->
+		 <p class="member_level">{lang welcome_join}{$_G.site_name},{lang now_you_are}<font color="#1c9df0">{$groupname}</font><img src="{$groupimg}" alt="{$groupname}" title="{$groupname}" /></p>
+		 <p class="member_room">{lang you_continue_next} <a href="virtual-office/" ><span>{lang into_office_room}</span></a><a href="{$SiteUrl}"><span>{lang back_index}</span></a></p>
+		 <p> <b>{lang complete_pro_date}</b></p>
+		 <p>{lang need_complete_pro_date}<a href="virtual-office/personal.php" style="text-decoration:underline" target="_blank">{lang click_here_add}</a></p>
+		 {if $is_company}
+		 <p><b>{lang added_comany_info}</b></p>
+		 <p> {lang open_company_website}<a href="virtual-office/company.php" style="text-decoration:underline" target="_blank">{lang click_perfect}</a></p>
+		 {/if}
+		 {else}
+			<h2>{$RegTips}</h2>
+		 <!-- {/if} -->
+	 </div>
+   </div>
+  </div>
+  <div class="blank6"></div>   
+</div>
+<!--{include file="footer.html"}-->

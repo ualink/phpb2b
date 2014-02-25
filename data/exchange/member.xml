@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<Title><![CDATA[[:en-us]Members[:zh-cn]会员库]]></Title>
+	<Description><![CDATA[导出产品库]]></Description>
+	<items>
+		<username><![CDATA[账号]]></username>
+		<email><![CDATA[电子邮件]]></email>
+		<first_name><![CDATA[姓]]></first_name>
+		<last_name><![CDATA[名]]></last_name>
+		<tel><![CDATA[电话]]></tel>
+		<fax><![CDATA[传真]]></fax>
+		<mobile><![CDATA[手机号码]]></mobile>
+		<address><![CDATA[详细地址]]></address>
+		<zipcode><![CDATA[邮政编码]]></zipcode>
+	</items>
+</root>

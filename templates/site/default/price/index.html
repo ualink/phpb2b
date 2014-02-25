@@ -1,0 +1,226 @@
+<!--{include file="../header.html" page_title="$page_title"}-->
+<style type="text/css">
+@import url({$theme_img_path}css/effect.css);
+</style>
+<script src="static/scripts/jquery.tools.js"></script>
+<script src="static/scripts/jquery.hover.js"></script>
+<div class="wrapper">
+	<div class="content">
+		<div class="main_left_w180">
+			<div class="cornerbox">
+				<div class="title_bar_s6">
+					<span class="title_top_s6"><span></span></span>
+					<h2>{lang product_prices}</h2>
+				</div>
+				<div class="price_menu">
+					<ul id="topnav">
+					<!--{loop $Items item}-->
+						<li>
+							<a href="index.php?do=product&action=price&catid={$item.id}">{$item.title}</a>
+							{if $item.child}
+							<div class="sub">
+							   <div class="row clearfix">
+								 <ul>
+								 <!--{loop $item.child item_child}-->
+									<li><a href="index.php?do=product&action=price&catid={$item_child.id}">{$item_child.title}</a></li>
+								  <!--{/loop}-->
+								 </ul> 
+								</div>
+							</div>
+							{/if}
+						</li>
+					  <!--{/loop}-->
+					</ul>
+					<div class="blank"></div>
+					<div class="btn_price_all"><a href="index.php?do=product&action=price">{lang all_product_categories}</a></div>
+					<div class="blank6"></div>
+				</div>
+				<div class="corner_bottom">
+					<div class="corner_bottom_l"></div>
+					<div class="corner_tottom_r"></div>
+				</div>
+			</div>
+			<div class="blank6"></div>
+			<div class="cornerbox">
+				<div class="title_bar_s6">
+					<span class="title_top_s6"><span></span></span>
+					<h2>{lang latest_price}</h2>
+				</div>
+				<div class="corner_content_s6">
+				   <ul>
+					  {pb:price row=9 name="item"}
+					  <li>{$item.link}</li>
+					 {/pb:price}
+				   </ul>
+				</div>
+			   <div class="corner_bottom">
+					<div class="corner_bottom_l"></div>
+					<div class="corner_tottom_r"></div>
+				</div>
+			</div><!--end-->
+		</div>
+		<div class="main_right_w770">
+			 <div class="area_price clearfix">
+				 <strong>{lang area_prices}</strong>
+				 <div>
+			 <!-- {category name="area" depth="1"} -->
+			 <!-- {foreach from=$category item=item} -->
+			 <a href='index.php?do=product&action=price&areaid={$item.id}'><span>{$item.name}</span></a>
+			 <!-- {/foreach} -->				 
+				 </div>
+			 </div>
+			 <div class="blank6"></div>
+			 <!-- the tabs -->
+			<ul class="tabs2 title_mouse">
+				  <li><a href="javascript:;"><span>{lang latest_new} {lang product}</span></a></li>
+				  <li><a href="javascript:;"><span>{lang latest_hot} {lang product}</span></a></li>
+			</ul>
+			<!-- tab "panes" --> 
+			<div class="panes box_bord">
+				<div class="product_hot clearfix">
+					<ul>
+						{pb:product row=6 type="image" name="item"}
+						<li><a href="{$item.url}"><img src="{$item.src}" alt="{$item.name}" /></a>
+						<p><a href="{$item.url}">{$item.name}</a></p>
+						</li>
+					   {/pb:product}                                                    
+					</ul>
+				 </div>
+				<div class="product_hot clearfix" style="display:none;">
+					<ul>
+						{pb:product row=6 type="image" type="hot" name="item"}
+						<li><a href="{$item.url}"><img src="{$item.src}" alt="{$item.name}" /></a>
+						<p><a href="{$item.url}">{$item.name}</a></p>
+						</li>
+					   {/pb:product}                                                      
+					</ul>
+				 </div>
+			</div>
+			<div class="blank6"></div>
+			<div class="brand_hot">
+				<div class="title">
+					<h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang product_category}</span><span class="corner_t_r"></span></h2>
+				</div>
+				<div class="letterindex clearfix">
+					<h3>{lang sort_by_alpha}</h3>
+					 <ul id="letternav">
+						<!--{foreach from=$AlphabetSorts item=item_alphabet name=Alphabet key=key_alphabet}-->
+						<li class="frist">
+						 <a href="javascript:;">{$key_alphabet}</a>
+							<div class="sub">
+							   <div class="row clearfix">
+								 <ul>
+									<!--{foreach from=$item_alphabet item=subitem_alphabet key=subkey_alphabet}-->
+									<li><a href="index.php?do=product&action=price&catid={$subkey_alphabet}">{$subitem_alphabet}</a></li>
+									<!--{/foreach}-->
+								 </ul> 
+								</div>
+							</div>
+						</li>
+						<!--{/foreach}-->
+					</ul>
+				</div>
+				<div class="letter_product_content clearfix">
+					<table>
+					<!--{foreach from=$Cats item=item1 name=Cats key=key1}-->
+					  <tr class="bg_hover">
+						<th><a href="index.php?do=product&action=price&catid={$item1.id}">{$item1.title}</a></th>
+						<td>
+						   <ul class="aa clearfix">
+							   <!--{foreach from=$item1.child item=item2 name=Cats2 key=key2}-->
+							   <li>
+								  <h3><a href="index.php?do=product&action=price&catid={$item2.id}">{$item2.title}</a></h3>
+								  <ul>
+									 <li>
+									 <!--{foreach from=$item2.child item=item3 name=Cats3 key=key3}-->
+									 <a href="index.php?do=product&action=price&catid={$item3.id}">{$item3.title}</a>
+									 <!--{/foreach}-->
+									 </li>
+								  </ul>
+							   </li>
+							   <!--{/foreach}-->
+						   </ul>
+						</td>
+					  </tr>
+					  <tr><td colspan="2" class="padding0"><hr class="hr_dashed"/></td></tr>
+					  <!--{/foreach}-->
+					</table>    
+				</div>                     
+			</div><!--end-->
+		
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<!--{literal}-->
+<script>
+$(function() {
+	$("ul.tabs2").tabs("div.panes > div");
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	function megaHoverOver(){
+		$(this).find(".sub").stop().fadeTo('fast', 10000).show();
+		(function($) { 
+			jQuery.fn.calcSubWidth = function() {
+				rowWidth = 0;
+				//Calculate row
+				$(this).find("ul").each(function() {					
+					rowWidth += $(this).width(); 
+				});	
+			};
+		})(jQuery); 
+		
+		if ( $(this).find(".row").length > 0 ) { //If row exists...
+			var biggestRow = 0;	
+			//Calculate each row
+			$(this).find(".row").each(function() {							   
+				$(this).calcSubWidth();
+				//Find biggest row
+				if(rowWidth > biggestRow) {
+					biggestRow = rowWidth;
+				}
+			});
+			//Set width
+			$(this).find(".sub").css({'width' :biggestRow});
+			$(this).find(".row:last").css({'margin':'0'});
+		} else { //If row does not exist...
+			
+			$(this).calcSubWidth();
+			//Set Width
+			$(this).find(".sub").css({'width' : rowWidth});
+			
+		}
+	}
+	
+	function megaHoverOut(){ 
+	  $(this).find(".sub").stop().fadeTo('fast', 1, function() {
+		  $(this).hide(); 
+	  });
+	}
+
+
+	var config = {    
+		 sensitivity: 2, // number = sensitivity threshold (must be 1 or higher)    
+		 interval: 100, // number = milliseconds for onMouseOver polling interval    
+		 over: megaHoverOver, // function = onMouseOver callback (REQUIRED)    
+		 timeout: 0, // number = milliseconds delay before onMouseOut    
+		 out: megaHoverOut // function = onMouseOut callback (REQUIRED)    
+	};
+
+	$("ul#letternav li .sub").css({'opacity':'0'});
+	$("ul#letternav li").hoverIntent(config);
+	$("ul#topnav li .sub").css({'opacity':'0'});
+	$("ul#topnav li").hoverIntent(config);
+
+
+});
+</script>
+<!--{/literal}-->
+<script>
+$("#SearchFrm").attr("action","{the_url module=search}");
+$("#hdModule").val("product");
+$("#topMenuProduct").addClass("lcur");
+</script>
+<!--{include file="../footer.html"}-->

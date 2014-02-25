@@ -1,0 +1,35 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang reg_and_visit}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang reg_and_visit}</h3> 
+    <ul class="subnav">
+		<li><a href="setting.php?do=register">{lang register}</a></li>
+        <li><a href="setting.php?do=registerfile" class="btn1"><span>{lang default_setting}</span></a></li>
+    </ul>
+</div>
+<div class="info"> 
+    <form method="post" name="edit_frm" action="setting.php"> 
+    <input type="hidden" name="data[reg_filename]" value="{$item.REG_FILENAME}" />
+    <input type="hidden" name="data[post_filename]" value="{$item.POST_FILENAME}" />
+        <table class="infoTable"> 
+		    <tr>
+				<th class="paddingT15"> {lang direct_access_to_url}</th>
+				<td class="paddingT15 wordSpacing5"><input name="data[setting][redirect_url]" type="text" id="RedirectUrl" value="{$item.REDIRECT_URL}" class="infoTableInput" /><span class="gray"><p>{lang direct_access_to_url_descriptiondd}</p></span></td>
+			</tr>
+         	<tr> 
+                <th class="paddingT15">{lang enterprise_space_named}</th> 
+              	<td class="paddingT15 wordSpacing5"><input type="text" name="data[setting][space_name]" value="{$item.SPACE_NAME|default:#space_name#}" class="infoTableInput" /></td> 
+          	</tr> 
+            <tr> 
+            <th></th> 
+            <td class="ptb20"> 
+                <input class="formbtn" type="submit" name="saveregisterfile" value="{lang submit}" /> 
+                <input class="formbtn" type="reset" name="reset" value="{lang reset}" /> 
+            </td> 
+        </tr> 
+        </table> 
+    </form> 
+</div> 
+<!-- {include file="footer.html"} -->

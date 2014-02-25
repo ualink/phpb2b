@@ -1,0 +1,38 @@
+<!--{include file="../header.html" page_title="$page_title" nav_id=9}-->
+<div class="wrapper">
+	<div class="content">
+		<div class="tips"><span>{$position}</span></div>
+        <div class="blank6"></div>
+		<div class="job_list_left fl">
+           <div class="title_bar_s4">
+              <span class="title_top_s4"><span></span></span>
+              <h3>{lang hr_information}</h3>
+           </div>
+			<div class="job_list_c">
+				<ul>
+					<li class="title"><h3 class="fl"><span>{lang hr_jobs}</span></h3><em class="fl"><span>{lang hr_company}</span></em><p class="fl">{lang jobs_area_n}</p><p class="fl">{lang post_time_n}</p></li>
+                    <!--{foreach from=$items item=item name=Items key=key}-->
+					<li><h3 class="fl"><a href="{the_url module=space userid=$item.userid}" title="">{$item.name}</a></h3><em class="fl co"><a href="{the_url module=space userid=$item.userid}">{$item.companyname}</a></em><p class="fl">{$item.work_station}</p><p class="fl">{$item.pubdate|date_format:"%Y-%m-%d"}</p></li>
+                    <!--{/foreach}-->
+			  </ul>
+			<div><div class="pagination2"><!-- {pager rowcount=$paging.total} --></div></div>
+			</div>
+		</div>
+		<div class="job_good fr">
+           <div class="title_bar_s4">
+              <span class="title_top_s4"><span></span></span>
+              <h3>{lang recommended_company}</h3>
+           </div>
+
+			<div class="job_good_c cb">
+				<ul>
+                	{pb:company type="commend" name=company}
+					<li>{$company.link}</li>
+                    {/pb:company}
+			  </ul>
+			</div>
+		</div>
+		<div class="blank6"></div>
+		</div>
+</div>
+<!--{include file="../footer.html"}-->

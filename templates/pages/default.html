@@ -1,0 +1,28 @@
+<!-- 
+The Name:Default
+Description:Default Page Template
+-->
+<!--{include file="site/$theme_name/header.html" page_title="$page_title" nav_id="$nav_id"}-->
+<div id="outer">
+    <div class="subnav">{$position}</div>
+    <div class="blank6"></div>
+	<div class="mainCon">
+		<div id="about_line">
+			<div id="aboutLeftBtn">
+				<ul>
+					{pb:userpage row=15 name="userpage"}
+						<li class="{if $item.id eq $userpage.id}sel{/if}">{$userpage.link}</li>
+					{/pb:userpage}				
+				</ul>
+			</div><!--/aboutLeftBtn-->
+			<div id="aboutRight">
+				<h2 class="abTit">{$item.title}</h2>
+				<p>{$item.content|nl2br}</p>
+				</div>
+			</div><!--/aboutRight-->
+			<div class="clear"></div>
+		</div> <!--/about_line-->   
+		<div class="bg_f_box_b"><span></span></div>
+	</div><!--/mainCon-->
+</div><!-- /outer -->
+<!--{include file="site/$theme_name/footer.html"}-->

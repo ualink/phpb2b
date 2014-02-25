@@ -1,0 +1,63 @@
+<!-- {include file="header.html"} -->
+<link href="../static/scripts/jquery/showLoading/css/showLoading.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="../static/scripts/jquery/showLoading/jquery.showLoading.js"></script>
+<!-- {literal} -->
+<script type="text/javascript">
+$(document).ready( function() {
+	$("#Save").click( function() {
+		$(".tdare").showLoading();
+	});
+});
+</script>
+<!-- {/literal} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang system_tool} &raquo; {lang caches}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang caches}</h3> 
+    <ul class="subnav">
+		{if $smarty.get.do=="clear"}
+	  	<li><a href="htmlcache.php">{lang updating}</a></li>		
+      	<li><a class="btn1" href="htmlcache.php?do=clear"><span>{lang clearing}</span></a></li>
+        {else}
+	  	<li><a class="btn1" href="htmlcache.php"><span>{lang updating}</span></a></li>		
+      	<li><a href="htmlcache.php?do=clear">{lang clearing}</a></li>
+        {/if}
+    </ul>
+</div>
+<div class="mrightTop"> 
+	{if $smarty.get.do=="clear"}
+    <div class="fontl"> 
+        <form name="edit_frm" id="EditFrm" method="post">
+        <input type="hidden" name="do" value="clear" />
+             <div class="left"> 
+               <label for="htmlcache"><input type="checkbox" name="data[type][]" id="htmlCache" value="htmlcache" />{lang caches} {lang page} {lang file}</label>
+               <label for="memberCache"><input type="checkbox" name="data[type][]" id="memberCache" value="membercache" />{lang caches} {lang member} {lang data}</label>
+               <label for="spaceCache"><input type="checkbox" name="data[type][]" id="spaceCache" value="spacecache" />{lang caches} {lang space} {lang data}</label>
+               <label for="dbCache"><input type="checkbox" name="data[type][]" id="dbCache" value="dbcache" />{lang caches} {lang label} {lang data}</label>
+               <label for="dataCache"><input type="checkbox" name="data[type][]" id="dataCache" value="smartycache" checked="checked" />{lang templet_style} {lang caches} {lang file}</label>
+               <label for="dataCompile"><input type="checkbox" name="data[type][]" id="dataCompile" value="smartycompile" />{lang template_compilation} {lang file}</label>
+               <input type="submit" name="save" id="Save" class="formbtn" value="{lang clear_now}" /> 
+            </div> 
+        </form> 
+    </div> 
+    {else}
+    <div class="fontl"> 
+        <form name="edit_frm" id="EditFrm" method="post">
+        <input type="hidden" name="do" value="update" />
+             <div class="left"> 
+               <label for="dataTypeSetting"><input type="checkbox" name="data[type][]" id="dataTypeSetting" value="setting" checked="checked" />{lang basic} {lang data}</label>
+               <label for="dataTypeBasic"><input type="checkbox" name="data[type][]" id="dataTypeBasic" value="ext" checked="checked" />{lang extension} {lang data}</label>
+               <label for="dataTypeArea"><input type="checkbox" name="data[type][]" id="dataTypeArea" value="area" checked="checked" />{lang the_area} {lang data}</label>
+               <label for="dataTypeIndustry"><input type="checkbox" name="data[type][]" id="dataTypeIndustry" value="industry" checked="checked" />{lang the_industry} {lang data}</label>
+               <label for="dataTypeLanguage"><input type="checkbox" name="data[type][]" id="dataTypeLanguage" value="language" />{lang lang_pack}</label>
+               <label for="dataTypeOptions"><input type="checkbox" name="data[type][]" id="dataTypeOptions" value="options" />{lang options}</label>
+                <input type="submit" name="save" id="Save" class="formbtn" value="{lang immediately}{lang updating}" /> 
+            </div> 
+        </form> 
+    </div> 
+    {/if}
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare"></div>
+<!-- {include file="footer.html"} -->

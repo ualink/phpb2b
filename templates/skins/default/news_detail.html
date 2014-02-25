@@ -1,0 +1,13 @@
+{extends file="layout.html"} 
+{block name="title" prepend}{$item.title}{/block}
+{block name="content"}
+			<div class="rightbarmore">
+						<p class="title">{$item.title}</p><br />
+						<br />
+						<p>{$item.content}</p>
+						<p style="text-align:right;">[<a href="javascript:window.close()" class="link12_blue">{lang close_window}</a>][<a href="javascript: window.print();" class="link12_blue">{lang print}</a>]</p>
+						
+			</div>
+			<div class="clear"></div>
+		</div>
+{/block}

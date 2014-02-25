@@ -1,0 +1,217 @@
+<!-- {include file="header.html"} -->
+<link rel="stylesheet" type="text/css" href="../static/scripts/jquery/jquery-ui.css" />
+<script src="../static/scripts/jquery/jquery-ui.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/reset.css" />
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$( "#multi_lang_tabs" ).tabs();
+})
+</script>
+<!--{/literal}-->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang member_center} &raquo; {lang membergroup}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang membergroup}</h3> 
+    <ul class="subnav">
+        <li><a href="membergroup.php">{lang the_all} {lang membergroup}</a></li>
+		<li><a class="btn1" href="membergroup.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+        <li><a href="membergroup.php?do=permission" id="permission">{lang permissions}</a></li>
+    </ul>
+</div>
+<div class="info"> 
+    <form method="post" action="membergroup.php"> 
+    <input type="hidden" name="type" value="{$item.type}" />
+    <input type="hidden" name="id" value="{$smarty.get.id}" />
+        <table class="infoTable"> 
+         	<tr> 
+                <th class="paddingT15">{lang naming_n}</th> 
+           	  <td class="paddingT15 wordSpacing5">
+			  		<div id="multi_lang_tabs">
+		<!-- {pl frm="input" values=$item.name} -->
+		</div></td> 
+          	</tr> 
+         	<tr> 
+                <th class="paddingT15">{lang types}{lang colon}</th> 
+              	<td class="paddingT15 wordSpacing5"><!--{html_radios name="membergroup[membertype_id]" options=$Membertypes|pl checked=$item.membertype_id|default:1 separator=""}--></td> 
+          	</tr> 
+         	<tr> 
+                <th class="paddingT15">{lang screenshot}{lang colon}</th> 
+           	  <td class="paddingT15 wordSpacing5"><input name="membergroup[picture]" value="{$item.picture}" />{if $item.picture}<img src="{$item.image}" alt="{$item.name}" border="0" />{/if}</td> 
+          	</tr>
+         	<tr> 
+                <th class="paddingT15">{lang minimum} {lang integral}{lang colon}</th> 
+              	<td class="paddingT15 wordSpacing5"><input name="membergroup[point_min]" value="{$item.point_min}" size="6" /></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang maximum} {lang integral}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><input name="membergroup[point_max]" value="{$item.point_max}" size="6" /></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang allow_the_release} {lang offer} {lang information}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="offer[allow]" options=$AskAction checked=$item.offer_allow|default:1 separator="" label_ids=$AskAction}--><span id="AllowOffer" style="display: none;">&nbsp;{lang per_day} {lang offer} {lang record_amount}{lang colon}<input name="membergroup[max_offer]" value="{$item.max_offer|default:0}" style="width:35px; text-align:center" />&nbsp;{lang if_need_check}<!--{html_radios name="offer[check]" options=$AskAction checked=$item.offer_check|default:0 separator="" label_ids=$AskAction}--></span></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang allow_the_release} {lang product} {lang information}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="product[allow]" options=$AskAction checked=$item.product_allow|default:1 separator="" label_ids=$AskAction}--><span id="AllowProduct" style="display: none;">&nbsp;{lang per_day} {lang product} {lang record_amount}{lang colon}<input name="membergroup[max_product]" value="{$item.max_product|default:0}" style="width:35px; text-align:center" />&nbsp;{lang if_need_check}<!--{html_radios name="product[check]" options=$AskAction checked=$item.product_check|default:0 separator="" label_ids=$AskAction}--></span></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang allow_the_release} {lang job} {lang information}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="job[allow]" options=$AskAction checked=$item.job_allow|default:1 separator="" label_ids=$AskAction}--><span id="AllowJob" style="display: none;">&nbsp;{lang per_day} {lang job} {lang record_amount}{lang colon}<input name="membergroup[max_job]" value="{$item.max_job|default:0}" style="width:35px; text-align:center" />&nbsp;{lang if_need_check}<!--{html_radios name="job[check]" options=$AskAction checked=$item.job_check|default:0 separator="" label_ids=$AskAction}--></span></td> 
+          	</tr> 
+	  <tr> 
+                <th class="paddingT15">{lang allow_the_release} {lang company} {lang information} {lang colon}</th> 
+		<td class="paddingT15 wordSpacing5"><!--{html_radios name="companynews[allow]" options=$AskAction checked=$item.companynews_allow|default:1 separator="" label_ids=$AskAction}--><span id="AllowCompanynews" style="display: none;">&nbsp;{lang per_day} {lang company}{lang information} {lang record_amount}{lang colon}<input name="membergroup[max_companynews]" value="{$item.max_companynews|default:0}" style="width:35px; text-align:center" />&nbsp;{lang if_need_check}<!--{html_radios name="companynews[check]" options=$AskAction checked=$item.companynews_check|default:0 separator="" label_ids=$AskAction}--></span></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang allow_the_release} {lang company} {lang album}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="album[allow]" options=$AskAction checked=$item.album_allow|default:1 separator="" label_ids=$AskAction}--><span id="AllowAlbum" style="display: none;">&nbsp;{lang per_day} {lang record_amount}{lang colon}<input name="membergroup[max_album]" value="{$item.max_album|default:0}" style="width:35px; text-align:center" />&nbsp;{lang if_need_check}<!--{html_radios name="album[check]" options=$AskAction checked=$item.album_check|default:0 separator="" label_ids=$AskAction}--></span></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang allow_the_release} {lang market} {lang information}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="market[allow]" options=$AskAction checked=$item.market_allow|default:1 separator="" label_ids=$AskAction}--><span id="AllowMarket" style="display: none;">&nbsp;{lang if_need_check}<!--{html_radios name="market[check]" options=$AskAction checked=$item.market_check|default:0 separator="" label_ids=$AskAction}--></span></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang allow_the_release} {lang company} {lang information}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="company[allow]" options=$AskAction checked=$item.company_allow|default:1 separator="" label_ids=$AskAction}--><span id="AllowCompany" style="display: none;">&nbsp;{lang if_need_check}<!--{html_radios name="company[check]" options=$AskAction checked=$item.company_check|default:0 separator="" label_ids=$AskAction}--></span></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang allow_the_opening_of} {lang space_name}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="membergroup[allow_space]" options=$AskAction checked=$item.allow_space|default:0 separator=""}--></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang the_default_length_of_service}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="membergroup[default_live_time]" options=$LiveTimes checked=$item.default_live_time separator=" "}--></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang service_after_the_expiration}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5">
+                    <select name="membergroup[after_live_time]">
+                    {html_options options=$MembergroupOption|pl selected=$item.after_live_time}
+                    </select>
+                </td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang maximum} {lang product_sort} {lang record_amount}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><input name="membergroup[max_producttype]" value="{$item.max_producttype}" size="3" /></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang maximum} {lang favorites} {lang record_amount}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><input name="membergroup[max_favorite]" value="{$item.max_favorite}" size="3" /></td> 
+          	</tr> 
+         	<tr> 
+                <th class="paddingT15">{lang description_n}</th> 
+              	<td class="paddingT15 wordSpacing5"><input name="membergroup[description]" value="{$item.description}" /></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang whether_or}{lang default}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="membergroup[is_default]" options=$AskAction checked=$item.is_default|default:0 separator=""}--></td> 
+          	</tr> 
+            <tr> 
+            <th></th> 
+            <td class="ptb20"> 
+                <input class="formbtn" type="submit" name="saveauth" value="{lang submit}" />            </td> 
+        </tr> 
+        </table> 
+  </form> 
+</div>
+<script language="JavaScript" type="text/JavaScript">
+var offer_allow={$item.offer_allow|default:1};
+var product_allow={$item.product_allow|default:1};
+var company_allow={$item.company_allow|default:1};
+var job_allow={$item.job_allow|default:1};
+var companynews_allow={$item.companynews_allow|default:1};
+var album_allow={$item.album_allow|default:1};
+var market_allow={$item.market_allow|default:1};
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#offer_allow__1").click(
+		function(){
+			$("#AllowOffer").show();
+		}
+	);
+	$("#offer_allow__0").click(
+		function(){
+		$("#AllowOffer").hide();
+		}
+	);
+	if(offer_allow==1) $("#offer_allow__1").click();
+	//product
+	$("#product_allow__1").click(
+		function(){
+			$("#AllowProduct").show();
+		}
+	);
+	$("#product_allow__0").click(
+		function(){
+		$("#AllowProduct").hide();
+		}
+	);
+	if(product_allow==1) $("#product_allow__1").click();
+	//company
+	$("#company_allow__1").click(
+		function(){
+			$("#AllowCompany").show();
+		}
+	);
+	$("#company_allow__0").click(
+		function(){
+		$("#AllowCompany").hide();
+		}
+	);
+	if(company_allow==1) $("#company_allow__1").click();
+	//job
+	$("#job_allow__1").click(
+		function(){
+			$("#AllowJob").show();
+		}
+	);
+	$("#job_allow__0").click(
+		function(){
+		$("#AllowJob").hide();
+		}
+	);
+	if(job_allow==1) $("#job_allow__1").click();
+	//album
+	$("#album_allow__1").click(
+		function(){
+			$("#AllowAlbum").show();
+		}
+	);
+	$("#album_allow__0").click(
+		function(){
+		$("#AllowAlbum").hide();
+		}
+	);
+	if(album_allow==1) $("#album_allow__1").click();
+	//market
+	$("#market_allow__1").click(
+		function(){
+			$("#AllowMarket").show();
+		}
+	);
+	$("#market_allow__0").click(
+		function(){
+		$("#AllowMarket").hide();
+		}
+	);
+	if(market_allow==1) $("#market_allow__1").click();
+	//companynews
+	$("#companynews_allow__1").click(
+		function(){
+			$("#AllowCompanynews").show();
+		}
+	);
+	$("#companynews_allow__0").click(
+		function(){
+		$("#AllowCompanynews").hide();
+		}
+	);
+	if(companynews_allow==1) $("#companynews_allow__1").click();
+})
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

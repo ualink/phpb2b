@@ -1,0 +1,271 @@
+/** Hover **/
+ul#topnav {width: 178px;position: relative;z-index:10;}
+ul#topnav li { float:left;margin: 0; padding: 0;position: relative;z-index:20;}
+ul#topnav li:hover a, ul#topnav li a:hover { background-position: left bottom; }
+ul#topnav a {width: 133px;height:28px;line-height:28px;float:left;padding:0 20px 0 25px; overflow:hidden; display:block; }
+ul#topnav li .sub {position: absolute;top: -7px; left: 166px; padding: 0 0 0 13px;z-index:100;display:none; overflow:hidden;}
+ul#topnav li .row {clear: both; width:365px; border-left:none; background-color:#FFFFFF; padding:10px; overflow:hidden }
+ul#topnav li .sub ul{list-style: none;margin: 0; padding: 0; width: 360px;clear:both;}
+ul#topnav .sub ul li { display:inline; border-bottom:1px dashed #ccc;}
+ul#topnav .sub ul li a {float: left;text-indent: 0; /*--Reset text indent--*/
+background:none;padding: 0 5px 0 10px;display: block;text-decoration: none;color: #000;font-weight:bold;width:155px;overflow:hidden}
+ul#topnav .sub ul li a:hover {color: #0033ff; }
+
+/*style 2*/
+
+.brand_hot .letterindex li a:hover { font-weight:bold;}
+ul#letternav {width: 660px;float:left;padding:6px 0 0 0;display:block;}
+ul#letternav li { float:left; display:inline;}
+ul#letternav li a { float:left;display:block;border-left:1px solid #98d2f7;font-size:14px;}
+ul#letternav li:hover a, ul#letternav li a:hover {border:1px solid #98d2f7;border-bottom:none; background-color:#FFFFFF;height:23px; position:relative; z-index:200; margin:0 -1px 0 0; text-transform:uppercase; }
+ul#letternav a {height:16px;line-height:16px;float:left;padding:0 7px; }
+ul#letternav li .sub { float: left;position: absolute;top: 29px; left: 0;background:none; z-index:100;display:none; overflow:hidden;border:1px solid #98d2f7; }
+ul#letternav li .row {clear: both; background-color:#FFFFFF; padding:10px; overflow:hidden }
+ul#letternav li .sub ul{list-style: none;margin: 0; padding: 0;clear:both;width:766px; }
+ul#letternav .sub ul li {  background:none;display:block; overflow:hidden;padding: 5px 5px 0 5px;font-size:14px;font-weight:bold; width:115px; height:auto; float:left}
+ul#letternav .sub ul li a {text-indent: 0;background:none;text-decoration: none;color: #000;border:none;height:auto;}
+ul#letternav .sub ul li a:hover {color: #0033ff; background:none; border:none;height:auto;}
+
+/** Scroll **/
+.jcarousel-container {
+    position: relative;
+}
+
+.jcarousel-clip {
+    z-index: 2;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.jcarousel-list {
+    z-index: 1;
+    overflow: hidden;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+	_position:absolute
+}
+
+
+.jcarousel-next {
+    z-index: 3;
+    display: none;
+}
+
+.jcarousel-prev {
+    z-index: 3;
+    display: none;
+}
+
+
+
+.jcarousel-skin .jcarousel-container-horizontal {
+    width:638px;
+    padding: 10px 40px;
+}
+
+.jcarousel-skin .jcarousel-container-vertical {
+    width: 75px;
+    height: 245px;
+    padding: 40px 20px;
+}
+
+.jcarousel-skin .jcarousel-clip-horizontal {
+    width:  638px;
+    height: 95px;
+}
+
+.jcarousel-skin .jcarousel-clip-vertical {
+    width:  75px;
+    height: 245px;
+}
+
+.jcarousel-skin .jcarousel-item {
+    width: 76px;
+    height: 95px;
+}
+
+.jcarousel-skin .jcarousel-item-horizontal {
+    margin-right: 11px; margin-left:5px;_margin-right: 14px; _margin-left:2px;
+}
+
+.jcarousel-skin .jcarousel-item-vertical {
+    margin-bottom: 10px;
+}
+
+.jcarousel-skin .jcarousel-item-placeholder {
+    background: #fff;
+    color: #000;
+}
+
+/**
+ *  Horizontal Buttons
+ */
+.jcarousel-skin .jcarousel-next-horizontal {
+    position: absolute;
+    top: 43px;
+    right: 5px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: transparent url(../images/next-horizontal.png) no-repeat 0 0;
+}
+
+.jcarousel-skin .jcarousel-next-horizontal:hover {
+    background-position: -32px 0;
+}
+
+.jcarousel-skin .jcarousel-next-horizontal:active {
+    background-position: -64px 0;
+}
+
+.jcarousel-skin .jcarousel-next-disabled-horizontal,
+.jcarousel-skin .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin .jcarousel-next-disabled-horizontal:active {
+    cursor: default;
+    background-position: -96px 0;
+}
+
+.jcarousel-skin .jcarousel-prev-horizontal {
+    position: absolute;
+    top: 43px;
+    left: 5px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: transparent url(../images/prev-horizontal.png) no-repeat 0 0;
+}
+
+.jcarousel-skin .jcarousel-prev-horizontal:hover {
+    background-position: -32px 0;
+}
+
+.jcarousel-skin .jcarousel-prev-horizontal:active {
+    background-position: -64px 0;
+}
+
+.jcarousel-skin .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin .jcarousel-prev-disabled-horizontal:active {
+    cursor: default;
+    background-position: -96px 0;
+}
+
+/**
+ *  Vertical Buttons
+ */
+.jcarousel-skin .jcarousel-next-vertical {
+    position: absolute;
+    bottom: 5px;
+    left: 43px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: transparent url(../images/next-vertical.png) no-repeat 0 0;
+}
+
+.jcarousel-skin .jcarousel-next-vertical:hover {
+    background-position: 0 -32px;
+}
+
+.jcarousel-skin .jcarousel-next-vertical:active {
+    background-position: 0 -64px;
+}
+
+.jcarousel-skin .jcarousel-next-disabled-vertical,
+.jcarousel-skin .jcarousel-next-disabled-vertical:hover,
+.jcarousel-skin .jcarousel-next-disabled-vertical:active {
+    cursor: default;
+    background-position: 0 -96px;
+}
+
+.jcarousel-skin .jcarousel-prev-vertical {
+    position: absolute;
+    top: 5px;
+    left: 43px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: transparent url(../images/prev-vertical.png) no-repeat 0 0;
+}
+
+.jcarousel-skin .jcarousel-prev-vertical:hover {
+    background-position: 0 -32px;
+}
+
+.jcarousel-skin .jcarousel-prev-vertical:active {
+    background-position: 0 -64px;
+}
+
+.jcarousel-skin .jcarousel-prev-disabled-vertical,
+.jcarousel-skin .jcarousel-prev-disabled-vertical:hover,
+.jcarousel-skin .jcarousel-prev-disabled-vertical:active {
+    cursor: default;
+    background-position: 0 -96px;
+}
+
+ .jcarousel-item {width:76px; display:block; overflow:hidden;text-align:center; float:left; _display:inline}
+ .jcarousel-item div {width:74px; height:74px;text-align:center;display:table; }
+ .jcarousel-item div span {display:table-cell;vertical-align:middle}
+ .jcarousel-item div span {
+    _height: 100%; /* 要保证和父元素高度一样才行 */
+    _writing-mode: tb-rl;
+    _vertical-align: middle;
+  }/* IE6 */
+.jcarousel-item div {*position:relative;*overflow:hidden;}
+.jcarousel-item div span{*position:absolute;*left:50%;*top:50%;}
+.jcarousel-item div img{*position:relative;*left:-50%;*top:-50%;}/* IE7 */
+.jcarousel-item img {max-width: 74px;max-height: 74px;} /* for Firefox & IE7 */
+* html .jcarousel-item img { /* for IE6 */
+width: expression(this.width > 74 && this.width > this.height ? 74 : true);
+height: expression(this.height > 74 ? 74 : true);
+}
+
+/*tabs*/
+/* root element for tabs  */
+ul.tabs { list-style:none; margin:0 !important; padding:0;	border-bottom:1px solid #0090ED;height:27px;}
+/* single tab */
+ul.tabs li { text-indent:0;padding:0;margin:0 !important;list-style-image:none !important; display:inline}
+/* when mouse enters the tab move the background image */
+ul.tabs a:hover {background-position: 0 -30px;}
+/* active tab uses a class name "current". it's highlight is also done by moving the background image. */
+ul.tabs a.current, ul.tabs a.current:hover, ul.tabs li.current a {background-position: 0 -60px;	cursor:pointer;}
+/* initially all panes are hidden */ 
+div.panes div.pane {display:none;}
+/* get rid of those system borders being generated for A tags */
+ul.tabs a:active {outline:none;}
+a:active {outline:none;}
+ul.tabs a:focus {-moz-outline-style:none;}
+a.current, .current a{outline:none;}
+a.current{ hide-focus:expression(this.hideFocus=true); }
+.current a{ hide-focus:expression(this.hideFocus=true); }
+ul.tabs a {float:left;display:block;height: 27px; line-height:27px;text-align:center;text-decoration:none;padding:0px;margin:0px;	position:relative;top:1px; font-weight:bold}
+ul.tabs a span { padding:0 20px;}
+ul.tabs a span { background-position:right -100px;display:block;}
+ul.tabs a:hover span { background-position:right -130px;}
+ul.tabs a.current span, ul.tabs a.current:hover span, ul.tabs li.current a span { background-position:right -160px;}
+
+/*tabs style 2*/
+/* root element for tabs  */
+ul.tabs2 { list-style:none; margin:0 !important; padding:0;height:30px;}
+/* single tab */
+ul.tabs2 li { text-indent:0;padding:0;margin:0 !important;list-style-image:none !important; display:inline}
+/* when mouse enters the tab move the background image */
+ul.tabs2 a:hover {background-position: 0 -30px;}
+/* active tab uses a class name "current". it's highlight is also done by moving the background image. */
+ul.tabs2 a.current, ul.tabs2 a.current:hover, ul.tabs2 li.current a {background-position: 0 -60px;	cursor:pointer;}
+/* get rid of those system borders being generated for A tags */
+ul.tabs2 a:active {outline:none;}
+ul.tabs2 a:focus {-moz-outline-style:none;}
+ul.tabs2 a {float:left;display:block;height: 30px; line-height:30px;text-align:center;text-decoration:none;padding:0px;margin:0px;	position:relative;top:1px; font-weight:bold; margin-right:2px;}
+ul.tabs2 a span { padding:0 20px;}
+ul.tabs2 a span { background-position:right -100px;display:block;}
+ul.tabs2 a:hover span { background-position:right -130px;}
+ul.tabs2 a.current span, ul.tabs2 a.current:hover span, ul.tabs2 li.current a span { background-position:right -160px;}
+ul.fxg_width a span {width:85px; height:30px; overflow:hidden; padding:0 10px;}
+
+

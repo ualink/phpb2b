@@ -1,0 +1,103 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang yellow_page}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang yellow_page}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="company.php"><span>{lang management}</span></a></li>
+        <li><a href="company.php?do=edit">{lang add_or_edit}</a></li>
+        <li><a href="companytype.php">{lang types}</a></li>
+        <li><a href="albumtype.php">{lang album_category}</a></li>
+    </ul>
+</div>
+<div class="mrightTop">
+	<div class="fontl">
+		{if $TotalAmount>0}<span><a href="{$smarty.server.PHP_SELF}?do=search&status=0">{lang moderated}</a><em>({$TotalAmount})</em></span>{/if}
+	</div>
+    <div class="fontr"> 
+        <form name="search_frm" id="SearchFrm" method="get"> 
+        <input type="hidden" name="do" value="search" />
+             <div> 
+                <select class="querySelect" name="companytype" id="companytype">
+					<option value="0">{lang company} {lang types}</option>
+                	{html_options options=$CompanyTypes selected=$smaty.get.companytype}
+              	</select>
+                <select class="querySelect" name="status" id="companystatus">
+					<option value="-1">{lang checked_status}</option>
+                    {html_options options=$CheckStatus selected=$smaty.get.status}
+                </select>
+				{lang cp_username_n}<input class="queryInput" type="text" name="member[username]" value="{$smarty.get.member.username}" /> 
+				{lang company_name}{lang colon}<input class="queryInput" type="text" name="company[name]" value="{$smarty.get.company.name}" />
+                <input type="submit" name="search" id="Search" class="formbtn" value="{lang searching}" /> 
+            </div> 
+        </form> 
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th><label for="idAll">{lang company_name}</label></th>
+		  <th>{lang cp_username}</th>
+		  <th>{lang trust_star}</th>
+		  <th>{lang checked_status}</th>
+		  <th>{lang in_area}</th>
+		  <th>{lang in_industry}</th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tfoot>
+		<tr>
+		  <th colspan="8"><div class="pageLinks">{$ByPages}</div></th>
+		</tr>
+    <tfoot>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<input type="hidden" name="member_id[]" value="{$item.member_id}">
+		<tr class="tatr2">
+		  <td class="firstCell"><input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}"></td>
+		  <td><label for="item_{$item.id}">{$item.CompanyName}</label>{if $item.if_commend==1}<span class="icon-commend"></span>{/if}</td>
+		  <td><a href="member.php?do=edit&id={$item.member_id}" title="{$item.NickName}">{$item.username}</a>[{$AllMembergroups[$item.membergroup_id]}]</td>
+		  <td>{$item.cache_credits}</td>
+		  <td>{$CheckStatus[$item.CompanyStatus]}</td>
+		  <td>{$Areas[1][$item.area_id1]}{$Areas[2][$item.area_id2]}</td>
+		  <td>{$Industries[1][$item.industry_id1]}{$Industries[2][$item.industry_id2]}</td>
+		  <td class="handler">
+           <ul id="handler_icon">
+            <li><a class="btn_browse" href="{the_url module=space userid=$item.space_name}" target="_blank" title="{lang preview}">{lang preview}</a></li>
+            <li><a class="btn_edit" href="company.php?do=edit&id={$item.id}{$addParams}" title="{lang edit}">{lang edit}</a></li>
+          </ul>  
+         
+		  </td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="8">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="submit" name="del" value="{lang delete}" class="formbtn batchButton"/>
+      <input type="submit" name="check[in]" value="{lang check_passed}" class="formbtn batchButton"/>
+      <input type="submit" name="check[out]" value="{lang check_invalid}" class="formbtn batchButton"/>
+      <input type="submit" name="recommend" value="{lang commend}" class="formbtn batchButton"/>
+	  <select name="set_group" id="SetGroup" class="actionsel" onchange="$('#ListFrm').submit()">
+	  <option value="0">{lang pls_select}{lang membergroup}</option>
+	  <optgroup label="{lang member_group}">
+      <!--{foreach from=$Membergroups item=groupname key=key}-->
+	  	<option value="{$key}">{$groupname}</option>
+      <!--{/foreach}-->
+	  </optgroup>
+	  </select>
+    </div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

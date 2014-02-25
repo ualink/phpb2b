@@ -1,0 +1,80 @@
+{block name="title" prepend}{#brands#}{/block}
+{block name="main"}
+<script src="../static/scripts/jquery/jquery.textbox.js" charset="{$charset}"></script>
+<script>
+var allows_maximum_input = "{lang allows_maximum_input}";
+var can_also_enter = "{lang can_also_enter}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#BrandDescription").textbox({
+		maxLength: 255,
+		onInput: function(event, status) {
+			$("#txtTips").html(allows_maximum_input+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.maxLength + "</strong> "+can_also_enter+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.leftLength + "</strong>");
+		}
+	});
+})
+</script>
+<!--{/literal}-->
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{lang brands}</h2></div>
+
+	  <form method="post" action="brand.php" enctype="multipart/form-data" onsubmit="$('#Save').attr('disabled',true);">
+	  <!-- {formhash} -->
+	  <input type="hidden" name="id" value="{$item.id}">
+	  <input type="hidden" name="formattribute_ids" value="{$item.formattribute_ids}">
+       <div class="hint">{lang must_input_with_star}</div>
+        <table class="offer_info_content">
+			  <tr>
+				<th><font class="red">*</font> {lang brand_name}</th>
+				<td class="tdright"><input name="data[brand][name]" type="text" id="dataBrandName" value="{$item.name}">
+				<font color="#666666">{lang words_length}</font></td>
+			  </tr>
+			  <tr>
+				<th> {lang brands}{lang alias_name}</th>
+				<td class="tdright"><input name="data[brand][alias_name]" type="text" id="dataBrandAliasName" value="{$item.alias_name}">
+			     </td>
+			  </tr>
+			  {if $BrandtypeOptions}
+			  <tr>
+				<th>{lang brand_type}</th>
+				<td>
+					<select name="data[brand][type_id]" id="BrandTypeId">
+                           {$BrandtypeOptions}
+					</select>					
+				</td>
+			  </tr>
+			  {/if}
+			  <tr>
+                    <th>{lang description}</th>
+                    <td class="tdright"><textarea name="data[brand][description]" id="BrandDescription" rows="8" wrap="VIRTUAL" style="width:370px;">{$item.description}</textarea><div id="txtTips"></div></td>
+              </tr>
+			<tr>
+             <th>{lang brand_image}</th>
+                    <td>
+                        <input name="pic" type="file" id="uploadfile" onchange="preview()" />
+                         <span class="gray"><br>
+                            {lang image_size_format_provision}</span></td>
+                    </tr>
+                   <tr>
+				   <!--{if $item.image}-->
+                     <th></th>
+                      <td><a href="{$item.image|default:"javascript:;"}" id="uploadpic_hover" rel="lightbox"><img id="uploadpic" src="{$item.image}.small.jpg" alt="{$item.name}" width="75" height="75"/></a></td>
+					  <!--{/if}-->
+                    </tr>
+			  <tr>
+				<th class="circle_bottomleft"></th>
+				<td class="circle_bottomright"><input name="save" type="submit" id="save" value=" {lang confirm_submit} "></td>
+			  </tr>
+          </table>
+	</form>
+<!--{literal}-->
+<script>
+var type_id="{$item.type_id|default:1}";
+jQuery(document).ready(function($) {
+$("#Brandtypes option[value='"+type_id+"']").attr("selected","selected");})
+</script>
+<!--{/literal}-->
+{/block}

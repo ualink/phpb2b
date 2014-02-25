@@ -1,0 +1,41 @@
+{block name="title" prepend}{#change_password#}{/block}
+{block name="main"}
+<!--{literal}-->
+<script>
+$(document).ready(function() {
+	$("#ChangePassFrm").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	})
+})
+</script>
+<!--{/literal}-->
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+     <div class="hint">{lang must_input_with_star}</div>
+	  <form name="changepassfrm" id="ChangePassFrm" method="post">
+	  <!-- {formhash} -->
+	  <input type="hidden" name="action" value="checkpasswd" />
+		 <table class="offer_info_content">
+              <tr>
+                <th class="circle_left"><span class="fontred"> *</span>{lang old_password}</th>
+              <td class="circle_right"><input name="oldpass" type="password" id="oldpass" class="required" value=""><span id="checkoldpwdDiv"></span> </td>
+            </tr>
+            <tr>
+              <th><span class="fontred"> *</span> {lang new_password_n}</th>
+              <td><input name="newpass" type="password" id="newpass" class="required" minlength="5"></td>
+            </tr>
+            <tr>
+              <th><span class="fontred"> *</span> {lang repeat}{lang new_password_n}</th>
+              <td><input name="re_newpass" type="password" id="re_newpass" class="required" minlength="5" equalTo="#newpass"></td>
+            </tr> 
+            <tr>
+              <th class="circle_bottomleft"></th>
+              <td class="circle_bottomright"><input name="btn_change_pwd" type="submit" id="BtnChangePwd" value="{lang i_sure}{lang change_password}"></td>
+            </tr> 
+        </table>
+	  </form>
+{/block}

@@ -1,0 +1,145 @@
+<!--{include file="../header.html" page_title="$page_title"}-->
+<link href="{$theme_img_path}css/topic.css" rel="stylesheet"/>
+<div id="doc" class="w952 supplier-portal">
+      <div id="main_content">
+                <div class="layout-p32a24" id="supplier-portal-1st">
+                    <div class="grid-24">
+                        <div class="mod-notice">
+    <div class="cell-header">
+        <h4 class="title">{lang announce}</h4>								
+    </div>
+    <div class="topic_content" id="noticeContainer">
+        <ul class="list">
+			<!-- {pb:announce row=4} -->
+            <li>{$row.link}</li>
+			<!-- {/pb:announce} -->
+        </ul>
+    </div>
+</div>                    </div>
+                </div>
+                <div class="layout-p32a24" id="supplier-portal-2nd">
+                    <div class="grid-4">
+                        <div class="mod-serverportal">
+    <div class="cell-header common-header-2nd">
+        <h3 class="title">{lang service_entrance}</h3>
+    </div>
+</div>
+<!-- {ads typeid=6 row=5 name="ads"} -->
+<div class="mod-img-3rd">
+    <h4 class="fd-hide">{$ads.title}</h4>
+    <div class="topic_content">
+        <dl class="cell-2nd">
+            <dt>
+                <a class="a-img" href="{$ads.url}" title="" linkf="ads">
+                    {$ads.thumb}
+                </a>
+            </dt>
+            <dd class="description"><a href="{$ads.url}" title="" linkf="ads">{$ads.title}</a></dd>
+        </dl>
+    </div>
+</div>
+<!-- {/ads} -->
+</div>
+<div class="grid-14">
+	<div class="mod-slider">
+    <h4 class="fd-hide">Slider</h4>
+    <div class="topic_content f-slider" id="js-slider">
+        <ul class="f-slider-list">
+            <li>
+                <a class="a-img" href="member.php" title="">
+					<!-- {if $topic.picture!=''} -->
+                    {the_attachment name=$topic.picture}"
+					<!-- {else} -->                    
+					<img src="attachment/sample/breathe-index1.jpg" alt="" />
+					<!-- {/if} -->
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>                                                
+<div class="mod-info">
+    <div class="cell-header common-header-1st">
+        <h3 class="title"><em>{lang latest_news}</em></h3>
+        <div class="fixed-rb"></div>
+        <div class="fd-right">
+            <a href="{the_url module=search do=news action=lists typeid=1}" title="{lang more}" class="btn-customize" id="js-customize-1st"><em>{lang more}</em></a>
+        </div>
+    </div>
+    <div class="topic_content" id="js-tab-1st">
+<div id="info-default" class="info-default">
+<div class="info-list">
+<ul class="cell-list-txt fd-clr">
+<!-- {pb:news row=10 industryid=$industry_id areaid=$area_id} -->
+<li><span class="txt-2nd">{$row.link}</span><span class="date">{$row.created|date_format:"%m-%d"}</span></li>
+<!-- {if $row.rownum==4} -->
+</ul>
+</div>
+<div class="info-list">
+<ul class="cell-list-txt fd-clr">
+<!-- {/if} -->
+<!-- {/pb:news} -->
+</ul>
+</div>
+
+</div>
+</div>
+</div>                                                
+	</div>
+	<div class="grid-6 grid-fixed">
+		<div class="mod-login-1st" id="js-login-1st">
+		<!--{if $pb_username eq ''}-->
+    <div class="cell-header">
+        <h4 class="title">{lang login_and_see_more}</h4>
+        <div class="btn-login" id="js-login-float">
+            <a href="logging.php" title="{lang user_login}" target="_self">{lang user_login}</a>
+        </div>
+    </div>
+	<!-- {/if} -->
+    <div class="topic_content">
+        <p class="tel">{lang service_hotline}<a class="value" href="#" title="">{$service_tel}</a></p>
+    </div>
+</div>                        
+<div class="mod-buyerdynamic">
+    <div class="cell-header common-header-2nd">
+        <h3 class="title">{lang offer_info}</h3>
+    </div>
+    <div class="topic_content">
+        <div class="obj-buyerdynamic-1st">
+            <div class="cell-header">
+                <h4 class="title">{lang newest_sell}</h4>
+                <div class="float-rt">
+                    <a title="{lang more}" href="{the_url module=search action=lists do=offer}" class="more">{lang more}</a>
+                </div>
+            </div>
+			<div id="js-hotRender" class="topic_content">
+			<ol class="hotsearch">
+			<!-- {pb:offer row=10 titlelen=5 industryid=$industry_id areaid=$area_id} -->
+			<li>{$row.iteration}&nbsp;<a title="{$row.title}" href="{$row.url}">{$row.title}</a></li>
+			<!-- {/pb:offer} -->
+			</ol>
+			</div>
+        </div>
+        <div class="obj-buyerdynamic-2nd">
+            <div class="cell-header">
+                <h4 class="title">{lang newest_buy}</h4>
+                <div class="float-rt">
+                    <a title="{lang more}" href="{the_url module=search action=lists do=offer}" class="more">{lang more}</a>
+                </div>
+            </div>
+            <div class="topic_content" id="js-tab-2nd">
+                <div class="f-tab-b buying" id="buyingBox">
+				<ul class="cell-list-txt" id="buyingSubBox" style="height: 648px;">
+				<!-- {pb:offer row=5 titlelen=12 industryid=$industry_id areaid=$area_id} -->
+				<li>{$row.link}<span>{$row.submit_time|date_format:"%m-%d"}</span></li>
+				<!-- {/pb:offer} -->
+				</ul>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>                                                
+	</div>
+		</div>
+	</div>
+</div>
+<!--{include file="../footer.html"}-->

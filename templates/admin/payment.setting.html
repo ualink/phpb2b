@@ -1,0 +1,56 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{#your_current_position#} {lang system_tools} &raquo; {lang pay_method} &raquo; {$item.title|default:$item.name}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang pay_method}</h3> 
+    <ul class="subnav">
+		<li><a href="payment.php">{lang management}</a></li>
+        <li><a class="btn1"><span>{lang add_or_edit}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form action="payment.php" method="post" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="id" value="{$smarty.get.id}">
+  <input type="hidden" name="data[payment][name]" id="paymentName" value="{$smarty.get.entry}">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang naming_n}</th>
+        <td class="paddingT15 wordSpacing5">{$item.name}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang the_title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[payment][title]" value="{$item.title|default:$item.name}" /><label class="field_notice">{lang title_display}</label></td>
+      </tr>
+      
+      <tr>
+        <th class="paddingT15"> {lang description_n}</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea style="width:550px;height:50px;" name="data[payment][description]">{$item.description}</textarea>        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang whether_or}{lang setup}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{html_radios name="data[payment][available]" options=$AskAction checked=$item.available|default:1 separator=""}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang support} {lang online_payment}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{html_radios name="data[payment][if_online_support]" options=$AskAction checked=$item.if_online_support|default:1 separator=""}</td>
+      </tr>
+	  <!-- {foreach from=$module_configs item=config} -->
+	  <tr>
+        <th class="paddingT15"> {$config.title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input name="data[config][{$config.name}]" value="{$config.value}" /></td>
+      </tr>
+	  <!-- {/foreach} -->
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+{editor type="tinymce"}
+{include file="footer.html"}

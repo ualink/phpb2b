@@ -1,0 +1,21 @@
+<!--{include file="header.html"}-->
+<div class="head" style="background:#E1F0FB url({$WebRootUrl}{$TemplateDir}/wap/images/topbg.gif) repeat-x;">
+<a href="{the_url module=wap}">{lang home_page}</a>&raquo;{$do_title}
+<a href="javascript:window.refresh();">{lang refresh_page}</a>
+<a href="javascript:window.history.back();">{lang go_back}</a>
+</div>
+<div class="main">
+<!-- {foreach from=$items item=item} -->
+<h3><a href="{$WebRootUrl}index.php?do=wap&action=detail&module={$_G.module}&id={$item.id}">{$item.title|pl}</a><small>{$item.created|date_format:"%m/%d/%Y"}</small></h3>
+<!-- {/foreach} -->
+<br/>
+<!-- {$pages} -->
+<br/><br/>
+<form action="{$_G.PHP_SELF}" method="get">
+<input type="hidden" name="do" value="wap">
+<input type="hidden" name="module" value="{$_G.module|default:'product'}">
+<input type="hidden" name="action" value="search">
+<input type="text" name="q" value="{$_G.q}" size="6"/>
+<input type="submit" name="submit" value="{lang search}"/>
+</form>
+<!--{include file="footer.html"}-->

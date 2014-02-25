@@ -1,0 +1,94 @@
+<!--{include file="../header.html" page_title=#invest_info# nav_id=4}-->
+<style type="text/css">
+@import url({$theme_img_path}css/effect.css);
+</style>
+<script src="static/scripts/jquery.tools.js"></script>
+<div class="wrapper">
+	<div class="content">
+		<div class="main_left_w180">
+			<div class="cornerbox">
+				<div class="title_bar_s6">
+					<span class="title_top_s6"><span></span></span>
+					<h2>{lang hot_invest_project}</h2>
+				</div>
+				<div class="corner_content_s6">
+				   <ul>
+					  <!--{pb:offer row=9 typeid=6 name="offer"}-->
+					  <li>{$offer.link}</li>
+					 <!--{/pb:offer}-->
+				   </ul>
+				</div>
+			   <div class="corner_bottom">
+					<div class="corner_bottom_l"></div>
+					<div class="corner_tottom_r"></div>
+				</div>
+			</div><!--end-->
+		</div>
+		<div class="main_right_w770">
+			<div class="area_price clearfix">
+				 <strong>{lang area_invest_info}</strong>
+				 <div>
+					 <!-- {category name="area" depth="1"} -->
+					 <!-- {foreach from=$category item=item} -->
+					 <a href='index.php?do=offer&action=lists&typeid=4&areaid={$item.id}&level=1'><span>{$item.name}</span></a>
+					 <!-- {/foreach} -->
+				 </div>
+			</div>
+			<div class="blank6"></div>
+			<div class="brand_hot">
+				<div class="title">
+					<h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang commend} {lang invest_info}</span><span class="corner_t_r"></span><span class="sub_category"><span class="title_more"><a href="index.php?do=offer&action=lists&typeid=4&type=commend" title="{lang more}" target="_blank"><span class="raquo">&raquo;</span>{lang more}</a></span></span></h2>
+				</div>
+				<div class="letter_product_content clearfix" style="text-align:center;">
+					<table cellspacing="5" class="table1">
+					  <tr>
+						<!--{pb:offer row=18 recursive=1 type="commend" typeid=6 name="offer"}-->
+					    <td><a {$offer.style} href="{$offer.url}" title="{$offer.title}">{$offer.adwords}</a></td>
+						<!-- {if $offer.iteration is div by 6} -->
+						</tr><tr>
+						<!-- {/if} -->
+					  <!--{/pb:offer}-->
+					  </tr>
+					</table>    
+			  </div>                     
+			</div><!--end hot-->
+			<div class="blank6"></div>
+			<!-- {pb:industry include="1,2,3" name="industry"} -->
+			<div class="brand_hot" id="brand_recommended">
+				<div class="title">
+					<h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{$industry.title|pl} {lang invest_info}</span><span class="corner_t_r"></span><span class="sub_category"><span class="title_more"><a href="index.php?do=offer&action=lists&typeid=4&industryid={$industry.id}&level={$industry.level}" title="{lang more}" target="_blank"><span class="raquo">&raquo;</span>{lang more}</a></span></span></h2>
+				</div>
+				<div class="letter_product_content clearfix" style="text-align:center;">
+					<div class="pic">
+						<ul>
+							<!--{pb:offer row=6 type="image" recursive=1 typeid=6 industryid=$industry.id name="offer"}-->
+							<li>
+							  <a href="{$offer.url}"><img height="80" width="110" border="0" alt="{$offer.adwords}" src="{$offer.thumb}"></a>
+							  <p><a title="{$offer.title}" href="{$offer.url}">{$offer.adwords}</a></p>
+							</li>
+						  <!--{/pb:offer}-->
+						</ul>
+					</div>
+					<table cellspacing="5" class="table1">
+					  <tr>
+						<!--{pb:offer row=18 recursive=1 typeid=6 industryid=$industry.id name="offer"}-->
+					    <td><a {$offer.style} href="{$offer.url}">{$offer.adwords}</a></td>
+						<!-- {if $offer.iteration is div by 6} -->
+						</tr><tr>
+						<!-- {/if} -->
+						<!--{/pb:offer}-->
+					  </tr>
+					</table>
+			  </div>                     
+			</div><!--end recommended-->
+			<div class="blank6"></div>
+			<!-- {/pb:industry} -->
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<script>
+$("#hdModule").val("offer");
+$("#topMenuOffer").addClass("lcur");
+</script>
+<!--{include file="../footer.html"}-->

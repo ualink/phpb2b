@@ -1,0 +1,33 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang passport}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang passport}</h3> 
+    <ul class="subnav">
+		<li><a href="passport.php">{lang management}</span></li>
+		<li><a class="btn1" href="passport.php?do=set"><span>{lang basic_setting}</span></a></li>
+		<!--{foreach from=$Items item=item}-->
+		{if $item.available}
+        <li><a class="btn_edit" href="passport.php?do=edit&entry={$item.name}&id={$item.id}{$addParams}" title="{lang edit}">{$item.title}</a></li>
+		{/if}
+		<!--{/foreach}-->
+    </ul>
+</div>
+<div class="info">
+  <form action="passport.php" method="post" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="do" value="setting">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang if_valid}</th>
+        <td class="paddingT15 wordSpacing5"><!--{html_radios name="data[setting][passport_support]" options=$AskAction checked=$item.passport_support|default:0 separator=""}--></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save_passport" value="{lang save_setting}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

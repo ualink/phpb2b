@@ -1,0 +1,34 @@
+<!--{include file="header.html" page_title=#online_pay#}-->
+<div class="wrapper">
+	<div class="tips"><span>{lang correct_operation}</span></div>  
+	<div class="blank6"></div>
+	<div class="charge_box">
+		<div class="corner_toptxt_bar">
+		  <span class="corner_toptxt_s1"><span></span></span>
+		</div>
+		<div class="charge_online">
+		  <p>{lang confirm_pay_amount}</p>
+		<table>
+			{if $OnlineSupport}
+			<form method=get action="">
+			<input type="hidden" name="tradeno" value="{$tradeno}">
+			<input type="hidden" name="do" value="pay">
+			<tr>
+				<th>&nbsp;</th>
+				<td><input type="submit" class="submit_w118" value="{lang next_pay_amount}"/></td>
+			</tr>
+			</form>
+			{elseif $Description}
+			<tr>
+				<th>{lang pay_description}</th>
+				<td class="pay_description">{$Description}</td>
+			</tr>
+		{/if}
+		</table>
+		</div>
+		<div class="corner_bottomtxt_bar">
+		  <span class="corner_bottomtxt_s1"><span></span></span>
+		</div>
+	</div> 
+</div>
+<!--{include file="footer.html"}-->

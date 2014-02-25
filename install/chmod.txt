@@ -1,0 +1,4 @@
+attachment/*
+data/*
+configs/*
+configs/config.inc.php

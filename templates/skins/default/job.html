@@ -1,0 +1,20 @@
+{extends file="layout.html"} 
+{block name="title" prepend}{#space_hr#}{/block}
+{block name="content"}
+<!-- {get do="cache" var="options" name="typeoption"} -->
+			<div class="rightbarcontact">
+					<div class="playercontact">
+					<div class="playerheadcontact"><span class="playlistcontact">{lang space_hr}</span><span class="player_head_concontact"></span><img src="{$SpaceUrl}images/contactus_13.jpg" /></div>
+					<div class="clear"></div>
+					<div class="hr_content">
+					<!--{pb:job companyid=$COMPANY.id row=10 status=1 name=job stat=1}-->
+						<p class="companytitle">{$job.link}</p>
+						<p title="{$item.content}">{$job.content|truncate:100}</p>
+					<!--{/pb:job}-->					
+						<p class="page"><!-- {pager rowcount=$total_count} --></p>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+{/block}

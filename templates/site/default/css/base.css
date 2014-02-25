@@ -1,0 +1,76 @@
+/****globals***/
+body, th, td, input, select, textarea { font: 12px/1.5em Verdana, "Lucida Grande", Arial, Helvetica, sans-serif; }
+body, h1, h2, h3, h4, h5, h6, p, ul, dl, dt, dd, form, img,fieldset { margin: 0; padding: 0; border:0;list-style: none; }
+h1, h2, h3, h4, h5, h6 { font-size:12px; font-weight:bold;}
+ul li { list-style: none; }
+a img { border: none; }
+em { font-style:normal;}
+select { margin:0px 2px 3px 0; }
+div{margin:0; padding:0;}
+table {border-collapse:collapse;border-spacing:0;}
+q:before,q:after{content:''}
+.clear {clear:both; height:0; overflow:hidden; display:block; line-height:0}
+.clearfix:after {clear:both; height:0; overflow:hidden; display:block; visibility:hidden; content:"."; }
+*html .clearfix { height:1%;}
+*+html .clearfix { height:1%;}
+.blank, .blank6 {clear:both; display:block; overflow:hidden;}
+.blank {height:10px;}
+.blank6 {height:6px;}
+.raquo {font-family: Helvetica; font-size:14px;}
+.break {word-wrap:break-word;}
+.vertical_break { word-wrap:break-word; width:6px;white-space:normal;}
+.cursor-hand {cursor:pointer;}
+/* Main Structural */
+.wrapper{padding:6px 0 0 0}
+.wrapper,.content,.container,#footer,#nav_inner,#header{width:960px;margin:0 auto;}
+.fl{ float:left;}
+.fr{ float:right;}
+.tar{ text-align:right;}
+.cb{ clear:both;}
+.mt10{ margin-top:10px;}
+.mr15{ margin-right:15px;}
+.mr7{ margin-right:10px; display:block; overflow:hidden}
+.spacebar { padding:0 5px;}
+/*en*/
+body, table, td, div, p {word-wrap:break-word;}
+/*header*/
+#header { height:110px;}
+.headtop{height:22px; width:948px; padding-left:10px; padding-top:5px; border:1px solid #ECF3F9; background:url(../images/headerbg_01.jpg);}
+.headtopcon{height:22px;width:948px; }
+.headtopcon img { margin:5px 0 0 0;*margin:2px 0 0 0; display:inline; overflow:hidden}
+.headtopcon a{ float:left; margin-right:10px;}
+.headtopcon em{ float:left; margin-left:110px; display:block; overflow:hidden}
+.sign_star { background:url(../images/sign_bg.gif) 0px 2px no-repeat; width:10px; height:10px; display:inline-block;_background:url(../images/sign_bg.gif) 0px 4px no-repeat;}
+.lhighs{ background:url(../images/lhighs.gif) no-repeat left 5px; color:#333333; text-decoration:none; padding-left:10px; margin-left:20px; margin-top:5px;}
+.index{ background:url(../images/startpagebg.jpg) no-repeat left 3px; padding-left:18px;}
+/*search*/
+.logo_search{ clear:both;}
+#logo {width:280px; text-align:center; float:left}
+.search_bar { width:670px; float:right; padding-top:15px; }
+.search_nav { padding-left:30px; height:24px;}
+.search_nav li {display:inline;}
+.search_panel span, .search_panel input, .search_panel button{ float:left;}
+.search_panel .history {height:24px; width:220px; line-height:24px; overflow:hidden; padding-left:20px; display:block;}
+.search_panel .history a  {padding:0 5px; display:inline-block }
+.search_nav li a {outline:none}
+.search_nav li a{ hide-focus:expression(this.hideFocus=true); }
+.search_bar .search_input_box input{ background: url(../images/searchbg.jpg) #fff no-repeat 219px 1px; width:241px; border:1px solid #ccc; color:#CCC; padding:2px 0 0 3px; margin:1px 5px 0 0;  height:18px; overflow:hidden; display:inline;}
+/*menu*/
+.header_nav{ height:35px; width:100%; margin:0 auto}
+#logo img { width:202px; }
+#nav_inner{height:35px; overflow:hidden}
+#nav_inner ul{ margin-left:20px; }
+#nav_inner li{ display:inline;}
+#nav_inner li a,#nav_inner li a span{ display:block; float:left; height:30px;text-decoration:none; cursor:pointer;font-size:14px; font-weight:bold; }
+#nav_inner li a span,#nav_inner li a:hover span,#nav_inner li a.current_nav_item span{padding:8px 16px 0; }
+a.current_nav_item:focus{outline:none}
+#nav_inner li a {outline:none}
+#language_bar a {float: right;}
+/*footer*/
+.ins{height:130px; text-align:center; color:#666; line-height:22px; padding:20px 0 0 0; position:absolute; width:960px; overflow:hidden}
+.ins span{margin:0px 7px;}
+.friend_link {background:url(../images/pardenttit.jpg) no-repeat left center; padding:0 0 0 8px; width:65px; font-weight:bold; line-height:20px}
+.friend_link_content { padding:0 0 0 10px;line-height:20px}
+#footer .footer_im a span{ display:inline-block;}
+#footer .footer_im a { text-decoration:none}
+#footer a strong { color:#37abf5; text-decoration:underline;}

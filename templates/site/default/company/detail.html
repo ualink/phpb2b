@@ -1,0 +1,69 @@
+<!--{include file="../header.html" page_title="$page_title" nav_id="$nav_id"}-->
+<div class="wrapper">
+	<div class="content">
+	<div class="tips"><span>{$position}</span></div>
+    <div class="blank6"></div>
+	<div class="detailtop3">
+	    <div class="detailtop3left">
+			<h3><img src="{$theme_img_path}images/lhighs.gif" alt="" />{lang company}{lang colon}{$item.name|pl}</h3>
+			<div class="detailtop3leftcon">
+               {$item.description|nl2br|stripslashes}
+			   <br>
+			   <p>[{lang area}{$item.area_names} {lang belong_industry}{$item.industry_names}]</p>
+			</div>				
+		    <div class="clear"></div>
+			<h3>{lang similars} {lang product}{lang lists}</h3>
+			<div class="detailtop3leftcon">
+				  <ul>
+				  <!-- {pb:product row=10 companyid=$item.id} -->
+				  <li>{$row.link}</li>
+				  <!-- {/pb:product} -->
+				  </ul>
+			</div>				
+		    <div class="clear"></div>
+			<h3>{lang similars} {lang offer}{lang lists}</h3>
+			<div class="detailtop3leftcon">
+				  <ul>
+				  <!-- {pb:offer row=10 companyid=$item.id name=offer} -->
+				  <li>{$offer.link}</li>
+				  <!-- {/pb:offer} -->
+				  </ul>
+			</div>				
+		</div>
+		<div class="detailtop3right">
+            {if !$LoginCheck && $pb_username==""}
+			<div class="contacttype">
+				<p class="right1">{lang members_view}</p>
+				<p>{lang register_site_member} 
+                            <input type="button" name="btn_login" value="{lang login}" onclick="redirect('{$SiteUrl}logging.php?forward={$_G.REQUEST_URI}');" class="btn_submit">{lang fenhao}</p>
+				<p>{lang not_register_site_member}<input type="button" name="btn_register" value="{lang free} {lang register}" class="btn_submit" onclick="redirect('{$SiteUrl}member.php');">{lang registered_site_member} 
+                </p>
+			</div>
+            {else}
+			<div class="contacttype">
+				<h3>{lang contact}</h3>
+				<p>{lang address}{$item.address}<br /> 
+				   {lang zip}{$item.zipcode}<br /> 
+				   {lang phone}{$item.tel}<br />
+				   {lang fax}{$item.fax}<br /> 
+				   {lang mobile_number}{$item.mobile}<br /> 
+				   {lang website}{lang colon}{$item.site_url}</p>
+			</div>
+            {/if}
+			<div class="contacttype">
+				<h3>{lang similars} {lang company}</h3>
+				<ul>
+                	{pb:company industryid=$item.industry_id areaid=$item.area_id row=10}
+					<li><span class="title">{$row.link}</span></li>
+                    {/pb:company}
+				</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<script>
+$("#topMenuCompany").addClass("lcur");
+$("#hdModule").val("company");
+</script>
+<!--{include file="../footer.html"}-->

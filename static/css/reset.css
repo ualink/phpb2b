@@ -1,0 +1,8 @@
+/*multi language ui*/
+.ui-tabs { padding: .1em;}
+.ui-tabs .ui-tabs-nav { padding: .1em .1em 0; }
+.ui-tabs .ui-tabs-nav li a { padding: .1em 1em;}
+.ui-tabs .ui-tabs-panel { padding: .2em .2em;}
+/*.ui-widget-content { border: none;}*/
+.ui-corner-all { border-radius: none; }
+.ui-widget-header { background: none; border: none; }

@@ -1,0 +1,36 @@
+{block name="title" prepend}{#sms#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+<div class="hint"><span class="btn_hint"><a href="pms.php?do=send" class="btn_publish">{lang send_message}</a></span>{lang sms_tips}</div>
+	  <form name="pmsfrm" method="post" action="{$smarty.server.PHP_SELF}">
+	  <!-- {formhash} -->
+       <table class="news">
+            <tr align="center">
+              <th>{lang choose}</th>
+              <th>{lang category}</th>
+              <th>{lang theme}</th>
+              <th>{lang state}</th>
+              <th>{lang time}</th>
+            </tr>
+			<!--{foreach from=$Items item=item}-->
+            <tr align="center" class="bggray">
+              <td><input type="checkbox" name="id[]" value="{$item.id}" id="item_{$item.id}"></td>
+              <td>{$item.typename}</td>
+              <td align="left"><a href="pms.php?do=view&id={$item.id}">{$item.title}</a></td>
+              <td><!--{if $item.status==0}--><span style="color:#FF0000">{$MessageStatus[$item.status]}</span>{else}<span style="color:#006600">{$MessageStatus[$item.status]}</span><!--{/if}--></td>
+              <td>{$item.senddate}</td>
+            </tr>
+			<!--{/foreach}-->
+            <tr align="center" class="bggray">
+              <td colspan="5">{$ByPages}</td>
+            </tr>
+        </table>  
+       <table class="trade_line">
+			<tr align="center" valign="bottom">
+				<td height="40"><input  name="del" type="submit" id="del" value=" {lang delete_select} "></td>
+			</tr>
+      </table>
+	  </form>
+{/block}

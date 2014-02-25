@@ -1,0 +1,90 @@
+<!--{include file="../header.html" page_title=#brands# nav_id=10}-->
+<style type="text/css">
+@import url({$theme_img_path}css/effect.css);
+</style>
+<script src="static/scripts/jquery.hover.js"></script>
+<div class="wrapper">
+	<div class="banner">{ads typeid=2}<span>{$ads.link}</span>{/ads}</div>
+	<div class="content">
+		<div class="main_left_w180">
+			<div class="cornerbox">
+				<div class="title_bar_s6">
+					<span class="title_top_s6"><span></span></span>
+					<h2>{lang brands} {lang categories}</h2>
+				</div>
+				<div class="brand_category_list">
+					<ul>
+					<!-- {get from="type" name="brandtype" var="Items"} -->
+					<!--{loop $Items brandtype brandtype}-->
+						<li>
+						   <h3><a href="index.php?do=brand&action=lists&catid={$brandtype.id}">{$brandtype.title}</a></h3>
+						   <!-- {if $brandtype.child} -->
+						   <ul>
+							<!--{loop $brandtype.child item_child}-->
+							   <li><a href="index.php?do=brand&action=lists&catid={$item_child.id}">{$item_child.title}</a></li>
+							<!--{/loop}-->
+						   </ul>
+						   <!-- {/if} -->
+						</li>
+					  <!--{/loop}-->
+					</ul>
+				</div>
+			   <div class="corner_bottom">
+					<div class="corner_bottom_l"></div>
+					<div class="corner_tottom_r"></div>
+				</div>
+			</div><!--end-->
+			<div class="blank6"></div>
+			<div class="cornerbox">
+				<div class="title_bar_s6">
+					<span class="title_top_s6"><span></span></span>
+					<h2>{lang brands} {lang information}</h2>
+				</div>
+				<div class="corner_content_s6">
+				   <ul>
+					 <!-- {pb:news row=10 name="item"} -->
+					 <li>{$item.link}</li>
+					 <!-- {/pb:news} -->
+				   </ul>
+				</div>
+			   <div class="corner_bottom">
+					<div class="corner_bottom_l"></div>
+					<div class="corner_tottom_r"></div>
+				</div>
+			</div><!--end-->
+		</div>
+		<div class="main_right_w770">
+			<div class="brand_hot">
+				<!-- {get from="type" name="brandtype" var="BrandTypes" multi=true} -->
+				<!--{foreach from=$LatestBrands item=item_sort key=key_brand}--><div class="clear"></div>
+				<div class="title">
+					<h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{$BrandTypes[$item_sort.type_id].name} {lang brands}</span><span class="corner_t_r"></span><span class="sub_category">
+					<span class="title_more"><a href="index.php?do=brand&action=lists&catid={$item_sort.type_id}" title="{lang more}"><span class="raquo">&raquo;</span>{lang more}</a></span>
+					</span></h2>
+				</div>
+				<div class="letter_content clearfix">
+					  <div class="brand_letter bg_yellow">
+						   <div class="brand_list clearfix">
+								<ul>
+									<!--{foreach from=$item_sort.brands item=item_brand_child key=key_brand_child}-->
+									 <li>
+									<div><span><a href="{the_url module=brand id=$item_brand_child.id}"><img src="attachment/{$item_brand_child.picture}.small.jpg" /></a></span></div>
+									<p>{$item_brand_child.name}</p>
+									</li>  
+									<!--{/foreach}-->
+							  </ul>
+							</div>
+					  </div>
+				</div>                     
+				<!--{/foreach}-->
+			</div><!--end-->
+		 
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<script>
+$("#SearchFrm").attr("action","{the_url module=search do=brand}");
+$("#topMenuProduct").addClass("lcur");
+</script>
+<!--{include file="../footer.html"}-->

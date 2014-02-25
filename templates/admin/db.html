@@ -1,0 +1,55 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang system_tool} &raquo; {lang database}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang database}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="db.php"><span>{lang db_backup}</span></a></li>
+        <li><a href="db.php?do=restore">{lang db_restore}</a></li>
+        <li><a href="db.php?do=query">{lang db_upgrade}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="get" action="db.php" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="do" value="backup" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang last_backup_time}</th>
+        <td class="paddingT15 wordSpacing5">{$LastbackupTime}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang backup_type}</th>
+        <td class="paddingT15 wordSpacing5"><input type="radio" name="backup_type" value="1" checked="checked" />{lang all_site_data_backup}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang backup_file_type}</th>
+        <td class="paddingT15 wordSpacing5"><input type="radio" name="method" value="multivol" />{lang multi_volume}&nbsp;<input type="radio" name="method" value="singlevol" checked="checked" />{lang single_volume}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang notes}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="message" value="" /></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="button" name="backup_now" id="BackupNow" value="{lang backup_now}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var on_backup = "{lang on_backup_ing}";
+</script>
+<!--{literal}-->
+<script language="JavaScript">
+$(document).ready(function() { 
+$('#BackupNow').click(function() {
+	$('#BackupNow').attr('disabled',"true");
+	$('#BackupNow').val(on_backup);
+	$('#EditFrm').submit();
+});
+})
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

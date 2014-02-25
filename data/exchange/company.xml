@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<Title><![CDATA[[:en-us]Company[:zh-cn]公司库]]></Title>
+	<Description><![CDATA[导出公司库]]></Description>
+	<items>
+		<name><![CDATA[公司名称]]></name>
+		<description><![CDATA[公司简介]]></description>
+		<english_name><![CDATA[英文名称]]></english_name>
+		<main_prod><![CDATA[主要产品]]></main_prod>
+		<tel><![CDATA[电话]]></tel>
+		<fax><![CDATA[传真]]></fax>
+		<mobile><![CDATA[手机号码]]></mobile>
+		<address><![CDATA[详细地址]]></address>
+		<zipcode><![CDATA[邮政编码]]></zipcode>
+		<email><![CDATA[电子邮件]]></email>
+		<link_man><![CDATA[联系人]]></link_man>
+	</items>
+</root>

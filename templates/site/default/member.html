@@ -1,0 +1,47 @@
+<!--{include file="header.html" page_title=#member_reg#}-->
+<!--{literal}-->
+<style type="text/css">  
+label.error {
+  font-weight: bold;
+  color: #b80000;
+}
+</style>
+<!--{/literal}-->
+<div class="wrapper">
+  <div class="subnav">
+    <div class="member_register"><span class="step_01">{lang fill_reg_info}</span><span class="step_02">{lang reg_success}</span></div>
+  </div>
+  <div class="blank6"></div>
+  <div class="content">
+	 <div class="base_title">
+	  <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang choose_reg_type}</span><span class="corner_t_r"></span><span class="title_telephone">{lang issue_contact}{$service_tel}</span></h2>
+	</div>
+	  <div class="base_content box_bord">
+	     <h3>{lang choose_reg_type_conditions}</h3>
+         <div class="blank"></div>
+	     <div class="member_black clearfix">
+             <div class="black_w680">
+                <table class="reg_member_list no_outline">
+                  <tr>
+				  <!--{loop $MemberTypes item}-->
+                    <th>{$item.name}</th>
+				  <!--{/loop}-->
+                  </tr>
+                  <tr>
+				  <!--{loop $MemberTypes item}-->
+                    <td width="25%"><p>{$item.description}</p></td>
+				  <!--{/loop}-->
+                  </tr>
+                  <tr>
+				  <!--{loop $MemberTypes item}-->
+                    <td><a href="{if $reg_filename!=''}{$reg_filename}{else}register.php{/if}?typename={$item.name|urlencode}" class="btn_reg">{lang register_now} {$item.name}</a></td>
+				  <!--{/loop}-->
+                  </tr>
+                </table>
+             </div>
+             <div class="block_w240">{$SiteDescription}</div>
+         </div>
+	 </div>
+  </div>
+</div>
+<!--{include file="footer.html"}-->

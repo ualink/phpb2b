@@ -1,0 +1,36 @@
+{block name="title" prepend}{#friendlink#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <table class="bggray">
+        <tr>
+          <td><strong>{lang our_partners}</strong>{lang colon}</td>
+          <td align="right" ><a href="link.php?do=edit"  class="btn_publish">{lang add_partners}</a></td>
+        </tr>
+      </table>      
+	  <form name="companylinkfrm" action="link.php" method="post">
+	  <!-- {formhash} -->
+      <table class="news">
+            <tr align="center">
+              <th><input type="checkbox" name="check_all" title="{lang all_select}"></th>
+              <th><strong>{lang company_name}</strong></th>
+            </tr>
+	  <!--{foreach from=$Items item=item}-->
+            <tr align="center" class="bggray">
+              <td><input type="checkbox" name="id[]" value="{$item.id}" rel="check_item"></td>
+              <td align="center"><a target="_blank" title="{lang access}{$item.title}" href="{$item.url}">{$item.title}</a></td>
+              </tr>
+  		<!--{foreachelse}-->
+		<!--{/foreach}-->
+        </table>
+       <table class="trade_line">
+              <tr>
+                <td height="1" background="{$office_theme_path}images/index_trade_line.gif"></td>
+              </tr>
+        <tr align="center" valign="bottom">
+          <td height="40"><input  name="delete" type="submit" id="delete" value= "{lang delete_select}" onClick="return test();"></td>
+        </tr>
+      </table>
+	  </form>
+{/block}

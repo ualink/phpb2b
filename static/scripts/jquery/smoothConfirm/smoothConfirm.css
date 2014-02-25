@@ -1,0 +1,102 @@
+.smoothConfirm div,.smoothConfirm h1, .smoothConfirm h2, .smoothConfirm h3, .smoothConfirm p {margin:0;padding:0;outline: none;}
+
+.smoothConfirm {
+	font-size:12px;
+	position: absolute;
+	z-index: 1000;
+	display: none;
+	overflow: hidden;
+}
+.smoothConfirm .bg {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: #ddd;
+	border-radius: 3px;
+	opacity: 0.5;
+	filter: alpha(opacity = 50);
+	-ms-filter: "alpha(opacity=50)";
+	z-index: 10000;
+}
+.smoothConfirm .content {
+	margin: 4px;
+	z-index: 10001;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background-color: white;
+	border: 1px solid #DDD;
+	border-radius: 3px;
+	padding: 15px 20px;
+}
+.smoothConfirm .dialog-inner {
+	text-align: center;
+	display: block;
+	font-size: 12px
+}
+.smoothConfirm .btns {
+	padding: 15px 0 0;
+	float: right;
+}
+.smoothConfirm .btns a {
+	margin: 0 3px;
+	text-decoration: none;
+	border: none;
+}
+
+.smoothConfirm .btns a:hover {
+	margin: 0 3px;
+	text-decoration: none;
+	border: none;
+}
+
+.smoothConfirm .button, .button span {
+	display: inline-block;
+	background-image: url(global_btn.png);
+	color: #666666;
+	font-weight: normal;
+	text-decoration: none;
+	cursor: pointer;
+	width: auto;
+}
+.smoothConfirm .normal {
+	background-position: 0 -112px;
+	padding-left: 2px;
+	height: 28px;
+}
+.smoothConfirm .normal span {
+	height: 28px;
+	line-height: 27px;
+	background-position: right -140px;
+	padding: 0 16px 0 14px;
+	min-width: 22px;
+	text-align: center;
+}
+.smoothConfirm .normal: hover {
+	background-position: 0 -168px;
+	text-decoration: none;
+}
+.smoothConfirm .normal: hover span {
+	background-position: right -196px;
+}
+.smoothConfirm .green {
+	background-position: 0 0;
+	padding-left: 2px;
+	height: 28px;
+}
+.smoothConfirm .green span {
+	height: 28px;
+	line-height: 27px;
+	background-position: right -28px;
+	padding: 0 16px 0 14px;
+	min-width: 22px;
+	color: white;
+	text-align: center;
+}
+.smoothConfirm .green: hover {
+	background-position: 0 -56px;
+	text-decoration: none;
+}
+.smoothConfirm .green: hover span {
+	background-position: right -84px;
+}

@@ -1,0 +1,64 @@
+{block name="title" prepend}{#invitation_code#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <div class="hint"><span class="orange">{lang friendly_tip}</span>{lang invitation_code_time}</div>
+		<table class="bgblue">
+            <tr align="center" class="bggray">
+              <td width="60%" align="left"><div id="txt">{$InviteCode}</div></td>
+              <td align="center"><a href="javascript:;" id="copy_invite">{lang copy}</a></td>
+            </tr>
+          </table>
+		<table class="trade_line">
+        <tr>
+          <td height="1" colspan="2" background="{$office_theme_path}images/index_trade_line.gif"></td>
+        </tr>
+      </table>
+<script language="javascript">
+var InviteCode = "{$InviteCode}";
+var copy_success = "{lang copy_success}";
+var browser_deny_set = "{lang browser_deny_set}";
+</script>
+<!--{literal}-->
+<script>
+$('#copy_invite').click(function() {
+  copyToClipboard(InviteCode);
+});
+function copyToClipboard(txt) {    
+	if(window.clipboardData) {    
+		 window.clipboardData.clearData();    
+		 window.clipboardData.setData("Text", txt);    
+		 alert(copy_success)    
+	} else if(navigator.userAgent.indexOf("Opera") != -1) {    
+	  window.location = txt;    
+	  alert(copy_success)    
+	} else if (window.netscape) {    
+	  try {    
+		   netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");    
+	  } catch (e) {    
+		   alert(browser_deny_set);    
+	  }    
+	  var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);    
+	  if (!clip)    
+		   return;    
+	  var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);    
+	  if (!trans)    
+		   return;    
+	  trans.addDataFlavor('text/unicode');    
+	  var str = new Object();    
+	  var len = new Object();    
+	  var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);    
+	  var copytext = txt;    
+	  str.data = copytext;    
+	  trans.setTransferData("text/unicode",str,copytext.length*2);    
+	  var clipid = Components.interfaces.nsIClipboard;    
+	  if (!clip)    
+		   return false;    
+	  clip.setData(trans,null,clipid.kGlobalClipboard);    
+	  alert(copy_success)    
+	}    
+}  
+</script>
+<!--{/literal}-->
+{/block}

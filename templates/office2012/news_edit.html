@@ -1,0 +1,59 @@
+{block name="title" prepend}{#companynews#}{/block}
+{block name="main"}
+{editor type="tinymce"}
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#Frm1").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+})
+</script>
+<!--{/literal}-->
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+     <div class="blank"></div>
+	  <form name="addnewsfrm" id="Frm1" action="news.php" method="post">
+	  <!-- {formhash} -->
+	  <input type="hidden" name="newsid" value="{$item.id}">
+         <table class="offer_info_content">
+			<tr>
+            <th class="circle_left"><font class="red">* </font>{lang news_title}</th>
+				<td class="circle_right"><font color="#666666">
+					<!--{if $smarty.get.act eq "view"}-->
+					{$item.Title}
+					{else}                          
+					<input name="title" type="text" id="title" value="{$item.Title}" size="35" class="required">
+					<!--{/if}-->
+				</font></td>
+			  </tr>
+			<!-- {if $CompanynewsTypes} -->
+			<tr>
+            <th>{lang category_n}</th>
+				<td><select name="type_id">
+                          {html_options options=$CompanynewsTypes selected=$item.type_id}
+                        </select></td>
+			</tr>
+			<!-- {/if} -->
+			<tr>
+				 <th><font class="red">* </font>{lang content}</th>
+				<td><p>
+					<!--{if $smarty.get.action eq "view"}-->
+					{$item.Content}
+					{else}
+					<textarea name="content" cols="55" rows="10" wrap="VIRTUAL" class="required">{$item.Content}</textarea>
+					<!--{/if}-->
+					<font color="#FF3300"><br>
+				</font></p></td>
+             </tr>
+			<tr>
+				 <th class="circle_bottomleft"></th>
+				<td class="circle_bottomright"><input name="save" type="submit" id="save" value=" {lang confirm_submit} "></td>
+             </tr>                                 
+          </table>
+	</form>
+{/block}

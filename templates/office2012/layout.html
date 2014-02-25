@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}">
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{block name="title"}{lang office_room} - {$_G.site_name}{/block}</title>
+<!-- {block name="meta"} -->
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<!-- {/block} -->
+<link href="../static/css/common.css" rel="stylesheet" type="text/css">
+<link href="{$office_theme_path}images/style.css" rel="stylesheet" type="text/css">
+<script src="../static/scripts/jquery.js"></script>
+<script src="../data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<script src="../static/scripts/jquery/jquery.validate.js"></script>
+<script src="../static/scripts/general.js"></script>
+<!--{literal}-->
+<script>
+$(document).ready(function() {
+	$("#GoTop").click(function(){
+		$('html, body').animate({scrollTop: '0px'}, 300);return false;
+	});
+	$("#check_all").click(function(){
+		var isCheckAll=$(this).attr("checked");
+		$('input[type="checkbox"][rel="check_item"]').each(function(){
+		   $(this).attr("checked",isCheckAll);
+		});
+	});
+});
+</script>
+<!--{/literal}-->
+</head>
+<body>
+<div id="content_bkg">
+<div id="basePageFrame">
+    <div class="header clearfix">
+        <div class="header_nav">
+          <!-- {get do="cache" name=nav var=cnav exclude="2,3,4,11"} -->
+		  <!-- {loop $cnav nitem} -->
+		  <a href="{$SiteUrl}{$nitem.url}" target="_blank"><span>{$nitem.name}</span></a>
+		  <!-- {/loop} -->
+        </div>
+       <div class="login_info">{#hello#|sprintf:$UserName}(<a href="personal.php" style="text-decoration:underline;">{$smarty.session.MemberName}</a>)
+       <!--{if $menu.pms and $newpm}--><a href="pms.php" title=""><img src="../images/message.gif" alt="{$newpm}" /></a><!--{/if}-->
+       </div>
+    </div>
+    <div class="header_txt">
+       <div class="welcome_txt">
+	   <span class="title" id="welcome-to">{lang welcome_to_office}</span>
+	   <form name="searchFrm" id="HeadSearchFrm" action="../index.php" target="_blank" method="get">
+	   <input type="hidden" name="do" value="offer" />
+	   <input type="hidden" name="action" value="lists" />
+	   <span class="search"><input name="q" type="text"  id="SearchKeyword" value="{lang input_keywords}" onfocus="if(this.value=='{lang input_keywords}') this.value='';" onblur="if(this.value=='') this.value='{lang input_keywords}';" class="input_white" /><input type="submit" value="{lang search}" onclick="if($('#SearchKeyword').val()=='{lang input_keywords}') alert('{lang input_keywords}');$('#SearchKeyword').focus();return false;" /></span>
+	   </form>
+	   </div>
+       <div class="welcome_txt_small"><span>{lang service_hotline}{$service_tel}</span></div>
+   </div>
+   <div id="main-nav">
+	 <div class="nav-wrapper">
+		<ul>
+		  <li><a href="index.php" id="home-page"><span>{lang office_homepage}</span></a></li>
+		  <li><a class="current_nav" href="offer.php" id="info-manage"><span>{lang info_manage}</span></a></li>
+		  <!--{if $COMPANYINFO.cache_spacename and $COMPANYINFO.status==1}--><li><a href="{$COMPANYINFO.space_url}" target="_blank"><span>{lang access}{lang space_name}</span></a></li><!--{/if}-->
+		  <li><a href="../logging.php?action=logout"><span>{lang login_out}</span></a></li>
+		</ul>
+	</div>
+  </div>
+<link href="../static/scripts/jquery/ui.css" rel="stylesheet" type="text/css"/>
+<script src="../static/scripts/jquery/ui.core.js"></script>
+<script>
+var service_days = {$service_days|default:1};
+</script>
+<!--{literal}-->
+<script>
+$(document).ready(function() {
+	$("#progressbar").progressbar({ value:service_days});
+	$("#info-manage").removeClass("current_nav");
+	$("#home-page").toggleClass("current_nav");
+});
+</script>
+<!--{/literal}-->
+<div class="wrap clearfix">
+    <div class="sidebar">
+       <div class="sidebar_menu">
+        <!-- {block name="sidebar"} -->
+			<table class="menu_nav" >
+				<tr>
+				</tr>
+				<tr>
+				<td>
+					<!--{if $menu.offer}-->
+					<table class="menu_width167">
+					<tr>
+					  <td>
+					  <table class="menu_nav">
+						  <tr>
+							<td width="30"><img src="{$office_theme_path}images/left_pic1.gif" width=30 height=35 alt=""></td>
+							<td background="{$office_theme_path}images/left_bg1.gif" class="title_bar" onclick="if($('#MenuTrade').length>0) $('#MenuTrade').toggle();"><a name="menu_top"></a>{lang business_information}</td>
+							<td width="55"><img src="{$office_theme_path}images/left_bg11.gif" width=55 height=35 alt=""></td>
+						  </tr>
+					  </table>
+					  </td>
+					</tr>
+					<tr>
+					  <td align="center" background="{$office_theme_path}images/left_mid.gif">
+					  <table class="menu_nav_content" id="MenuTrade">
+						  <tr>
+							<th><img src="{$office_theme_path}images/sell_add.gif"></th>
+							<td><a href="offer.php?do=edit">{lang release_supply}</a></td>
+						  </tr>
+						  <tr>
+							<th><img src="{$office_theme_path}images/buy.gif"></th>
+							<td><a href="offer.php">{lang our_offer}</a></td>
+						  </tr>
+						  <tr>
+							<th><img src="{$office_theme_path}images/favor.gif"></th>
+							<td><a href="favor.php">{lang our_favorites}</a></td>
+						  </tr>
+						  <tr>
+							<th><img src="{$office_theme_path}images/sell.gif" width="14" height="14"></th>
+							<td><a href="stat.php">{lang buy_statistics}</a></td>
+						  </tr>
+						<tr>
+						  <th><img src="{$office_theme_path}images/message_in.gif" /></td>
+						  <td><a href="pms.php?type=inquery">{lang customer_inquiry}</a></td>
+						</tr>		  
+					  </table>
+					 </td>
+					</tr>
+				  </table>
+					<!--{/if}-->
+					<!--{if $menu.product}-->
+					<table class="menu_width167">
+					  <tr>
+						<td>
+						 <table class="menu_nav">
+							<tr>
+							  <td width="30"><img src="{$office_theme_path}images/left_pic2.gif" width=30 height=35 alt=""></td>
+							  <td background="{$office_theme_path}images/left_bg2.gif" class="title_bar" onclick="if($('#MenuProduct').length>0) $('#MenuProduct').toggle();"><a name="p"></a>{lang information_management}</td>
+							  <td width="55"><img src="{$office_theme_path}images/left_bg21.gif" width=55 height=35 alt=""></td>
+							</tr>
+						</table></td>
+					  </tr>
+					  <tr>
+						<td align="center" background="{$office_theme_path}images/left_mid.gif">
+						<table class="menu_nav_content" id="MenuProduct">
+							<tr>
+							  <th><img src="{$office_theme_path}images/product.gif"></th>
+							  <td><a href="product.php?do=edit">{lang release_products}</a> </td>
+							</tr>
+							<tr>
+							  <th><img src="{$office_theme_path}images/product2.gif"></th>
+							  <td><a href="product.php">{lang our_productse}</a></td>
+							</tr>
+							<tr>
+							  <th><img src="{$office_theme_path}images/cal.gif"></th>
+							  <td><a href="price.php">{lang my_product_price}</a></td>
+							</tr>
+							<tr>
+							  <th><img src="{$office_theme_path}images/sort.gif"></th>
+							  <td><a href="producttype.php">{lang categories_management}</a></td>
+							</tr>
+							<tr>
+							  <th><img src="{$office_theme_path}images/brand.gif"></th>
+							  <td><a href="brand.php">{lang brand_manage}</a></td>
+							</tr>
+						</table></td>
+					  </tr>
+					</table>
+					<!--{/if}-->
+					<!--{if $menu.company}-->
+					<table class="menu_width167">
+					  <tr>
+						<td> <table class="menu_nav">
+							<tr>
+							  <td width="30"><img src="{$office_theme_path}images/left_pic3.gif" width=30 height=35 alt=""></td>
+							  <td background="{$office_theme_path}images/left_bg2.gif" class="title_bar" onclick="if($('#MenuCompany').length>0) $('#MenuCompany').toggle();">{lang company_information}</td>
+							  <td width="55"><img src="{$office_theme_path}images/left_bg21.gif" width=55 height=35 alt=""></td>
+							</tr>
+						</table></td>
+					  </tr>
+					  <tr>
+						<td align="center" background="{$office_theme_path}images/left_mid.gif">
+						<table class="menu_nav_content" id="MenuCompany" style="{$MenuHide}">
+							<tr> 
+							  <th><img src="{$office_theme_path}images/company.gif"></th>
+							  <td><a href="company.php">{lang basic_information}</a> </td>
+							</tr>
+							<tr> 
+							  <th><img src="{$office_theme_path}images/album.gif"></th>
+							  <td><a href="album.php">{lang company_album}</a> </td>
+							</tr>
+							<tr> 
+							  <th><img src="{$office_theme_path}images/contact.gif"></th>
+							  <td><a href="card.php">{lang card_information}</a> </td>
+							</tr>
+							<tr> 
+							  <th><img src="{$office_theme_path}images/alert.gif"></th>
+							  <td><a href="news.php">{lang company_news}</a></td>
+							</tr>
+							<tr>
+							  <th><img src="{$office_theme_path}images/hr.gif" /></th>
+							  <td><a href="job.php">{lang hr}</a></td>
+							<tr> 
+							<tr> 
+							  <th><img src="{$office_theme_path}images/link.gif"></th>
+							  <td><a href="link.php" title="{lang friendlink}">{lang link_exchange}</a></td>
+							</tr>
+						  </table></td>
+					  </tr>
+					</table>
+					<!--{/if}-->
+					<!--{if $menu.pms}-->
+					<table class="menu_width167">
+					  <tr>
+						<td> <table class="menu_nav">
+							<tr>
+							  <td width="30"><img src="{$office_theme_path}images/left_pic4.gif" width=30 height=35 alt=""></td>
+							  <td background="{$office_theme_path}images/left_bg2.gif" class="title_bar" onclick="if($('#MenuPMS').length>0) $('#MenuPMS').toggle();">{lang exchange_information}</td>
+							  <td width="55"><img src="{$office_theme_path}images/left_bg21.gif" width=55 height=35 alt=""></td>
+							</tr>
+						</table></td>
+					  </tr>
+					  <tr>
+						<td align="center" background="{$office_theme_path}images/left_mid.gif">
+						<table class="menu_nav_content" id="MenuPMS" style="{$MenuHide}">
+							<tr>
+							  <th><img src="{$office_theme_path}images/message_out.gif" /></th>
+							  <td><a href="pms.php">{lang sms}</a></td>
+							</tr>			
+							<tr>
+							  <th><img src="{$office_theme_path}images/message.gif"/></th>
+							  <td><a href="pms.php?do=send">{lang send_message}</a></td>
+							</tr>
+						</table>
+						</td>
+					  </tr>
+					</table>
+					<!--{/if}-->
+					<table class="menu_width167">
+					  <tr>
+						<td> <table class="menu_nav">
+							<tr>
+							  <td width="30"><img src="{$office_theme_path}images/self_service.gif" width=30 height=35 alt=""></td>
+							  <td background="{$office_theme_path}images/left_bg2.gif" class="title_bar" onclick="if($('#MenuService').length>0) $('#MenuService').toggle();">{lang self_service}</td>
+							  <td width="55"><img src="{$office_theme_path}images/left_bg21.gif" width=55 height=35 alt=""></td>
+							</tr>
+						</table></td>
+					  </tr>
+					  <tr>
+						<td align="center" background="{$office_theme_path}images/left_mid.gif">
+						<table class="menu_nav_content" id="MenuService" style="{$MenuHide}">
+							<tr>
+							  <th><img src="{$office_theme_path}images/news.gif" /></th>
+							  <td><a href="ads.php">{lang site_advertising}</a></td>
+							</tr>
+							<tr>
+							  <th><img src="{$office_theme_path}images/adword.gif" /></th>
+							  <td><a href="spread.php">{lang keyword_advertising}</a></td>
+							</tr>
+							<tr> 
+							  <th><img src="{$office_theme_path}images/style.gif"></th>
+							  <td><a href="space.php">{lang diy_website}</a></td>
+							</tr>
+							<tr> 
+							  <th><img src="{$office_theme_path}images/sell_add.gif"></th>
+							  <td><a href="order.php">{lang order_manage}</a></td>
+							</tr>
+						</table>
+						</td>
+					  </tr>
+					</table>
+					<!--{if $menu.basic}-->
+				   <table class="menu_width167">
+					  <tr>
+						<td><table class="menu_nav">
+							<tr>
+							  <td width="30"><img src="{$office_theme_path}images/left_pic7.gif" width=30 height=35 alt=""></td>
+							  <td background="{$office_theme_path}images/left_bg2.gif" class="title_bar" onclick="if($('#MenuBasic').length>0) $('#MenuBasic').toggle();">{lang system_settings}</td>
+							  <td width="55"><img src="{$office_theme_path}images/left_bg21.gif" width=55 height=35 alt=""></td>
+							</tr>
+						</table></td>
+					  </tr>
+					  <tr>
+						<td align="center" background="{$office_theme_path}images/left_mid.gif">
+						<table class="menu_nav_content" id="MenuBasic">
+							<tr>
+							  <th><img src="{$office_theme_path}images/personals.gif"></th>
+							  <td><a href="personal.php">{lang profile}</a></td>
+							</tr>
+							<tr> 
+							  <th><img src="{$office_theme_path}images/password.gif"></th>
+							  <td><a href="changepass.php">{lang change_password}</a></td>
+							</tr>
+							<tr> 
+							  <th><img src="{$office_theme_path}images/code.gif"></th>
+							  <td><a href="invite.php">{lang our_invitation_code}</a></td>
+							</tr>
+						</table></td>
+					  </tr>
+					  <tr>
+						<td><div class="backtop"><a href="javascript:;" id="GoTop">{lang go_top}</a></div></td>
+					  </tr>
+				  </table>
+					<!--{/if}-->
+				  </td>
+				</tr>
+				<tr>
+				<td>&nbsp;</td>
+				</tr>
+			</table>
+		<!-- {/block} -->
+       </div>
+    </div>
+   <div class="main_content">
+        <!-- {block name="main"} -->
+		<!-- {/block} -->
+    </div>
+</div>
+<div class="h30"></div>
+</div>
+</div>
+<div id="footer_bkg">
+   <div id="base_page_footer">
+  <div class="footer_content">
+   <p>{lang aim_at} {$_G.site_name} {lang have_problem_send_email}{mailto text="$service_email" address="$service_email" encode="javascript"} {lang or} <a href="{$SiteUrl}help/" target="_blank">{lang view_help}</a></p> 
+   <p>{lang customer_hotline}{$service_tel} {lang sales_hotline}{$sale_tel}</p>
+   <!-- {if $company_name} --><p>Copyright &copy; {$_G.site_name}. All rights reserved. {$_G.company_name|pl} {lang copyright}</p><!-- {/if} -->
+</div>
+</div>
+</div>
+</body>
+</html>

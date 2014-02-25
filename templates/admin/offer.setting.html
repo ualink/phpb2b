@@ -1,0 +1,60 @@
+<!-- {include file="header.html"} -->
+<script src="../static/scripts/jquery/facebox/facebox.js" type="text/javascript"></script>
+<link href="../static/scripts/jquery/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css"/>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$.facebox.settings.loadingImage = SiteUrl+'static/images/facebox/loading.gif'; 
+	$.facebox.settings.closeImage = SiteUrl+'static/images/facebox/closelabel.gif'; 
+	$('a[rel*=facebox]').facebox() 
+})
+</script>
+<!--{/literal}-->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang offer}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang offer}</h3> 
+    <ul class="subnav">
+		<li><a href="offer.php">{lang management}</a></li>
+        <li><a class="btn1" href="offer.php?do=setting"><span>{lang setting}</span></a></li>
+		<li><a href="offertype.php">{lang sorts}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" id="EditFrm" action="offer.php" name="edit_frm">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang expires_approach}</th>
+        <td class="paddingT15 wordSpacing5">          
+		{html_radios name='data[setting][offer_expire_method]' options=$SettingStatus
+     selected=$item.OFFER_EXPIRE_METHOD|default:1 separator='<br />'}
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang top_time_to_spend_points}</th>
+        <td class="paddingT15 wordSpacing5"><input type="text" name='data[setting][offer_moderate_point]' value="{$item.OFFER_MODERATE_POINT|default:0}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang resent_the_minimum_number_of_days}</th>
+        <td class="paddingT15 wordSpacing5"><input type="text" name='data[setting][offer_refresh_lower_day]' value="{$item.OFFER_REFRESH_LOWER_DAY|default:3}" />{lang days}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang update_interval}</th>
+        <td class="paddingT15 wordSpacing5"><input type="text" name='data[setting][offer_update_lower_hour]' value="{$item.OFFER_UPDATE_LOWER_HOUR|default:24}" />{lang hours}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang data_filtering}</th>
+        <td class="paddingT15 wordSpacing5">{html_radios name='data[setting][offer_filter]' options=$AskAction
+     selected=$item.OFFER_FILTER|default:0 separator=' '}<label class="field_notice">{lang filtering_the_same_user_information}</label></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="setting" value="{lang save_setting}" />
+		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

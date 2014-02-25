@@ -1,0 +1,95 @@
+<!--{include file="header.html" page_title=#member_reg#}-->
+<script src="data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<!--{literal}-->
+<style type="text/css">
+label.error {
+  font-weight: bold;
+  color: #b80000;
+}
+</style>
+<!--{/literal}-->
+<div class="wrapper">
+	<div class="subnav">
+        <div class="member_register"><span class="step_11">{lang fill_reg_info}</span><span class="step_02">{lang reg_success}</span></div>
+     </div>
+     <div class="blank6"></div>
+     <div class="base_title">
+       <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang fill_reg_info}</span><span class="corner_t_r"></span></h2> 
+	</div>
+	<div class="registercon box_bord">
+            <form name="regfrm" id="regfrm" method="post" action="" autocomplete="off">
+            <!-- {formhash} -->
+            <input type="hidden" name="register" value="{$_G.type}" />
+            <input type="hidden" name="typename" value="{$_G.typename|urldecode}" />
+            <input type="hidden" name="forward" value="{$_G.forward}" />
+			<label class="registerlabel" for="dataMemberUsername">
+			{lang member_login_name}<span>*</span>
+			</label>
+			<label>
+			<input type="text" name="data[member][username]" id="dataMemberUsername" value="" tabindex="1"/>
+			</label><br />
+			<label class="lenglabel" id="membernameDiv">
+			{lang member_login_name_conditions}
+			</label>
+            <br clear="all" />
+			<label class="registerlabel" for="dataMemberEmail">
+			E-mail{lang colon}<span>*</span>
+			</label>
+			<label>
+			<input name="data[member][email]" id="dataMemberEmail" value="" tabindex="2"/>
+			</label><br />
+			<label class="lenglabel" id="memberemailDiv">
+			{lang email_conditions}
+			</label><br clear="all" />
+			<label class="registerlabel" for="memberpass">
+			{lang password}<span>*</span>
+			</label>
+			<label>
+			<input type="password" name="data[member][userpass]" id="memberpass" value="" tabindex="3">
+			</label><br />
+			<label class="lenglabel">
+			{lang password_conditions}
+			</label>
+			<br clear="all" />
+			<label class="registerlabel" for="re_memberpass">
+			{lang re_enter_password}<span>*</span>
+			</label>
+			<label>
+			<input name="re_memberpass" type="password" id="re_memberpass" value="" tabindex="4">
+			</label><br />
+			<label class="lenglabel">
+			{lang re_enter_up_password}
+			</label>
+            <br clear="all" />
+            <!-- {if $ifcapt} -->
+			<label class="registerlabel" for="login_auth">
+			{lang code}
+			</label>
+			<span class="registercheck"><img class="registerpic" width="123" height="50" id="imgcaptcha" src="captcha.php?sid={$sid}" alt="{lang unclear_see_numbers}" title="{lang unclear_see_numbers}" />
+			<p>
+			<object type="application/x-shockwave-flash" data="static/images/play.swf?audio_file=captcha.php&amp;do=play&amp;bgColor1=#fff&amp;bgColor2=#fff&amp;iconColor=#777&amp;borderWidth=1&amp;borderColor=#000" height="19" width="19">
+			<param name="movie" value="static/images/play.swf?audio_file=captcha.php&amp;do=play&amp;bgColor1=#fff&amp;bgColor2=#fff&amp;iconColor=#777&amp;borderWidth=1&amp;borderColor=#000" />
+			</object>
+			<br /><a href="javascript:;"><img src="{$theme_img_path}images/gongqiu03.jpg" class="registerpic2" id="exchange_imgcapt" /></a></p><br clear="all" /></span><br clear="all" />
+			<label class="checkinput">
+			<input name="data[capt_register]" id="login_auth" type="text" value="" size="4" style="width:60px;" tabindex="5">&nbsp;<font class="gray">{lang input_code}</font>
+			</label>
+            <br clear="all" />
+            <!-- {/if} -->
+			<p class="registerp2"><input name="licence_check" id="LicenseCheck" type="checkbox" onclick="if(this.checked)$('#Submit').removeAttr('disabled'); else $('#Submit').attr('disabled','true');" checked="checked" /><label for="LicenseCheck">{lang see_agree}</label></p>
+			<div class="agree" id="agreements" style="display: none;">{$agreement}</div>
+            <br clear="all" />
+			<p class="registerbutton"><input type="submit" name="Submit" id="Submit" value="{lang register}" class="submit_w67" tabindex="6"/></p>
+			</form>
+		</div>
+ </div>
+<script language="javascript" src="static/scripts/jquery/jquery.validate.js"></script>
+<script language="javascript" src="static/scripts/validate.js" charset="{$charset}"></script>
+<!--{literal}-->
+<script>
+$("#SeeAgreement").click(function() { 
+	$("#agreements").toggle();
+});
+</script>
+<!--{/literal}-->
+<!--{include file="footer.html"}-->

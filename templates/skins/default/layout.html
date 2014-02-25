@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-Type" content="text/html;charset={$charset}" />
+<title>{block name="title"} - {$COMPANY.name}{/block}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<!-- {block name="meta"} -->
+<meta name="keywords" content="{$COMPANY.name}" />
+<meta name="description" content="{$COMPANY.description|strip_tags|truncate:100}" />
+<!-- {/block} -->
+<meta name="author" content="" />
+<link href="{$SpaceUrl}style.css" rel="stylesheet" type="text/css">
+<!-- {if $SpaceExtraStyle} -->
+<link href="{$SpaceExtraStyle}style.css" rel="stylesheet" type="text/css">
+<!-- {/if} -->
+<script type="text/javascript" src="{$WebRootUrl}static/scripts/jquery.js"></script>
+<script src="{$WebRootUrl}static/scripts/jquery/jquery.colorbox.js" type="text/javascript"></script>
+<script language="javascript" src="{$WebRootUrl}static/scripts/jquery/jquery.form.js"></script>
+<script src="{$WebRootUrl}static/scripts/jquery/smoothConfirm/jquery.smoothConfirm.js" type="text/javascript"></script>
+<link href="{$WebRootUrl}static/scripts/jquery/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css"/>
+<link href="{$WebRootUrl}static/scripts/jquery/smoothConfirm/smoothConfirm.css" media="screen" rel="stylesheet" type="text/css" />
+<script>
+var SpaceUrl = "{$SpaceUrl}";
+var SiteUrl = "{$WebRootUrl}";
+var cur = "{$cur}";
+</script>
+<!--{literal}-->
+<script>
+var ok_btn = "{lang sure}";
+var cancel_btn = "{lang cancel}";
+jQuery(document).ready(function($) {
+	$('a[rel*=lightbox]').colorbox({maxWidth:600,opacity:0.1});
+	$('a.top').click(function(){     
+		$('html, body').animate({scrollTop: '0px'}, 300);     
+		return false;}
+	);
+	var options = { 
+		success:       function(html){ 
+			$("#AddToFriend").smoothConfirm(html, {
+				okVal: ok_btn,
+				cancelVal: cancel_btn
+			});
+		},
+	}; 
+	$('#AddToFriend').click(function() { 
+		$("#AddFriendFrm").ajaxSubmit(options); 
+		return false; 
+	});
+	$("#"+cur).addClass("home");
+})
+</script>
+<!--{/literal}-->
+</head>
+<body>
+<div class="wrapper"><!-- Please set top banner content here.-->
+	<!-- {block name="banner"} -->
+	<div class="head">
+		<ul class="list1">
+			<li class="company"><a id="AddToFriend" href="javascript:;" title="{lang add_friend}">{lang add_friend}</a></li>
+			<li class="message"><a href="{$Menus.feedback}">{lang feed_back_to_company}</a></li>
+		</ul>
+		<div class="global_link">
+			<span title="{lang integrity_index}">({$MEMBER.credits|default:0})</span>
+			<ul class="list2">
+				<li id="space_index"><a href="{$Menus.index}">{lang home_page}</a></li>
+				<li id="space_intro"><a href="{$Menus.intro}">{lang space_intro}</a></li>
+				<li id="space_product"><a href="{$Menus.product}">{lang product_show}</a></li>
+				<li id="space_offer"><a href="{$Menus.offer}">{lang offer}</a></li>
+				<li id="space_news"><a href="{$Menus.news}">{lang space_news}</a></li>
+				<li id="space_album"><a href="{$Menus.album}">{lang space_album}</a></li>
+				<li id="space_hr"><a href="{$Menus.job}">{lang space_hr}</a></li>
+				<li id="space_contact"><a href="{$Menus.contact}">{lang contact_us}</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<div class="imgabsolute"><h1>{$COMPANY.name}{if $COMPANY.english_name}({$COMPANY.english_name}){/if}</h1></div>
+		<div class="imgabsolute2"><img src="{$GROUP.image}" alt="{$GROUP.name}" /></div>
+		<div id="tips">{lang current_position}<a href="{$WebRootUrl}">{$_G.site_name}</a>&raquo;<a href="{$Menus.index}">{$COMPANY.name}</a></div>
+	</div>
+	<form name="add_friend_frm" id="AddFriendFrm" action="{$WebRootUrl}virtual-office/link.php" method="post" target="_blank">
+	<!-- {formhash} -->
+	<input type="hidden" name="save" value="save">
+	<input type="hidden" name="is_ajax" value="1">
+	<input name="spacelink[title]" type="hidden" value="{$COMPANY.name}">
+	<input name="spacelink[url]" type="hidden" value="{$space_url}">
+	</form>
+	<!-- {/block} -->
+	<div class="content">
+		<!-- Please set leftbar content  here.-->
+		<!-- {block name="leftbar"} -->
+		<div class="leftbar">
+			<div class="latest_news">
+				<div><img src="{$SpaceUrl}images/left-1.gif"/><p>{lang product_sort}</p><div class="clear"></div></div>
+				<ul>
+				<!--{loop $ProductTypes item ProductTypes}-->
+					<li><a title="{$item.typename}" href="{the_url module=producttype typeid=$item.typeid userid=$smarty.get.userid}">{$item.typename}</a></li>
+				<!--{/loop}-->
+				</ul>
+			</div>
+			<!-- plugin -->
+			<div class="latest_news">
+				<div><img src="{$SpaceUrl}images/left-2.gif"/><p>{lang friend_links}</p><div class="clear"></div></div>
+				<!--{if $Links}-->
+				<ul>
+					<!--{loop $Links spacelink spacelink}-->
+					<li><a href="{$spacelink.url}" target="_blank">{$spacelink.title}</a></li>
+					<!--{/loop}-->
+				</ul>
+				<!--{/if}-->
+			</div>
+			<div class="latest_news">
+				<div><img src="{$SpaceUrl}images/left-3.gif"/><p>{lang contact_method}</p><div class="clear"></div></div>
+				<ul>
+					<li>{lang contact_people}{$COMPANY.link_man}</li>
+					<li>{lang phone}{$COMPANY.tel}</li>
+					<li>{lang fax}{$COMPANY.fax}</li>
+					<li>{lang address}{$COMPANY.address}</li>
+					<li>{lang zip}{$COMPANY.zipcode}</li>
+				</ul>
+			</div>
+		</div>
+		<!-- {/block} -->
+		<!-- {block name="content"} --><!-- Main content here please!!! --><!-- {/block} -->
+		<div class="clear"></div>
+	</div>
+	<div class="notice">
+		<p>{#space_statement#|sprintf:$site_name}</p>
+	</div>
+	<div class="foot">
+		<!-- {if $company_name} --><p>Copyright &copy; {$company_name} All rights reserved.</p><!-- {/if} -->
+		<!--{if $pb_username!=""}--><a href="{$WebRootUrl}redirect.php?url=/virtual-office/">{lang admin_entrance}</a> | <!--{/if}--><a href="{$WebRootUrl}index.php?do=help">{lang use_helps}</a> | <a href="javascript:;" class="top">{lang go_top}</a>
+	</div>
+	<div><img src="{$SpaceUrl}images/contactus_22.gif"></div>
+</div>
+</body>
+</html>

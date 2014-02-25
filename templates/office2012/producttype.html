@@ -1,0 +1,43 @@
+{block name="title" prepend}{#product_sort#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <div class="hint">{lang friendly_tip}</span>{lang adjustment_sequence}</div>
+
+		  <form name="prodtypefrm" action="producttype.php" method="post">
+		  <!-- {formhash} -->
+		   <table class="product_type">
+            <tr>
+              <th colspan="4"><strong>{lang series_sort_product}</strong></th>
+            </tr>
+			 <!--{foreach from=$Items name=producttype item=item}-->
+            <tr>
+              <td width="6%" align="center"><img src="{$office_theme_path}images/on.gif"></td>
+              <td width="40%" align="left">{$item.name}</td>
+              <td align="center"><a href="producttype.php?do=edit&id={$item.id}">{lang modify}</a></td>
+              <td align="center"><a href="producttype.php?do=del&id={$item.id}">{lang delete}</a></td>
+            </tr>
+			<!--{/foreach}-->
+          </table>
+		  </form>
+		 
+		<form name="edit_frm" method="post" action="producttype.php" autocomplete="off">
+		<!-- {formhash} -->
+        <table>
+        <tr>
+          <td colspan="2">&nbsp;{lang product_sort_name}
+            <input name="data[name]" type="Text" value="">
+            <input type="Submit" name="save" value="&nbsp;{lang add}&nbsp;"></td>
+        </tr>
+        </table>
+		</form>
+        <table>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="1" colspan="2" background="{$office_theme_path}images/index_trade_line.gif"></td>
+        </tr>
+      </table>
+{/block}

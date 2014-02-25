@@ -1,0 +1,9 @@
+# ##########################################################################
+# PUT THE FILE INTO THE TEMPLATES DIRECTORY PLEASE AND RENAME TO .htaccess #
+# PROHIBIT THE USER DIRECT ACCESS TO VISIT TEMPLATE FILE                   # 
+# ##########################################################################
+ErrorDocument 403 /index.php?do=error&action=redirect&code=403
+<FilesMatch "\.(html|htm)$">
+ Order allow,deny
+ Deny from all
+</FilesMatch>

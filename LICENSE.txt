@@ -1,0 +1,32 @@
+English Version of EULA, for non-Chinese-Speaking Users Only
+Copyright (c) 2001-2012, Ualink Inc.
+
+All Rights Reserved.
+
+IMPORTANT: THIS SOFTWARE END USER LICENSE AGREEMENT("EULA") IS A LEGAL AGREEMENT BETWEEN YOU AND Ualink Inc.. READ IT CAREFULLY BEFORE COMPLETING THE INSTALLATION PROCESS AND USING THE SOFTWARE. IT PROVIDES A LICENSE TO USE THE SOFTWARE AND CONTAINS WARRANTY INFORMATION AND LIABILITY DISCLAIMERS. BY INSTALLING AND USING THE SOFTWARE, YOU ARE CONFIRMING YOUR ACCEPTANCE OF THE SOFTWARE AND AGREEING TO BECOME BOUND BY THE TERMS OF THIS AGREEMENT. IF YOU DO NOT AGREE TO BE BOUND BY THESE TERMS, PLEASE DO NOT INSTALL OR USE THE SOFTWARE. YOU MUST ASSUME THE ENTIRE RISK OF USING THIS PROGRAM. ANY LIABILITY OF Ualink Inc. WILL BE LIMITED EXCLUSIVELY TO PRODUCT REPLACEMENT OR REFUND OF PURCHASE PRICE BEFORE FIRST INSTALLATION. 
+
+THIS EULA SHALL APPLY TO THE PHPB2B SOFTWARE ANY VERSION HEREWITH REGARDLESS OF WHETHER OTHER SOFTWARE IS REFERRED TO OR DESCRIBED HEREIN. Ualink Inc. RETAINS OWNERSHIP OF THE SOFTWARE AND ANY COPIES OF IT, REGARDLESS OF THE FORM IN WHICH THE COPIES MAY EXIST.
+
+Definitions 
+"PHPB2B"("PB" for short) is a trading portal programe which is developed by Ualink Inc.. 
+"the Software" means "PHPB2B". 
+"Ualink Inc." is the enterprise being responsible for PB product. 
+License Grants 
+You may use the Software for free for non-commercial use under the License Restrictions. 
+You may modify the source code(if being provieded) or interface of the Software to fit your website under the License Restrictions. 
+You have property of all members’ information and articles in the B2B site powered by the Software; meanwhile, you need assume all relevant legal duty by yourself. 
+You may use the Software for commercial use after purchasing the commercial license. Moreover, according to the license you purchased you may get specified term, manner and content of technical support from Ualink Inc. Commercial users are prior to submiting ideas and opinions to Ualink Inc., but without any guarantee of acceptance. 
+License Restrictions 
+You may not use the Software for commercial use or profit use, unless you have been licensed to. To purchase the license, please visit http://www.phpb2b.com or dial 8610-8411 2674 for more information. 
+You may not rent, lease, sublicense, sell, assign, pledge the Software and its services. 
+You may not remove or modify the copyright information and relevant links, such as http://www.phpb2b.com, http://bbs.phpb2b.com and http://www.ualink.org, in the footer of B2B site pages without the prior written consent of Ualink Inc., no matter how heavily you modified the Software. 
+You may not modify the Software to create derivative works for redistribution based upon the Software. 
+In the event that you fail to comply with this EULA, your license will be terminated. 
+LIMITED WARRANTY AND DISCLAIMER 
+THE SOFTWARE AND THE ACCOMPANYING FILES ARE SOLD "AS IS" AND WITHOUT WARRANTIES AS TO PERFORMANCE OF MERCHANTABILITY OR ANY OTHER WARRANTIED WHETHER EXPRESSED OR IMPLIED. 
+Ualink Inc. is not liable for the content of any message posted on the forums powered by the Software. 
+You must assume the entire risk of using the Software. ANY LIABILITY OF Ualink Inc. WILL BE LIMITED EXCLUSIVELY TO PRODUCT REPLACEMENT, REFUND OF PURCHASE PRICE BEFORE YOUR FIRST INSTALLATION. 
+Official Websites 
+URL of Ualink Inc. is http://www.phpb2b.com. 
+URL of Discuz! Community is http://bbs.phpb2b.com. 
+Ualink Inc. reserves the right to modify this EULA. http://www.phpb2b.com/ provides offical information on license and price, Ualink Inc. may modify them without notice. Modified license and price list will apply to new licensed users。

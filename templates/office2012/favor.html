@@ -1,0 +1,60 @@
+{block name="title" prepend}{#favorites#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <table class="bggray">
+        <tr>
+          <td class="orange">{lang favorites_tips}</td>
+        </tr>
+      </table>      
+      <form name="listfrm" action="{$smarty.server.PHP_SELF}" method="post">
+	  <!-- {formhash} -->
+      <table class="offer_publish_list">
+        <tr>
+          <td>
+          <table class="bglist">
+            <tr>
+            <th>{lang type}</th>
+            <th>{lang title}</th>
+            <th>{lang collection_time}</th>
+            <th>{lang selected}</th>
+            </tr>
+			<!--{foreach from=$Items item=item}-->
+            <tr>
+              <td class="orange">{$TradeTypes[$item.type_id]}</td>
+              <td><a href="{the_url module=offer id=$item.offerid}" target="_blank" style="text-decoration:  underline;">{$item.title}</a>&nbsp;</td>
+              <td>{$item.pubdate}&nbsp;</td>
+              <td><input name="id[]" type="checkbox" id="id_{$item.id}" value="{$item.id}"></td>
+            </tr>
+			<!--{/foreach}-->
+          </table>
+          </td>
+        </tr>
+		<!--{if $Items}-->
+        <tr>
+          <td><div align="right" style="padding:5px 0 ;">
+                <input type="submit" name="del" value="{lang delete_message}" onClick="return window.confirm{lang ok_delete}">
+              </div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="1" background="{$office_theme_path}images/index_trade_line.gif"></td>
+        </tr>
+		{else}
+        <tr align="center">
+          <td><B>{lang no_collection_message}</B>&nbsp;</td>
+        </tr>
+		<!--{/if}-->
+        <tr>
+          <td><table class="room_pages">
+              <tr>
+                <td>{$ByPages}</td>
+              </tr>
+          </table></td>
+        </tr>
+      </table>
+      </form>
+{/block}

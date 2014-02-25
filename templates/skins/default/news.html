@@ -1,0 +1,19 @@
+{extends file="layout.html"} 
+{block name="title" prepend}{#space_news#}{/block}
+{block name="content"}
+			<div class="rightbarcontact">
+					<div class="playercontact">
+					<div class="playerheadcontact"><span class="playlistcontact">{lang space_news}</span><span class="player_head_concontact"></span><img src="{$SpaceUrl}images/contactus_13.jpg" /></div>
+					<div class="clear"></div>
+					<div class="player_concontact">
+					<!--{pb:companynews companyid=$COMPANY.id row=10 name=companynews stat=1}-->
+						<p class="companytitle"><a href="{the_url do=space action=detail module=news id=$COMPANY.id itemid=$companynews.id}">{$companynews.title}</a></p>
+						<p>{$companynews.content|truncate:100}</p>
+					<!--{/pb:companynews}-->					
+						<p><div class="pagination"><!-- {pager rowcount=$total_count} --></div></p>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+{/block}

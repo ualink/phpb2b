@@ -1,0 +1,30 @@
+{block name="title" prepend}{#brands#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <div class="hint"><span class="btn_hint"><a href="brand.php?do=edit" class="btn_publish">{lang click_add}</a></span>{lang add_your_brands}</div>               
+     <table class="album" >
+          <!--{foreach from=$Items item=item}-->
+          <tr bgcolor="{cycle values="#CCFFCC,#ffffff"}">
+          <th><a href="brand.php?do=edit&id={$item.id}" style="text-decoration: underline;"><img style="padding: 6px; border: 1px solid #CCC; background-color: #FFF;" src="{$item.image}" alt="" border="0" width="80" height="80" /></a></th>
+          <td>
+          <div id="certs" align="left">
+            <ul>
+            <li>{lang brand_name}{$item.name}</li>
+            <li>{lang description}{$item.description|nl2br|truncate:100}</li>
+            <li style="list-style:none"><a href="brand.php?do=edit&id={$item.id}" style="text-decoration: underline;">{lang modify}</a>&nbsp;<a href="brand.php?do=del&id={$item.id}" style="text-decoration: underline;">{lang delete}</a></li>
+            </ul>
+          </div>
+          </td>
+          </tr>
+          <!--{foreachelse}-->
+          <tr><td colspan="2"><div align="center">{lang no_datas_now}</div></td></tr>
+          <!--{/foreach}-->
+      </table>				
+     <table class="room_pages">
+          <tr>
+            <td>{$ByPages}</td>
+          </tr>
+     </table> 
+{/block}

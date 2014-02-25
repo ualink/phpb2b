@@ -1,0 +1,70 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang member_center} &raquo; {lang membergroup}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang membergroup}</h3> 
+    <ul class="subnav">
+		<li><a href="membergroup.php">{lang the_all} {lang membergroup}</a></li>
+        <li><a class="btn1" href="membergroup.php?do=permission"><span>{lang permissions}</span></a></li>
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontl">
+             <div class="left">{lang custom_membership_groups}</div>
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th>&nbsp;</th>
+		  <th><label for="basic_chkall"><input type="checkbox" name="basic_chkall" id="basic_chkall" onclick="checkAll('prefix', this.form, 'basic', 'basic_chkall')" />&nbsp;{lang basic_info} {lang trade_management}</label></th>
+		  <th><label for="offer_chkall"><input type="checkbox" name="offer_chkall" id="offer_chkall" onclick="checkAll('prefix', this.form, 'offer', 'offer_chkall')" />&nbsp;{lang offer} {lang trade_management}</label></th>
+		  <th><label for="product_chkall"><input type="checkbox" name="product_chkall" id="product_chkall" onclick="checkAll('prefix', this.form, 'product', 'product_chkall')" />&nbsp;{lang product} {lang management}</label></th>
+		  <th><label for="company_chkall"><input type="checkbox" name="company_chkall" id="company_chkall" onclick="checkAll('prefix', this.form, 'company', 'company_chkall')" />&nbsp;{lang company} {lang trade_management}</label></th>
+		  <th><label for="pms_chkall"><input type="checkbox" name="pms_chkall" id="pms_chkall" onclick="checkAll('prefix', this.form, 'pms', 'pms_chkall')" />&nbsp;{lang business_information}</label></th>
+		  <th>{lang screenshot}</th>
+		</tr>
+    </thead>
+    <tfoot>
+		<tr>
+		  <th>&nbsp;</th>
+		  <th>{lang basic_info} {lang trade_management}</th>
+		  <th>{lang offer} {lang trade_management}</th>
+		  <th>{lang product} {lang management}</th>
+		  <th>{lang company} {lang trade_management}</th>
+		  <th>{lang business_information}</th>
+		  <th>{lang screenshot}</th>
+		</tr>
+    </tfoot>
+    <tbody>
+		<!--{foreach from=$Items name=membergroup item=item}-->
+		<tr class="tatr2">
+		  <th style="text-align:left; padding-left:60px;"><label for="group{$item.id}chkall"><input type="checkbox" name="group_{$item.id}_chkall" id="group{$item.id}chkall" onclick="checkAll('value', this.form, {$item.id}, 'group_{$item.id}_chkall')" />&nbsp;{$item.name|pl}</label></th>
+		  <td><input type="checkbox" name="basic[]" value="{$item.id}" rel="{$item.id}" id="groupid_{$item.id}_0" {if $item.exemptval[0]==1}checked{/if} /></td>
+		  <td><input type="checkbox" name="offer[]" value="{$item.id}" rel="{$item.id}" id="groupid_{$item.id}_3" {if $item.exemptval[1]==1}checked{/if} /></td>
+		  <td><input type="checkbox" name="product[]" value="{$item.id}" rel="{$item.id}" id="groupid_{$item.id}_1" {if $item.exemptval[2]==1}checked{/if} /></td>
+		  <td><input type="checkbox" name="company[]" value="{$item.id}" rel="{$item.id}" id="groupid_{$item.id}_2" {if $item.exemptval[3]==1}checked{/if} /></td>
+		  <td><input type="checkbox" name="pms[]" value="{$item.id}" rel="{$item.id}" id="groupid_{$item.id}_4" {if $item.exemptval[4]==1}checked{/if} /></td>
+		  <td><img src="{$item.image}" border="0" alt="{$item.name}" /></td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="6">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+		<input type="submit" name="save_permission" value="{lang save}" class="formbtn batchButton"/>
+    </div>
+    <div class="pageLinks"/>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

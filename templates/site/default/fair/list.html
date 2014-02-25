@@ -1,0 +1,49 @@
+<!--{include file="../header.html" page_title="$page_title" nav_id=5}-->
+<div class="wrapper">
+    <div class="tips"><span>{$position}</span></div>
+    <div class="blank6"></div>
+    <div class="companylistconleft">
+        <div class="base_title">
+          <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang search_result}</span><span class="corner_t_r"></span></h2> 
+	    </div>
+        <div class="base_list_box box_bord">
+           <div class="base_list_head"></div>
+           <div class="base_list_content clearfix">	
+           <!--{foreach from=$items item=item name=fair}-->
+                <div class="base_list clearfix">
+                    {if $item.picture}<div class="base_list_img"><img src="{$item.image}" /></div>{/if}
+                    <div class="base_list_info">
+                      <span class="title title_link"><a href="{the_url module=fair id=$item.id}">{$item.title}</a></span>
+                      <p> {$item.description}</p>
+                      <div class="update_time"><em>{lang fair_time}({$item.begin_time|date_format:"%Y.%m.%d"}-{$item.end_time|date_format:"%Y.%m.%d"})</em>{lang categories}[<a href="{the_url module=search do=fair typeid=$item.expotype_id}">{$item.typename}</a>]</div>
+                      <div class="txt_source"><span class="fr link-underline"><a href="{the_url module=fair id=$item.id}">{lang visit_full_content}...</a></span></div>
+                  </div>
+                 </div>
+                 <hr class="hr_dashed" />
+               <!--{/foreach}-->
+                <div><div class="pagination2"><!-- {pager rowcount=$paging.total} --></div></div>
+           </div>
+        </div>
+    </div>
+	<div class="companylistconright">
+			<div class="lookcompany ex_choose">
+				<div class="buymessagetop"><img src="{$theme_img_path}images/lhighs.gif" />{#area_choose#|sprintf:#the_area#}</div>
+				<p>
+                <!--{foreach from=$Areas[1] item=area_item key=area_key}-->
+					<a href="{the_url module=search do=fair areaid=$area_key}">{$area_item}</a><br />
+                <!--{/foreach}-->
+				</p>
+				<div class="clear"></div>
+			</div>
+			<div class="companylistsee ex_choose">
+				<div class="buymessagetop"><img src="{$theme_img_path}images/lhighs.gif" />{lang sort_choose}</div>
+				<p>
+				<!--{foreach from=$Type item=item key=key}-->
+					<a href="{the_url module=search do=fair typeid=$key}">{$item}</a><br />
+				<!--{/foreach}-->
+				</p>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="blank6"></div>
+<!--{include file="../footer.html"}-->

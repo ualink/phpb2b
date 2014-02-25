@@ -1,0 +1,45 @@
+<!-- {include file="header.html"} -->
+<script type="text/javascript">
+var menu = {$ActionMenus};
+var currTab = 'dashboard';
+var firstOpen = [];
+</script>
+<script type="text/javascript" src="{$admin_theme_path}js/index.js" charset="{$charset}"></script>
+<div class="back_nav">
+    <div class="back_nav_list">
+        <dl>
+            <dt>{$menu.text}</dt>
+            <dd><a href="javascript:;" onclick="openItem('{$sub_key}','{$key}');none_fn();">{$sub_menu.text}</a></dd>
+        </dl>
+    </div>
+    <div class="shadow"></div>
+    <div class="close_float"><img src="{$admin_theme_path}images/close2.gif" /></div>
+</div>
+<div id="head">
+    <div id="logo"><img src="{$admin_theme_path}images/phpb2b_logo.png" /></div>
+    <div id="menu"><span>{#hello#|sprintf:"<strong>$current_adminer</strong>"} [<a href="login.php?action=dereg" target="_self" title="{lang use_other_account}">{lang off}</a>,<a href="adminer.php?do=profile" title="{lang set_your_personal_info}" target="workspace">{lang account_set}</a>,<a href="../logging.php?action=logout&fr=cp">{lang login_out}</a>]</span>
+    <a href="{$SiteUrl}index.php" target="_blank" class="menu_btn1" title="{lang back_to_homepage}">{lang browse_homepage}</a>
+    <a href="javascript:;" class="menu_btn1" id="iframe_refresh" title="{lang refresh_the_page}">{lang refresh}</a>
+    </div>
+    <ul id="nav"></ul>
+    <div id="headBg"></div>
+</div>
+<div id="content">
+    <div id="left">
+        <div id="leftMenus">
+            <dl id="submenu">
+                <dt><a class="ico1" id="submenuTitle" href="javascript:;"></a></dt>
+            </dl>
+         </div>
+		<div class="copyright">
+			<p>Powered by {lang soft_name} {$smarty.const.PHPB2B_VERSION}</p>
+			<p>&copy; 2007-2012 <a href="http://www.phpb2b.com/" target="_blank">UALINK</a> Inc.</p>
+		</div>
+    </div>
+    <div id="right">
+        <iframe frameborder="0" style="display:none;" width="100%" id="workspace" name="workspace"></iframe>
+    </div>
+    <div class="clear"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!--{include file="../header.html" page_title="$page_title"}-->
+<!-- {literal} -->
+<style>
+#wrap{width:960px;margin:0 auto;background:#FFF;position:relative}
+.fenlei{ font-size:14px; font-weight:bold; height:40px; line-height:40px;}
+.list_tit{ height:30px; line-height:30px; background-color:#F2F2F2; color:#3C3C3C; font-weight:bold; padding-left:15px; border-bottom:1px solid #ccc; padding-right:14px;}
+.list_con{line-height:30px; color:#6F6F6F; padding:7px 0; padding-right:10px;}
+.list_con td{line-height:20px; padding:5px 0}
+.list_con th{ font-weight:400; text-align:left;}
+
+.list_con1{border-left:1px solid #F2F2F2;border-right:1px solid #F2F2F2; line-height:21px; padding:15px 0 15px 17px;}
+.list_con1 a{margin-right:18px;}
+.o_expand {
+	cursor: hand;
+    float: right;
+    width: 30px;
+}
+</style>
+<!-- {/literal} -->
+<div id="wrap">
+<div class="tips"><span>{$position}</span></div>
+<div class="blank6"></div>
+<div class="list_tit"><span class="fl">{lang main_city}</span></div>
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+  <tbody><tr>
+    <td class="list_con1" colspan="3">
+		<!-- {pb:area level=1 name="area"} -->
+		<strong><a href="{$area.url}" {$area.style} title="{$area.title|pl}">{$area.title|pl}</a></strong>
+		<!-- {/pb:area} -->
+	</td>
+    </tr>
+  <tr>
+    <td height="5" background="{$theme_img_path}images/clist_bg1.jpg" width="5"></td>
+    <td background="{$theme_img_path}images/clist_bg2.jpg" width="940"></td>
+    <td background="{$theme_img_path}images/clist_bg3.jpg" width="5"></td>
+  </tr>
+</tbody>
+</table>
+<div class="blank6"></div>
+<div class="list_tit"><span class="fl">{lang main_industry}</span></div>
+
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+  <tbody><tr>
+    <td class="list_con1" colspan="3">
+		<!-- {pb:industry level=1 name="industry"} -->
+		<strong><a href="{$industry.url}" {$industry.style} title="{$industry.title|pl}">{$industry.title|pl}</a></strong>
+		<!-- {/pb:industry} -->
+	</td>
+    </tr>
+  <tr>
+    <td height="5" background="{$theme_img_path}images/clist_bg1.jpg" width="5"></td>
+    <td background="{$theme_img_path}images/clist_bg2.jpg" width="940"></td>
+    <td background="{$theme_img_path}images/clist_bg3.jpg" width="5"></td>
+  </tr>
+</tbody>
+</table>
+<div style="height: 10px;" class="clearit"></div>
+
+<div class="list_tit">
+<span class="fl">{$station_name}{lang sort_by_alpha}</span>
+<span class="o_expand">
+<img alt="{lang expand_or_no}" title="{lang expand_or_no}" src="{$theme_img_path}images/collapsed_yes.gif" onclick="$('#category_list').toggle();" id="category_img">
+</span>
+</div>
+<table cellspacing="0" cellpadding="0" border="0" width="100%" id="category_list">
+    <tbody>
+  <tr>
+    <td class="list_con1" colspan="3">
+	<!-- {foreach from=$alpha_datas item=item name=datas key=key} -->
+    <strong>{$key}</strong>&emsp;&nbsp;
+		<!-- {foreach from=$item.child item=item1 name=data key=key1} -->
+			<a href="{the_url module=topic id=$item1.id do=$_G.do}" title="{$item1.title} {lang sub_station}">{$item1.title}</a>
+		<!-- {/foreach} -->
+	<br>
+	<!-- {/foreach} -->
+	</td>
+    </tr>
+  <tr>
+    <td height="5" background="{$theme_img_path}images/clist_bg1.jpg" width="5"></td>
+    <td background="{$theme_img_path}images/clist_bg2.jpg" width="940"></td>
+    <td background="{$theme_img_path}images/clist_bg3.jpg" width="5"></td>
+
+  </tr>
+</tbody>
+</table>
+</div>
+<!--{include file="../footer.html"}-->

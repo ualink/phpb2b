@@ -1,0 +1,64 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang payment_method}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang payment_method}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="payment.php"><span>{lang management}</span></a></li>
+		<!--{foreach from=$Items item=item}-->
+		{if $item.available}
+        <li><a href="payment.php?do=edit&entry={$item.name}&id={$item.id}{$addParams}" title="{lang setting}{$item.title}">{$item.title}</a></li>
+		{/if}
+		<!--{/foreach}-->
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontl">{lang to_install_or_uninstall_operation_tip}</div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th><label for="idAll">{lang naming}</label></th>
+		  <th>{lang setup}</th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2" title="{$item.description|strip_tags}">
+		  <td class="firstCell"><input type="checkbox" {if !$item.id}disabled="disabled"{/if} name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}"></td>
+		  <td><strong>{$item.title}</strong><br><small>{$item.description|strip_tags}</small></td>
+		  <td><input type="checkbox" name="" {if $item.available}checked{/if}></td>
+		  <td class="handler">
+          <ul id="handler_icon">
+            {if $item.available or $item.id}
+             <li><a class="btn_browse"  href="{$SiteUrl}purchase.php?do=pay&pay_method={$item.name}" target="_blank" title="{lang test}">{lang preview}</a></li>
+            <li><a class="btn_edit" href="payment.php?do=edit&entry={$item.name}&id={$item.id}{$addParams}" title="{lang edit}">{lang edit}</a></li>
+             <li><a class="btn_uninstall" href="payment.php?do=uninstall&id={$item.id}{$addParams}" title="{lang uninstall}">{lang uninstall}</a></li>
+             {else}
+            <li><a class="btn_install" href="payment.php?entry={$item.name}&do=install{$addParams}" title="{lang install}">{lang install}</a></li>
+            {/if}
+          </ul>  
+		</td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="4">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+    </div>
+    <div class="pageLinks">{$ByPages}</div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

@@ -1,0 +1,126 @@
+<!-- {include file="header.html"} -->
+<script src="{$SiteUrl}scripts/jquery/jquery.colorbox.js" type="text/javascript"></script>
+<link href="{$SiteUrl}scripts/jquery/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css"/>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$('a[rel*=lightbox]').colorbox() 
+})
+</script>
+<!--{/literal}-->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang product_center}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang product_center}</h3>
+    <ul class="subnav">
+		<li><a href="product.php">{lang management}</a></li>
+        <li><a class="btn1"><span>{lang add_or_edit}</span></a></li>
+		<li><a href="productsort.php">{lang category}</a></li>
+		<li><a href="productcategory.php">{lang product}{lang sorts}</a></a></li>
+		<li><a href="brand.php">{lang brands}</a></a></li>
+		<li><a href="brandtype.php">{lang brands}{lang sorts}</a></a></li>
+		<li><a href="price.php">{lang prices}</a></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" id="EditFrm" name="edit_frm" enctype="multipart/form-data" >
+  <input type="hidden" name="id" value="{$smarty.get.id}" />
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+  <input type="hidden" name="company_name" value="{$item.companyname}" />
+  <input type="hidden" name="username" value="{$item.username}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang member_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[username]" value="{$item.username}" /><label class="field_notice">{lang member_name}</label>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang company_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[company_name]" id="dataCompanyName" value="{$item.companyname}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang product}{lang naming_n}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[product][name]" value="{$item.name}" /><label class="field_notice">{lang the_title}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang labels}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[tag]" type="text" id="Tag" value="{$item.tag}" /><label class="field_notice">{lang multi_seperate_by_quot}</label>        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang in_industry}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <span id="dataIndustry">
+					<select name="industry[id][1]" id="dataProductIndustryId1" class="level_1" style="width:120px;" ></select>
+					<select name="industry[id][2]" id="dataProductIndustryId2" class="level_2" style="width:120px;"></select>
+					<select name="industry[id][3]" id="dataProductIndustryId3" class="level_3" style="width:120px;"></select>
+		</span>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang in_area}</th>
+        <td class="paddingT15 wordSpacing5">
+			<span id="dataArea">
+						<select name="area[id][1]" id="dataProductAreaId1" class="level_1" style="width:120px;" ></select>
+						<select name="area[id][2]" id="dataProductAreaId2" class="level_2" style="width:120px;"></select>
+						<select name="area[id][3]" id="dataProductAreaId3" class="level_3" style="width:120px;"></select>
+			</span>        
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang detailed_contents}</th>
+        <td class="paddingT15 wordSpacing5"><textarea style="width:650px;height:300px;" name="data[product][content]" id="dataProductContent">{$item.content}</textarea>
+		</td>
+
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang seo_title}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[meta][title]" type="text" id="seo_title" value="{$item.seo_title}" />        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang seo_keyword}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[meta][keyword]" type="text" id="seo_kewyord" value="{$item.seo_keyword}" />        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang seo_description}</th>
+        <td class="paddingT15 wordSpacing5"><input name="data[meta][description]" type="text" id="seo_description" value="{$item.seo_description}" />        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang picture}</th>
+        <td class="paddingT15 wordSpacing5">
+        <input class="infoTableFile2" type="file" name="pic" id="pic" />
+          <label class="field_notice">{lang image_format_support}</label>
+          {if $item.picture}
+          <br /><span><img src="{$item.image}" alt="{$item.name}"/></span>
+          {/if}
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save_and_pub}" />
+			<input class="formbtn" type="submit" name="pass" value="{lang check_passed}" />
+			<input class="formbtn" type="submit" name="forbid" value="{lang check_invalid}" />
+			<input class="formbtn" type="submit" name="del" value="{lang delete}" />
+		</td>
+
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var cache_path = "../";
+var app_language = '{$AppLanguage}';
+var area_id1 = {$item.area_id1|default:0} ;
+var area_id2 = {$item.area_id2|default:0} ;
+var area_id3 = {$item.area_id3|default:0} ;
+var industry_id1 = {$item.industry_id1|default:0} ;
+var industry_id2 = {$item.industry_id2|default:0} ;
+var industry_id3 = {$item.industry_id3|default:0} ;
+</script>
+<script src="../static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="../static/scripts/script_area.js"></script>
+<script src="../static/scripts/script_industry.js"></script>
+{editor type="tinymce"}
+<!-- {include file="footer.html"} -->

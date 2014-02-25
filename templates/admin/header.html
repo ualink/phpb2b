@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{lang control_pannel} - {$_G.site_name}</title>
+<link href="{$admin_theme_path}css/style.css" rel="stylesheet" type="text/css" />
+<link href="{$admin_theme_path}css/form.css" rel="stylesheet" type="text/css" />
+<link href="../static/css/common.css" rel="stylesheet" type="text/css" />
+<script src="../data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<script type="text/javascript" src="../static/scripts/jquery.js"></script>
+<script type="text/javascript" src="{$admin_theme_path}js/common.js"></script>
+<script type="text/javascript" src="../static/scripts/jquery/tablehover.js" ></script>
+<script>
+var SiteUrl = "{$SiteUrl}";
+var DeleteSure = "{lang delete_sure}";
+</script>
+<!--{literal}-->
+<script>
+$(document).ready(function(){
+		$('.dataTable').tableHover();
+		$(".btn_delete,.btn_uninstall").click( function() {
+			var d = confirm(DeleteSure);
+			if(d) return true;else return false;
+		});
+});
+</script>
+<style type="text/css">
+td.hover, tr.hover
+{
+	background-color: #F2F9FD;
+}
+th.hover, thead td.hover, tfoot td.hover
+{
+	background-color: ivory;
+}
+</style>
+<!--{/literal}-->
+</head>
+<body>

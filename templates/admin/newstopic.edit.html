@@ -1,0 +1,52 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang industry_news}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang industry_news}</h3> 
+    <ul class="subnav">
+		<li><a href="news.php">{lang management}</a></li>
+        <li><a href="newstopic.php">{lang topic_news}</a></li>
+        <li><a class="btn1" href="newstopic.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+        <li><a href="newstype.php">{lang sorts}</a></li>
+		<li><a href="newsgather.php">{lang collection}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="newstopic.php" id="EditFrm" name="edit_frm" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{$item.id}" />
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="newstopic[title]" value="{$item.title}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang digest_n}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="newstopic[description]" value="{$item.description}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang info} {lang lists}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><textarea name="data[news]" id="dataNews">{$item.news}</textarea><label class="field_notice">{lang add_more_than_one_line_on_behalf_of_a_record}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang picture}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <input class="infoTableFile2" type="file" name="pic" id="pic" />
+          <label class="field_notice">{lang image_format_support}</label>
+          {if $item.picture}
+          <br /><span><img src="{$item.image}" alt="{$item.name}"/></span>
+          {/if}
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

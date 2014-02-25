@@ -1,0 +1,68 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang dictionary}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang dictionary}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="dict.php"><span>{lang management}</span></a></li>
+        <li><a href="dict.php?do=edit">{lang add_or_edit}</a></li>
+        <li><a href="dicttype.php">{lang types}</a></li>
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontr"> 
+        <form name="search_frm" id="SearchFrm" method="get"> 
+             <div> 
+				{lang title_keywords} : <input class="queryInput" type="text" name="q" value="{$smarty.get.q}" /> 
+                <input type="submit" name="search" id="Search" class="formbtn" value="{lang searching}" /> 
+            </div> 
+        </form> 
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th><label for="idAll">{lang the_title}</label></th>
+		  <th>{lang alias_name}</th>
+		  <th>{lang sorts}</th>
+		  <th>{lang content_digest}</th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2">
+		  <td class="firstCell"><input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}"></td>
+		  <td><label for="item_{$item.id}">{$item.word|pl}</label></td>
+		  <td>{$item.word_name}</td>
+		  <td>{$item.typename|pl}</td>
+		  <td>{$item.digest|pl|truncate:50}</td>
+		  <td class="handler">
+          <ul id="handler_icon">
+            <li><a class="btn_delete"  href="dict.php?id={$item.id}&do=del{$addParams}" title="{lang delete}">{lang delete}</a></li>
+            <li><a class="btn_browse"  href="{the_url module=dict id=$item.id}" target="_blank" title="{lang preview}">{lang preview}</a></li>
+            <li><a class="btn_edit" href="dict.php?do=edit&id={$item.id}{$addParams}" title="{lang edit}">{lang edit}</a></li>
+          </ul>		  </td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="6">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="submit" name="del" value="{lang delete}" class="formbtn batchButton"/>
+    </div>
+    <div class="pageLinks">{$ByPages}</div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

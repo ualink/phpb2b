@@ -1,0 +1,120 @@
+<!--{include file="header.html" page_title=#login#}-->
+<!--{literal}-->
+<style type="text/css">
+label.error {
+  font-weight: bold;
+  color: #b80000;
+}
+</style>
+<!--{/literal}-->
+<div class="wrapper">
+    <div class="content">
+        {if $pb_username==""}<div class="loading"><img src="{$theme_img_path}images/lhighs.gif" />{lang your_ongoing_operations}<span>{lang pls_login}</span></div>{/if}
+        <div class="loadingcon">
+        <form name="loggingfrm" id="LoggingFrm" method="post" action="logging.php" autocomplete="off">
+        	<input type="hidden" name="action" value="logging">
+			<!-- {formhash} -->
+			<input type="hidden" name="forward" value="{$forward}" />
+            <div class="loadingconleft">
+                <p>{lang member_login}</p>
+				{if !empty($LoginError)}{$LoginError}{/if}
+				<br />
+{if $pb_username!=""}
+					<label class="loadingname">
+                        {lang user_name}
+                    </label>
+                    <label>
+                        {$pb_username|default:#account_n_email_n_mobile#}
+                    </label>
+                    <br clear="all" />
+					<label class="loadingname">
+                        {lang member_type}
+                    </label>
+                    <label>
+                        {$member_info.groupname}<img src="{$member_info.groupimage}" />
+                    </label>
+                    <br clear="all" />
+					<label class="loadingname">
+                        {lang your_last_login}{lang colon}
+                    </label>
+                    <label>
+                        {$member_info.last_login|date_format:"%Y-%m-%d %H:%M"}
+                    </label>
+                    <br clear="all" />
+{else}
+					<label class="loadingname">
+                        {lang user_name}
+                    </label>
+                    <label>
+                        <input type="text" style="color: #CCCCCC;" name="data[login_name]" id="LoginName" value="{lang account_n_email_n_mobile}" tabindex="1">
+                    </label>
+                    <br clear="all" />
+                    <label class="loadingname">
+                    {lang password}
+                    </label>
+                    <label>
+                        <input name="data[login_pass]" type="password" id="LoginPass" value="" tabindex="2">&nbsp;<a href="getpasswd.php">{lang forget_password}</a>
+                    </label>
+                    <br clear="all" />
+                    {if $ifcapt}
+                    <label class="loadingname">
+                        {lang code}
+                    </label>
+                    <label class="loadingcheck">
+                        <input name="data[capt_logging]" id="LoginAuth" type="text" value="" size="5" maxlength="5" tabindex="3"><a href="javascript:;" onclick="$('#imgcaptcha').attr('src','captcha.php?sid=' + Math.random());return false;"><img src="captcha.php" id="imgcaptcha" alt="{lang unclear_see_numbers}" title="{lang unclear_see_numbers}" width="128"/></a>
+                    </label>
+                    <div class="clear"></div>
+                    <p class="loadingp1">{lang refresh_code}</p>
+                    {/if}
+                    <div class="clear"></div>
+                    <div class="login" id="btnLoginDiv">
+                       <input type="submit" name="log_in" id="LogIn" value="{lang login}" class="loadingbutton" />
+                       <input type="reset" name="reset" value="{lang reset}" class="loadingbutton"/>
+                    </div>
+{/if}
+                    <div class="clear"></div>
+                    <p class="loadingp3">{lang questions_service_hotline}{$service_tel}</p>
+            </div>
+            <div class="loadingconright">
+                <p>{lang free_register}</p>
+                <ul>
+                    <li><a><img src="{$theme_img_path}images/logging_01.gif" alt="" /><p><b>{lang products_show}</b><br />{lang illustrated_display_product}</p></a></li>
+                    <li><a><img src="{$theme_img_path}images/logging_02.gif" alt="" /><p><b>{lang online_business}</b><br />{lang internet_power_promotion}</p></a></li>
+                    <li><a><img src="{$theme_img_path}images/logging_03.gif" alt="" /><p><b>{lang hr}</b><br />{lang talents_join}</p></a></li>
+                    <li><a><img src="{$theme_img_path}images/logging_04.gif" alt="" /><p><b>{lang agent_join}</b><br />{lang development_agent_join}</p></a></li>
+                    <li><a><img src="{$theme_img_path}images/logging_05.gif" alt="" /><p><b>{lang company_news}</b><br />{lang display_company_news}</p></a></li>
+                    <li><a><img src="{$theme_img_path}images/logging_06.gif" alt="" /><p><b>{lang classifieds}</b><br />{lang free_classifieds}</p></a></li>
+                </ul>
+				<div class="member_reg">
+{if $pb_username!=""}
+                       <input type="button" value="{lang into_office_room}" class="loadfreeregister" onclick="redirect('virtual-office/');return false;"/>
+					   {else}
+                       <input type="button" value="{lang register}" class="loadfreeregister" onclick="redirect('member.php');return false;"/>
+					   {/if}
+               </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+<script src="data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<script language="javascript" src="static/scripts/jquery/jquery.validate.js"></script>
+<script language="javascript" src="static/scripts/validate.js" charset="{$charset}"></script>
+<script>
+var account_n_email_n_mobile = "{lang account_n_email_n_mobile}";
+</script>
+<!--{literal}-->
+<script>
+$(document).ready(function(){
+	$("#LoginName").focus(function(){
+		if($("#LoginName").val()==account_n_email_n_mobile){
+			$("#LoginName").val('').css('color', '#000');
+		};
+	}).blur(function(){
+		if($("#LoginName").val()==''){
+		$("#LoginName").val(account_n_email_n_mobile).css("color","#ccc")};
+	});
+});
+</script>
+<!--{/literal}-->
+<!--{include file="footer.html"}-->

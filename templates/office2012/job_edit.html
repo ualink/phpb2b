@@ -1,0 +1,145 @@
+{block name="title" prepend}{#company_job#}{/block}
+{block name="main"}
+{fetch file="../static/scripts/date.js"}
+<script src="../static/scripts/jquery/jquery.textbox.js" charset="{$charset}"></script>
+<script>
+var allows_maximum_input = "{lang allows_maximum_input}";
+var can_also_enter = "{lang can_also_enter}";
+</script>
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+     <div class="hint">{lang must_input_with_star}</div>
+
+	  <form name="jobfrm" id="Frm1" action="job.php" method="post">
+	  <!-- {formhash} -->
+	  <input type="hidden" name="id" value="{$item.id}">
+      
+		  <table class="offer_info_content">       
+
+                      <tr>
+                         <th class="circle_left">
+                        <font color="#FF6600">*</font>{lang job_title}</th>
+                         <td class="circle_right"><input name="job[name]" type="text" id="jobname" value="{$item.name}" class="required"></td>
+                      </tr>
+                      <tr>
+                        <th>{lang sex}</th>
+                        <td class="tdright">{html_radios name="job[require_gender_id]" options=$Genders checked=$item.require_gender_id|default:0 separator=" "}</td>
+                      </tr>
+                      
+                      <tr>
+                        <th><font color="#FF6600">*</font>{lang job_number}({lang peoples})</th>
+                        <td class="tdright"><input name="job[peoples]" type="text" id="peoples" value="{$item.peoples}" size="2" maxlength="2" class="required number"></td>
+                      </tr>
+                      <tr>
+                        <th>{lang education}</th>
+                        <td class="tdright"><select name="job[require_education_id]">
+                          {html_options options=$Educations selected=$item.require_education_id}
+                        </select></td>
+                      </tr>
+                      
+                      <tr>
+                        <th>{lang age}</th>
+                        <td class="tdright"><input name="job[require_age]" type="text" id="require_age" value="{$item.require_age}"></td>
+                      </tr>
+                      <tr>
+                        <th>{lang salary}</th>
+                        <td class="tdright"><select name="job[salary_id]">
+						{html_options options=$Salary selected=$item.salary_id}
+						</select></td>
+                      </tr>
+                      <tr>
+                        <th>{lang industry}</th>
+                        <td class="tdright">
+						<div id="dataIndustry">
+							<select name="industry[id][1]" id="dataCompanyIndustryId1" class="level_1" style="width:120px;" ></select>
+							<select name="industry[id][2]" id="dataCompanyIndustryId2" class="level_2" style="width:120px;"></select>
+							<select name="industry[id][3]" id="dataCompanyIndustryId3" class="level_3" style="width:120px;"></select>
+						</div>
+						</td>
+                      </tr>
+                      <tr>
+                        <th>{lang location}</th>
+                        <td class="tdright">
+						<div id="dataArea">
+							<select name="area[id][1]" id="dataCompanyAreaId1" class="level_1" style="width:120px;" ></select>
+							<select name="area[id][2]" id="dataCompanyAreaId2" class="level_2" style="width:120px;"></select>
+							<select name="area[id][3]" id="dataCompanyAreaId3" class="level_3" style="width:120px;"></select>
+						</div>
+						</td>
+                      </tr>
+                      <tr>
+                        <th><font color="#FF6600">*</font>{lang job_address}</th>
+                        <td class="tdright"><input name="job[work_station]" type="text" id="work_station" value="{$item.work_station}" class="required"/></td>
+                      </tr>
+                      <tr>
+                        <th><font color="#FF6600">*</font>{lang category}{lang colon}</th>
+                        <td class="tdright">
+						<select name="job[jobtype_id]" id="JobtypeId">
+        <option value="0">{lang select_category}</option>
+        {$JobtypeOptions}
+        </select>
+						</td>
+                      </tr>
+					   <th>{lang job_nature}</th>
+                        <td class="tdright"><select name="job[worktype_id]">
+						{html_options options=$Worktype selected=$item.worktype_id}
+						</select></td>
+                      </tr>
+                      <tr>
+                        <th>{lang due_date_n}</th>
+                        <td class="tdright"><input type="text" name="expire_time" value='{$item.expire_date}' id="date1"  readonly><span class="btn_calendar" id="calendar-date1"></span></td>
+                      
+                      </tr>
+                      <tr>
+                        <th><font color="#FF6600">*</font>{lang job_description}</th>
+                        <td class="tdright"><textarea name="job[content]" cols="35" rows="4" id="Content" class="required">{$item.content|strip_tags}</textarea><div id="txtTips"></div></td>
+                      </tr>
+                       <tr>
+                        <th class="circle_bottomleft"></th>
+                        <td class="circle_bottomright"><input name="save" type="submit" id="save" value="{lang save}"></td>
+                      </tr>
+            </table>
+	</form>
+</div>
+</div>
+<script>
+var cache_path = "../";
+var app_language = '{$AppLanguage}';
+var area_id1 = {$item.area_id1|default:0} ;
+var area_id2 = {$item.area_id2|default:0} ;
+var area_id3 = {$item.area_id3|default:0} ;
+var industry_id1 = {$item.industry_id1|default:0} ;
+var industry_id2 = {$item.industry_id2|default:0} ;
+var industry_id3 = {$item.industry_id3|default:0} ;
+var jobtype_id = {$item.jobtype_id|default:0} ;
+</script>
+<!--{literal}-->
+<script>
+Calendar.setup({
+	trigger    : "calendar-date1",
+	animation  : false,
+	inputField : "date1",
+	onSelect   : function() { this.hide() }
+});
+jQuery(document).ready(function($) {
+	$("#JobtypeId").val(jobtype_id);
+	$("#Content").textbox({
+		maxLength: 255,
+		onInput: function(event, status) {
+			$("#txtTips").html(allows_maximum_input+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.maxLength + "</strong> "+can_also_enter+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.leftLength + "</strong>");
+		}
+	});
+	$("#Frm1").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+})
+</script>
+<!--{/literal}-->
+<script src="../static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="../static/scripts/script_area.js"></script>
+<script src="../static/scripts/script_industry.js"></script>
+{/block}

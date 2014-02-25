@@ -1,0 +1,72 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang job}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang job}</h3> 
+    <ul class="subnav">
+		<li><a href="job.php">{lang management}</a></li>
+        <li><a class="btn1"><span>{lang cp_view}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang member}{lang naming_n}</th>
+        <td class="paddingT15 wordSpacing5">{$item.cache_username}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang company_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$item.cache_companyname}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang job} {lang naming_n}</th>
+        <td class="paddingT15 wordSpacing5">{$item.name}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang work_area}{lang colon}</th>
+      <td class="paddingT15 wordSpacing5">{$item.work_station}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang job_description}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$item.content|strip_tags}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang gender_require}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$Genders[$item.require_gender_id]}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang number_of_people}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$item.peoples}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang academic_requirements}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$Educations[$item.require_education_id]}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang age_requirement}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$item.require_age}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang wages_level}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$SalaryLevels[$item.salary_id]}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang nature_of_work}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$Worktypes[$item.worktype_id]}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang clicks}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$item.clicked}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang pub_date}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$item.created|date_format:"%Y-%m-%d"}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang expire_date}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$item.expire_time|date_format:"%Y-%m-%d"}</td>
+      </tr>
+    </table>
+</div>
+<!-- {include file="footer.html"} -->

@@ -1,0 +1,131 @@
+<html><head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="" name="keywords">
+<meta content="" name="description">
+<meta content="width=device-width, minimum-scale=1.0, maximum-scale=2.0" name="viewport">
+<title>{$_G.site_name} - PHPB2B{$smarty.const.PHPB2B_VERSION}</title>
+<link type="text/css" rel="stylesheet" href="templates/wap/3g/css/home.css">
+</head>
+<body>
+<a id="top"></a>
+<div id="mainpage">
+<div class="add_headbox">
+	<div class="headbox">
+		<div class="logoarea">
+			<h2><a title="{$_G.site_name}" href="{$_G.site_url}"></a></h2>
+			
+		</div>
+		<div class="headnav">
+			<p>
+				<a href="{the_url module=wap do=product}">{lang product}</a>
+				<a href="{the_url module=wap do=offer}" class="{if $_G.module=='offer'}current_module{/if}">{lang offer}</a>
+				<a href="{the_url module=wap do=company}" class="{if $_G.module=='company'}current_module{/if}">{lang yellow_page}</a>
+				<a href="{the_url module=wap do=news}" class="{if $_G.module=='news'}current_module{/if}">{lang information}</a>
+			</p>
+		</div>
+	</div>
+</div>
+
+	
+		<div class="main_prom">
+			[<a href="index.php?do=announce">{lang board}</a>]
+			<!--{pb:announce titlelen=15 row=2 name="item"}-->
+			<h1><p><b>{$item.link}</b></p></h1>
+			<!--{/pb:announce}-->
+		</div>
+	<div class="news_list">
+		<!--{pb:announce titlelen=15 row=8 name="item"}-->
+		<p><a href="{$item.url}" class="sticky">{$item.title}</a></p>
+		<!-- {/pb:announce} -->
+		<noscript><p style="color:red;" href="#">No JavaScript</p></noscript>
+	</div>
+	<div class="mainlistsbox">
+		<div style="border-top:0px;" class="bar_nav">
+			<ul>
+				<li class="">{lang information}</li>
+			</ul>
+		</div>
+		<div id="floor1" class="nav_content_list" style="overflow: hidden;">
+		<div style="list-style: none outside none; margin: 0pt; width: 3021px;">
+			<div class="nav_content_item" style="width: 1007px; display: table-cell; vertical-align: top;">
+				<ul class="news_list">
+					<!--{pb:news row=8 name="item"}-->
+					<li>{$item.link}</li>
+					<!--{/pb:news}-->
+				</ul>
+
+				<div class="list_more">
+					<a href="index.php?do=news" title="{lang information}">{lang information} &gt;&gt;</a>
+				</div>
+
+			</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="mainlistsbox">
+		<div class="bar_nav">
+			<ul>
+				<li class="">{lang offer}</li>
+				
+			</ul>
+		</div>
+		<div id="floor2" class="nav_content_list" style="overflow: hidden;">
+		<div style="list-style: none outside none; margin: 0pt; width: 3021px;">
+			<div data-role="lazy" class="nav_content_item" style="width: 1007px; display: table-cell; vertical-align: top;" data-unload="0">
+				<ul class="sina_small_pic">
+				<!--{pb:offer typeid="2" type="image" row=3 titlelen="10" name="item"}-->
+						<li><a href="{$item.url}"><img src="{$item.thumb}" alt="{$item.title}" width="130" height="145" /><h2>{$item.link}</h2></a></li>
+						<!--{/pb:offer}-->
+				</ul>
+
+				<ul class="news_list">
+					<!--{pb:offer row=8 typeid="2" name="item"}-->
+					<li>{$item.link}</li>
+					<!--{/pb:offer}-->
+				</ul>
+				<div class="list_more">
+					<a href="index.php?do=offer" title="{lang offer}">{lang offer} &gt;&gt;</a>
+				</div>
+			</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="mainlistsbox">
+		<div class="bar_nav b_top">
+			<ul>
+				<li>{lang fair}</li>
+			</ul>
+		</div>
+		<div id="floor4" class="nav_content_list" style="overflow: hidden;">
+		<div style="list-style: none outside none; margin: 0pt; width: 4028px; -moz-transition-duration: 0ms; -moz-transform: translate3d(0px, 0pt, 0pt);">
+			<div class="nav_content_item" style="width: 1007px; display: table-cell; vertical-align: top;">
+				<ul class="news_list">
+					<!--{pb:fair row=8 name="item"}-->
+					<li>{$item.link}</li>
+					<!--{/pb:fair}-->
+				</ul>
+				<div class="list_more">
+					<a href="index.php?do=fair" title="{lang new_fair}">{lang new_fair} &gt;&gt;</a>
+				</div>
+			</div>
+	</ul>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="footbox">
+		
+<div class="f_sbox">
+	<a class="l_c" href="index.php?do=wap">{lang web3g_version}</a><a href="index.php?do=pc" class="m_c">{lang webpc_version}</a><a id="_bottom" href="index.php?do=pad" class="r_c">{lang webmobile_version}</a>
+</div>
+		
+		
+		<p class="font14">&copy;{lang service_hotline}{$service_tel}</p>
+		<p class="font14"><small>{$smarty.now|date_format:"%m/%d/%Y %H:%M"}</small></p>
+        </div><!-- footbox end -->
+</div><!-- mainpage end -->
+</body>
+</html>

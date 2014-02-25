@@ -1,0 +1,13 @@
+#
+# robots.txt for PHPB2B4.0
+#
+
+User-agent: *
+
+Disallow: /api/
+Disallow: /app/
+Disallow: /data/
+Disallow: /pb-admin/
+Disallow: /virtual-office/
+Disallow: /libraries/
+Disallow: /templates/

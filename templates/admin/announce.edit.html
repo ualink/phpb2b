@@ -1,0 +1,62 @@
+<!-- {include file="header.html"} -->
+{editor type="tinymce"}
+<!--{fetch file="../static/scripts/date.js"}-->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang announcement}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang announcement}</h3> 
+    <ul class="subnav">
+		<li><a href="announce.php">{lang management}</a></li>
+        <li><a class="btn1" href="announce.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+        <li><a href="announcementtype.php">{lang sorts}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form action="announce.php" method="post" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="id" value="{$smarty.get.id}">
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[announcement][subject]" value="{$item.subject}" /><label class="field_notice">{lang title_display}</label>        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang categories}</th>
+        <td class="paddingT15 wordSpacing5">
+			<select name="data[announcement][announcetype_id]">
+			<!--{foreach from=$Types item=typename key=key}-->
+			<option value="{$key}" {if $item.announcetype_id==$key}selected{/if}>{$typename}</option>
+			<!--{/foreach}-->
+			</select></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang date_end}</th>
+        <td class="paddingT15 wordSpacing5"> 
+		<input name="data[display_expiration]" value="{$item.display_expiration}" type="text" id="date1" /><span class="btn_calendar" id="calendar-date1"></span><label class="field_notice">{lang is_empty_or_zero_never_expires}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang content}</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea style="width:550px;height:50px;" name="data[announcement][message]" id="dataAnnouncementMessage">{$item.message}</textarea>        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!--{literal}-->
+<script>
+Calendar.setup({
+	trigger    : "calendar-date1",
+	animation  : false,
+	inputField : "date1",
+	onSelect   : function() { this.hide() }
+});
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

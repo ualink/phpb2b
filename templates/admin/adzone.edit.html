@@ -1,0 +1,110 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang ads} &raquo; {lang adzone}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang adzone}</h3> 
+    <ul class="subnav">
+		<li><a href="adzone.php">{lang management}</a></li>
+        <li><a class="btn1" href="adzone.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+        <li><a href="{if $id}adzone.php?do=makejs&id={$id}{else}javascript:;{/if}">{lang make_javascript_code}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="adzone.php" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="id" value="{$id}">
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang serial_number}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="adzone[id]" value="{$item.id}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang the_title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="adzone[name]" value="{$item.name}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang display_objects}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<select multiple name="membergroup_ids[]" id="MembergroupIds">
+			<option value="0">{lang no_limit}</option>
+			<!--{foreach from=$Membergroups name=membergroup key=key1 item=item1}-->
+			<option value="{$key1}">{$item1}</option>
+			<!--{/foreach}-->
+		</select><label class="field_notice">{lang does_not_appear_in_its_advertising_space_and_advertising}</label>
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang content_digest}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><textarea style="width:550px;height:50px;" name="adzone[description]" id="dataTradeContent">{$item.description}</textarea></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang the_price}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="adzone[price]" value="{$item.price}" type="text" /></td>
+      </tr>      
+      <tr>
+        <th class="paddingT15">{lang width}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="adzone[width]" value="{$item.width}" type="text" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang height}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="adzone[height]" value="{$item.height}" type="text" /></td>
+      </tr>      
+      <tr>
+        <th class="paddingT15"> {lang adzone_type}</th>
+        <td class="paddingT15 wordSpacing5">
+			<select name="adzone[what]" id="AdzoneWhat">
+				<option value="1">{lang site_built} {lang advertising}</option>
+				<option value="2">{lang site_external} {lang advertising}</option>
+			</select>
+		</td>
+      </tr>
+      <tbody id="AdzoneWhat2" style="display:none;">
+      <tr>
+        <th class="paddingT15"> {lang ads} HTML {lang code}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea style="width:550px;height:50px;" name="adzone[additional_adwords]" id="dataTradeContent">{$item.additional_adwords}</textarea>        </td>
+      </tr>
+      </tbody>
+      <tr>
+        <th class="paddingT15"> {lang pattern}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+			<select name="adzone[style]" id="AdzoneStyle">
+				<option value="0">{lang default}</option>
+				<option value="1">{lang flash_image_rotation}</option>
+			</select>
+		</td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang publish}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var what_val = "{$item.what|default:1}";
+var style_val = "{$item.style|default:0}";
+var membergroup_ids = "{$item.membergroup_ids}";
+var sel_membergroup_ids = "{$item.sel_membergroup_ids}";
+</script>
+<!--{literal}-->
+<script>
+$(function(){
+	if(membergroup_ids!="") $('#MembergroupIds').val(sel_membergroup_ids);
+	$("#AdzoneWhat").val(what_val);
+	$("#AdzoneStyle").val(style_val);
+	$("#AdzoneWhat").change( function() { 
+			$("#AdzoneWhat2").toggle();
+		} 
+	);
+});
+if(what_val==2){
+	$("#AdzoneWhat2").show();
+}
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

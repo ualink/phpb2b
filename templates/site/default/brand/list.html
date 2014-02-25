@@ -1,0 +1,77 @@
+<!--{include file="../header.html" page_title="$page_title" nav_id=10}-->
+	<div class="wrapper">
+	<div class="tips"><span>{$position}</span></div>        
+        <div class="category_select clearfix">
+            <div class="category_select_title"><span>{lang sort_choose}</span></div>
+            <div class="category_select_txt">
+			<!--{loop $Types item1}-->
+                <a href="index.php?do=brand&action=lists&catid={$item1.id}"><span>&bull; {$item1.name}</span></a> 
+            <!--{/loop}--> 
+            </div>
+        </div>
+        <div class="blank6"></div>
+        <div class="content">
+            <div class="main_left_w720">
+                <div class="brand_page"><div class="pagination2"><!-- {pager rowcount=$paging.total} --></div></div>
+                <div class="brand_list padding21 clearfix">
+                     <ul>
+						<!--{loop $items item}-->
+                         <li>
+							<div><span><a href="{the_url module=brand id=$item.id}"><img src="{$item.image}" /></a></span></div>
+							<p><a href="{the_url module=brand id=$item.id}">{$item.name}</a></p>
+						 </li>
+						<!--{loopelse}-->
+						<span>{lang no_brand_and_add}</span>
+						<!--{/loop}-->
+                                 
+                      </ul>
+                </div>
+                <div class="brand_page"><div class="pagination2"><!-- {pager rowcount=$paging.total} --></div></div>
+            </div>
+            <div class="main_right_w230">
+                
+                <div class="cornerbox">
+                    <div class="title_bar_s6">
+                        <span class="title_top_s6"><span></span></span>
+                        <h2>{lang latest_news}</h2>
+                    </div>
+                    <div class="corner_content_s6">
+                       <ul>
+						<!-- {pb:news typeid=1 row=10 name="item"} -->
+                         <li><a href="{$item.url}">&bull; {$item.title}</a></li>
+						<!-- {/pb:news} -->
+                       </ul>
+                    </div>
+                    <div class="corner_bottom">
+                        <div class="corner_bottom_l"></div>
+                        <div class="corner_tottom_r"></div>
+                    </div>
+                </div>
+                <div class="blank6"></div>
+                <div class="cornerbox">
+                    <div class="title_bar_s6">
+                        <span class="title_top_s6"><span></span></span>
+                        <h2>{lang brands} {lang commend}</h2>
+                    </div>
+                    <div class="corner_content_s7 clearfix">
+                       <ul>
+						<!-- {pb:brand type="commend" row=12 name="brand"} -->
+                         <li>{$brand.link}</li>
+						<!-- {/pb:brand} -->
+                      </ul>
+                    </div>
+                    <div class="corner_bottom">
+                        <div class="corner_bottom_l"></div>
+                        <div class="corner_tottom_r"></div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="clear"></div>
+        </div>
+	</div>
+<script>
+$("#SearchFrm").attr("action","{the_url module=search do=brand}");
+$("#topMenuProduct").addClass("lcur");
+</script>
+<!--{include file="../footer.html"}-->

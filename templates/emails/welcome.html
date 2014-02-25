@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$_G.site_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<base target="_blank" />
+<!-- {literal} -->
+<style>
+div, h1, p{ margin: 0; padding: 0;}
+#sendbox { width:600px; padding:10px; background:#fff; font-size:12px; font-family:Arial, Helvetica, sans-serif}
+#sendbox .content { border:1px solid #ccc; padding:10px;}
+#sendbox .content h1 { font-size:24px; font-weight:bold; line-height:160%;}
+#sendbox .content em { color:#ccc; font-size:12px; display:block; margin-bottom:20px;font-style:normal;}
+#sendbox .content p { text-indent:22px;line-height:18px;}
+#sendbox .info p { color:#ccc; padding:5px 10px 0 10px; line-height:18px;}
+</style>
+<!-- {/literal} -->
+</head>
+
+<body>
+<div id="sendbox">
+    <div class="content">
+        <h1>{$user_name} {lang thank_for_your_register}</h1>
+        <em>{lang pls_read_the_service_statement}</em>
+        <div><p>{$user_name}{#you_have_been_the_member#|sprintf:$_G.site_name:$service_email:$service_email}</p></div>
+    </div>
+    <div class="info">
+        <p>{#the_website_email_sended#|sprintf:$site_url:$site_name}</p>
+    </div>
+</div>
+</body>
+</html>

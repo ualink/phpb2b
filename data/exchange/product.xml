@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<Title><![CDATA[[:en-us]Products[:zh-cn]产品库]]></Title>
+	<Description><![CDATA[导出产品库]]></Description>
+	<items>
+		<name><![CDATA[产品名称]]></name>
+		<price><![CDATA[价格]]></price>
+		<content><![CDATA[说明]]></content>
+	</items>
+</root>

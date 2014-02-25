@@ -1,0 +1,106 @@
+<!--{include file="../header.html" page_title="$page_title" nav_id="$nav_id"}-->
+<div class="wrapper">
+	<div class="content">
+	<div class="tips"><span>{$position}</span></div>
+    <div class="blank6"></div>
+    <div class="detailtopcon clearfix">
+			<h3>{$item.title}</h3>
+            {if $item.picture}
+			<div class="detailtopconleft">
+				<p class="left1"><img src="{$item.image}" alt="" width="80" height="80" /></p>
+				<p class="left2"><a href="misc.php?source={$item.image_url}" target="_blank"><img src="{$theme_img_path}images/detail_17.jpg" alt="" /></a><span>{lang enlarge_image}</span></p>
+			</div>
+            {/if}
+			<div class="detailtopconleft2">
+				  <p>{$item.title}</p>
+				  <p>{lang publish_time}{$item.pubdate}</p>
+				  <!-- {if $item.price} --><p>{lang the_price_n}<em class="value">{$item.price}</em></p><!-- {/if} -->
+				  <p>{lang area}{$item.area_names}</p>
+                   <p>{lang belong_industry}{$item.industry_names}</p>
+				   <!-- {if $item.tag} --><p>{lang keyword}{$item.tag}</p><!-- {/if} -->
+				 <p style="text-align: center;margin:5px;">
+					<br />
+					<label>
+					  <input type="button" name="favor" value="{lang to_inquiry}"  class="leftbutton" onclick="redirect('{$SiteUrl}index.php?do=product&action=inquery&id={$item.id}');" />
+					</label>
+                   {if $pb_userid==$item.member_id}
+					<label>
+					  <input type="button" name="edit" value="{lang to_edit}"  class="leftbutton" onclick="redirect('{$SiteUrl}virtual-office/product.php?do=edit&id={$item.id}');" />
+					</label>
+					{/if}
+					 {if $pb_username}
+					<label>
+					  <input type="button" name="price" value="{lang to_price}"  class="leftbutton" onclick="redirect('{$SiteUrl}virtual-office/price.php?do=edit&productid={$item.id}');" />
+					</label>
+                    {/if}
+				  </p>
+			</div>
+			<div class="detailtopconright">
+				<p class="right1">{if $item.companyname}
+<a href="{the_url module=space userid=$item.space_name}" target="_blank" title="{$item.companyname}">{$item.companyname}</a>{else}{lang released_by_personnal}{/if}</p>
+				<p>{lang contact_people}{$item.link_people}<br />
+				{lang member_type}<img src="{$MEMBER.groupimage}" alt="{$MEMBER.groupname}" /><br />
+				{lang reputation_index_n}{$MEMBER.credits}<br />
+				{lang authentication_type}{$MEMBER.trust_image}<br />
+				</p>
+			</div>
+		</div>	
+    <div class="blank6"></div>
+	<div class="detailtop3">
+		<div class="detailtop3left">
+			<h3><img src="{$theme_img_path}images/lhighs.gif" alt="" />{lang details}</h3>
+			<div class="detailtop3leftcon">
+               {$item.content|nl2br|stripslashes}
+			   <!-- {if $ObjectParams} -->
+				<table width="578" border="0" class="table_param">
+				<caption>{$item.title}{lang specifications}</caption>
+                <tr> 
+                    <th>&nbsp;</th><th>{lang content_n}</th> 
+                </tr> 
+                <!--{loop $ObjectParams tparam op}-->
+					<tr>
+					  <td>{$tparam.label}</td>
+					  <td>{$tparam.value}</td>
+				</tr>
+               	<!--{/loop}-->
+			   </table>
+			   <!-- {/if} -->
+			</div>				
+		</div>
+		<div class="detailtop3right">
+            {if $pb_username==""}
+			<div class="contacttype">
+				<p class="right1">{lang members_view}</p>
+				<p>{lang register_site_member}
+                            <input type="button" name="btn_login" value="{lang login}" onclick="redirect('{$SiteUrl}logging.php?forward={$_G.REQUEST_URI}');" class="btn_submit"></p>
+				<p>{lang not_register_site_member}<input type="button" name="btn_register" value="{lang free} {lang register}" class="btn_submit" onclick="redirect('{$SiteUrl}member.php');">{lang registered_site_member} 
+                </p>
+			</div>
+            {else}
+			<div class="contacttype">
+				<h3><img src="{$theme_img_path}images/lhighs.gif" />{lang contact}</h3>
+				<p>{lang address}{$item.address}<br /> 
+				   {lang zip}{$item.zipcode}<br /> 
+				   {lang phone}{$item.tel}<br />
+				   {lang fax}{$item.fax}<br /> 
+				   {lang website}{lang colon}{$item.site_url}</p>
+			</div>
+            {/if}
+			<div class="contacttype">
+				<h3><img src="{$theme_img_path}images/lhighs.gif" alt="" />{lang add_information_release}</h3>
+				<ul>
+                	<!-- {pb:product memberid=$item.member_id row=10 name="item"} -->
+					<li>{$item.link}</li>
+                    <!-- {/pb:product} -->
+				</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<script>
+$("#SearchFrm").attr("action","{the_url module=search}");
+$("#hdModule").val("product");
+$("#topMenuProduct").addClass("lcur");
+</script>
+<!--{include file="../footer.html"}-->

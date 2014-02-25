@@ -1,0 +1,45 @@
+*{margin:0; padding:0;}
+body {margin:0px; font-family: "Microsoft YaHei", Helvetica, sans-serif;font-size: 12px;line-height: 210%;font-weight: normal;color: #333333;text-decoration: none;background: #28b1f8 url(images/line.jpg) repeat-x 0 0 ;}
+a {	text-decoration:none; color:#fff;}
+a:hover { text-decoration:underline;}
+li{ list-style:none;}
+input, textarea, select, button, file {	font-size:12px;}
+.txt_box {	font-size:12px;	border:1px solid #dcdcdc;}
+#main{ background:url(images/bg.jpg) no-repeat 0 0; width:935px; min-height:600px; height:600px;  margin:0 auto; position:relative;}
+#top{ position:absolute; top:20px; right:0; color:#fff; font-weight:bold;}
+#ads{ position:absolute; top:35px; left:0; padding-left:220px;color:#fff; font-size:16px; font-weight:bold;}
+#left { position:absolute; top:138px; left:20px; width:160px; float:left;}
+#left li{height:50px;font-size:14px; font-weight:bold; color:#fff; text-decoration:none; padding-left:20px;}
+#right{ position:absolute; top:90px;  left:216px; width:700px;}
+#right h3{ font-size:14px; color:#fff;}
+#right h3 span{ font-size:24px; padding-right:20px; font-style:normal; font-style:italic;}
+.info{ color:#fff; text-indent:2em; margin:10px 0;}
+.info a,.suc a{ color:#ff0;}
+.btn{ background:url(images/btn.jpg) repeat-x 0 0; text-align:center; border:1px solid #00719b; padding:0 8px; color:#fff; cursor:pointer; height:29px; line-height:29px; font-weight:bold; display:block; float:left; margin:10px 15px 0 0;}
+.btn2{ background:url(images/btn.jpg) repeat-x 0 0; text-align:center; border:1px solid #00719b; padding:0 0px; color:#fff; cursor:pointer; height:29px; line-height:29px; font-weight:bold; display:block; float:left; margin:10px 0px 0 0;width:600px;}
+.content{color:#fff; margin:auto 10px; padding:10px;}
+.c{color:#fff;}
+caption{ background:#1e91c7; text-align:left; font-size:14px; font-weight:bold; height:24px; line-height:24px; padding-left:10px; margin:10px 0; }
+table{ margin-top:10px;}
+td{ height:30px; line-height:30px;}
+#introducetd{ padding:10px 10px 5px; color:#fff;  border:1px solid #fff;}
+.table_list{ border:1px solid #fff; border-width:1px 0 0 1px; }
+.table_list td,.table_list th{ color:#f5f5f5; padding:3px 5px; line-height:16px;border:1px solid #fff; border-width:0 1px 1px 0; }
+.suc{line-height:35px; color:#FFFFFF; float:left; margin:50px; display:block; overflow:hidden }
+.error{ color:#FF0000; font-weight:bold; }
+.no_error{ color:#00FF00; }
+.suc p {line-height:24px;}
+.installmessage_img {padding:180px 0 0 180px; background:url(images/finished.png) no-repeat;_background: none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod= crop, src="images/finished.png"); float:left;}
+.license{}
+	.license h1{ padding-bottom:10px; font-size:14px; text-align:center; }
+	.license h3{ margin:0; color:#666; }
+	.license p{ line-height:150%; margin:10px 0; text-indent:25px; }
+	.license li{ line-height:150%; margin:5px 0; }
+#step-title { position:absolute; top:90px; left:20px; width:160px; text-align:center;font-size:14px; font-weight:bold;color:#FFFFCC}
+.input_focus, .input_blur {	height:15px; line-height:15px; border:1px solid #dcdcdc; padding:2px;}
+.input_focus, .textarea_focus {	background-color:#F6FCFF; font-size: 12px; border:1px solid #C7E8F9;}
+.button_style {	background:url(images/bg_admin.jpg) repeat-x 0 -51px; text-align:center; border:1px solid #9cc9e0; padding:1px 4px;
+ *padding-top:3px; color:#077ac7; cursor:pointer; height:21px; }
+.radio_style, .checkbox_style {	border:0;}
+select, .textarea_style { border:1px solid #dcdcdc;}
+.file_style{ height:20px; line-height:20px;border:1px solid #dcdcdc; }

@@ -1,0 +1,126 @@
+<!-- {include file="header.html"} -->
+<script src="../static/scripts/jquery/facebox/facebox.js" type="text/javascript"></script>
+<link href="../static/scripts/jquery/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css"/>
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; Email{lang setting}</p>
+</div>
+<div id="rightTop"> 
+    <h3>Email{lang setting}</h3> 
+</div>
+<div class="info"> 
+    <form method="post" action="setting.php" name="edit_frm" id="EditFrm">
+    <input type="hidden" name="do" id="Do" value="" />
+        <table class="infoTable"> 
+            <tr> 
+                <th class="paddingT15"> 
+              <label for="email_type">{lang mail_sent_by}</label></th> 
+          <td class="paddingT15 wordSpacing5"> 
+                    <label for="mail_sendtype1"><input type="radio" name="data[setting][send_mail]" id="mail_sendtype1" value="1">&nbsp;{lang built_in_mail_server}</label>&nbsp;<label for="mail_sendtype2"><input type="radio" name="data[setting][send_mail]" id="mail_sendtype2" value="2">&nbsp;{lang other_smtp_server}</label>&nbsp;</td> 
+            </tr>
+            <tbody id="smtp_set" style="{if $item.SEND_MAIL==1}display:none;{/if}">
+            <tr> 
+                <th class="paddingT15"> 
+                    {lang smtp_server_url}</th> 
+                <td class="paddingT15 wordSpacing5"> 
+                    <input class="infoTableInput" type="text" name="data[setting][smtp_server]" value="{$item.SMTP_SERVER|default:'smtp.qq.com'}" /></td> 
+            </tr> 
+            <tr> 
+                <th class="paddingT15"> 
+                    {lang smtp_server_port}</th> 
+                <td class="paddingT15 wordSpacing5"> 
+                    <input class="infoTableInput" type="text" name="data[setting][smtp_port]" value="{$item.SMTP_PORT|default:'25'}" /></td> 
+            </tr> 
+            <tr> 
+                <th class="paddingT15"> 
+                    {lang requires_authentication}</th> 
+                <td class="paddingT15 wordSpacing5"> 
+                <input type="radio" name="data[setting][smtp_auth]" id="smtp_auth1" value="1" {if $item.SMTP_AUTH=="1"}checked="checked"{/if} />{lang correct}
+                <input type="radio" name="data[setting][smtp_auth]" id="smtp_auth2" value="0" {if $item.SMTP_AUTH=="0"}checked="checked"{/if} />{lang deny}
+                </td> 
+            </tr> 
+            <tr> 
+                <th class="paddingT15"> 
+                    {lang sender_from}</th> 
+                <td class="paddingT15 wordSpacing5"> 
+                <input class="infoTableInput" type="text" name="data[setting][mail_from]" value="{$item.MAIL_FROM|default:'email@host.com'}" /></td> 
+            </tr>
+            <tr> 
+                <th class="paddingT15"> 
+                    {lang sender_name}</th> 
+                <td class="paddingT15 wordSpacing5"> 
+                    <input class="infoTableInput" type="text" name="data[setting][mail_fromwho]" value="{$item.MAIL_FROMWHO|default:$sitetitle}" /></td> 
+            </tr> 
+            <tr> 
+                <th class="paddingT15"> 
+                    {lang smtp_authentication} {lang cp_username_n}</th> 
+                <td class="paddingT15 wordSpacing5"> 
+                <input class="infoTableInput" type="text" name="data[setting][auth_username]" id="auth_username" value="{$item.AUTH_USERNAME|default:'username'}" /></td> 
+            </tr>
+            <tr> 
+                <th class="paddingT15"> 
+                    {lang smtp_authentication} {lang method}{lang colon}</th> 
+                <td class="paddingT15 wordSpacing5"> 
+                <input class="infoTableInput" type="text" name="data[setting][auth_protocol]" id="auth_auth_protocol" value="{$item.AUTH_PROTOCOL|default:''}" /><span class="gray">{lang unless_necessary_or_do_not_fill}</span></td> 
+            </tr>
+            <tr> 
+                <th class="paddingT15"> 
+                    {lang smtp_authentication} {lang password_n}</th> 
+                <td class="paddingT15 wordSpacing5"> 
+                <input class="infoTableInput" name="data[setting][auth_password]" type="password" id="auth_password" value="{$item.AUTH_PASSWORD|default:''}"/></td> 
+            </tr>
+            </tbody>
+            <tr> 
+                <th class="paddingT15"> 
+                    {lang test} {lang email_addr}</th> 
+                <td class="paddingT15 wordSpacing5"> 
+                <input class="infoTableInput" type="text" name="data[setting][testemail]" id="dataTestemail" value="{$item.TESTEMAIL}" />&nbsp;&nbsp;<input class="formbtn" type="button" name="test" id="Test" value="{lang test}" /></td> 
+            </tr> 
+            <tr> 
+            <th></th> 
+            <td class="ptb20"> 
+                <input class="formbtn" type="submit" name="save_mail" id="SaveEmail" value="{lang save}" /> 
+                <input class="formbtn" type="reset" name="reset" id="ResetEmail" value="{lang reset}" /> 
+            </td> 
+        </tr> 
+        </table> 
+    </form> 
+</div> 
+<script language="JavaScript" type="text/JavaScript">
+var service_email = "{$service_email}";
+var on_sending = "{lang on_sending}"+"...";
+var type_id = "{$item.SEND_MAIL|default:'1'}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#dataTestemail").focus(function(){
+	if($("#dataTestemail").val()==service_email){
+		$("#dataTestemail").val("")};
+	}).blur(function(){
+	if($("#dataTestemail").val()==''){
+		$("#dataTestemail").val(service_email).css("color","#ccc")};
+	});
+	$("#mail_sendtype"+type_id).attr("checked",'checked');
+	$("#mail_sendtype2").click(
+		function(){
+			$("#smtp_set").show();
+		}
+	);
+	$("#mail_sendtype1").click(
+		function(){
+			$("#smtp_set").hide();
+		}
+	);
+	$("#Test").click(
+		function(){
+			$("#Do").val("testemail");
+			$.facebox.settings.loadingImage = SiteUrl+'images/facebox/loading.gif'; 
+			$.facebox.settings.closeImage = SiteUrl+'images/facebox/closelabel.gif'; 
+			jQuery.facebox(on_sending);
+			$("#EditFrm").submit();
+		}
+	);
+})
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

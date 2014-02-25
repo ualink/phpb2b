@@ -1,0 +1,94 @@
+<!--{include file="../header.html" page_title=$page_title nav_id=5}-->
+<div class="adv mauto">
+    <!--{ads typeid=1 row="8" name="item"}--><span>{$item.link}</span><!--{/ads}-->
+</div>
+<div class="wrapper">
+   <div class="exh_con">
+      <div class="exh_con_left">
+         <div class="exh_con_img">
+			<!-- {ads type="focus" from="fair"} --><!-- This text is replaced by the Flash movie. --><!-- {/ads} -->
+		 </div>
+         <div class="exh_con_net">
+             <div class="title_bar_s2">
+             <span class="title_top_s2"><span></span></span>
+             <h2>{lang recommended_fair}</h2>
+             </div>
+             <div class="net_content">
+              <div class="main clearfix">
+               <!-- {pb:fair type=commend row=1 infolen=35 name="item"} -->
+               <div class="net_content_img"><img src="{$item.src}" /></div>
+               <div class="net_content_intro">
+                 <h3>{$item.link}</h3>
+                 <p>{$item.content}&nbsp;&nbsp;<span><a href="{$item.url}">{lang detail}</a></span> </p>
+               </div>
+               <!-- {/pb:fair} -->
+              </div>
+               <div class="net_meeting">
+                 <ul>
+                 <!-- {pb:fair row=2 name="fair"} -->
+                 <li><span class="net_meeting_title">{$fair.link}</span><span class="net_meeting_time pb_datetime">[{$fair.pubdate}]</span></li>
+                 <!-- {/pb:fair} -->
+                 </ul>
+                 <div class="clear"></div>
+               </div>
+             </div>
+         </div>
+        <div class="blank6"></div>  
+        <div class="title_bar_s1">
+        <span class="title_top_s1"><span></span></span>
+        <h2><span class="title_more"><a href="{the_url action=list do=fair}"><span class="raquo">&raquo;</span>{lang more}</a></span>{lang new_fair}</h2>
+        </div>
+
+        <div class="exh_recent">
+            <ul class="exh_recentlist clearfix">
+			<!-- {get do="cache" var="types" name="type"} -->
+            <!-- {pb:fair row=24 name="fair"} -->
+                <li><span class="sort"><a href="index.php?do=fair&action=list&typeid={$fair.expotype_id}">[{$types.expotype[$fair.expotype_id]}]</a></span><span class="title">{$fair.link}</span><span class="date pb_datetime">[{$fair.pubdate}]</span></li>
+            <!-- {/pb:fair} -->
+            </ul>
+        </div>
+      </div>
+      <div class="exh_con_right"> 
+         <div class="title_bar_s1">
+           <span class="title_top_s1"><span></span></span>
+           <h2><span class="title_more"><a href="index.php?do=fair&action=list"><span class="raquo">&raquo;</span>{lang more}</a></span>{lang hot_fair}</h2>
+        </div>
+        <div class="exh_consulting">
+        <ul>
+        <!-- {pb:fair row=10 type="hot" name="fair"} -->
+        <li>{$fair.link}</li>
+        <!-- {/pb:fair} -->
+        </ul>
+      </div>
+    <div class="blank6"></div>
+        
+          <div class="title_bar_s1">
+           <span class="title_top_s1"><span></span></span>
+           <h2><span class="title_more"><a href="{the_url action=list do=fair}"><span class="raquo">&raquo;</span>{lang more}</a></span>{lang find_fair}</h2>
+        </div>
+       
+        <div class="exh_find">
+        <form action="index.php" name="search_fair_frm" id="SearchFairFrm">
+		<input type="hidden" name="do" value="search">
+		<input type="hidden" name="action" value="lists">
+		<input type="hidden" name="module" value="fair">
+        <table>
+          <tr>
+            <th>{lang keyword}</th>
+            <td><input name="q" type="text" style="width:100px; color:gray;" value="{lang input_keywords}"/></td>
+          </tr>
+          
+          <tr>
+            <th>&nbsp;</th>
+            <td><input type="button" value="{lang search}" class="btn_search" onclick="$('#SearchFairFrm').submit();" /></td>
+          </tr>
+        </table>
+        </form>
+        </div>
+   </div> 
+ <div class="clear"></div>  
+</div>
+   <div class="blank6"></div>
+   <!--{ads typeid=2 name="ads1"}--><span>{$ads1.link}</span><!--{/ads}-->
+</div>
+<!--{include file="../footer.html"}-->

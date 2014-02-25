@@ -1,0 +1,23 @@
+{extends file="layout.html"} 
+{block name="title" prepend}{#space_album#}{/block}
+{block name="content"}
+			<div class="rightbarcontact">
+					<div class="playercontact">
+					<div class="playerheadcontact"><span class="playlistcontact">{lang space_album}</span><span class="player_head_concontact"></span><img src="{$SpaceUrl}images/contactus_13.jpg" /></div>
+					<div class="clear"></div>
+					<div class="player_concontact clearfix">
+					<!--{if $Items}-->
+						<ul>
+						<!--{loop $Items item}-->
+							<li><a href="{$item.middleimage}" rel="lightbox"><img src="{$item.image}" width="80" height="80" alt="{$item.title}" border="0"></a><p>{$item.title|truncate:20}</p></li>
+						<!--{/loop}-->				
+						</ul>
+						<div class="clear"></div>
+						<p class="page">{$ByPages}</p>
+					<!--{/if}-->
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+{/block}

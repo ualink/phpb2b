@@ -1,0 +1,116 @@
+<!-- {include file="header.html"} -->
+{literal}
+<style>
+.row-actions {font-size:12px; color:#CCCCCC;}
+</style>
+{/literal}
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang offer}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang offer}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="offer.php"><span>{lang management}</span></a></li>
+        <li><a href="offer.php?do=edit">{lang add_or_edit}</a></li>
+        <li><a href="offer.php?do=setting">{lang setting}</a></li>
+        <li><a href="offertype.php">{lang sorts}</a></li>
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontr"> 
+        <form name="search_frm" id="SearchFrm" method="get" action="offer.php"> 
+        <input type="hidden" name="do" value="search" />
+             <div> 
+                <select class="querySelect" name="type_id">
+				<option value="0">{lang types}</option>
+                <!--{foreach from=$TradeTypes item=item key=key}-->
+                <option value="{$key}" {if $key==$smarty.get.type_id}selected{/if}>{$item}</option>
+                <!--{/foreach}-->
+				</select>
+				{lang title_keywords} : <input class="queryInput" type="text" name="q" value="{$smarty.get.q}" /> 
+				{lang adwords}<input class="queryInput" type="text" name="adwords" value="{$smarty.get.adwords}" /> 
+				{lang cp_username} : <input class="queryInput" type="text" name="username" value="" />
+                <select class="querySelect" name="display_pg">
+				<option value="0">{lang eve_page_display} {lang record_amount}</option>
+				<option value="10" {if $smarty.get.display_pg==10}selected="selected"{/if}>{lang eve_page_display}10</option>
+				<option value="20" {if $smarty.get.display_pg==20}selected="selected"{/if}>{lang eve_page_display}20</option>
+				<option value="30" {if $smarty.get.display_pg==30}selected="selected"{/if}>{lang eve_page_display}30</option>
+				</select>
+                <input type="submit" class="formbtn" value="{lang searching}" /> 
+            </div> 
+        </form> 
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="" method="post">
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th></th>
+		  <th><label for="idAll">{lang the_title}</label></th>
+		  <th>{lang types}</th>
+		  <th>{lang cp_username}</th>
+		  <th>{lang checked_status}</th>
+		  <th>{lang pub_date}</th>
+		  <th>{lang expire_date}</th>
+		  <th>{lang action}</th>
+		</tr>
+    <thead>
+    <tfoot>
+		<tr>
+		  <th colspan="9"><div class="pageLinks">{$ByPages}</div></th>
+		</tr>
+    <tfoot>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2">
+		  <td class="firstCell"><input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}"></td>
+		  <td>{if $item.created>=$today_timestamp}<span class="icon-new"></span>{/if}{if $item.if_commend==1}<span class="icon-commend"></span>{/if}{if $item.TradePicture!=''}<span class="icon-pic"></span>{/if}{if $item.if_urgent}<span class="icon-hurry"></span>{/if}</td>
+		  <td><label for="item_{$item.id}">{$item.title|pl}</label>
+		  <!-- {if $item.adwords} -->
+		  <div class="row-actions"><a {$item.style} title="{$item.title}">{$item.adwords}</a></div>
+		  <!-- {/if} -->
+		  </td>
+		  <td><a href="offer.php?do=search&type_id={$item.type_id}" style="text-decoration: none;">{$TradeTypes[$item.type_id]}</a></td>
+		  <td><a href="member.php?do=edit&id={$item.member_id}">{$item.username}</a></td>
+		  <td>{$CheckStatus[$item.status]}</td>
+		  <td class="pb_datetime">{$item.pubdate}<br><span style="color:gray;" title="{lang last_modified}"><small>{$item.moddate}</small></span></td>
+		  <td class="pb_datetime">{if $item.if_expire}<span style="color:red;" title="{$item.expdate}">{$item.if_expire}</span>{else}{$item.expdate}{/if}</td>
+		  <td class="handler">
+           <ul id="handler_icon">
+            <li><a class="btn_resend" href="offer.php?id={$item.id}&do=refresh{$addParams}" title="{lang trade_refresh}">{lang trade_refresh}</a></li>
+             <li><a class="btn_browse"  href="{$SiteUrl}index.php?do=offer&action=detail&id={$item.id}{$addParams}" target="_blank" title="{lang preview}">{lang preview}</a></li>
+            <li><a class="btn_edit" href="offer.php?do=edit&id={$item.id}&type_id={$smarty.get.type_id}{$addParams}" title="{lang edit}">{lang edit}</a></li>
+          </ul>  
+		  
+		  </td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="8">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="submit" name="del" value="{lang delete}" class="formbtn batchButton"/>
+      <input type="submit" name="commend" value="{lang commend}" class="formbtn batchButton"/>
+      <input type="submit" name="urgent_batch" value="{lang set_urgent}" class="formbtn batchButton"/>
+      <input type="submit" name="cancel_urgent_batch" value="{lang cancle} {lang urgent}" class="formbtn batchButton"/>
+      <input type="submit" name="refresh" value="{lang trade_refresh}" class="formbtn batchButton"/>
+      <input type="submit" name="export" value="{lang data_export}" class="formbtn batchButton"/>
+	  <select name="status_batch" id="StatusBatch" onchange="$('#ListFrm').submit();">
+      	<option value="-1">{lang set_status}</option>
+        <option value="0">{lang check_invalid}</option>
+        <option value="1">{lang check_passed}</option>
+      </select>
+		</div>
+		<div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

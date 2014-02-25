@@ -1,0 +1,46 @@
+/* A PHPB2B Common Style */
+.pb_datetime { font: 12px/1.5 Georgia;}
+
+/* Notices and Errors */
+div.messageFailure {
+	background:#FAD8D7 url(../images/check_error.gif) no-repeat scroll 10px 11px;
+	border:1px solid #C64F51;
+	color:#660000;
+}
+div.message {
+	clear:both;
+	margin:1em 0;
+	padding:1em 1em 1em 36px;
+}
+label.error {
+  font-weight: bold;
+  color: #b80000;
+}
+/*icon*/
+.icon-commend, .icon-new, .icon-hurry, .icon-pic {
+background:url("../images/sprites_bg_icon.gif") no-repeat scroll 5px 0 transparent;
+display:inline-block;
+height:17px;
+padding-left:23px;
+vertical-align:middle;
+}
+.icon-new{
+background-position:5px -50px;
+}
+.icon-hurry {
+background-position:5px -100px;
+}
+.icon-pic {
+background-position:5px -150px;
+}
+
+/*im_icon*/
+.im_msn, .im_icq, .im_yahoo, .im_skype, .im_qq, .im_pms {cursor: pointer; background:transparent url(../images/im_icon.gif) no-repeat 0 2px; height:20px; padding-left:20px; display:block;vertical-align:middle; text-align:left; text-decoration: none;}
+.im_icq {background-position:0 -36px;}
+.im_yahoo {background-position:0 -75px;}
+.im_skype {background-position:0 -115px; padding-left:37px;}
+.im_qq {background-position:0 -155px;}
+.im_pms {background-position:0 -197px;}
+
+.btn_calendar { cursor:pointer; height:20px; padding-left:20px; display:inline-block; background:url(../images/datePicker.gif) no-repeat center center;}
+.btn_calendar { vertical-align:middle}

@@ -1,0 +1,30 @@
+{block name="title" prepend}{#self_advertising#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <div class="hint">{lang ads_list}</div> 
+	<table cellspacing="0" id="dataTable" class="datas">
+		<thead>
+		<tr>
+			<td><p align="left">{lang ads_title}</p></td>
+			<td>{lang details}</td>
+			<td>{lang price_description_strip}</td>
+			<td>{lang operation}</td>
+		</tr>
+		</thead>
+		<tbody>
+			  <!--{foreach from=$datas item=item}-->
+			  <tr>
+              <td>{$item.name}</td>
+		      <td>{$item.description}</td>
+		      <td>{$item.price}</td>
+		      <td><a href="{$smarty.server.PHP_SELF}?do=buy&id={$item.id}">{lang apply}</a></td>
+			  </tr>
+              <!--{foreachelse}-->
+              <tr><td colspan="4"><div align="center">{lang no_datas_now}</div></td></tr>
+			  <!--{/foreach}-->
+		</tbody>
+	</table>
+	<div id="footer" style="margin-top: 40px;"></div>	
+{/block}

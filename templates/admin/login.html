@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}">
+<title>{#control_login#|sprintf:#control_pannel#} - {$_G.site_title}</title>
+<link rel="stylesheet" type="text/css" href="{$admin_theme_path}css/login.css" />
+<script language="javascript" src="../static/scripts/jquery.js"></script>
+<script language="javascript" src="../static/scripts/jquery.pngFix.js"></script>
+<body>
+<div id="header">
+   <div class="logo"></div>
+</div>
+<div id="wrapper">
+   <div class="console_left">
+	   <div class="title">{#control_login#|sprintf:#control_pannel#}</div>
+	   <p>{lang phpb2b_info}</p>
+	   <div class="intro_1">{lang config_your_info}</div>
+	   <div class="intro_2">{lang manage_your_ads}</div>
+	   <div class="intro_3">{lang set_site_secure}</div>
+	  
+   </div>
+   <div class="console_right">
+	   <div class="title">{lang cp_login_first}</div>
+	   <div class="login">
+		  <form action="login.php" method="post" name="login_frm" id="LoginFrm" class="s_lo_f" autocomplete="off">
+			<input type="hidden" name="do" value="login"  />
+			<!-- {formhash} -->
+			<!-- {if $pb_username && $is_admin} -->
+		   <div class="user"><label>{lang cp_username_n}{$pb_username}</label><input type="hidden" name="data[username]" value="{$pb_username}">{$LoginError}</div>
+			<!-- {else} -->
+		   <div class="user"><label>{lang cp_username_n}</label><input tabindex="1" type="text" name="data[username]" id="username" size="16" maxLength="20" value="{$smarty.post.data.username}">{$LoginError}</div>
+		   <!-- {/if} -->
+		   <div class="pwd"><label>{lang cp_passwd}</label><input tabindex="2" type="password" name="data[userpass]" id="userpass" size="16" maxLength="20" value=""></div>
+		   <div class="forget"><a href="{$SiteUrl}getpasswd.php">{lang cp_forget_passwd}</a></div>
+		   <!--{get do="cache" name="language" var="lan"}-->
+		   <!-- {if $lan} -->
+		   <div class="user"><label>{lang lang_pack}{lang colon}</label>
+			   <select name="data[language]" id="dataLanguage">
+			   <!-- {foreach from=$lan item=item key=key} -->
+				<option value="{$key}" {if $key==$AppLanguage}selected="selected"{/if}>{$item.title}</option>
+			   <!-- {/foreach} -->
+				<option value="">{lang please_select}</option>
+			   </select>
+		   </div>
+		   <!-- {/if} -->
+		   {if $ifcapt}
+		   <div class="code"><label>{lang cp_capt}</label><input type="text" value="" name="data[capt_login_admin]" size="16" tabindex="3" id="capt_login_admin" /><img id="imgcaptcha" src="../captcha.php" alt="{lang refresh_capt}" width="128"/></div>
+		   {/if}
+		   <div class="btn_login"><input type="submit" name="login" id="Login" value="{lang cp_login}" /></div>
+		   </form>
+	   </div>
+   </div>
+   <div class="clear"></div>
+	<div class="reg">{lang meet_with_more_phpb2b_users}&nbsp;<input name="" id="register_member" type="button" value="{lang register_now}" onclick="location.href='http://bbs.phpb2b.com/'" /></div>
+	<hr class="hr_solid" /></div>
+</div>
+<div id="footer"><span class="left">&copy;2007-2011 Powered By {lang soft_name} {$smarty.const.PHPB2B_VERSION}, <a href="http://www.phpb2b.com/">UALINK</a> Inc.
+</span><span class="right"><a href="{$SiteUrl}index.php" title="{lang return_homepage}">{lang return_homepage}</a>&nbsp;|&nbsp;<a href="http://bbs.phpb2b.com/">{lang feed_back}</a></span> 
+</div>   
+<script language="javascript">
+var pls_input_username = "{lang pls_input_username}";
+var pls_input_passwd = "{lang pls_input_passwd}";
+var pls_input_authcode = "{lang pls_input_authcode}";
+var if_capt = "{$ifcapt}";
+var is_admin = "{$smarty.session.is_admin}";
+var current_username = "{$pb_username}";
+</script>
+<!--{literal}-->
+<script>
+$(document).ready(function(){   
+	$('#imgcaptcha').click(
+		function(){
+		$('#imgcaptcha').attr('src','../captcha.php?sid=' + Math.random());
+		$('#capt_login_admin').focus();
+		return false;
+		}
+	);
+	$("#Login").click(
+		function(){   
+			if(is_admin==""){
+				if($('#username').val() == ""){
+					alert(pls_input_username);
+					$('#username').focus();
+					return false;
+				}
+			}
+			if($('#userpass').val() == ""){
+				alert(pls_input_passwd);
+				$('#userpass').focus();
+				return false;
+			}
+			if(if_capt!=""){
+				if($('#capt_login_admin').val() == ""){
+					alert(pls_input_authcode);
+					$('#capt_login_admin').focus();
+					return false;
+				}
+			}
+			$("#LoginFrm").submit();   
+			$("#Login").attr("disabled", "disabled");
+		}
+	);
+	if(current_username!=""){
+		$('#userpass').focus();
+	}else{
+		$('#username').focus();
+	}
+     $("img").pngfix();
+});
+</script>
+<!--{/literal}-->
+</body>
+</html>

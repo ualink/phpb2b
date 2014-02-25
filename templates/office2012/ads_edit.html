@@ -1,0 +1,53 @@
+{block name="title" prepend}{#self_advertising#}{/block}
+{block name="main"}
+{literal}
+<script>
+$(document).ready(function() {
+	$("#Frm1").submit(function(){
+       $("#PayName").val($("#PayId option:selected").text());
+    })
+});
+</script>
+{/literal}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+     <div class="hint">{lang sure_and_select_action}</div>
+	  <form name="frm1" id="Frm1" action="" method="post">
+	  <!-- {formhash} -->
+	  <input type="hidden" name="do" value="ads">
+	  <input type="hidden" name="id" value="{$item.id}">
+	  <input type="hidden" name="paynow" id="Paynow" value="">
+	  <input type="hidden" name="pay_name" id="PayName" value="">
+       <table class="offer_info_content">
+          <tr>
+            <th class="circle_left">{lang ads_title}{lang colon}</th>
+             <td class="circle_right">{$item.name}</td>
+          </tr>
+          <tr>
+            <th>{lang the_price}{lang colon}</th>
+            <td>{$item.price}{lang money_unit}</td>
+          </tr>
+          <tr>
+             <th>{lang notes}</th>
+             <td>{$item.description}</td>
+          </tr>
+		  <!-- {if $payments} -->
+		  <tr>
+			<th>{lang please_select}</th>
+			<td><label>
+			  <select name="pay_id" id="PayId">
+					  <!--{foreach from=$payments item=item}-->
+					  <option value="{$item.id}">{$item.title}</option>
+					  <!--{/foreach}-->
+					</select>
+			</label></td>
+		  </tr>
+		  <!-- {/if} -->
+          <tr>
+             <th class="circle_bottomleft"></th>
+             <td class="circle_bottomright"><input name="send1" type=submit id="Submit1" value="{lang submit_order}">&nbsp;&nbsp;<input name="send1" type=submit id="Submit2" value="{lang submit_order_and_pay}" onclick="$('#Paynow').val('y');"></td>
+          </tr>
+        </table>
+	  </form>
+{/block}

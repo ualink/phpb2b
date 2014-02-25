@@ -1,0 +1,66 @@
+<!--{include file="header.html" page_title="$page_title"}-->
+<div class="wrapper">
+  <div class="content clearfix">
+    <div class="tips"><span>{$position}</span></div>
+    <div class="blank6"></div>
+    <div class="companylistconleft">
+        <div class="base_title">
+          <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang search_result}</span><span class="corner_t_r"></span></h2> 
+	    </div>
+        <div class="base_list_box box_bord">
+           <div class="base_list_head"><strong>{lang puglish_time}</strong><a href="{the_url do=$module action=list filter=2592000}">{lang this_month}</a><a href="{the_url do=$module filter=604800 action=lists}">{lang this_week}</a><a href="{the_url do=$module filter=86400 action=lists}">{lang today_hours}</a></div>
+           <div class="base_list_content clearfix">	
+           <!--{loop $items item items}-->
+                <div class="base_list clearfix">
+                    {if $item.picture}<div class="base_list_img"><img src="{$item.image}" /></div>{/if}
+                    <div class="base_list_info">
+                      <span class="title title_link"><a href="{the_url id=$item.id do=$_G.do}">{$item.title|pl|truncate:80}</a></span>
+                      <p> {$item.digest}</p>
+                      <div class="update_time"><em>{lang update_time}({$item.pubdate})</em>
+					  <!-- {if $item.typename} -->
+					  {lang categories}[<a href="{the_url action=list do=$module typeid=$item.type_id}">{$item.typename}</a>]
+					  <!-- {/if} -->
+					  </div>
+					  <!-- {if $item.clicked} -->
+                      <div class="txt_source"><span class="fr link-underline"><a href="{the_url id=$item.id do=$module}">{lang visit_full_content}...</a></span>{$item.clicked} {lang visited}&nbsp;{lang source}{$item.source|default:$_G.site_name}</div>
+					  <!-- {/if} -->
+                  </div>
+                 </div>
+                 <hr class="hr_dashed" />
+               <!--{/loop}-->
+                <div class="pagination2">{if $total_count>0}<!-- {the_page limit=10 rowcount=$total_count class_active="pagination-active"} -->{/if}</div>
+           </div>
+        </div>
+    </div>
+    <div class="companylistconright">
+      <div class="lookcompany">
+        <div class="recommendcompanytop"><img src="{$theme_img_path}images/lhighs.gif" />{lang category_nav}</div>
+        <div class="companylistseecon">
+          <ul>
+          	<!--{loop $SubCats item1}-->
+            <li><a href="{the_url module=$module action=list typeid=$item1.id}">{$item1.name}</a></li>
+            <!--{/loop}-->
+          </ul>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="lookcompany" style="margin-top:10px;">
+       <div class="companylistseecon" >
+        <form action="index.php" method="get" id="NewsSearchFrm">
+		<input type="text" name="q" value="{$_G.q}" class="input"/>
+		<input type="hidden" name="do" value="{$_G.do}">
+		<input type="hidden" name="action" value="list">
+		<input type="button" value="{lang search}" onclick="$('#NewsSearchFrm').submit();" class="submit"/>
+		</form>
+		</div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+<script>
+$("#SearchFrm").attr("action","{the_url module=search}");
+$("#hdModule").val("product");
+$("#topMenuNews").addClass("lcur");
+</script>
+<!--{include file="footer.html"}-->

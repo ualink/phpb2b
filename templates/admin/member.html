@@ -1,0 +1,111 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang member_center} &raquo; {lang member}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang member}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="member.php"><span>{lang management}</span></a></li>
+        <li><a href="member.php?do=edit">{lang add_or_edit}</a></li>
+        <li><a href="membertype.php">{lang sorts}</a></li>        
+        <li><a href="memberemail.php">{lang email_addr}</a></li>        
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontr"> 
+        <form name="search_frm" id="SearchFrm" method="get"> 
+        <input type="hidden" name="do" value="search" />
+             <div> 
+				{lang cp_username} <input class="queryInput" type="text" name="member[name]" id="member_name" value="{$smarty.get.member.name}" /> 
+                <select class="querySelect" name="groupid" id="Groupid">
+				<option value="-1">{lang membership_type}</option>
+				{html_options options=$MembergroupOptions selected=$smarty.get.groupid}
+				</select>
+				<select name="member[status]" id="member_status">
+				<option value="-1">{lang checked_status}</option>
+				{html_options options=$MemberStatus selected=$smarty.get.member.status}
+				</select>
+                <input type="submit" name="search" id="Search" class="formbtn" value="{lang searching}" /> 
+            </div> 
+        </form> 
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="" method="post">
+  <input type="hidden" name="id" value="{$smarty.get.id}" />
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}" id="dataZone">
+		<thead>
+			<tr>
+			  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+			  <th><label for="idAll">{lang cp_username}</label></th>
+			  <th>{lang times}</th>
+			  <th>{lang checked_status}</th>
+			  <th>{lang ip_address}</th>
+			  <th>{lang trust_type}</th>
+			  <th>{lang membergroup}</th>
+			  <th>{lang integral}</th>
+			  <th>{lang trust_star}</th>
+			  <th>{lang action}</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+			  <th colspan="10"><div class="pageLinks">{$ByPages}</div></th>
+			</tr>
+		<tfoot>
+		<tbody>
+			<!--{foreach from=$Items item=item}-->
+			<tr class="tatr2">
+			  <td class="firstCell">{if $item.candelete}<input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}">{/if}</td>
+			  <td><label for="item_{$item.id}">{$item.username}</label><br><span style="color:gray;" title="{$item.NickName}"><small>{$item.NickName}</small></span></td>
+			  <td>{if $item.pubdate>$today_timestamp}<img src="{$admin_theme_path}images/new.gif" alt="{$item.pubdate|date_format:'%H:%M:%S'}"/>{else}{$item.pubdate|date_format:"%m-%d %H:%M"}{/if}&nbsp;</td>
+			  <td>{$MemberStatus[$item.status]}</td>
+			  <td>{$item.reg_ip}{iplocation ip=$item.reg_ip}</td>
+			  <td><!-- {if $item.trust_image} -->{$item.trust_image}<!-- {/if} --></td>
+			  <td><!-- {if $item.membergroup_id} --><a href="member.php?do=search&groupid={$item.membergroup_id}"><img src="{$item.group_image}" border="0" alt="{$Membergroups[$item.membergroup_id].name}" /></a><!-- {/if} --></td>
+			  <td>{$item.points}</td>
+			  <td>{$item.credits}</td>
+			  <td class="handler">
+              <ul id="handler_icon">
+                {if $item.candelete}<li><a class="btn_delete" href="member.php?id={$item.id}&do=del{$addParams}" title="{lang delete}">{lang delete}</a></li>{/if}
+                <li><a class="btn_edit" href="member.php?do=edit&id={$item.id}{$addParams}" title="{lang edit}">{lang edit}</a></li>
+              </ul>
+              </td>
+			</tr>
+			<!--{foreachelse}-->
+			<tr class="no_data info">
+			  <td colspan="10">{lang no_datas}</td>
+			</tr>
+			<!--{/foreach}-->
+		</tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+		<input type="submit" name="del" value="{lang delete}" class="formbtn batchButton"/>
+		<select name="pb_action" id="PbAction" class="actionsel" onchange="javascript:document.list_frm.submit()">
+		<option value="0">{lang pls_select}{lang action}</option>
+		<optgroup label="{lang checked_status}">
+		<option value="status_1">{lang check_passed}</option>
+		<option value="status_3">{lang no_verify_passing}</option>
+		<option value="status_0">{lang check_invalid}</option>
+		<option value="status_4">{lang forbid}</option>
+		<option value="status_2">{lang moderated}</option>
+		</optgroup>
+		<optgroup label="{lang setting} {lang membership_type}">
+		<!--{foreach from=$Membertypes name=usertype item=item1 key=key1}-->
+		<option value="membertype_{$key1}">{$item1|pl}</option>
+		<!--{/foreach}-->
+		</optgroup>
+		<optgroup label="{lang setting} {lang member_group}">
+		<!--{foreach from=$MembergroupOptions name=MembergroupOptions item=item2 key=key2}-->
+		<option value="membergroup_{$key2}">{$item2|pl}</option>
+		<!--{/foreach}-->
+		</optgroup>
+		</select>
+    </div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

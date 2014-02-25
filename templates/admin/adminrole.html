@@ -1,0 +1,45 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang member_center} &raquo; {lang administrator}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang administrator}</h3> 
+    <ul class="subnav">
+		<li><a href="adminer.php">{lang administrator}</a></li>
+		<li><a class="btn1" href="adminer.php?do=admingroup"><span>{lang admingroup}</span></a></li>
+		<li><a href="adminer.php?do=admingroup&action=edit">{lang add_or_edit}</a></li>
+        <li><a href="adminer.php?do=password">{lang change_pass}</a></li>
+    </ul>
+</div>
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell">{lang serial_number}</th>
+		  <th>{lang naming}</th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item name=adzone}-->
+		<tr class="tatr2">
+		  <td class="firstCell">{$item.id}</td>
+		  <td>{$item.name}</td>
+		  <td class="handler">
+           <ul id="handler_icon">
+            <li><a class="btn_delete" href="adminer.php?id={$item.id}&do=admingroup&action=del{$addParams}" title="{lang delete}">{lang delete}</a></li>
+            <li><a class="btn_edit" href="adminer.php?do=admingroup&action=edit&id={$item.id}{$addParams}" title="{lang edit}">{lang edit}</a></li>
+          </ul>  
+		 </td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="6">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

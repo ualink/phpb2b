@@ -1,0 +1,20 @@
+<!-- {include file="header.html"} -->
+<!--{literal}-->
+<style type="text/css">
+body {background: #fcfdff}
+h1 {font-size: 12px; color: #444; line-height: 55px; background: url(../templates/admin/images/welcome_h1.gif); padding-left: 2%}
+dl {line-height: 40px; padding-left: 80px; margin: 35px 0 45px 15%}
+dt {font-size: 12px; color: #00CC00; font-weight: bold;}
+dd {color: #444;}
+a {color: #06c}
+a:hover {color: #09f}
+p {color: #999; border-top: 1px solid #cbe4f5; text-align: center; padding-top: 20px;}
+</style>
+<!--{/literal}-->
+<h1>{lang action_tip}</h1>
+<dl style="background: url({$admin_theme_path}images/{$action_img}) no-repeat left 10px; ">
+    <dt><a href="{$url}" style="text-decoration: none;" title="{$message|strip_tags}">{$message}</a></dt>
+      <dd><a href="javascript:history.back()" class="forward">{lang go_back}</a></dd>
+</dl>
+{$redirect}
+<!-- {include file="footer.html"} -->

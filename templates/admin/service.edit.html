@@ -1,0 +1,52 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang service_center}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang service_center}</h3> 
+    <ul class="subnav">
+		<li><a href="service.php">{lang management}</a></li>
+		<li><a class="btn1"><span>{lang revert}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="service.php" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="id" value="{$item.id}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input type="text" name="data[service][title]" value="{$item.title}" /></td>
+      </tr> 
+      <tr>
+        <th class="paddingT15"> {lang category_n}</th>
+        <td class="paddingT15 wordSpacing5">{$ServiceTypes[$item.type_id]}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang author}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$item.nick_name|default:#anonymous#}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang email_addr}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$item.email}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang detailed_contents}</th>
+        <td class="paddingT15 wordSpacing5">{$item.content}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang whether_or}{lang setup}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><!--{html_radios name="data[service][status]" options=$Status checked=$item.status separator=" "}--></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang revert} {lang content}</th>
+        <td class="paddingT15 wordSpacing5"><textarea name="data[service][revert_content]" rows="5" cols="50">{$item.revert_content}</textarea></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang submit}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

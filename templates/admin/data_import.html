@@ -1,0 +1,36 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang system_tool} &raquo; {lang my_notes}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang data}</h3> 
+    <ul class="subnav">
+		<li><a href="data_exchange.php?do=export">{lang data_export}</a></li>
+        <li><a class="btn1" href="data_exchange.php?do=import"><span>{lang data_import}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="" id="EditFrm" name="edit_frm" enctype="multipart/form-data">
+	<input type="hidden" name="do" value="import">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang pls_select}{lang types}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<select name="tb_name">
+			{html_options options=$FileItems}
+		</select>
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang pls_select}{lang file}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input type="file" name="tb_file" id="tb_file"> (.xls)</td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang immediately}{lang data_import}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

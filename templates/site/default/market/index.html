@@ -1,0 +1,84 @@
+<!--{include file="../header.html" page_title=#market# nav_id=7}-->
+<style type="text/css">
+@import url({$theme_img_path}css/effect.css);
+</style>
+<script src="static/scripts/jquery.tools.js"></script>
+<!--{literal}-->
+<script language="javascript" type="text/javascript">
+<!--
+function setImg(img,width,height){ 
+    var scale_w=img.width/width; 
+    var scale_h=img.height/height; 
+    var scale=scale_w>scale_h?scale_w:scale_h; 
+     img.width=img.width/scale; 
+    return false; 
+}
+-->
+</script>
+<style>
+.pfsc {width:980px; margin:0 auto;}
+.pf_right {width:776px; float:left; margin-left:8px;}
+.pf_right ul li {width:255px; float:left; margin:0 2px 3px 0; height:207px;}
+.pf_right .procon {width:254px; height:145px; border:1px solid #ccc; border-top-style:none; border-bottom-style:none; text-align: center;}
+.pf_right .procon img {padding:2px 2px 0 2px; width: 230px; height: 145px;}
+.pf_right .procon p {width:245px; margin:2px 2px 0 2px; height:46px; line-height:20px;padding:0 0 0 5px; color:#555;}
+.pf_right .procon p a:link{color: #CC0000; text-decoration:none;font-size: 12px;font-weight: bold;}
+</style>
+<!--{/literal}-->
+<div class="adv mauto">
+	<!--{ads typeid=1 row="8" name="ads"}--><span>{$ads.link}</span><!--{/ads}-->
+</div>
+<div class="blank6"></div>
+<div class="pfsc">
+	<div class="main_left_w180" style="padding-left: 6px;">
+		<div class="cornerbox">
+			<div class="title_bar_s6">
+				<span class="title_top_s6"><span></span></span>
+				<h2>{lang added_market}</h2>
+			</div>
+			<div class="corner_content_s6">
+			   <h3 style="text-align: center;"><a href="index.php?do=market&action=add">{lang i_would_join}</a></h3>
+			</div>
+		   <div class="corner_bottom">
+				<div class="corner_bottom_l"></div>
+				<div class="corner_tottom_r"></div>
+			</div>
+		</div><!--end-->
+		<div class="blank6"></div>
+		<div class="cornerbox">
+			<div class="title_bar_s6">
+				<span class="title_top_s6"><span></span></span>
+				<h2>{lang area_category}</h2>
+			</div>
+			<div class="corner_content_s6">
+			   <ul>
+				 {pb:area level=1 name="item" row='all'}
+				  <li><a href="index.php?do=market&action=lists&areaid={$item.id}&level=1">{$item.title|pl}</a></li>
+				 {/pb:area}
+			   </ul>
+			</div>
+		   <div class="corner_bottom">
+				<div class="corner_bottom_l"></div>
+				<div class="corner_tottom_r"></div>
+			</div>
+		</div><!--end-->
+	</div>
+	<div class="pf_right">
+		<ul>
+			<!-- {pb:market row=12 type="image" name="market"} -->
+			<li><div style="height: 4px;"><img src="{$theme_img_name}images/pfsc_top.gif"></div>
+			<div class="procon"><span>
+					<a title="{$market.name}" href="{$market.url}">
+					<img src="{$market.src}"></a></span>
+			<p>{lang market_name_n}{lang colon}{$market.link}<br>
+			{lang mainly_products}<span title="{$market.main_business}">{$market.main_business|truncate:16}</span></p>
+			</div>
+			<div style="height: 4px;"><img src="{$theme_img_path}images/pf_d.gif"></div>
+			</li>
+			<!-- {/pb:market} -->
+		</ul>
+	</div>
+	<div class="pagination2"><!-- {pager rowcount=$paging.total} --></div>
+	<div class="clear"></div>
+</div>
+<!--{include file="../footer.html"}-->

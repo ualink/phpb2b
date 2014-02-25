@@ -1,0 +1,69 @@
+<!--{include file="templates/site/$theme_name/header.html" page_title=#online_pay#}-->
+<link href="{$TemplateDir}/payments/alipay/css.css" rel="stylesheet" type="text/css">
+<!-- {literal} -->
+<script language=javascript>
+<!-- 
+//校验输入框  -->
+function CheckForm()
+{
+	if ($("#body").val()=="") {
+		alert("请输入付款备注.");
+		$("#body").focus();
+		return false;
+	}
+	if ($("#money").length>0 && $("#money").val() <= 0) {
+		alert("请输入付款金额.");
+		$("#money").focus();
+		return false;
+	}
+	var reg	= new RegExp(/^\d*\.?\d{0,2}$/);
+	if ($("#money").length>0 && ! reg.test($("#money").val()))
+	{
+        alert("请正确输入付款金额");
+		$("#money").focus();
+		return false;
+	}
+	if (Number($("#money").val()) < 0.01) {
+		alert("付款金额金额最小是0.01.");
+		$("#money").focus();
+		return false;
+	}
+	//$("#NextStep").attr("disabled", true);
+}  
+</script>
+<!-- {/literal} -->
+<div class="clear1"></div>
+<div id="box">
+
+	<div style="height:20px;"></div>
+	<div class="pay">
+		<strong>在线支付</strong>
+		<div class="pay_ts">
+		<p>付款提示：</p>
+		1、本次付款通过支付宝在线支付功能，免收异地及跨行手续费。无支付宝账号的客户也可以通过此支付功能在线支付。请确保您已经开通了网银支付功能。<br/><br/>
+		2、如有其它问题，您也可以直接与我们电话联系：{$service_tel}<br/><br/> 
+		</div>
+
+	</div>
+	<div class="clear1"></div>
+	<form name="alipaysubmit" id="alipaysubmit" onSubmit="return CheckForm();" action="purchase.php" method="post" target="_blank">
+	<input type="hidden" name="do" value="paynow">
+	<!-- {formhash} -->
+	<input type="hidden" name="tradeno" value="{$item.trade_no}">
+	<div class="payinput">
+	<ul>
+	<!-- {if $item.trade_no} -->
+ 	<li><p>订单编号：</p>{$item.trade_no}</li>
+	<!-- {/if} -->
+ 	<li><p>收款方：</p>{$_G.site_name}</li>
+	<li><p>付款金额：</p>
+	<!-- {if $item.total_price>0} -->{$item.total_price}<!-- {else} --><INPUT maxLength=10 size=30 id="money" class="input175" name="money" value=""/><span>请输入付款金额，如：200.01</span><!-- {/if} --> 元</li>
+	<li><p>备注：</p><TEXTAREA name="body" id="body" rows=2 cols=40 wrap="physical" class="inputtext"></TEXTAREA><span>请输入相关备注，使我们更多的获悉您的相关要求，以便为您提供更好的服务。如本次交易为含税价，且需发票，请在此输入发票抬头和快递地址，我司会及时给您快递发票。</span></li>
+	<li><p>&nbsp;</p><input type="submit" id="NextStep" value="下一步"></li>
+	</ul>
+	</div>
+	</form>
+</div>
+</div>
+</div>
+<!--{include file="templates/site/$theme_name/footer.html"}-->

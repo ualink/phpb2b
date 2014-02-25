@@ -1,0 +1,97 @@
+<!--{include file="../header.html" page_title="$page_title"}-->
+<script src="data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<script src="static/scripts/jquery/jquery.textbox.js" charset="{$charset}"></script>
+<script>
+var app_language = '{$AppLanguage}';
+var allows_maximum_input = "{lang allows_maximum_input}";
+var can_also_enter = "{lang can_also_enter}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#Content").textbox({
+		maxLength: 255,
+		onInput: function(event, status) {
+			$("#txtTip").html(allows_maximum_input+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.maxLength + "</strong> "+can_also_enter+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.leftLength + "</strong>");
+		}
+	});
+	$("#PostFrm").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+})
+</script>
+<!--{/literal}-->
+<div class="wrapper">
+	<div class="content">
+        <div class="title_bar_s4">
+            <span class="title_top_s4"><span></span></span>
+             <h3><div class="price_step1"><span>{lang fill_inquiry_information}</span><span>{lang inquiry_successful}</span></div>{lang inquiry_steps}</h3>
+        </div>
+		<div class="pricecontent">
+			<form name="xunjiafrm" id="PostFrm" action="{$_G.REQUEST_URI}" method="post">
+			<input type="hidden" name="id" value="{$_G.id}">
+			<input type="hidden" name="to_member_id" value="{$item.member_id}">
+			<!-- {formhash} -->
+			<input type="hidden" name="do" value="inquery">
+			<p>{lang receiver}</p>
+			<div class="content1">
+				<img src="{$item.image}" alt="" />
+				<p>{lang product_name}{lang colon}<a href="{the_url id=$item.id module='product'}" target="_blank">{$item.name}</a><br />
+					{lang contact}{$CompanyUser}
+				</p>
+				<div class="clear"></div>
+			</div>
+			<p>{lang inquiry_content}</p>
+			<div class="content2">
+				  <label class="title">{lang message_the_title}</label>
+				  <label class="text">
+				  <input name="title" type="text" value="{$item.name}" size="45" class="required" />
+				  </label><br />
+				  <div class="clear"></div>
+				  <label class="title">{lang additional_information}</label>
+				  <label>
+				  <textarea name="inquery[content]" id="Content" class="textaera2"></textarea><br><span id="txtTip" style="width: 300px;">
+				</span>
+				  </label>
+				 <div class="clear"></div>				
+			</div>
+			<p>{lang my_contacts}</p>
+			<div class="content3">
+				<label class="name">{lang name}</label>
+				<label>
+				<input type="text" name="inquery[link_man]" class="required" />
+				</label><br />
+				<div class="clear"></div>
+				<label class="name">{lang email}</label>
+				<label>
+				<input name="inquery[link_email]" id="LinkEmail" type="text" class="required email">
+				</label><br />
+				<div class="clear"></div>
+				<label class="name">{lang telephone}</label>
+				<label>
+				<input type="text" name="inquery[link_tel]" id="telnumber" value="" class="required">
+				</label><br />
+				<div class="clear"></div>
+				<label class="enquiry">
+				<!-- {if !$pb_username} -->
+				<span>{lang please_login_first}</span>
+				<!-- {else} -->
+				<input type="submit" value="{lang inquiry}" name="submit" id="Submit"/>
+				<!-- {/if} -->&nbsp;<input type="reset" value="{lang cancel}" />
+				</label>
+				<div class="clear"></div>	
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="static/scripts/jquery/jquery.validate.js"></script>
+<script>
+$("#SearchFrm").attr("action","{the_url module=search}");
+$("#hdModule").val("product");
+$("#topMenuProduct").addClass("lcur");
+</script>
+<!--{include file="../footer.html"}-->

@@ -1,0 +1,169 @@
+{block name="title" prepend}{#product_management#}{/block}
+{block name="main"}
+<script src="{$SiteUrl}static/scripts/jquery/jquery.colorbox.js" type="text/javascript"></script>
+<link href="{$SiteUrl}static/scripts/jquery/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css"/>
+<script>
+var SiteUrl = "{$SiteUrl}";
+</script>
+<!--{editor type="tinymce"}-->
+<!--{literal}-->
+<style>
+</style>
+<script>
+jQuery(document).ready(function($) {
+	$('a[rel*=lightbox]').colorbox({maxWidth:600,opacity:0.1});
+	$('#CountryId').change(function(){
+        $("#CountryImage").attr("src",$("#CountryId").find('option:selected').attr("title"));
+    });
+	$("#Frm1").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+})
+</script>
+<!--{/literal}-->
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{lang product_management}</h2></div>
+
+	  <form name="productaddfrm" id="Frm1" method="post" action="{$smarty.env.PHP_SELF}" enctype="multipart/form-data" onsubmit="$('#Save').attr('disabled',true);">
+	  <!-- {formhash} -->
+	  <input type="hidden" name="id" value="{$item.id}">
+	  <input type="hidden" name="formattribute_ids" value="{$item.formattribute_ids}">
+       <div class="hint">{lang must_input_with_star}</div>
+        <table class="offer_info_content">
+
+                      <tr>
+                        <th class="circle_left"><font class="red">*</font>{lang product_type}</th>
+                        <td class="circle_right">{html_radios name="data[product][sort_id]" options=$ProductSorts checked=$item.sort_id|default:2 separator=" "}</td>
+                      </tr>
+                      <tr>
+                        <th><font class="red">*</font>{lang product_name}</th>
+                        <td class="tdright"><input name="data[product][name]" type="text" id="dataProductName" value="{$item.name}" class="required">
+                        <font color="#666666">{lang words_length}</font></td>
+                      </tr>
+                      <tr>
+                        <th>{lang the_price_n}</th>
+                        <td class="tdright"><input name="data[product][price]" type="text" id="dataProductPrice" value="{$item.price}"></td>
+                      </tr>
+					  <!--{foreach from=$Forms name=form item=item1 key=key1}-->
+                      <tr>
+                        <th> {$item1.label}{lang colon}</th>
+                        <td class="tdright"><font color="#666666">
+                          <input name="data[formitem][{$key1}]" type="text" id="{$item1.id}" value="{$item1.value}"></font></td>
+                      </tr>
+					  <!--{/foreach}-->
+                      <tr>
+                        <th>{lang country}:</th>
+                        <td><select name="data[product][country_id]" id="CountryId">
+							<option>{lang please_select}</option>
+						<!--{foreach from=$Countries name=Countries item=country}-->
+							<option value="{$country.id}" title="../static/images/country/{$country.picture}" {if $country.id==$item.country_id}selected="selected"{/if}>{$country.name}</option>
+						<!--{/foreach}-->
+                        </select>&nbsp;&nbsp;<img src="../static/images/country/{$item.country}" id="CountryImage"></td>
+                      </tr>
+                      <tr>
+                        <th>{lang industry}</th>
+                        <td class="tdright">
+						<div id="dataIndustry">
+							<select name="industry[id][1]" id="dataProductIndustryId1" class="level_1" ></select>
+							<select name="industry[id][2]" id="dataProductIndustryId2" class="level_2"></select>
+							<select name="industry[id][3]" id="dataProductIndustryId3" class="level_3" ></select>
+						</div>						
+						</td>
+                      </tr>
+                      <tr>
+                        <th>{lang area}</th>
+                        <td class="tdright">
+		              <div id="dataArea">
+							<select name="area[id][1]" id="dataProductAreaId1" class="level_1" ></select>
+							<select name="area[id][2]" id="dataProductAreaId2" class="level_2" ></select>
+							<select name="area[id][3]" id="dataProductAreaId3" class="level_3"></select>
+						</div>
+
+						</td>
+                      </tr>
+                      <tr>
+                        <th><font class="red">*</font>{lang product_description}</th>
+                        <td class="tdright"><textarea name="data[product][content]" id="dataProductContent" rows="8" wrap="VIRTUAL" style="width:570px;" class="required">{$item.content}</textarea><br />
+                            <font color="#FF3300">{lang attention_explain}<br>
+                        </font></td>
+                      </tr>
+                      <tr>
+                        <th>{lang respective_series}</th>
+                        <td class="tdright"><font color="#666666">
+                        <span class="zi">
+                          <select name="data[product][type_id]">
+                            <option value="0">{lang select}</option>
+							<!--{foreach from=$ProductTypes name=producttype item=item2}-->
+							<option value="{$item2.id}" {if $item.type_id==$item2.id}selected{/if}>{$item2.name}</option>
+							<!--{foreachelse}-->
+							<!--{/foreach}-->
+                          </select>
+                        {lang category_management_explain}</font></span></font></td>
+                      </tr>
+					  <tr>
+				<th>{lang sorts_n}</th>
+				<td>
+				<select name="data[product][category_id]" id="ProductpriceCategory">
+				<option>{lang select}</option>
+				{$Productcategories}	
+				</select></td>
+			  </tr>
+                      <tr>
+                        <th>{lang product_brand}</th>
+                        <td class="tdright"><select name="data[product][brand_id]">
+                            <option value="0">{lang select}</option>
+                            {html_options options=$UserBrands selected=$item.brand_id}
+                          </select></td>
+                      </tr>
+                      <tr>
+                        <th>{lang tags_n}</th>
+                        <td class="tdright"><input class="infoTableInput2" name="data[tag]" type="text" id="tag" value="{$item.tag}" /><label class="field_notice">{lang space_separate}</label></td>
+                      </tr>
+                      <tr>
+                        <th>{lang product_image}</th>
+                        <td>
+                            <input name="pic" type="file" id="uploadfile" onchange="preview()" />
+                            <span class="gray"><br>
+                              {lang image_size_format_provision}</span></td>
+                      </tr>
+                      <tr>
+					  <!--{if $item.image}-->
+                        <th></th>
+                        <td><a href="{$item.image|default:"javascript:;"}" id="uploadpic_hover" rel="lightbox"><img id="uploadpic" src="{$item.image}.small.jpg" alt="{$item.name}" width="80" /></a></td>
+						<!--{/if}-->
+                      </tr>
+                      <tr>
+                        <th class="circle_bottomleft"></th>
+                        <td class="circle_bottomright"><input name="save" type="submit" id="save" value=" {lang confirm_submit} ">
+						<!--{if $item.id}-->
+						&nbsp;<a href="{the_url module=product id=$item.id}" title="{lang preview}{$item.name}" target="_blank" style="text-decoration:underline;color:blue;">{lang preview}</a>
+						<!--{/if}-->
+						</td>
+                      </tr>
+          </table>
+	</form>
+<script>
+var cache_path = "../";
+var app_language = '{$AppLanguage}';
+var area_id1 = {$item.area_id1|default:0} ;
+var area_id2 = {$item.area_id2|default:0} ;
+var area_id3 = {$item.area_id3|default:0} ;
+var industry_id1 = {$item.industry_id1|default:0} ;
+var industry_id2 = {$item.industry_id2|default:0} ;
+var industry_id3 = {$item.industry_id3|default:0} ;
+</script>
+<!-- {literal} -->
+<script>
+jQuery(document).ready(function($) {
+	$("#ProductpriceCategory").val("{$item.category_id|default:0}")
+})
+</script>
+<!-- {/literal} -->
+<script src="../static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="../static/scripts/script_area.js"></script>
+<script src="../static/scripts/script_industry.js"></script>
+{/block}

@@ -1,0 +1,94 @@
+<!--{include file="header.html" page_title="$page_title"}-->
+<script>
+var site_url = "{$SiteUrl}";
+var id = "{$item.id}";
+var quote_type = "{$quote_type}";
+</script>
+<!-- {literal} -->
+<script>
+function doZoom(size){
+	$('#content').css({
+		fontSize:size+'px'
+	});
+}
+$(document).ready(function(){
+	$("#content img").each(function(){  
+		 if($(this).width() > $(this).parent().width()) {  
+			 $(this).width("100%");  
+		 }  
+	});
+});
+</script>
+<!-- {/literal} -->
+<!-- {if $item.trend_data} -->
+<script type="text/javascript" src="static/scripts/jquery/jquery.swfobject.js"></script>
+<!-- {literal} -->
+<script>
+$(document).ready(
+function () {
+	$('#quoteFlash').flash(
+		{
+			swf: 'images/chart.swf',
+			height: 300,
+			width: 700,
+			wmode: 'transparent',
+			flashvars: {
+				//To pass parameters, URLEncode the dataURL. Use escape() in JavaScript
+				dataUrl: escape('index.php?do=market&action=getChartData&type='+quote_type+'&id='+id+'&rand='+Math.random())
+			}
+		}
+	);
+});
+</script>
+<!-- {/literal} -->
+<!-- {/if} -->
+<div class="wrapper">
+  <div class="content">
+    <div class="tips"><span>{$position}</span></div>
+    <div class="news_all clearfix">
+      <div class="news_all_left">
+       <div class="news_title">
+        <div class="title_bar_s4">
+          <span class="title_top_s4"><span></span></span>
+          <h2><span>{$item.title}</span>
+          <p>{lang source}<span class="gray">{$item.source|default:$_G.site_name}</span> {lang post_time}<span class="gray">({$item.pubdate})</span>{lang categories}<span class="gray link-underline">{$item.typename}</span>{lang font_size}{lang colon}&nbsp;<a href="javascript:void(false);" onclick="doZoom(16);">{lang large}</a>&nbsp;<a href="javascript:void(false);" onclick="doZoom(14)">{lang middle}</a>&nbsp;<a href="javascript:void(false);" onclick="doZoom(10)">{lang small}</a></p>
+          </h2>
+       </div>
+       </div>
+        <div class="news_all_left_con">
+		  <div id="quoteFlash"></div>
+		  <div class="clear"></div>
+		  <!-- {if $item.picture} -->
+		  <p class="left1"><img src="{$item.image_url}" /></p>
+		  <!-- {/if} -->
+          <div id="content">{$item.content|nl2br}</div>
+		  <div class="clear"></div>
+		  <div><span><b>{lang prev_record}{lang colon}</b>{$item.prev_link}</a> </span><span><b>{lang next_record}{lang colon}</b>{$item.next_link} </span></div>
+          <div id="news_info">
+		  <!-- {if $item.attach_hashid} -->[<a href="misc.php?do=download&aid={$item.attach_hashid}" target="_blank"><img src="{$theme_img_path}images/download.gif" border="0" />{lang download_attach}</a>] <!-- {/if} -->
+		  <!-- {if $item.tag} -->[{lang tags}{lang colon}{$item.tag_link}] <!-- {/if} -->
+		  <!-- {if $item.download_article} -->[<a href="index.php?do=standard&action=downloadtxt&id={$item.id}" target="_blank"><img src="{$theme_img_path}images/document.gif" border="0" />{lang download_article}</a>]<!-- {/if} --> [<a href="javascript:window.close()">{lang close_widow}</a>] [<a href="javascript: window.print();">{lang print_page}</a>] <!-- {if $item.clicked} -->{lang views}{$item.clicked|number_format}<!-- {/if} --></div>
+        </div>
+      </div>
+      <div class="all_right">
+       <div class="title_bar_s4">
+          <span class="title_top_s4"><span></span></span>
+          <h3>{lang related_info}</h3>
+       </div>
+        <div class="all_right_con">
+          <ul class="news_list">
+          {pb:news row=10 titlelen=32 typeid=$item.type_id}
+            <li> {$row.link}</li>
+          {/pb:news}
+          </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
+<script>
+$("#SearchFrm").attr("action","{the_url module=search}");
+$("#topMenuNews").addClass("lcur");
+</script>
+<!--{include file="footer.html"}-->

@@ -1,0 +1,154 @@
+<!-- {include file="header.html"} -->
+{fetch file="../static/scripts/date.js"}
+<script src="{$SiteUrl}static/scripts/jquery/jquery.colorbox.js" type="text/javascript"></script>
+<link href="{$SiteUrl}static/scripts/jquery/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css"/>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$('a[rel*=lightbox]').colorbox()
+})
+</script>
+<!--{/literal}-->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang ads} &raquo; {lang ads}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang ads}</h3> 
+    <ul class="subnav">
+		<li><a href="ad.php">{lang management}</a></li>
+        <li><a class="btn1" href="ad.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="ad.php" enctype="multipart/form-data" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="id" value="{$smarty.get.id}" />  
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang ads}{lang title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="ad[title]" value="{$item.title}" /><label class="field_notice">{lang ad_show_title}</label>        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang ads}{lang description_n}</th>
+        <td class="paddingT15 wordSpacing5"><textarea style="width:550px;height:100px;" name="ad[description]" id="dataTradeContent">{$item.description}</textarea></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang adzone}{lang naming_n}</th>
+        <td class="paddingT15 wordSpacing5">
+		<select name="ad[adzone_id]" id="ad_adzone_id">
+		<!--{foreach from=$Adzones item=z name=sel_adzone}-->
+		<option value="{$z.id}" {if $z.id eq $item.adzone_id or $z.id eq $smarty.get.adzone_id}selected{/if}>
+		{$z.name}
+		<!--{foreachelse}-->
+		<option value="0">{lang full_please}{lang adzone}
+		<!--{/foreach}-->
+		</select></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang link_mode}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><label for="Sourcetype1"><input type="radio" name="m_sourcetype" id="Sourcetype1" value="1"/>{lang local_upload}</label><label for="Sourcetype2"><input type="radio" name="m_sourcetype" id="Sourcetype2" value="2"/>{lang link_address}</label>
+          </td>
+      </tr>
+      <tbody id="divSourceType2" style="display:none">
+      <tr>
+        <th class="paddingT15">{lang remote_url}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input type="text" name="ad[source_url]" value="{$item.source_url}"></td>
+      </tr>
+      </tbody>
+      <tbody id="divSourceType1" style="display:none">
+      <tr>
+        <th class="paddingT15">{lang attachment} {lang upload}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" type="file" name="attach" /></td>
+      </tr>
+      </tbody>
+      <tr>
+        <th class="paddingT15"> {lang width}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<input type="text" name="ad[width]" value="{$item.width}" style="width: 35px;" /><label class="field_notice">{lang if_the_image_or_flash_the_system_will_automatically}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang height}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<input type="text" name="ad[height]"  value="{$item.height}" style="width: 35px;" /><label class="field_notice">{lang if_the_image_or_flash_the_system_will_automatically}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang point_to_url}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="ad[target_url]" value="{$item.target_url}" />        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang display_order}</th>
+        <td class="paddingT15 wordSpacing5">
+		<input type="text" name="ad[priority]" id="AdPriority" value="{$item.priority|default:0}" style="width: 35px;" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang whether_or} {lang show_it}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<!--{html_radios name="ad[state]" options=$AdsStatus checked=$item.state|default:"1" separator=" "}-->        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang if_valid}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<!--{html_radios name="ad[status]" options=$AdsStatus checked=$item.status|default:"1" separator=" "}--></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang date_start}</th>
+        <td class="paddingT15 wordSpacing5"> 
+		<input name="data[start_date]" value="{$item.start_date}" type="text" id="date2" /><span class="btn_calendar" id="calendar-date2"></span><label class="field_notice">{lang empty_that_never_expires}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang effective_period} {lang arrive_to}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"> 
+		<input name="data[end_date]" value="{$item.end_date}" type="text" id="date1" /><span class="btn_calendar" id="calendar-date1"></span><label class="field_notice">{lang empty_that_never_expires}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang display_pictures_after_the_expiration_of}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input name="ad[picture_replace]" value="{if $item.id}{$item.picture_replace}{else}static/images/nopicture_small.gif{$item.picture_replace}{/if}" />{if $item.picture_replace}&nbsp;<a href="{$SiteUrl}{$item.picture_replace}" rel="lightbox"><img src="../images/attachimg.gif" /></a>{/if}<label class="field_notice">{lang empty_will_not_display_any_media_after}</label></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save_and_pub}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var ad_url = "{$item.source_url}";
+</script>
+<!--{literal}-->
+<script>
+Calendar.setup({
+	trigger    : "calendar-date1",
+	animation  : false,
+	inputField : "date1",
+	onSelect   : function() { this.hide() }
+});
+Calendar.setup({
+	trigger    : "calendar-date2",
+	animation  : false,
+	inputField : "date2",
+	onSelect   : function() { this.hide() }
+});
+jQuery(document).ready(function($) {
+	/* Using Name for selector */
+	$("#Sourcetype1").click(function() 
+	  {  
+		// hides matched elements if shown, shows if hidden 
+		$("#divSourceType1").show(); 
+		$("#divSourceType2").hide(); 
+	});
+	$("#Sourcetype2").click(function() 
+	  {  
+		// hides matched elements if shown, shows if hidden 
+		$("#divSourceType2").show(); 
+		$("#divSourceType1").hide(); 
+	});
+	if(ad_url!=""){
+		$("input[name='m_sourcetype']").val("2");
+	}
+})
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

@@ -1,0 +1,113 @@
+<!-- {include file="header.html"} -->
+<script src="{$SiteUrl}static/scripts/jquery/jquery.colorbox.js" type="text/javascript"></script>
+<link href="{$SiteUrl}static/scripts/jquery/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css"/>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$('a[rel*=lightbox]').colorbox() 
+})
+</script>
+<!--{/literal}-->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang product_center}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang product_center}</h3> 
+    <ul class="subnav">
+		<li><a href="product.php">{lang management}</a></li>
+		<li><a href="productsort.php">{lang category}</a></a></li>
+        <li><a href="productcategory.php">{lang product}{lang sorts}</a></li>
+		<li><a href="brand.php">{lang brands}</a></li>
+        <li><a class="btn1" href="brand.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+        <li><a href="brandtype.php">{lang brands}{lang types}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form action="brand.php" method="post" id="EditFrm" name="edit_frm" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{$item.id}" />
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+   <input type="hidden" name="company_name" value="{$item.companyname}" />
+  <input type="hidden" name="username" value="{$item.username}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15">{lang brand_name}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[name]" value="{$item.name}" />        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang alias_name}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[alias_name]" value="{$item.alias_name}" /><label class="field_notice">{lang optimization_of_the_name}</label></td>
+      </tr>
+	  {if $item.id}
+	  <tr>
+        <th class="paddingT15"> {lang member_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="brand[[username]" value="{$item.username}"  readonly/></td>
+      </tr>
+	   <tr>
+        <th class="paddingT15"> {lang company_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="brand[company_name]" value="{$item.companyname}" readonly/></td>
+      </tr>
+	  {else}
+	  	  <tr>
+        <th class="paddingT15"> {lang member_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="brand[[username]" value="{$item.username}"  /></td>
+      </tr>
+	   <tr>
+        <th class="paddingT15"> {lang company_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="brand[company_name]" value="{$item.companyname}" /></td>
+      </tr>
+	  {/if}
+      <tr>
+        <th class="paddingT15"> {lang parent_categories}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<select name="data[type_id]" id="Brandtypes">
+		<option value="0">{lang top_categories}</option>
+        {$BrandtypeOptions}
+		</select>        
+		</td>
+      </tr>
+	  	<tr>
+        <th class="paddingT15"> {lang clicks}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[hits]" value="{$item.hits}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang description_n}</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea style="width:550px;height:50px;" name="data[description]">{$item.description}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang whether_or}{lang commend}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<!--{html_radios name="data[if_commend]" options=$AskAction checked=$item.if_commend|default:"0" separator=" "}--></td>
+      </tr>
+      <tr>
+	   <tr>
+        <th class="paddingT15">{lang picture}</th>
+        <td class="paddingT15 wordSpacing5">
+        <input class="infoTableFile2" type="file" name="pic" id="pic" />
+          <label class="field_notice">{lang image_format_support}</label>
+          {if $item.picture}
+          <br /><span><img src="{$item.image}" alt="{$item.name}"/></span>
+          {/if}
+        </td>
+      </tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />
+		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var type_id = "{$item.type_id|default:0}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+$("#Brandtypes").val(type_id);})
+</script>
+<!--{/literal}-->
+<!--{editor type="tinymce"}-->
+<!-- {include file="footer.html"} -->

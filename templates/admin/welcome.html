@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<title>{#welcome_to_cp#|sprintf:#control_pannel#}</title>
+<base target="_blank" />
+<link href="{$admin_theme_path}css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../static/scripts/jquery.js"></script>
+<script src="../static/scripts/jquery/facebox/facebox.js" type="text/javascript"></script>
+<link href="../static/scripts/jquery/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css"/>
+<!--{literal}-->
+<script>
+function setUpdateAlert(d)
+{
+	$.ajax({
+		url: 'home.php?do=set_update_alert&type='+d,
+		type: 'GET',
+		dataType: 'html',
+		timeout: 1000,
+		error: function(){
+			alert('Error loading XML document');
+		},
+		success: function(data){
+			$.facebox.close();
+		}
+	});
+}
+</script>
+<!--{/literal}-->
+{if $hasNewVersion}
+<script>
+var VersionInfo = '{$VersionInfo}';
+var alert_after_week = "{lang alert_after_week}";
+var alert_no = "{lang alert_no}";
+var close = "{lang close}";
+var SiteUrl = "{$SiteUrl}";
+{literal}
+jQuery(document).ready(function($) {
+	$.facebox.settings.loadingImage = SiteUrl+'images/facebox/loading.gif'; 
+	$.facebox(VersionInfo+"<div align='center'><input type='button' id='NoUpdateAlert' value='"+alert_no+"' onclick='setUpdateAlert(1);'>&nbsp;<input type='button' id='AlertAfterWeek' value='"+alert_after_week+"' onclick='setUpdateAlert(7);'>&nbsp;<input type='button' id='AlertAfterWeek' value='"+close+"' onclick='$.facebox.close();'></div>");
+})
+{/literal}
+</script>
+{/if}
+</head>
+<body>
+{assign var="s_name" value=$_G.site_name}
+<div id="rightWelcome">
+	<p>
+		<strong>{#hello#|sprintf:$current_adminer},{#welcome_to_cp#|sprintf:$s_name}{lang control_pannel}</strong>
+	</p>
+</div>
+<dl id="rightCon">
+<dt>{lang safety_tips}</dt>
+<dd>
+    <ul>
+	   <li>
+		{lang today_is}{$smarty.now|date_format:"%Y-%m-%d"},{lang last_login_time}{$item.last_login},{lang last_login_ip}{$item.last_ip}{iplocation ip="$item.last_ip"}
+	   </li>
+       <li>{lang please_keep} <span class="red">{lang site_key}</span>,{lang for_more_information_go_to_set} "<a href="setting.php?do=auth" target="_self"><span class="bold">{lang setting_global} - {lang security_prompt}</span></a>" {lang re_cover}</li>
+       <li>{lang if_you_want_to_continue_to_enable}<span class="red">{lang update_reminder}</span>,{lang please_reset} "<a href="javascript:void(0);" onclick="setUpdateAlert(0);" target="_self"><span class="bold">{lang set_reminder}</span></a>" {lang and_refresh_the_page}</li>
+       <li>
+			<span><a href="member.php?do=search&member[status]=0" target="_self">{lang moderated} {lang member}</a><em>({$TotalAmounts.member})</em></span>
+			<span><a href="company.php?do=search&status=0" target="_self">{lang moderated} {lang yellow_page}</a><em>({$TotalAmounts.company})</em></span>
+			<span><a href="offer.php?do=search&status=0" target="_self">{lang moderated} {lang offer}</a><em>({$TotalAmounts.trade})</em></span>
+			<span><a href="product.php?do=search&product[status]=0" target="_self">{lang moderated} {lang product}</a><em>({$TotalAmounts.product})</em></span>
+	   </li>
+    </ul>
+</dd>
+<dt>{lang administrator} {lang message}</dt>
+<dd>
+    <ul>
+      <form method="post" action="adminnote.php" id="EditFrm" name="edit_frm" target="_self">
+        <li>{lang content}<input type="text" name="data[adminnote][title]" value="" />&nbsp;<input class="formbtn" type="submit" name="save" value="{lang save}" /></li>
+      </form>
+   </ul>
+</dd>
+<dt>{lang system_information}</dt>
+<dd>
+    <table>
+        <tr>
+            <th>{lang server_operating_system}</th>
+            <td>{$item.operatingsystem}</td>
+            <th>{lang web_server}</th>
+            <td>{$item.software}</td>
+        </tr>
+        <tr>
+            <th>{lang php_version}</th>
+            <td>{$item.PhpVersion}</td>
+            <th>{lang mysql_version}</th>
+            <td>{$item.MysqlVersion}</td>
+        </tr>
+        <tr>
+            <th>Safe Mode:</th>
+            <td>{$item.safe_mode}</td>
+            <th>Safe Mode ID:</th>
+            <td>{$item.safe_mode_gid}</td>
+        </tr>
+        <tr>
+            <th>{lang program_version_and_encoding}</th>
+            <td><a href="{$SupportUrl}" title="{lang check_update}" target="_blank"><span class="red">{$item.PBVersion}</span></a></td>
+            <th>{lang installation_date}</th>
+            <td>{$item.InstallDate}</td>
+        </tr>
+        <tr>
+            <th>{lang used} {lang database}:</th>
+            <td>{$item.DatabaseSize}</td>
+            <th>{lang php_gd_support}</th>
+            <td>{$item.GDSupports}</td>
+        </tr>
+    </table>
+</dd>
+<dt>{lang about} {lang soft_name}</dt>
+<dd>
+    <table>
+        <tr>
+            <th>{lang help} {lang forum}{lang colon}</th>
+            <td><a href="http://www.phpb2b.com/forum-and-community" target="_blank">http://www.phpb2b.com/forum-and-community</a></td>
+        </tr>
+    </table>
+</dd>
+</dl>
+</body>
+</html>

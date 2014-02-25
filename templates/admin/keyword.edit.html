@@ -1,0 +1,35 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang information}{lang keywords}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang information}{lang keywords}</h3> 
+    <ul class="subnav">
+		<li><a href="keyword.php">{lang management}</a></li>
+        <li><a class="btn1" href="keyword.php?do=edit"><span>{lang edit}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="keyword.php" id="EditFrm" name="edit_frm">
+  	<input type="hidden" name="page" value="{$smarty.get.page}" />
+	<input type="hidden" name="id" value="{$item.id}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[keyword][title]" value="{$item.title}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang if_valid}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<!--{html_radios name="data[keyword][status]" options=$Status checked=$item.status|default:"1" separator=" "}-->        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save_and_pub}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

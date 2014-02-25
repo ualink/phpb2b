@@ -1,0 +1,77 @@
+<!--{assign var="metakeywords" value=#dictionary#}-->
+<!--{assign var="metadescription" value=#dict_digest_content#}-->
+<!--{include file="../header.html" page_title=#dictionary# nav_id=12}-->
+<div class="wrapper">
+	<div class="content clearfix">
+	  <div class="main_left_w720">
+	  <div class="title_bar_s5">
+	  <span class="title_top_s5"><span></span></span>
+	  <div class="lemma clearfix">
+		<div class="new_lemma">
+		 <h2>{lang latest_words}</h2>
+		 <ul>
+		 <!-- {pb:dict row=25 name="dict"} -->
+		  <li>{$dict.link}</li>
+		 <!-- {/pb:dict} -->
+		 </ul>
+		</div>
+		<div class="hot_lemma">
+		 <h2>{lang hot_words}</h2>
+		 <ul>
+		 <!-- {pb:dict row=25 orderby="hits DESC" name="dict"} -->
+		  <li>{$dict.link}</li>
+		 <!-- {/pb:dict} -->
+		 </ul>
+		</div>
+	  </div>
+   </div>
+	   <div class="blank6"></div>
+	   <div class="lemma_main">
+		 <ul>
+			<!--{foreach from=$Dictypes name=Dicttypes item=item1 key=key1}-->
+			 <li>
+			  <a href="{the_url module=dict action=list typeid=$item1.id}">{$item1.name}</a>
+				<!-- {if $item1.sub} -->
+				  <p class="clearfix">
+						<!--{foreach from=$item1.sub name=SubDicttypes item=item2 key=key2}-->
+							<a href="{the_url module=dict action=list typeid=$item2.id}">{$item2.name}</a>
+						<!--{/foreach}-->
+				  </p>
+				<!-- {/if} -->
+				<!-- {if !$smarty.foreach.Dicttypes.last} -->
+				    <hr class="hr_dashed" />
+				<!-- {/if} -->
+			 </li>
+			<!--{/foreach}-->
+		 </ul>
+	   </div>
+	  </div>
+	  <div class="main_right_w230">
+	   <div class="title_bar_s4">
+	   <span class="title_top_s4"><span></span></span>
+	   <h3>{lang dict_digest}</h3>
+	   </div>
+	   <div class="dictionary">
+		<form name="dict_search_frm" id="dictSearchFrm" action="{the_url module=search}" method="get">
+		<input type="hidden" name="do" value="dict" />
+		<input type="hidden" name="action" value="search" />
+		 <p>{#dict_digest_content#|sprintf:$site_name}</p>
+		 <p><input name="q" id="queryStr" type="text" class="input_w160"/>&nbsp;<input type="submit" value="{lang search}" class="btn_submit_w45"/></p>
+		</form>
+	   </div>
+	   <div class="blank6"></div>
+		<div class="title_bar_s4">
+	   <span class="title_top_s4"><span></span></span>
+	   <h3>{lang site_announce}</h3>
+	   </div>
+	   <div class="dictionary">
+		<ul>
+			<!--{pb:announce row=4 titlelen=15 infolen=35}-->
+				<li>{$row.link}</li>
+			<!--{/pb:announce}-->
+		</ul>
+	   </div>
+	  </div>
+	</div>
+</div>
+<!--{include file="../footer.html"}-->

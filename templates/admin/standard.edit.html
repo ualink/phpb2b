@@ -1,0 +1,87 @@
+<!-- {include file="header.html"} -->
+{fetch file="../static/scripts/date.js"}
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang standards}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang standards}</h3> 
+    <ul class="subnav">
+		<li><a href="standard.php">{lang management}</a></li>
+        <li><a class="btn1" href="standard.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+        <li><a href="standard.php?do=type">{lang types}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form action="standard.php" method="post" id="EditFrm" name="edit_frm" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{$item.id}" />
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang title}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[standard][title]" value="{$item.title}" /><label class="field_notice">{lang show_name_n}</label>        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang source_n}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[standard][source]" value="{$item.source|default:$_G.site_name}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang sorts}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<select name="data[standard][type_id]">
+		{html_options options=$StandardTypes selected=$item.type_id}
+		 </select>
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15">  {lang pub_date}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input name="data[publish_time]" id="date1" value="{$item.publish_date}" /><span class="btn_calendar" id="calendar-date1"></span></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang force_time}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input name="data[force_time]" value="{$item.force_date}" id="date2" /><span class="btn_calendar" id="calendar-date2"></span></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang attachments}</th>
+        <td class="paddingT15 wordSpacing5"><input name="attach" type="file" id="attach" />{if $item.attach}<br /><br>{$item.attach}{/if}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang digest}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea name="data[standard][digest]">{$item.digest}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang detailed_contents}</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea style="width:550px;height:50px;" name="data[standard][content]" class="mceEditor">{$item.content}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />
+		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!--{literal}-->
+<script>
+Calendar.setup({
+	trigger    : "calendar-date1",
+	animation  : false,
+	inputField : "date1",
+	onSelect   : function() { this.hide() }
+});
+Calendar.setup({
+	trigger    : "calendar-date2",
+	animation  : false,
+	inputField : "date2",
+	onSelect   : function() { this.hide() }
+});
+</script>
+<!--{/literal}-->
+{editor type="tinymce" mode="specific_textareas"}
+<!-- {include file="footer.html"} -->

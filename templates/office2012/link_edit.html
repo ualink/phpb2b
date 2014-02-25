@@ -1,0 +1,33 @@
+{block name="title" prepend}{#friendlink#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <div class="tip_title">{lang changes_our}{lang friendlink}{lang colon}</div>
+        
+	  <form name="linkeditfrm" method="post" action="{$smarty.env.PHP_SELF}">
+	  <!-- {formhash} -->
+	  <input type="hidden" name="id" value="{$item.id}"/>
+	     <table class="offer_info_content">
+              <tr>
+                <th class="circle_left">{lang show_name}</th>
+                 <td class="circle_right">
+                <input name="spacelink[title]" type="text" id="companyname" value="{$item.title}"></td>
+              </tr>
+              <tr>
+                <th>{lang link_address}{lang colon}</th>
+                <td><input name="spacelink[url]" type="text" id="url" value="{$item.url}">{lang site_links}</td>
+              </tr>
+              <tr>
+                <th>{lang notes}</th>
+                <td>
+                <textarea name="spacelink[description]" rows="" cols="50">{$item.description}</textarea>
+                </td>
+              </tr>
+              <tr>
+                <th class="circle_bottomleft"></th>
+                <td class="circle_bottomright"><input type="submit" value= "{lang fill_submit}" name="save"></td>
+              </tr>
+          </table>
+	  </form>
+{/block}

@@ -1,0 +1,101 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang yellow_page}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang yellow_page}</h3> 
+    <ul class="subnav">
+		<li><a href="company.php">{lang management}</a></li>
+        <li><a class="btn1" href="company.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+        <li><a href="companytype.php">{lang types}</a></li>
+        <li><a href="albumtype.php">{lang album_category}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form action="company.php" method="post" id="EditFrm" name="edit_frm" enctype="multipart/form-data">
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang company_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[company][name]" value="{$item.name}" /><label class="field_notice">{lang company_name}</label>        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang enterprise_direct_keyword}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[company][adwords]" value="{$item.adwords}" /><label class="field_notice">{lang company_direct}</label>        </td>
+      </tr>
+      {if $smarty.get.id}
+      <input type="hidden" name="id" value="{$smarty.get.id}">
+      <tr>
+        <th class="paddingT15"> {lang cp_username_n}</th>
+        <td class="paddingT15 wordSpacing5">{$item.username}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang space} {lang naming_n}</th>
+        <td class="paddingT15 wordSpacing5"><a href="{the_url module=space userid=$item.cache_spacename}" target="_blank" title="{lang visit}{$item.name}">{$item.cache_spacename}</a>[<a href="member.php?do=edit&id={$item.member_id}">{lang modify}</a>]<label class="field_notice">{lang only_english_letters}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang top_domain_support}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[company][topleveldomain]" value="{$item.topleveldomain}" /><label class="field_notice">{lang must_setting_first}</label></td>
+      </tr>
+      {else}
+      <tr>
+        <th class="paddingT15"> {lang cp_username_n}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[username]" value="" /><label class="field_notice">{lang cp_username}</label></td>
+      </tr>
+      {/if}
+      <tr>
+        <th class="paddingT15"> {lang in_industry}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <span id="dataIndustry">
+					<select name="industry[id][1]" id="dataMarketIndustryId1" class="level_1" style="width:120px;" ></select>
+					<select name="industry[id][2]" id="dataMarketIndustryId2" class="level_2" style="width:120px;"></select>
+					<select name="industry[id][3]" id="dataMarketIndustryId3" class="level_3" style="width:120px;"></select>
+		</span>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang in_area}</th>
+        <td class="paddingT15 wordSpacing5">
+			<span id="dataArea">
+						<select name="area[id][1]" id="dataMarketAreaId1" class="level_1" style="width:120px;" ></select>
+						<select name="area[id][2]" id="dataMarketAreaId2" class="level_2" style="width:120px;"></select>
+						<select name="area[id][3]" id="dataMarketAreaId3" class="level_3" style="width:120px;"></select>
+			</span>        
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang description_n}</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea style="width:550px;height:50px;" name="data[company][description]">{$item.description}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang clicks}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[company][clicked]" value="{$item.clicked}" type="text" /></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />
+		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var cache_path = "../";
+var app_language = '{$AppLanguage}';
+var area_id1 = {$item.area_id1|default:0} ;
+var area_id2 = {$item.area_id2|default:0} ;
+var area_id3 = {$item.area_id3|default:0} ;
+var industry_id1 = {$item.industry_id1|default:0} ;
+var industry_id2 = {$item.industry_id2|default:0} ;
+var industry_id3 = {$item.industry_id3|default:0} ;
+</script>
+<script src="../static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="../static/scripts/script_area.js"></script>
+<script src="../static/scripts/script_industry.js"></script>
+{editor type="tinymce"}
+<!-- {include file="footer.html"} -->

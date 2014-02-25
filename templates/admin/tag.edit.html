@@ -1,0 +1,39 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang tags}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang tags}</h3> 
+    <ul class="subnav">
+		<li><a href="tag.php">{lang management}</a></li>
+        <li><a class="btn1" href="tag.php?do=edit"><span>{lang edit}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="tag.php" id="EditFrm" name="edit_frm">
+  	<input type="hidden" name="page" value="{$smarty.get.page}" />
+	<input type="hidden" name="id" value="{$item.id}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[tag][name]" value="{$item.name}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang if_invisible}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<!--{html_radios name="data[tag][closed]" options=$Status checked=$item.closed|default:"1" separator=" "}-->        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">flag{lang param_value}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[tag][flag]" value="{$item.flag}" /></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save_and_pub}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

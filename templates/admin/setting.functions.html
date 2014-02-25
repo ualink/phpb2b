@@ -1,0 +1,38 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang functions}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang functions}</h3> 
+	<ul class="subnav">
+		<li><a class="btn1" href="setting.php?do=functions"><span>{lang static_optimization}</span></a></li>
+		<li><a href="setting.php?do=attach">{lang attachment}{lang setting}</a></li>
+	</ul>
+</div>
+<div class="info"> 
+  <form action="setting.php" method="post" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="do" value="functions">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang top_domain_support}</th>
+        <td class="paddingT15 wordSpacing5"><!--{html_radios name="data[topleveldomain_support]" options=$AskAction checked=$item.topleveldomain_support|default:0 separator=""}--></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang sub_domain_support}</th>
+        <td class="paddingT15 wordSpacing5"><!--{html_radios name="data[subdomain_support]" options=$AskAction checked=$item.subdomain_support|default:0 separator=""}-->
+		<span id="divDataSubdomain">&nbsp;<input name="data[subdomain]" type="text" id="subdomain" value="{$item.subdomain}" class="infoTableInput" />
+          <span class="gray">{lang fill_in_the_sub_domain_name_suffix}</span></span></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang static_url}</th>
+        <td class="paddingT15 wordSpacing5"><!--{html_radios name="data[rewrite_able]" options=$AskAction checked=$item.rewrite_able|default:0 separator=""}--></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save_functions" value="{lang save_setting}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div> 
+<!-- {include file="footer.html"} -->

@@ -1,0 +1,86 @@
+<!--{include file="header.html" page_title=#select_buy_service#}-->
+<style type="text/css">
+@import url({$theme_img_path}css/effect.css);
+</style>
+<script src="static/scripts/jquery.tools.js"></script>
+<div class="wrapper">
+	<div class="tips"><span>{$position}</span></div>  
+	<div class="blank6"></div>
+         <!-- the tabs -->
+        <ul class="tabs2 title_mouse">
+              <li><a href="javascript:;"><span>{lang member_upgrade}</span></a></li>
+        </ul>
+        <!-- tab "panes" -->
+	<div class="panes box_bord">
+		<div class="charge_txt">
+			<table>
+				<form method="post" name="apply_frm" id="ApplyFrm" action="{$_G.PHP_SELF}" target="_self" />
+				<!-- {formhash} -->
+				<input type="hidden" name="do" value="buynow" />
+				  <tr>
+					<th>{lang applicant_name}</th>
+					<td>{if $pb_userid}{$pb_username}{else}<input name="username" type="text" id="username"><span>*<span><br>
+							{lang applicant_name_conditions}</span>{/if}</td>
+				  </tr>
+				  <tr>
+					<th>{lang applicant_type}</th>
+					<td><label>
+					  <select name="good_id" id="GoodId">
+							  <!--{pb:good name="item" row="-1"}-->
+							  <option value="{$item.id}">{$item.title}&nbsp;{$item.price}</option>
+							  <!--{/pb:good}-->
+							</select>
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>{lang telephone}</th>
+					<td><label>
+					  <input name="tel" type="text" class="linehui" id="member_tel" value="{$MemberInfo.tel}" disabled="disabled">
+							  <span>{lang left_bracket}<a href="javascript:;" onclick="$('#member_tel').attr('disabled',false);">{lang modify}</a>{lang right_bracket}</span>
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>{lang email}</th>
+					<td><label>
+					  <input name="email" type="text" class="linehui" id="member_email" value="{$MemberInfo.email}" disabled="disabled">
+							  <span class="fontred">{lang left_bracket}<a href="javascript:;" onclick="$('#member_email').attr('disabled',false);">{lang modify}</a>{lang right_bracket}</span>
+					</label></td>
+				  </tr>				  
+				  <tr>
+					<th>{lang select_pay_method}</th>
+					<td><label>
+					  <select name="payment_id" id="PaymentId">
+							  <!--{loop $payments item}-->
+							  <option value="{$item.id}">{$item.title}</option>
+							  <!--{/loop}-->
+							  <option value="">{lang please_select}</option>
+							</select>
+					</label></td>
+				  </tr>
+
+				  <tr>
+					<th>{lang description}</th>
+					<td><label>
+					  <input name="content" type="text" class="linehui" id="content" value="" />
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>&nbsp;</th>
+					<td><input type="button" class="submit_w118" value="{lang next_step}" onclick="$('#ApplyFrm').submit();"/></td>
+				  </tr>
+				  </form>
+			</table>
+		</div>
+      </div>
+</div>
+<script>
+var index_val = {$index|default:0};
+</script>
+<!--{literal}-->
+<script>
+$(function() {
+$("ul.tabs2").tabs("div.panes > div",{initialIndex:index_val});
+});
+</script>
+<!--{/literal}-->
+<!--{include file="footer.html"}-->

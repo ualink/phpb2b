@@ -1,0 +1,65 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+<p>{lang your_current_position} {lang trade_management} &raquo; {lang product_center}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang product_center}</h3> 
+    <ul class="subnav">
+		<li><a href="product.php">{lang management}</a></li>
+		<li><a href="productsort.php">{lang category}</a></a></li>
+        <li><a href="productcategory.php">{lang product}{lang sorts}</a></li>
+        <li><a href="brand.php">{lang brands}</a></li>
+        <li><a class="btn1" href="brandtype.php"><span>{lang brands}{lang sorts}</span></a></li>
+        <li><a href="brandtype.php?do=edit">{lang add_or_edit}</a></li>
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontr"> 
+        <form name="search_frm" id="SearchFrm" method="get"> 
+        <input type="hidden" name="do" value="search" />
+             <div> 
+			    {lang title_keyword}<input class="queryInput" type="text" name="q" value="{$smarty.get.q}" /> 
+                <input type="submit" name="search" id="Search" class="formbtn" value="{lang searching}" /> 
+            </div>  
+        </form> 
+    </div> 
+</div>
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="brandtype.php" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th><label for="idAll">{lang naming}</label></th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2">
+		  <td class="firstCell"><input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}"></td>
+		  <td><label for="item_{$item.id}">{$item.name}</label></td>
+		  <td class="handler">
+           <ul id="handler_icon">
+            <li><a class="btn_delete" href="brandtype.php?id={$item.id}&do=del{$addParams}" title="{lang delete}">{lang delete}</a></li>
+            <li><a class="btn_edit" href="brandtype.php?do=edit&id={$item.id}{$addParams}" title="{lang edit}">{lang edit}</a></li>
+          </ul>  
+		 </td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="3">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="submit" name="del" value="{lang delete}" class="formbtn batchButton"/>
+    </div>
+    <div class="pageLinks">{$ByPages}</div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

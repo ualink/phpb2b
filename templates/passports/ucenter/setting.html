@@ -1,0 +1,131 @@
+<!--{include file="header.html"}-->
+<!--{literal}-->
+<style type="text/css">
+body {background: #fcfdff}
+</style>
+<!--{/literal}-->
+<div id="currentPosition">
+	<p>{$_your_current_position} 全局 &raquo; 通行证 {if $item.name} &raquo; {$item.name}{/if}</p>
+</div>
+<div id="rightTop"> 
+    <h3>通行证</h3> 
+    <ul class="subnav">
+		<li><a href="passport.php">管理</a></li>
+        <li><a class="btn1" href="#"><span>设置{$item.name}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form action="passport.php" method="post" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="id" value="{$smarty.get.id}">
+  <input type="hidden" name="data[passport][name]" id="PassportName" value="{$smarty.get.entry}">
+    <table class="infoTable">
+      <tr>
+        <th colspan="2" class="paddingT15 wordSpacing5">基本信息</th>
+      </tr>
+      <tr>
+        <th class="paddingT15"> 名称：</th>
+        <td class="paddingT15 wordSpacing5">{$item.name}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> 显示标题：</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[passport][title]" value="{$item.title|default:$item.name}" /><label class="field_notice">显示的标题</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> 简单描述：</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea style="width:550px;height:50px;" name="data[passport][description]">{$item.description}</textarea>        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> 是否启用：</th>
+        <td class="paddingT15 wordSpacing5">{html_radios name="data[passport][available]" options=$AskAction checked=$item.available|default:1 separator=""}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> 默认会员组：</th>
+        <td class="paddingT15 wordSpacing5"><select name="data[config][DEFAULT_GROUP_ID]" id="dataMemberGroupId">
+        {html_options options=$MembergroupOptions selected=$item.DEFAULT_GROUP_ID}
+        </select>
+      </tr>
+      <tr>
+        <th class="paddingT15"> 默认用户类型：</th>
+        <td class="paddingT15 wordSpacing5"><select name="data[config][DEFAULT_MEMBERTYPE_ID]" id="dataMemberTypeId">
+        {html_options options=$Membertypes selected=$item.DEFAULT_MEMBERTYPE_ID}
+        </select>
+      </tr>
+      <tr>
+        <th colspan="2" class="paddingT15">参数：</th>
+      </tr>
+      <tr>
+        <th class="paddingT15"> UCenter 应用 ID：</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[config][UC_APPID]" value="{$item.UC_APPID}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> UCenter 通信密钥：</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[config][UC_KEY]" value="{$item.UC_KEY}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> UCenter 访问地址：</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input name="data[config][UC_API]" value="{$item.UC_API|default:"http://localhost/uc_server"}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> Ucenter 主机IP地址：</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[config][UC_IP]" value="{$item.UC_IP|default:"127.0.0.1"}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> UCenter 数据库服务器:</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[config][UC_DBHOST]" value="{$item.UC_DBHOST|default:"localhost"}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> UCenter 数据库名：</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" type="text" name="data[config][UC_DBNAME]" value="{$item.UC_DBNAME|default:""}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> UCenter 数据库用户名：</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[config][UC_DBUSER]" value="{$item.UC_DBUSER|default:""}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> UCenter 数据库密码：</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" type="password" name="data[config][UC_DBPW]" value="{$item.UC_DBPW|default:""}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> UCenter 表前缀：</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[config][UC_DBTABLEPRE]" value="{$item.UC_DBTABLEPRE|default:"discuz.dzx_uc_"}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> UCenter 数据库字符集：</th>
+        <td class="paddingT15 wordSpacing5">          
+          <select name="data[config][UC_DBCHARSET]" id="dataConfigUcDbcharset">
+          <option value="gbk" {if $item.UC_DBCHARSET=="gbk"}selected="selected"{/if}>GBK/GB2312</option>
+          <option value="utf8" {if $item.UC_DBCHARSET=="utf8"}selected="selected"{/if} >UTF8</option>
+          <option value="big5" {if $item.UC_DBCHARSET=="big5"}selected="selected"{/if} >BIG5</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> UCenter 字符集：</th>
+        <td class="paddingT15 wordSpacing5">          
+          <select name="data[config][UC_CHARSET]" id="dataConfigUcCharset">
+          <option value="gbk" {if $item.UC_CHARSET=="gbk"}selected="selected"{/if}>GBK/GB2312</option>
+          <option value="utf-8" {if $item.UC_CHARSET=="utf-8"}selected="selected"{/if} >UTF-8</option>
+          <option value="big5" {if $item.UC_CHARSET=="big5"}selected="selected"{/if} >BIG5</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="保存" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!--{include file="footer.html"}-->

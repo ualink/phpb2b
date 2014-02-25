@@ -1,0 +1,36 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang ads} &raquo; {lang adzone}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang adzone}</h3> 
+    <ul class="subnav">
+		<li><a href="adzone.php">{lang management}</a></li>
+        <li><a href="adzone.php?do=edit&id={$id}">{lang add_or_edit}</a></li>
+		<li><a class="btn1" href="adzone.php?do=makejs&id={$id}"><span>{lang view_the_calling_code}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+<form name="textfrm">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> <a href="javascript:clip('textfrm.copy')" title="{lang click_copy_to_clipboard}">({lang click_copy_to_clipboard})</a></th>
+        <td class="paddingT15 wordSpacing5"><textarea name="copy" style="width:450px;overflow-y:visible;font-family:Arial">{$XMLDATA}</textarea></td>
+      </tr>
+    </table>
+</div>
+<script>
+var data_has_been_copied_to_the_clipboard = "{lang data_has_been_copied_to_the_clipboard}";
+</script>
+<!--{literal}-->
+<script type="text/javascript">
+function clip(text){
+	str=eval("document." + text)
+	str.select()
+	str = document.selection.createRange();
+	clipboardData.setData('text',(str.text));
+	alert(data_has_been_copied_to_the_clipboard);
+}
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

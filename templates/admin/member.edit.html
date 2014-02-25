@@ -1,0 +1,114 @@
+<!-- {include file="header.html"} -->
+{fetch file="../static/scripts/date.js"}
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang member_center} &raquo; {lang user_center}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang member}</h3> 
+    <ul class="subnav">
+		<li><a href="member.php">{lang management}</a></li>
+        <li><a class="btn1" href="member.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+        <li><a href="membertype.php">{lang sorts}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="member.php" id="EditFrm" name="edit_frm">
+  	<input type="hidden" name="page" value="{$smarty.get.page}" />
+	<input type="hidden" name="id" value="{$item.id}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang cp_username_n}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[member][username]" value="{$item.username}" /></td>
+      </tr>   
+      <tr>
+        <th class="paddingT15"> {lang space} {lang naming_n}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[member][space_name]" value="{$item.space_name}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang email_addr}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[member][email]" value="{$item.email}" /></td>
+      </tr>   
+      <tr>
+        <th class="paddingT15"> {lang membership_type}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <select name="data[member][membertype_id]" id="dataMemberTypeId">
+        {html_options options=$Membertypes selected=$item.membertype_id}
+        </select>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang integral}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[member][points]" value="{$item.points|default:0}" /></td>
+      </tr>   
+      <tr>
+        <th class="paddingT15"> {lang balance}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[member][balance_amount]" value="{$item.balance_amount|default:0}" /></td>
+      </tr>   
+      <tr>
+        <th class="paddingT15"> {lang trust_star}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[member][credits]" value="{$item.credits|default:0}" /></td>
+      </tr>   
+      <tr>
+        <th class="paddingT15">{lang member_group}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <select name="data[member][membergroup_id]" id="dataMemberGroupId">
+        {html_options options=$MembergroupOptions selected=$item.membergroup_id}
+        </select>
+        {if $item.groupimage}<img src="{$item.groupimage}" />{/if}
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang trust_type}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{html_checkboxes name="data[trusttype]" options=$Trusttypes checked=$item.selected_trusttypeid separator=" "}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang business_hours}</th>
+        <td class="paddingT15 wordSpacing5"><input name="data[service_start_date]" id="date1" value="{$item.service_start_date}" /><span class="btn_calendar" id="calendar-date1"></span>{lang arrive_to}<input name="data[service_end_date]" value="{$item.service_end_date}" id="date2" /><span class="btn_calendar" id="calendar-date2"></span></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang status}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <select name="data[member][status]" id="dataMemberStatus">
+        {html_options options=$MemberStatus selected=$item.status|default:1}
+        </select>       
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang new_password}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[userpass]" id="dataUserpass" value="" type="password" /><label class="field_notice">{lang not_modify_not_complete}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang re_input_new_password}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[re_userpass]" id="dataReUserpass" value="" type="password" /></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!--{literal}-->
+<script>
+Calendar.setup({
+	trigger    : "calendar-date1",
+	animation  : false,
+	inputField : "date1",
+	onSelect   : function() { this.hide() }
+});
+Calendar.setup({
+	trigger    : "calendar-date2",
+	animation  : false,
+	inputField : "date2",
+	onSelect   : function() { this.hide() }
+});
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

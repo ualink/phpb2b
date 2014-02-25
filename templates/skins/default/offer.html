@@ -1,0 +1,21 @@
+{extends file="layout.html"} 
+{block name="title" prepend}{#space_offer#}{/block}
+{block name="content"}
+		<div class="rightbarcontact">
+				<div class="playercontact">
+				<div class="playerheadcontact"><span class="playlistcontact">{lang space_offer}</span><span class="player_head_concontact"></span><img src="{$SpaceUrl}images/contactus_13.jpg" /></div>
+				<div class="clear"></div>
+				<div class="player_concontact clearfix">
+					<ul>
+					<!--{pb:offer name="item" companyid=$COMPANY.id row=12 stat=1}-->
+						<li><a href="{$WebRootUrl}{$item.url}" target="_blank"><img src="{$item.thumb}" width="80" height="80" alt="{$item.title}"></a><p>{$item.title|truncate:20}</p></li>
+					<!--{/pb:offer}-->				
+					</ul>
+					<div class="clear"></div>
+					<p><div class="pagination"><!-- {pager rowcount=$paging.total} --></div></p>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+{/block}

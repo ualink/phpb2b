@@ -1,0 +1,31 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang fair}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang fair}</h3> 
+    <ul class="subnav">
+		<li><a href="fair.php">{lang management}</a></li>
+		<li><a href="fairtype.php">{lang sorts}</a></li>
+        <li><a class="btn1" href="fairtype.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="fairtype.php" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="id" value="{$item.id}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang naming_n}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[expotype][name]" value="{$item.name}" /></td>
+      </tr>   
+      
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

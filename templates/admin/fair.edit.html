@@ -1,0 +1,172 @@
+<!-- {include file="header.html"} -->
+{fetch file="../static/scripts/date.js"}
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang fair}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang fair}</h3> 
+    <ul class="subnav">
+		<li><a href="fair.php">{lang management}</a></li>
+        <li><a class="btn1" href="fair.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+        <li><a href="fairtype.php">{lang sorts}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form action="fair.php" method="post" id="EditFrm" name="edit_frm" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{$smarty.get.id}">
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+    <table class="infoTable">
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang the_title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[expo][name]" value="{$item.name}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang category}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<select name="data[expo][expotype_id]">
+        <!--{foreach from=$Expotypes name=Expotypes item=item1 key=key1}-->
+        <option value="{$key1}" {if $key1==$item.expotype_id}selected="selected"{/if}>{$item1}</option>
+        <!--{/foreach}-->
+        </select>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang digest}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea style="width:550px;height:50px;" name="data[expo][description]" id="Description">{$item.description}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang in_industry}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <span id="dataIndustry">
+					<select name="industry[id][1]" id="dataexpoIndustryId1" class="level_1" style="width:120px;" ></select>
+					<select name="industry[id][2]" id="dataexpoIndustryId2" class="level_2" style="width:120px;"></select>
+					<select name="industry[id][3]" id="dataexpoIndustryId3" class="level_3" style="width:120px;"></select>
+		</span>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang in_area}</th>
+        <td class="paddingT15 wordSpacing5">
+			<span id="dataArea">
+						<select name="area[id][1]" id="dataexpoAreaId1" class="level_1" style="width:120px;" ></select>
+						<select name="area[id][2]" id="dataexpoAreaId2" class="level_2" style="width:120px;"></select>
+						<select name="area[id][3]" id="dataexpoAreaId3" class="level_3" style="width:120px;"></select>
+			</span>        
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang beginning} {lang times}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        	<input id="date1" type="text" name="data[begin_time]" value="{$item.begin_date}" type="text" /><span class="btn_calendar" id="calendar-date1"></span>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang ending} {lang times}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        	<input id="date2" type="text" name="data[end_time]" value="{$item.end_date}" type="text" /><a href="javascript:;"><span class="btn_calendar" id="calendar-date2"></span></a>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang cycle_time}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[expo][refresh_method]" value="{$item.refresh_method}" type="text" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang scale}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[expo][scope]" value="{$item.scope}" type="text" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang address}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[expo][address]" value="{$item.address}" type="text" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang organizers}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[expo][hosts]" value="{$item.hosts}" type="text" /></td>
+      </tr>      
+      <tr>
+        <th class="paddingT15"> {lang sponsor}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[expo][organisers]" value="{$item.organisers}" type="text" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang co_organizer}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[expo][co_organisers]" value="{$item.co_organisers}" type="text" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang supporters}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[expo][sponsors]" value="{$item.sponsors}" type="text" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang contact_method}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<textarea style="width:550px;height:50px;" name="data[expo][contacts]" id="Contacts">{$item.contacts}</textarea>
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang notes}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea style="width:550px;height:50px;" name="data[expo][important_notice]" id="ImportantNotice">{$item.important_notice}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang picture}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <input class="infoTableFile2" type="file" name="pic" id="pic" />
+          <label class="field_notice">{lang image_format_support}</label>
+          {if $item.picture}
+          <br /><span><img src="{$item.image}" alt="{$item.name}"/></span>
+          {/if}
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang whether_or}{lang commend}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<!--{html_radios name="data[expo][if_commend]" options=$AskAction checked=$item.if_commend|default:"0" separator=" "}--></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />
+		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var cache_path = "../";
+var app_language = '{$AppLanguage}';
+var area_id1 = {$item.area_id1|default:0} ;
+var area_id2 = {$item.area_id2|default:0} ;
+var area_id3 = {$item.area_id3|default:0} ;
+var industry_id1 = {$item.industry_id1|default:0} ;
+var industry_id2 = {$item.industry_id2|default:0} ;
+var industry_id3 = {$item.industry_id3|default:0} ;
+</script>
+<!--{literal}-->
+<script>
+Calendar.setup({
+	trigger    : "calendar-date1",
+	animation  : false,
+	inputField : "date1",
+	onSelect   : function() { this.hide() }
+});
+Calendar.setup({
+	trigger    : "calendar-date2",
+	animation  : false,
+	inputField : "date2",
+	onSelect   : function() { this.hide() }
+});
+</script>
+<!--{/literal}-->
+<script src="../static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="../static/scripts/script_area.js"></script>
+<script src="../static/scripts/script_industry.js"></script>
+<!--{editor type="tinymce"}-->
+<!-- {include file="footer.html"} -->

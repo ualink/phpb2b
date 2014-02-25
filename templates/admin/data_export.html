@@ -1,0 +1,36 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang system_tool} &raquo; {lang my_notes}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang data}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="data_exchange.php?do=export"><span>{lang data_export}</span></a></li>
+        <li><a href="data_exchange.php?do=import">{lang data_import}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="" id="EditFrm" name="edit_frm">
+	<input type="hidden" name="do" value="export">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang pls_select}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<select name="tb_name">
+			{html_options options=$FileItems}
+		</select>
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang record_amount}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="record_amount" id="record_amount" value="" /><label class="field_notice" for="record_amount">{lang allows_maximum_input}{lang record_amount}</label></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="executive" value="{lang executive}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

@@ -1,0 +1,52 @@
+{block name="title" prepend}{#keyword_adwords#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <table class="offer_count">
+         <tr>
+          <td>&nbsp;</td>
+          <td class="height35"><a title="{lang release}" href="spread.php?do=edit" class="btn_publish">{lang add}{lang keyword_advertising}</a></td>
+        </tr>
+      </table>      
+      <form name="listfrm" action="{$smarty.server.PHP_SELF}" method="post">
+	  <!-- {formhash} -->
+      <table class="offer_publish_list">
+        <tr>
+          <td>
+          <table class="bglist">
+            <tr>
+              <th>{lang words}</th>
+              <th>{lang the_title}</th>
+              <th>{lang link_address}</th>
+              <th>{lang state}</th>
+              <th>{lang expire_date}</th>
+            </tr>
+			<!--{foreach from=$Items item=item}-->
+            <tr align="center" class="bgwhite">
+              <td><a href="{$SiteUrl}{the_url action=lists module=search do=product q=$item.keyword_name}" target="_blank" style="text-decoration:underline;">{$item.keyword_name}</a></td>
+              <td>{$item.title}</td>
+              <td><a href="{$item.target_url}" target="_blank" style="text-decoration:underline;">{$item.target_url}</a></td>
+              <td>{$CheckStatus[$item.status]}</td>
+              <td>{$item.exp_date}</td>
+            </tr>
+			<!--{foreachelse}-->
+			<tr><td colspan="6"><a href="spread.php?do=edit">{lang no_datas}</a></td></tr>
+			<!--{/foreach}-->
+          </table></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>
+          <table class="room_pages">
+              <tr>
+                <td>{$ByPages}</td>
+              </tr>
+          </table>
+          </td>
+        </tr>
+      </table>
+      </form>
+{/block}

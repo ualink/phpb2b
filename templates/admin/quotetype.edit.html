@@ -1,0 +1,82 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+ <p>{lang your_current_position} {lang trade_management} &raquo; {lang pro_market}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang pro_market}</h3> 
+    <ul class="subnav">
+		<li><a href="market.php">{lang management}</a></li>
+		<li><a href="quote.php">{lang price_quotes}</a></li>
+        <li><a href="quotetype.php">{lang quotes}{lang sorts}</a></li>
+        <li><a class="btn1" href="quotetype.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="id" value="{$item.id}" />
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+    <table class="infoTable">
+	      <tr>
+        <th class="paddingT15"> {lang add_method}</th>
+        <td class="paddingT15 wordSpacing5">
+		<select name="data[method]" id="DataMethod">
+			<option value="1">{lang add_one_by_one}</option>
+			<option value="2">{lang copy_from_the_industry_classification}</option>
+        </select></td>
+      </tr>
+	  <tbody id="DataMethod1">
+	    {if $smarty.get.id}
+      <input type="hidden" name="id" value="{$smarty.get.id}" />
+      <input type="hidden" name="page" value="{$smarty.request.page}" />
+      <tr>
+        <th class="paddingT15"> {lang category_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[quote][name]" value="{$item.name}" type="text" /><label class="field_notice">{lang top_category_name_not_support_special_sign}</label>        </td>
+      </tr>
+    {else}
+	      <tr>
+        <th class="paddingT15"> {lang category_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><textarea name="data[quotetype][name]" id="dataNames"></textarea><label class="field_notice">{lang add_more_than_one_line_on_behalf_of_a_record}</label></td>
+      </tr>
+    {/if}
+      <tr>
+        <th class="paddingT15"> {lang parent_categories}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <select name="data[quotetype][parent_id]" id="BrandtypeParentId">
+        <option value="0">{lang top_categories}</option>
+        {$QuotetypeOptions}
+        </select>
+        </td>
+      </tr>
+	  </tbody>
+	  	  <tbody id="DataMethod2" style="display:none;">
+		        <tr>
+        <th class="paddingT15"> {lang whether_or}{lang overcast}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><!--{html_radios name="data[coverage]" options=$AskAction checked=1 separator=""}--><label class="field_notice">{lang if_choose_not_disorders_may_lead_to}</label></td>
+      </tr> 
+      <tr>
+        <th class="paddingT15"> {lang whether_or}{lang empty}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><!--{html_radios name="data[truncate]" options=$AskAction checked=0 separator=""}--></td>
+      </tr>      
+	  </tbody>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save_and_pub}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var parent_id = "{$item.parent_id|default:0}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#BrandtypeParentId").val(parent_id)
+		$("#DataMethod").change( function() { 
+		$("#DataMethod1, #DataMethod2").toggle();
+		});
+})
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

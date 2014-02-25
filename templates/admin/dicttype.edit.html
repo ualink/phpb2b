@@ -1,0 +1,77 @@
+<!-- {include file="header.html"} -->
+<link rel="stylesheet" type="text/css" href="../static/scripts/jquery/jquery-ui.css" />
+<script src="../static/scripts/jquery/jquery-ui.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/reset.css" />
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$( "#multi_lang_tabs" ).tabs();
+})
+</script>
+<!--{/literal}-->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang dictionary}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang dictionary}</h3> 
+    <ul class="subnav">
+		<li><a href="dict.php">{lang management}</a></li>
+        <li><a href="dicttype.php">{lang types}</a></li>
+        <li><a class="btn1" href="dicttype.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="dicttype.php" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="id" value="{$item.id}" />
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+    <table class="infoTable">
+	    {if $smarty.get.id}
+      <input type="hidden" name="id" value="{$smarty.get.id}" />
+      <input type="hidden" name="page" value="{$smarty.request.page}" />
+      <tr>
+        <th class="paddingT15"> {lang category_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<div id="multi_lang_tabs">
+		<!-- {pl frm="input" values=$item.name class="infoTableInput2"} -->
+		</div>
+		<label class="field_notice">{lang top_category_name_not_support_special_sign}</label>        </td>
+      </tr>
+    {else}
+	      <tr>
+        <th class="paddingT15"> {lang category_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><textarea name="data[dicttype][name]" id="dataNames"></textarea><label class="field_notice">{lang add_more_than_one_line_on_behalf_of_a_record}</label></td>
+      </tr>
+    {/if}
+      <tr>
+        <th class="paddingT15"> {lang display_order}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[dicttype][display_order]" value="{$item.display_order|default:0}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang parent_categories}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<select name="data[dicttype][parent_id]" id="DicttypeParentId">
+		<option value="0">{lang top_categories}</option>
+        {$dicttypeOptions}
+		</select><label class="field_notice">{lang currently_supports_two_categories}</label>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var parent_id = "{$item.parent_id|default:0}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#DicttypeParentId").val(parent_id)
+})
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

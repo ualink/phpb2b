@@ -1,0 +1,133 @@
+<!--{include file="../header.html" page_title=#customer_service_center#}-->
+<style type="text/css">
+@import url({$theme_img_path}css/effect.css);
+</style>
+<script src="static/scripts/jquery.tools.js"></script>
+<div class="wrapper">
+	<div class="tips"><span>{$position}</span>{lang customer_service_center}</div>
+	<div class="blank6"></div>  
+	<div class="content clearfix">
+	  <div class="main_left_w720">
+		 <div class="service_center_txt">
+             <div class="intro">
+             <span>{lang focus_user_service}</span><em>{lang service_for_your_internet}</em>
+             </div>
+             <div class="title">{lang customer_service}</div>
+         </div>
+		 <ul class="tabs2 title_mouse">
+		  <li><a href="javascript:;"><span>{lang latest_new} {lang answers}</span></a></li>
+		  <li><a href="javascript:;"><span>{lang latest_new} {lang problems}</span></a></li>
+	</ul>
+		<div class="panes box_bord">
+			<div class="customer_service">
+			   <table>
+				  <tr>
+					<th>{lang problems}</th>
+					<th>{lang status}</th>
+					<th>{lang submit_time}</th>
+					<th>{lang reply_time}</th>
+				  </tr>
+                  <!--{foreach from=$AnsweredService item=item2 name=AnsweredService}-->
+				  <tr>
+					<td><div class="title"><span>[<a href="index.php?do=service&action=lists&typeid={$item2.type_id}">{$item2.typename}</a>]</span><a href="index.php?do=service&action=detail&id={$item2.id}">{$item2.title}</a></div></td>
+					<td>{if $item2.revert_content}<span class="answer">{lang answered}</span>{else}{lang no_answer}{/if}</td>
+					<td><span{if $item2.revert_content} class="answer"{/if}>{$item2.submitdate}</span></td>
+					<td><span{if $item2.revert_content} class="answer"{/if}>{$item2.revertdate}</span></td>
+				  </tr>
+                  <!--{/foreach}-->
+			  </table>
+			</div>
+			<div class="customer_service" style="display: none;">
+			   <table>
+				  <tr>
+					<th>{lang problems}</th>
+					<th>{lang status}</th>
+					<th>{lang submit_time}</th>
+					<th>{lang reply_time}</th>
+				  </tr>
+                  <!--{foreach from=$LatestService item=item1 name=LatestService}-->
+				  <tr>
+					<td><div class="title"><span>[<a href="index.php?do=service&action=lists&typeid={$item1.type_id}">{$item1.typename}</a>]</span><a href="index.php?do=service&action=detail&id={$item1.id}">{$item1.title}</a></div></td>
+					<td>{if $item1.revert_content}<span class="answer">{lang answered}</span>{else}{lang no_answer}{/if}</td>
+					<td><span{if $item1.revert_content} class="answer"{/if}>{$item1.submitdate}</span></td>
+					<td><span{if $item1.revert_content} class="answer"{/if}>{$item1.revertdate}</span></td>
+				  </tr>
+                  <!--{/foreach}-->
+			  </table>
+			</div>
+	   </div>
+		<div class="blank6"></div>
+		<div class="guest_book">
+		  <div class="blank6"></div> 
+		  <div class="corner_box">        
+			  {if $Errors}{$Errors}{/if}
+          		<form action="index.php?do=service&action=post" name="service_frm" id="ServiceFrm" method="post">
+					<!-- {formhash} -->
+					<input type="hidden" name="save_service" value="save_service">
+			  <div class="title_bar_s4">
+			  <span class="title_top_s4"><span></span></span>  
+			  <div class="feedback">{lang service_type}{html_radios options=$ServiceTypes checked=1 name="service[type_id]"}</div>  
+			  </div>
+			  <div class="guest_book_content">
+			   <ul>
+				 <li><span>{lang the_title}</span><input name="service[title]" type="text" value="{$item.title}" /></li>
+				 <li><span>{lang your_name}</span><input name="service[nick_name]" type="text" /></li>
+				 <li><span>{lang your_email}</span><input name="service[email]" type="text" value="{$item.email}" /></li>
+				 <li><span>{lang added_content}</span><textarea name="service[content]" cols="60" rows="5">{$item.content}</textarea></li>
+				 <li><span>&nbsp;</span><input name="" type="submit" value="{lang submit}" class="btn_submit_w45"/></li>
+			   </ul>
+			  
+			  </div>
+			  <div class="corner_bottomtxt_bar">
+				 <span class="corner_bottomtxt_s1"><span></span></span>
+			  </div>   
+		   </div>  
+	  </div>
+	  </div>
+	  <div class="main_right_w230">
+		  <div class="corner_box">
+			<div class="title_bar_s4">
+		   <span class="title_top_s4"><span></span></span>
+		   <h3>{lang latest_tips}</h3>
+		   </div>
+			<div class="new_tips">
+			<ul>
+				{pb:feed row="10"}
+				  <li>{$feed.link}</li>
+				{/pb:feed}
+			</ul>
+		   </div>
+	    </div>
+		<div class="blank6"></div>
+		<div class="corner_box">
+		  <div class="title_bar_s4">
+		  <span class="title_top_s4"><span></span></span>
+		  <h3>{lang warm_reminder}</h3>
+		</div>
+		  <div class="new_tips">
+		   <p>{lang reply_submit_issue}</p>    
+			<p><h2>{lang contact_us}</h2><br />
+			{lang service_hotline}{$service_tel}<br /></p>
+			<p class="break">{lang email}<a href="mailto:{$service_email}">{$service_email}</a></p>
+		</div>
+		<div class="blank6"></div>
+		<div class="corner_box">
+		  <div class="title_bar_s4">
+		  <span class="title_top_s4"><span></span></span>
+		  <h3>{lang service_client}</h3>
+		</div>
+		  <div class="new_tips">
+		   <p><a href="index.php?do=service&action=client">{lang click_and_preview} {lang service_client}</a></p>
+		</div>
+	   </div>
+	  </div>
+	</div>
+</div>
+<!--{literal}-->
+<script>
+$(function() {
+	$("ul.tabs2").tabs("div.panes > div");
+});
+</script>
+<!--{/literal}-->
+<!--{include file="../footer.html"}-->

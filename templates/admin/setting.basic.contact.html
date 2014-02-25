@@ -1,0 +1,56 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang site_info}</p>
+</div>
+<div id="rightTop">
+	<h3>{lang site_info}</h3>
+	<ul class="subnav">
+		<li><a href="setting.php?do=basic">{lang basic_setting}</a></li>
+		<li><a class="btn1" href="setting.php?do=basic_contact"><span>{lang contact_method}</span></a></li>
+		<li><a href="setting.php?do=basic_desc">{lang site_desc}</a></li>
+	</ul>
+</div>
+<div class="info">
+  <form method="post">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"><label for="price_format"> {lang company_name}{lang colon}</label></th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="data[setting][company_name]" type="text" id="company_name" value="{$item.COMPANY_NAME|default:$companyname}" />
+          <span class="gray">{lang company_name_copyright_information}</span>
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="price_format"> {lang website} {lang service_hotline}{lang colon}</label></th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="data[setting][service_tel]" type="text" id="service_tel" size="30" value="{$item.SERVICE_TEL|default:$service_tel}"  />
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="price_format"> {lang website} {lang sales_hotline}{lang colon}</label></th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="data[setting][sale_tel]" type="text" id="sale_tel" size="30" value="{$item.SALE_TEL|default:$sale_tel}" />
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="price_format"> {lang website} {lang service_qq}</label></th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="data[setting][service_qq]" type="text" id="data[setting][sale_tel]" size="30" value="{$item.SERVICE_QQ|default:$service_qq}" />
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="price_format"> {lang website} {lang service_msn}</label></th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="data[setting][service_msn]" type="text" id="data[setting][sale_tel]2" size="30" value="{$item.SERVICE_MSN|default:$service_msn}" />
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="price_format"> {lang website} {lang service_email}</label></th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="data[setting][service_email]" type="text" id="service_email" size="30" value="{$item.SERVICE_EMAIL|default:$service_email}" />
+		</td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20"><input class="formbtn" type="submit" name="savebasic" value="{lang submit}" />
+          <input class="formbtn" type="reset" name="reset" value="{lang reset}" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

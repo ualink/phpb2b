@@ -1,0 +1,18 @@
+{block name="title" prepend}{#product_sort#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+     <div class="blank"></div>
+		  <form name="prodtypeeditfrm" method="post" action="producttype.php" autocomplete="off">
+		  <!-- {formhash} -->
+			  <input type="hidden" name="id" value="{$item.id}">
+			<table width="100%" border="0" cellpadding="5" cellspacing="1" class="bgblue">
+				<tr align="center">
+				  <td width="40%" colspan="5">&nbsp;{lang product_sort_name}
+					<input name="data[name]" type="text" value="{$item.name}">
+					<input type="submit" name="save" value="{lang saving}"></td>
+				  </tr>
+          </table>
+		</form>		 
+{/block}

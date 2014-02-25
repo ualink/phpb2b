@@ -1,0 +1,17 @@
+<!--{include file="header.html"}-->
+<div class="main">
+<div class="main" style="text-align:center;">
+<h1><img src="{$WebRootUrl}static/images/logo.jpg" alt="" width="150"/></h1>
+	  <a href="{the_url module=wap do=product}" class="{if $_G.module=='product'}current_module{/if}">{lang product}</a>
+	  <a href="{the_url module=wap do=offer}" class="{if $_G.module=='offer'}current_module{/if}">{lang offer}</a>
+	  <a href="{the_url module=wap do=company}" class="{if $_G.module=='company'}current_module{/if}">{lang yellow_page}</a>
+	  <a href="{the_url module=wap do=news}" class="{if $_G.module=='news'}current_module{/if}">{lang information}</a>
+<br/>
+<form action="{$smarty.server.PHP_SELF}" method="get">
+<input type="hidden" name="do" value="wap">
+<input type="hidden" name="module" value="{$_G.module|default:'product'}">
+<input type="hidden" name="action" value="search">
+<input type="text" name="q" value="" size="6"/>
+<input type="submit" name="submit" value="{lang search}"/>
+</form>
+<!--{include file="footer.html"}-->

@@ -1,0 +1,43 @@
+<!--{include file="../header.html" page_title=$page_title nav_id=12}-->
+<div class="wrapper">
+	<div class="tips"><span>{$position}</span></div>
+	<div class="blank6"></div>  
+	<div class="content clearfix">
+	  <div class="main_left_w720">
+	      <div class="base_title">
+		     <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang search_result}</span><span class="corner_t_r"></span></h2>
+		 </div>
+	     <div class="lemma_list">
+		<table>
+		  <tr>
+			<th>{lang word_name}</th>
+			<th>{lang digest}</th>
+		  </tr>
+		 
+         <!--{foreach from=$items item=item name=items key=key}-->
+		  <tr>
+			<td class="title"><a href="{the_url module=dict id=$item.id}">{$item.word}</a></td>
+			<td>{$item.digest|strip_tags|truncate:100}</td>
+		  </tr>
+		 <tr><td colspan="2" class="height_1"> <hr class="hr_dashed" /></td></tr>
+          <!--{/foreach}-->
+		</table>
+		<div><div class="pagination2"><!-- {pager rowcount=$paging.total} --></div></div>
+	   </div>
+	  </div>
+	  <div class="main_right_w230">
+		<div class="title_bar_s4">
+	   <span class="title_top_s4"><span></span></span>
+	   <h3>{lang hot_words}</h3>
+	   </div>
+	   <div class="dictionary">
+		<ul>
+		 {pb:dict row=10 orderby="hits DESC" name=dict}
+		  <li>{$dict.link}</li>
+		 {/pb:dict}
+		</ul>
+	   </div>
+	  </div>
+	</div>
+</div>
+<!--{include file="../footer.html"}-->

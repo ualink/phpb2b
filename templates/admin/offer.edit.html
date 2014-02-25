@@ -1,0 +1,175 @@
+<!-- {include file="header.html"} -->
+<link href="../static/scripts/jquery/colorpicker.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="../static/scripts/jquery/colorpicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/scripts/jquery/jquery-ui.css" />
+<script src="../static/scripts/jquery/jquery-ui.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/reset.css" />
+<script>
+var arr = [{$colors}];
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$( "#multi_lang_tabs" ).tabs();
+	$( "#tabs-ta" ).tabs();
+	$.fn.colorPicker.defaultColors = arr;
+	$('#color1').colorPicker();
+})
+</script>
+<!--{/literal}-->
+{fetch file="../static/scripts/date.js"}
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang offer}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang offer}</h3> 
+    <ul class="subnav">
+		<li><a href="offer.php">{lang management}</a></li>
+        <li><a class="btn1" href="offer.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+        <li><a href="offer.php?do=setting">{lang setting}</a></li>
+        <li><a href="offertype.php">{lang sorts}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" enctype="multipart/form-data" id="EditFrm" action="offer.php" name="edit_frm">
+  	<input type="hidden" name="page" value="{$smarty.get.page}" />
+  	{if $smarty.get.id}
+  	<input type="hidden" name="id" value="{$smarty.get.id}" />
+  	<input type="hidden" name="company_name" value="{$item.companyname}" />
+  	<input type="hidden" name="username" value="{$item.username}" />
+  	<input type="hidden" name="oldtag" value="{$item.tag}" />
+    <input type="hidden" name="oldimg" value="{$item.picture}" />
+  	{/if}
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang member_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[username]" value="{$item.username}" />
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang company_name}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[company_name]" id="dataCompanyName" value="{$item.companyname}"/></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang the_title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<div id="multi_lang_tabs">
+		<!-- {pl frm="input" values=$item.title} -->
+		</div>
+				<label class="field_notice">{lang title_display}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang adwords}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[trade][adwords]" value="{$item.adwords}" />&nbsp;{lang bold}<input type="checkbox" name="highlight[style][1]" {if $hl.bold}checked{/if}>&nbsp;{lang italic}<input type="checkbox" name="highlight[style][2]" {if $hl.italic}checked{/if}>&nbsp;{lang underline}<input type="checkbox" name="highlight[style][3]" {if $hl.underline}checked{/if}>&nbsp;<input type="text" name="highlight[color]" id="color1" value="{$hl.color}" title=""></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang labels}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[tag]" type="text" id="tag" value="{$item.tag}" /><label class="field_notice">{lang multi_seperate_by_quot_or_space}</label>        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang pub_date}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{$item.pubdate|default:#automatically_generated#}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang expire_date}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        	<input type="text" name="expiretime" id="date1" value="{$item.expdate}" /><span class="btn_calendar" id="calendar-date1"></span>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang category}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><p><!--{html_options name="data[trade][type_id]" options=$TradeTypes selected=$item.type_id|default:"1"}--></p></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang view_points_required}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[trade][require_point]" type="text" id="require_point" value="{$item.require_point}" /><label class="field_notice">{lang default_not_points}</label>        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang in_industry}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <span id="dataIndustry">
+					<select name="industry[id][1]" id="dataTradeIndustryId1" class="level_1" style="width:120px;" ></select>
+					<select name="industry[id][2]" id="dataTradeIndustryId2" class="level_2" style="width:120px;"></select>
+					<select name="industry[id][3]" id="dataTradeIndustryId3" class="level_3" style="width:120px;"></select>
+		</span>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang in_area}</th>
+        <td class="paddingT15 wordSpacing5">
+			<span id="dataArea">
+						<select name="area[id][1]" id="dataTradeAreaId1" class="level_1" style="width:120px;" ></select>
+						<select name="area[id][2]" id="dataTradeAreaId2" class="level_2" style="width:120px;"></select>
+						<select name="area[id][3]" id="dataTradeAreaId3" class="level_3" style="width:120px;"></select>
+			</span>        
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang detailed_contents}</th>
+        <td class="paddingT15 wordSpacing5">
+		<div id="tabs-ta">
+		<!-- {pl frm="textarea" values=$item.content style="width:650px;height:300px;"} -->
+		</div>
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang seo_title}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[meta][title]" type="text" id="seo_title" value="{$item.seo_title}" />        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang seo_keyword}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[meta][keyword]" type="text" id="seo_kewyord" value="{$item.seo_keyword}" />        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang seo_description}</th>
+        <td class="paddingT15 wordSpacing5"><input name="data[meta][description]" type="text" id="seo_description" value="{$item.seo_description}" />        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang picture}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <input class="infoTableFile2" type="file" name="pic" id="pic" />
+          <label class="field_notice">{lang image_format_support}</label>
+          {if $item.picture}
+          <br /><span><img src="{$item.image}" alt="{$item.name}"/></span>
+          {/if}
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />
+			<input class="formbtn" type="submit" name="pass" value="{lang check_passed}" />
+			<input class="formbtn" type="submit" name="forbid" value="{lang check_invalid}" />
+			<input class="formbtn" type="submit" name="del" value="{lang delete}" />
+		</td>
+
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var cache_path = "../";
+var app_language = '{$AppLanguage}';
+var area_id1 = {$item.area_id1|default:0} ;
+var area_id2 = {$item.area_id2|default:0} ;
+var area_id3 = {$item.area_id3|default:0} ;
+var industry_id1 = {$item.industry_id1|default:0} ;
+var industry_id2 = {$item.industry_id2|default:0} ;
+var industry_id3 = {$item.industry_id3|default:0} ;
+</script>
+<!--{literal}-->
+<script>
+Calendar.setup({
+	trigger    : "calendar-date1",
+	animation  : false,
+	inputField : "date1",
+	onSelect   : function() { this.hide() }
+});
+</script>
+<!--{/literal}-->
+<script src="../static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="../static/scripts/script_area.js"></script>
+<script src="../static/scripts/script_industry.js"></script>
+{editor type="tinymce"}
+<!-- {include file="footer.html"} -->

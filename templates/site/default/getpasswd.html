@@ -1,0 +1,58 @@
+<!--{include file="header.html" page_title=#get_password#}-->
+<script src="data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<script language="javascript" src="static/scripts/jquery/jquery.validate.js"></script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#getPasswdFrm").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+})
+</script>
+<!--{/literal}-->
+<div class="wrapper">
+  <div class="content">
+    <div class="tips"><span>{$position}</span></div>
+    <div class="blank6"></div>
+   <div class="quhuimima">  
+      <div class="base_title">
+         <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang add_details}</span><span class="corner_t_r"></span><span class="title_telephone">{lang issue_contact}{$service_tel}</span></h2> 
+      </div>
+      <div class="messagecon">
+              <div class="messageconleft">
+              <form name="getpasswdfrm" id="getPasswdFrm" method="post" action="getpasswd.php">
+                  <input type="hidden" name="action" value="getpasswd" />
+                  <!-- {formhash} -->
+                    <strong>{lang input_name_password}</strong><br /><br />
+                    <table class="messagecon_list">
+                      <tr>
+                        <th>{lang login_name}</th>
+                        <td><input type="text" name="data[username]" value="" id="dataUsername" class="required"/></td>
+                      </tr>
+                      <tr>
+                        <th>{lang your_email}</th>
+                        <td><input type="text" name="data[email]" id="UserEmail" value="" class="required email"/></td>
+                      </tr>
+                      <tr>
+                        <th>&nbsp;</th>
+                        <td><input type="submit" name="go_next" value="{lang send_password_email_next}" id="GoNext" class="submit_w165"/></td>
+                      </tr>
+                    </table>
+                </form>
+                </div>
+                <img src="{$theme_img_path}images/quhuuimima04.jpg" />
+                <div class="messageconright">
+                <!-- {if $ERRORS} -->
+                    <p>{$ERRORS}</p>
+                <!-- {else} -->
+                    {lang if_forget_password_pls_reset}
+                <!-- {/if} -->
+                </div>
+            </div>
+    </div>
+  </div>
+</div>
+<!--{include file="footer.html"}-->

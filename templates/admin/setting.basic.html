@@ -1,0 +1,71 @@
+<!-- {include file="header.html"} -->
+<link href="../static/scripts/jquery/colorpicker.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="../static/scripts/jquery/colorpicker.js"></script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$.fn.colorPicker.defaultColors = ['00FFFF', '000000', '999999', 'FF0000', 'FFFF00', '0000FF', 'FFFFFF', '00FF7F', '00FF00'];
+	$('#color1').colorPicker();
+})
+</script>
+<!--{/literal}-->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang site_info}</p>
+</div>
+<div id="rightTop">
+	<h3>{lang site_info}</h3>
+	<ul class="subnav">
+		<li><a class="btn1" href="setting.php?do=basic"><span>{lang basic_setting}</span></a></li>
+		<li><a href="setting.php?do=basic_contact">{lang contact_method}</a></li>
+		<li><a href="setting.php?do=basic_desc">{lang site_desc}</a></li>
+	</ul>
+</div>
+<div class="info">
+  <form method="post">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"><label for="time_zone"> {lang website} {lang naming_n}</label></th>
+        <td class="paddingT15 wordSpacing5"><input name="data[setting][site_name]" type="text" id="site_name" value="{$item.SITE_NAME|default:$_G.site_name}" class="infoTableInput" />
+          <span class="gray">{lang appear_in_the_navigation_bar}</span>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="time_format_simple"> {lang website} {lang the_title}{lang colon}</label></th>
+        <td class="paddingT15 wordSpacing5"><input name="data[setting][site_title]" type="text" id="site_title" value="{$item.SITE_TITLE|default:$_G.site_title}" class="infoTableInput" />
+          <span class="gray">{lang appear_in_the_page_title}</span>
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="time_format_complete"> {lang website} {lang sub_title}</label></th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="data[setting][site_banner_word]" type="text" id="site_banner_word" value="{$item.SITE_BANNER_WORD|default:$site_banner_word}"/>
+          <span class="gray">{lang will_be_displayed_in_banner}</span>
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="time_format_complete"> {lang logo_url}</label></th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="data[setting][site_logo]" type="text" id="site_logo" value="{$item.SITE_LOGO|default:"$admin_theme_pathimages/logo.gif"}"/>
+          <span class="gray">{lang no_http_means_local_url}</span>
+		</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="price_format"> {lang website} URL{lang colon}</label></th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="data[setting][site_url]" type="text" id="site_url" value="{$item.SITE_URL|default:$smarty.const.URL}" />
+          <span class="gray">{lang website} {lang the_link_will_be_displayed_in_the_bottom_of_the_page}</span>
+		</td>
+      </tr>
+	   <tr>
+        <th class="paddingT15"><label for="price_format"> {lang website} {lang icp_info}</label></th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput" name="data[setting][icp_number]" type="text" id="icp_number" value="{$item.ICP_NUMBER|default:$icpnumber}" />
+          <span class="gray">{lang icp_will_be_shown_at_the_footer}</span>
+                </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20"><input class="formbtn" type="submit" name="savebasic" value="{lang submit}" />
+          <input class="formbtn" type="reset" name="reset" value="{lang reset}" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

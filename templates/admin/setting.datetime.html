@@ -1,0 +1,30 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang time_set}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang time_set}</h3> 
+</div>
+<div class="info"> 
+  <form action="setting.php" method="post" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="do" value="functions">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang default} {lang date_format}</th>
+        <td class="paddingT15 wordSpacing5"><input name="data[date_format]" type="text" id="DateFormat" value="{$item.DATE_FORMAT|default:"%Y-%m-%d"}"/>
+          <span class="gray">{lang gd_picture_ok}<a href="http://www.php.net/strftime" target="_blank">strftime</a>{lang any_format} {$smarty.now|date_format:"%Y-%m-%d"}</span></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang default} {lang time_difference}</th>
+        <td class="paddingT15 wordSpacing5"><input name="data[time_offset]" type="text" id="TimeOffset" value="{$item.TIME_OFFSET|default:0}"/>
+          <span class="gray">{lang the_time_difference_between_local_time_and_gmt}{$smarty.now|date_format:"%Y-%m-%d %H:%M:%S"}</span></span></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save_datetime" value="{lang save_setting}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div> 
+<!-- {include file="footer.html"} -->

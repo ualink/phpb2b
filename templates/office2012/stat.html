@@ -1,0 +1,30 @@
+{block name="title" prepend}{#statistics#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <table class="bggray">
+          <tr>
+            <td align="center"><span class="font14b_org">{lang information_statistics}</span> </td>
+          </tr>
+      </table>
+        <table class="offer_info_count">
+
+                  <!--{foreach from=$UserTradeStat item=ut}-->
+                    <tr>
+                      <td height="35" class="font14"><img src="{$office_theme_path}images/stat.gif" width="13" height="13" border="0"> <strong>{$ut.name}{lang information}{lang colon}</strong> {lang now_you_have} <span class="orange"><strong>{$ut.Amount|default:"0"}</strong></span> {lang number}{$ut.name}{lang information_g}</td>
+                    </tr>
+                    <!--{/foreach}-->
+					<!--{if $pb_userlevel>1}-->
+                    <tr>
+                      <td height="35" class="font14"><img src="{$office_theme_path}images/stat.gif" width="13" height="13" border="0"> <strong>{lang products_n}</strong> {lang now_you_have} <span class="orange"><strong>{$ProductAmount}</strong></span>{lang account_product}</td>
+                    </tr>
+					<!--{/if}-->
+                    <tr>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td height="1" background="{$office_theme_path}images/index_trade_line.gif"></td>
+                    </tr>
+       </table>
+{/block}

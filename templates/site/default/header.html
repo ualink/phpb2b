@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<title>{$page_title}</title>
+<base href="{$SiteUrl}">
+<meta name ="keywords" content="{$metakeywords|strip_tags}">
+<meta name ="description" content="{$metadescription|strip_tags|truncate:200}"> 
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<link rel="stylesheet" type="text/css" href="{$theme_img_path}css/base.css" />
+<link rel="stylesheet" type="text/css" href="{$theme_img_path}css/general.css" />
+<link rel="stylesheet" type="text/css" href="{$theme_img_path}style.css" />
+<!-- {if $theme_style_name} -->
+<link rel="stylesheet" id="css_extstyle" type="text/css" href="{$theme_img_path}style/{$theme_style_name}/style.css" />
+<!-- {/if} -->
+<link rel="stylesheet" type="text/css" href="{$theme_img_path}css/layout.css" />
+<link rel="stylesheet" type="text/css" href="static/css/common.css" />
+<link rel="shorcut icon" type="image/x-ico" href="{$SiteUrl}{$theme_img_path}images/favicon.ico" />
+<link rel="bookmark" type="image/x-ico" href="{$SiteUrl}{$theme_img_path}images/favicon.ico" />
+<script src="static/scripts/jquery.js"></script>
+<script language="javascript">
+var cookiepre = '{$cookiepre}';
+var theme_style_name = '{$theme_style_name}';
+var cookiedomain = '{$cookiedomain}';
+var cookiepath = '{$cookiepath}';
+</script>
+<script src="static/scripts/general.js"></script>
+<script language="javascript">
+var keywords_sample = "{lang keywords_sample}";
+var input_keywords = "{lang input_keywords}";
+var SiteUrl = "{$SiteUrl}";
+var show_ajax = "{$show_ajax}";
+var nav_id = "{$nav_id}";
+var search_url = "{the_url module=search}";
+var cook_style_name = getcookie("siteStyle");
+var cook_style_href = '{$theme_img_path}style/';
+if(!isUndefined(cook_style_name) && cook_style_name!='') $('#css_extstyle').attr('href',cook_style_href + cook_style_name+'/style.css');
+</script>
+<!--{literal}-->
+<script>
+$(document).ready(function() {
+	if(show_ajax==1){
+		$.ajaxSetup ({
+			cache: false
+		});
+		$("#hdLoginBar").load(SiteUrl+"ajax.php?action=showLoginBar",
+				function (responseText, textStatus, XMLHttpRequest){
+				this;
+		});
+	}
+	$('#style_switch a').click(function(){
+		var cssextra = $(this).attr('label');
+		if(cssextra){
+			$('#css_extstyle').attr('href',cook_style_href+cssextra+'/style.css');
+			setcookie("siteStyle", cssextra);
+		}
+	})
+	$("#SearchKeyword").focus(function(){
+		if($("#SearchKeyword").val()==keywords_sample){
+			$("#SearchKeyword").val("").css('color', '#000000')
+			};
+		}).blur(function(){
+		if($("#SearchKeyword").val()==''){
+			$("#SearchKeyword").val(keywords_sample).css('color', '#ccc')
+			};
+	});
+	$("#BtnSearch").click(function(){
+		if($('#SearchKeyword').val()==keywords_sample) {alert(input_keywords);$('#SearchKeyword').focus();return false;}
+	});
+	$("#BtnCompany").click(function(){
+		if($('#SearchKeyword').val()==keywords_sample) {alert(input_keywords);$('#SearchKeyword').focus();return false;}
+		$("#SearchFrm").attr("action",search_url);
+		$("#hdAct").val("direct");
+	});
+})
+</script>
+<!--{/literal}-->
+</head>
+<body id="bd_{$smarty.const.CURSCRIPT}">
+<div id="header">
+    <div class="headtop">
+    <!--{cacheless}-->
+    <p class="headtopcon">
+        <a class="index" href="javascript:;" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('{$SiteUrl}');">{lang set_home_page}</a>
+        <a href="{$_G.REQUEST_URI}" onclick="javascript:window.external.addFavorite(this.href, this.title);return false;" rel="sidebar" title="{$_G.site_name}">{lang add_favorite}</a>
+        <!--{if $pb_username!=""}-->
+        <span id="hdLoginBar"><em>{#hello#|sprintf:$pb_username}&nbsp;</em>
+        <a href="redirect.php?url=/virtual-office/" target="_blank">[{lang my_office_room}]</a>
+        {if $is_admin}<a href="pb-admin/login.php" target="_admin">[{lang control_pannel}]</a>{/if}
+        <a href="logging.php?action=logout">[{lang login_out}]</a></span>
+        <!--{else}-->
+        <span id="hdLoginBar"><em>{#hello_welcome_to#|sprintf:$_G.site_name}</em>
+        <a href="logging.php">&nbsp;[{lang pls_login}]</a>
+        <a href="member.php" title="{lang register}" ><strong>[{lang free} {lang register}]</strong></a></span>
+        <!--{/if}-->
+        <a href="index.php?do=service" style="float:right;">{lang customer_service}</a>
+        <a href="index.php?do=offer&action=post" style="float:right;">{lang free_post}</a>
+    </p>
+    <!--{/cacheless}-->
+    </div>
+    <div class="logo_search clearfix">
+        <h1 id="logo"><a href="{$site_url}"><img src="{$site_logo}" alt="{$site_banner_word}" /></a></h1>
+        <div class="search_bar">
+            <div class="search_nav">
+                <ul>
+                    <li id="topMenuProduct"><a href="index.php?do=product"><span>{lang search_product}</span></a></li>
+                    <li id="topMenuCompany"><a href="index.php?do=company"><span>{lang search_company}</span></a></li>
+                    <li id="topMenuOffer"><a href="index.php?do=offer"><span>{lang search_offer}</span></a></li>
+                    <li id="topMenuNews"><a href="index.php?do=news"><span>{lang search_news}</span></a></li>
+                </ul>
+                <a href="{the_url module=search}" class="fl lhighs">{lang adv_search}</a>
+            </div>
+            <form name="search_frm" id="SearchFrm" method="get" action="index.php">
+            <input type="hidden" name="do" id="hdDo" value="search" />
+            <input type="hidden" name="action" id="hdAct" value="lists" />
+            <input type="hidden" name="module" id="hdModule" value="offer" />
+             <div class="search_panel">
+                 <span class="search_input_box">
+                    <input type="text" name="q" id="SearchKeyword" value="{$_G.q|default:#keywords_sample#}" />
+                  </span>
+                  <span class="search_btn_box">
+                  <button type="submit" id="BtnSearch" value="{lang search}">{lang search}</button>
+                  <button type="submit" id="BtnCompany" value="{lang search}">{lang company_direct}</button>
+                  </span>
+                  <span class="history break underline"><strong>{lang latest_search}</strong><!--{pb:tag row=3 name="tag1"}-->{$tag1.link}<!--{/pb:tag}--></span> 
+             </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="header_nav">    
+    <div id="nav_inner">
+        <ul><!-- {get do="cache" name=nav echo=y} --></ul>
+	</div>
+</div>

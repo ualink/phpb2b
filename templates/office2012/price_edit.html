@@ -1,0 +1,56 @@
+{block name="title" prepend}{#product_prices#}{/block}
+{block name="main"}
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#Frm1").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+})
+</script>
+<!--{/literal}-->
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{lang product_prices}</h2></div>
+
+	  <form method="post" action="price.php" id="Frm1">
+	  <!-- {formhash} -->
+	  <input type="hidden" name="id" value="{$item.id}">
+	  <input type="hidden" name="do" value="price">
+       <div class="hint">{lang must_input_with_star}</div>
+        <table class="offer_info_content">
+			<!-- {if $item.productname} -->
+			<input type="hidden" name="product[name]" value="{$item.productname}">
+			<input type="hidden" name="product[id]" value="{$item.product_id}">
+			  <tr>
+				<th> {lang product_name}</th>
+				<td class="tdright">{$item.productname}</td>
+			  </tr>
+			<!-- {else} -->
+			  <tr>
+				<th><font class="red">*</font>{lang product_name}{lang colon}</th>
+				<td class="tdright"><input type="text" name="product[name]" value="" class="required"></td>
+			  </tr>
+			<!-- {/if} -->
+			  <tr>
+				<th><font class="red">*</font>{lang the_price_n}</th>
+				<td><input name="price[price]" type="text" id="dataProductName" value="{$item.price}" class="required">&nbsp;<select name="price[currency]">{html_options options=$Monetaries selected=$item.currency}
+				</select><font size="4" color=""> / </font><select name="price[units]">
+				{html_options options=$Measuries selected=$item.units}	
+				</select></td>
+			  </tr>
+			  <tr>
+                        <th>{lang price_description}</th>
+                        <td class="tdright"><textarea name="price[description]" id="dataProductContent" rows="8" wrap="VIRTUAL" style="width:370px;">{$item.description}</textarea></td>
+                      </tr>
+			  <tr>
+			  <tr>
+				<th class="circle_bottomleft"></th>
+				<td class="circle_bottomright"><input name="save" type="submit" id="save" value=" {lang confirm_submit} "></td>
+			  </tr>
+          </table>
+	</form>
+{/block}

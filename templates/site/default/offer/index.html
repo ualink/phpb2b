@@ -1,0 +1,131 @@
+<!--{include file="../header.html" page_title=#search_offer#}-->
+  <div class="blank6"></div>
+  <div class="container clearfix">
+    <div class="fullsrceen_ad"><!--{ads typeid=2 name="ads1"}--><span>{$ads1.link}</span><!--{/ads}--></div>
+    <div class="blank6"></div>
+    <div class="offer_list">
+      <div class="offer_list_top">
+        <div class="offer_list_top1 fl">
+          <div class="offer_list_top1_news">
+            <div class="title_bar_s1">
+            <span class="title_top_s1"><span></span></span>
+            <h2>{lang new_offer}</h2>
+            </div>
+            <div class="offer_list_top1_newscon">
+                <div class="title_time">
+                  <h4><span id="currentDate">{lang today_is}{$smarty.now|date_format:"%Y-%m-%d"}</span></h4>
+                </div>
+              <ul>
+			  <!-- {pb:offer row=10} -->
+                <li class="even">
+                <span class="even_width">{$row.link}</span>
+                <span class="even_padding">{$row.pubdate}</span>
+                </li>
+				<!-- {/pb:offer} -->
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="offer_list_right clearfix">
+        <div class="offer_list_top2">
+			<div>{ads typeid=3}<!-- This text is replaced by the Flash movie. -->{/ads}</div>
+			<div class="blank6"></div>            
+        </div>
+        <div class="offer_list_top3">
+           <div class="title_bar_s1">
+               <span class="title_top_s1"><span></span></span>
+               <h5>{lang welcome_join}{$_G.site_name}</h5>
+            </div>
+
+          <div class="offer_list_top3_c">
+            <div class="offer_list_top3_c1 cursor-hand">
+              <ul>{lang offer_introduction}</ul>
+              <div class="clear"></div>
+            </div>
+            <div class="offer_list_top3_c2">
+              <h2><span><a href="member.php" title="{lang free_reg}">{lang free_reg}</a></span></h2>
+              {lang reg_and_upgrade_vip}
+              {lang service_hotline}<span class="font14" >{$service_tel}</span>
+              </div>
+          </div>
+        </div>
+        </div>
+        <!--top3 end -->
+      </div>
+     <div class="clear"></div>
+    </div>
+           <div class="offer_list_con">
+                <div class="offer_list_con_left">
+                    
+                     <div class="title_bar_s1">
+                        <span class="title_top_s1"><span></span></span>
+                        <h2>{lang urgent_buy}</h2>
+                        </div>
+                     <div class="offer_list_con_left2_c offer_list_con_left_con">
+                     <ul>
+                        {pb:offer row=8 name="item"}
+                        <li>{$item.link}</li>
+                        {/pb:offer}
+                        </ul>
+                      </div>  
+                    <div class="blank6"></div>
+
+                    <div class="title_bar_s1">
+                        <span class="title_top_s1"><span></span></span>
+                        <h2>{lang commend} {lang seller}</h2>
+                    </div>
+                    <div  class="offer_list_con_left3_c offer_list_con_left_con">
+                    <ul>
+                         {pb:company row=8 name=company}
+                         <li>{$company.link}</li>
+                         {/pb:company}
+                     </ul>
+                     </div>
+                     <div class="blank6"></div>
+                   
+                       <div class="title_bar_s1">
+                        <span class="title_top_s1"><span></span></span>
+                        <h2>{lang stored_product}</h2>
+                        </div>
+                        
+                       <div  class="offer_list_con_left4_c offer_list_con_left_con">
+                         <ul>
+                         {pb:product row=8 name="item"}
+                         <li>{$item.link}</li>
+                         {/pb:product}
+                         </ul>
+                      </div>
+                  
+                </div>
+                <div class="co_assort fr" >
+                  <div class="title_bar_s1" style="height:28px; overflow:hidden">
+                    <span class="title_top_s1"><span></span></span>
+                    <h4><span class="titlebg_l"></span><span class="titlebg_m title_mouse">{lang industry_sort}</span><span class="titlebg_r"></span></h4>
+                </div>
+            <div class="co_assort_c clearfix">
+				<!-- {get var="IndustryList" from="industry"} -->
+                <!--{foreach from=$IndustryList item=item0 name=level_0 key=key0}-->
+                <h3 class="cb"><em class="fl"><a href="{the_url module=search industryid=$item0.id do=offer action=lists}">{$item0.name}</a></em><p class="fr"><a href="index.php?do=offer&action=lists&industryid={$item0.id}">{lang more}</a></p></h3>
+                {if $item0.sub}
+                <!--{foreach from=$item0.sub item=level1 name=level_1_industry key=key_level1}-->
+                <div class="fl">
+                    <a href="{the_url module=search industryid=$level1.id do=offer action=lists}" title="{$level1.name}" class="co_type_f">{$level1.name}</a>
+                    <br />
+                    <!--{foreach from=$level1.sub item=level2 name=level_2_industry key=key_level2}-->
+                    <a href="{the_url module=search industryid=$level2.id do=offer action=lists}" title="{$level2.name}">{$level2.name}</a><em>|</em>
+                    <!--{/foreach}-->
+                </div>
+                <!--{/foreach}-->
+                {/if}
+                <!--{/foreach}-->
+                <div class="cb"></div>
+            </div>
+        </div>
+      </div> 
+</div>
+<script>
+$("#hdModule").val("offer");
+$("#topMenuOffer").addClass("lcur");
+</script>   
+</script>
+<!--{include file="../footer.html"}-->

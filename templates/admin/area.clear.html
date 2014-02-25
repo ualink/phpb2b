@@ -1,0 +1,31 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang area}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang area}</h3> 
+    <ul class="subnav">
+		<li><a href="area.php">{lang management}</a></li>
+		<li><a href="area.php?do=edit">{lang add_or_edit}</a></li>
+        <li><a href="area.php?do=country">{lang country}</a></li>
+        <li><a href="areatype.php">{lang sorts}</a></li>
+        <li><a class="btn1" href="area.php?do=clear"><span>{lang clearing}</span></a></li>
+        <li><a href="area.php?do=refresh">{lang update_cache}</a></li>
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontl"> 
+        <form name="edit_frm" action="area.php" id="EditFrm" method="post">
+        <input type="hidden" name="do" value="clear" />
+             <div class="left"> 
+               <label for="Level1"><input type="checkbox" name="data[level][]" id="Level1" value="1"/>{#area_levels#|sprintf:1}</label>
+               <label for="Level2"><input type="checkbox" name="data[level][]" id="Level2" value="2" checked="checked"  />{#area_levels#|sprintf:2}</label>
+               <label for="Level3"><input type="checkbox" name="data[level][]" id="Level3" value="3" checked="checked" />{#area_levels#|sprintf:3}</label>
+                <input type="submit" name="save" id="Save" class="formbtn" value="{lang clear_now}" /> 
+            </div> 
+        </form> 
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare"></div>
+<!-- {include file="footer.html"} -->

@@ -1,0 +1,44 @@
+<!--{include file="../header.html" page_title="$page_title" nav_id="$nav_id"}-->
+<div class="wrapper">
+	<div class="contentbox">
+		<div class="tips"><span>{$position}</span></div>
+		<div class="blank6"></div>
+		<div class="container">
+			<div class="fl help_l">
+				 <div class="help_ltop">
+                     <span class="help_top_left"></span><span class="help_top_right"></span>
+                </div>
+				<div class="help_lcont">
+					<div class="help_telborder">
+						<div class="help_tel">
+							<div class="help_telcont">{lang help_center}<br /><p class="tar">{$service_tel}</p></div>
+						</div>
+					</div>
+					<!--{foreach from=$Helptypes item=helptype name=Helptypes}-->
+					<h2 class="tar helpbor_01"><a href="index.php?do=help&action=lists&typeid={$helptype.id}">{$helptype.name}</a></h2>
+					<ul>
+						<!-- {if $helptype.sub} -->
+						<!--{foreach from=$helptype.sub item=sub_helptype name=sub_helptype}-->
+						<li class="help_lcontnav"><a href="index.php?do=help&action=lists&typeid={$sub_helptype.id}">{$sub_helptype.name}</a></li>
+						<!--{/foreach}-->
+						<!-- {/if} -->
+					</ul>
+					<!--{/foreach}-->
+				</div>
+                 <div class="help_lcontnavs"></div>
+			</div>
+			<div class="fr help_r clearfix">
+				<div class="help_rcontbg">					
+                       <form method="get" action="index.php?do=help&action=lists" >
+                         <p class="help_rsearch">
+                            {lang search} {lang help}{lang colon}<input name="q" value="" type="text" /><input name="submit" value="{lang search}" type="submit" class="btn_submit_w45 search_en" />
+                          </p>
+                        </form>
+					<div class="help_rbg">{$item.content}</div>
+				</div>
+			</div>
+		</div>
+        <div class="clear"></div>
+	</div>
+</div>
+<!--{include file="../footer.html"}-->

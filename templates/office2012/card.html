@@ -1,0 +1,95 @@
+{block name="title" prepend}{#business_card#}{/block}
+{block name="main"}
+<script type="text/javascript" src="../static/scripts/googlemap.js"></script>
+<script type="text/javascript" src="../static/scripts/map_init.js"></script>
+<!--{literal}-->
+<script type="text/javascript">
+$(document).ready(function(){
+  	buildMap();
+  	pressEnter();
+});
+function clip(text){
+str=eval("document." + text)
+str.select()
+str = document.selection.createRange();
+clipboardData.setData('text',(str.text));
+}
+</script>
+<!--{/literal}-->
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <div class="hint">{lang must_input_with_star}</div>  
+	
+        <form name="TradeFrm" enctype="multipart/form-data" method="post" action="{$smarty.server.PHPSELF}">
+        <!-- {formhash} -->
+         <table class="card" >
+              <tr>
+                <th>{lang contact_people}</th>
+                <td><input type="text" name="company[link_man]" value="{$item.link_man}" />
+                <font class="dull_gray">{lang full_name}</font></td>
+              </tr>
+              <tr>
+                <th>{lang phone}</th>
+                <td><input name="data[telcode]" type="text" class="ip" value="{$item.telcode}" size="4" maxlength="4">
+                -
+                  <input name="data[telzone]" type="text" class="ip" value="{$item.telzone}" size="4" maxlength="4">
+                  -
+                  <input name="data[tel]" type="text" class="ip" value="{$item.tel}" size="10" maxlength="10" /></td>
+              </tr>
+              <tr>
+                <th>{lang fax}</th>
+                <td><input name="data[faxcode]" type="text" class="ip" value="{$item.faxcode}" size="4" maxlength="4">
+                -
+                  <input name="data[faxzone]" type="text" class="ip" value="{$item.faxzone}" size="4" maxlength="4">
+                  -
+                  <input name="data[fax]" type="text" class="ip" value="{$item.fax}" size="10" maxlength="10" /></td>
+              </tr>
+              <tr>
+                <th>{lang address}</th>
+                <td><input name="company[address]" type="text" id="addressname" value="{$item.address}" onblur='givemap()'></td>
+              </tr>
+              <tr>
+                <th>{lang map_position}</th>
+                <td><input type="hidden" name="mapaddress" id="address" size="45" value="{$item.map_longitude},{$item.map_latitude}"/>
+<DIV id="mainmap" style="width:500px;height:300px;border:1px solid #000;"></DIV><br>
+{lang map_position}<span id="spanaddress" style="display: none" onclick="showtxtaddress()"></span><a href="#" style="display: none" onclick="showtxtaddress()">({lang please_select})</a><input type="text" id="txtaddress" name="txtaddress" size="50"><br/>
+{lang map_coordinate}<span id="spanlat_lon"></span>
+<input type="hidden" name="maplocation" id="maplocation" value="" /></td>
+              </tr>
+              <tr>
+                <th>{lang mobile}</th>
+                <td><input name="company[mobile]" type="text" id="company[mobile]" value="{$item.mobile}" /></td>
+              </tr>
+              <tr>
+                <th>{lang email_addr}</th>
+                <td><input name="company[email]" type="text" id="company[email]" value="{$item.email}" /></td>
+              </tr>
+                <tr>
+                <td colspan="2" align="right">
+                <div align="center">
+                  <input name="save" type="submit" id="save" value="{lang saving}">
+                </div></td>
+              </tr>                          
+			</table>
+			<table class="card" >
+             <tr>
+                <th>{lang flash_card_code}</th>
+                <td style="width:370px;"><textarea name="flash_card" style="width:350px;overflow-y:visible;height:150px;font-family:Arial"><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"  codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0" id="FlashVars" width="460" height="250">  
+				<param name="movie" value="{$SiteUrl}images/cards/default.swf?instanceid={$item.id}">  
+				<param name="allowScriptAccess" value="sameDomain" />
+				<param name="FlashVars" value="" />
+				<param name="quality" value="high">   
+				<param name="bgcolor" value="#FFFFFF">
+				<!--[if !IE]> <-->  
+				<embed src="{$SiteUrl}images/cards/default.swf?instanceid={$item.id}" quality="high" bgcolor="#ffffff" width="550" height="400" name="FlashVars" align="middle" allowScriptAccess="sameDomain" FlashVars="foo=100000" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+				FAIL (the browser should render some flash content, not this).  
+				</object>  
+				<!--> <![endif]-->  
+				</object></textarea></td>
+                <td><a href="javascript:clip('TradeFrm.flash_card');" title="{lang copy_to_clipboard}">{lang copy_to_clipboard}</a></td>
+                <td>&nbsp;</td>
+           </tr>                          
+        </table>
+        </form>
+{/block}

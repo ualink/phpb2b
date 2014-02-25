@@ -1,0 +1,165 @@
+<!--{include file="../header.html" page_title="$page_title" nav_id=6}-->
+<link href="static/scripts/jquery/ui.css" rel="stylesheet" type="text/css"/>
+<script src="static/scripts/jquery/ui.core.js"></script>
+<div class="wrapper">
+	<div class="place_price clearfix">
+		 <strong>{lang area_prices}</strong>
+		 <div>
+		 <!-- {category name="area" depth="1"} -->
+		 <!-- {foreach from=$category item=item} -->
+		 <a href='index.php?do=product&action=price&areaid={$item.id}'><span>{$item.name}</span></a>
+		 <!-- {/foreach} -->
+		 </div>
+	</div>
+	<div class="blank6"></div>        
+	<div class="content">
+		<div class="main_left_w180">
+			<div class="cornerbox">
+				<div class="title_bar_s6">
+					<span class="title_top_s6"><span></span></span>
+					<h2>{lang quotes} {lang categories}</h2>
+				</div>
+				<div class="price_menu_today clearfix">
+					<ul>
+						<!-- {get from="type" name="quotetype" var="Categories"} -->
+						<!--{foreach from=$Categories item=item}-->
+						<li><a href="index.php?do=market&action=quote&catid={$item.id}" title="{$item.title}">{$item.title}</a></li>
+						<!--{/foreach}-->
+				  </ul>
+					<div class="blank"></div>
+					<div class="btn_price_all"><a href="index.php?do=market&action=quote">{lang the_all} {lang price_quotes}</a></div>
+					<div class="blank6"></div>
+			  </div>
+			   <div class="corner_bottom">
+					<div class="corner_bottom_l"></div>
+					<div class="corner_tottom_r"></div>
+				</div>
+			</div>
+			<div class="blank6"></div>
+			<div class="cornerbox">
+				<div class="title_bar_s6">
+					<span class="title_top_s6"><span></span></span>
+					<h2>{lang quote_search}</h2>
+				</div>
+				<div class="corner_content_s6">
+				   <div class="box_date_search">
+					<form method="get" action="">
+					<input type="hidden" name="action" value="search" />
+					   <div>{lang searching_product}<input type="text" name="title" value="{$_G.title}" class="s_input"></div>
+					   <div>{lang date_start}<input name="ds" id="date1" value="{$QuoteSearchFrom}" class="s_input"/></div>
+					   <div>{lang date_end}<input name="de" id="date2" value="{$QuoteSearchTo}" class="s_input"/></div>
+					   <div class="text_center"><input type="submit" class="btn_submit" value="{lang search}"></div>
+					</form> 
+					</div>                   
+				</div>
+			   <div class="corner_bottom">
+					<div class="corner_bottom_l"></div>
+					<div class="corner_tottom_r"></div>
+				</div>
+			</div>
+			<div class="blank6"></div>
+			<div class="cornerbox">
+				<div class="title_bar_s6">
+					<span class="title_top_s6"><span></span></span>
+					<h2>{lang pro_market}</h2>
+				</div>
+				<div class="corner_content_s6">
+				   <ul>
+					<!-- {pb:market row=10 type="commend" name="market"} -->
+					 <li><!-- {$market.link} --></li>
+					<!-- {/pb:market} -->
+				   </ul>
+				</div>
+			   <div class="corner_bottom">
+					<div class="corner_bottom_l"></div>
+					<div class="corner_tottom_r"></div>
+				</div>
+			</div>
+			<div class="blank6"></div>
+			<div class="cornerbox">
+				<div class="title_bar_s6">
+					<span class="title_top_s6"><span></span></span>
+					<h2>{lang latest_price}</h2>
+				</div>
+				<div class="corner_content_s6">
+				   <ul>
+					{pb:price row=9 name="item"}
+					  <li>{$item.link}</li>
+					 {/pb:price}
+				   </ul>
+				</div>
+			   <div class="corner_bottom">
+					<div class="corner_bottom_l"></div>
+					<div class="corner_tottom_r"></div>
+				</div>
+			</div>
+		  
+		</div>
+		<div class="main_right_w770">
+			<div class="brand_hot">
+				<div class="title">
+					<h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang commend} {lang product}</span><span class="corner_t_r"></span></h2>
+				</div>
+				 <div class="product_hot commend box_bord clearfix">
+				<ul>
+					{pb:product row=6 type="image,commend"}
+					<li><a href="{$row.url}"><img src="{$row.src}" alt="{$row.name}" /></a>
+					<p><a href="{$row.name}">{$row.name}</a></p>
+					</li>
+				    {/pb:product}  
+					</ul>
+				 </div>
+			</div>
+			<div class="blank6"></div>
+			<div class="product_brand_intro">
+				<table id="hacker">
+				 <thead>
+				  <tr>
+					<th>{lang title}</th>
+					<th>{#post_time_n#}</th>
+				  </tr>
+				  </thead>
+				  <tfoot>
+				  <tr>
+					<th>{lang title}</th>
+					<th>{#post_time_n#}</th>
+				  </tr>
+				  </tfoot>
+				  <!-- {foreach from=$items item=item} -->
+				  <tbody>
+				  <tr>
+					<td><a href="index.php?do=market&action=chart&id={$item.id}" style="text-decoration:underline">{$item.title}</a></td>
+					<td class="pb_datetime">{$item.pubdate|date_format:"%Y-%m-%d"}</td>
+				  </tr>
+				  </tbody>
+				  <!-- {/foreach} -->
+				  <tr>
+					<td colspan="2" id="noborder"><div class="pagination2"><!-- {pager rowcount=$paging.total} --></div></td>
+				  </tr>
+				</table>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<!--{literal}-->
+<style> 
+#hacker tr:hover{ 
+background-color: #F6FAFD;
+} 
+</style>
+<script>
+$(document).ready(function() {
+	$("#date1").datepicker({dateFormat:'yy-mm-dd',showOn: "button",
+			buttonImage: "static/images/datePicker.gif",
+			buttonImageOnly: true
+	});
+	$("#date2").datepicker({dateFormat:'yy-mm-dd',showOn: "button",
+			buttonImage: "static/images/datePicker.gif",
+			buttonImageOnly: true
+	});
+	$("#mn_7").removeClass("current_nav_item");
+});
+</script>
+<!--{/literal}-->
+<!--{include file="../footer.html"}-->

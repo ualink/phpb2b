@@ -1,0 +1,80 @@
+<!-- {include file="header.html"} -->
+<script src="{$SiteUrl}static/scripts/jquery/jquery.colorbox.js" type="text/javascript"></script>
+<link href="{$SiteUrl}static/scripts/jquery/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css"/>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$('a[rel*=lightbox]').colorbox()
+})
+</script>
+<!--{/literal}-->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang templet} &raquo; {lang templet}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang templet}</h3> 
+</div>
+<div class="mrightTop"> 
+    <div class="fontr"> 
+        <form name="search_frm" id="SearchFrm" method="get">
+        <input type="hidden" name="do" value="search" />
+             <div> 
+				{lang keywords}<input class="queryInput" type="text" name="q" value="{$smarty.get.q}" /> 
+                <input type="submit" name="search" id="Search" class="formbtn" value="{lang search}" /> 
+            </div> 
+        </form> 
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="" method="post">
+  <input type="hidden" name="type" value="user" />
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th></th>
+		  <th><label for="idAll">{lang templet_name}</label></th>
+		  <th>{lang directory}</th>
+		  <th>{lang author}</th>
+		  <th>{lang screenshot}</th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2">
+		  <td class="firstCell"><input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}"></td>
+		  <td>{if $item.is_default==1}<img src="{$admin_theme_path}images/right.gif" alt="{lang default}" />{/if}</td>
+		  <td style="color:{$item.style}"><label for="item_{$item.id}">{$item.title}</label></td>
+		  <td>{$item.directory}</td>
+		  <td>{$item.author}</td>
+		  <td>{if $item.type=="system" and $item.available==1}<a href="templet.php?do=setup&name={$item.name}&id={$item.id}">{lang setup}</a> | {/if}{if $item.picture}<a href="{$item.picture}" title="" rel="lightbox">{lang preview}</a>{else}{lang preview}{/if}</td>
+		  <td class="handler">
+           <ul id="handler_icon">
+            {if $item.available}
+            <li><a class="btn_edit" href="templet.php?do=edit&id={$item.id}&type={$item.type}{$addParams}" title="{lang edit}">{lang edit}</a></li>
+             <li><a class="btn_uninstall" href="templet.php?do=uninstall&type={$item.type}&id={$item.id}{$addParams}" title="{lang uninstall}">{lang uninstall}</a></li>
+             {else}
+			 <input type="hidden" name="entry[]" value="{$item.entry}" />
+            <li><a class="btn_install" href="templet.php?entry={$item.entry}&do=install&type={$item.type}{$addParams}" title="{lang install}">{lang insatll}</a></li>
+            {/if}
+          </ul>  
+		 </td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="7">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction"><input type="submit" name="install" value="{lang install}" class="formbtn batchButton"/></div>
+    <div class="left paddingT15" id="batchAction"><input type="submit" name="del" value="{lang uninstall}" class="formbtn batchButton"/></div>
+    <div class="pageLinks">{$ByPages}</div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

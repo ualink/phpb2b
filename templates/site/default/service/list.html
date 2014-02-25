@@ -1,0 +1,56 @@
+<!--{include file="../header.html" page_title=#customer_service_center#}-->
+<div class="wrapper">
+	<div class="tips"><span>{$position}</span></div>
+	<div class="blank6"></div>  
+	<div class="content clearfix">
+	  <div class="main_left_w720">
+	  	<div class="service_center_txt">
+             <div class="intro">
+             <span>{lang focus_user_service}</span><em>{lang service_for_your_internet}</em>
+             </div>
+             <div class="title">{lang customer_service}</div>
+         </div>
+		 <div class="corner_box">
+			<div class="title_bar_s4">
+			 <span class="title_top_s4"><span></span></span>  
+			</div>
+		   <div class="customer_service box_bord">
+			 <table cellspacing="0">
+				  <tr>
+					<th>{lang problems}</th>
+					<th>{lang status}</th>
+					<th>{lang submit_time}</th>
+					<th>{lang reply_time}</th>
+				  </tr>
+                  <!--{foreach from=$items item=item name=Items}-->
+				  <tr>
+					<td><div class="title"><span>[<a href="index.php?do=service&action=lists&typeid={$item.type_id}">{$item.typename}</a>]</span><a href="index.php?do=service&action=detail&id={$item.id}">{$item.title}</a></div></td>
+					<td>{if $item.revert_content}<span class="answer">{lang answered}</span>{else}{lang no_answer}{/if}</td>
+					<td><span{if $item.revert_content} class="answer"{/if}>{$item.submitdate}</span></td>
+					<td><span{if $item.revert_content} class="answer"{/if}>{$item.revertdate}</span></td>
+				  </tr>
+                  <!--{/foreach}-->
+				</table>
+			 <div><div class="pagination2"><!-- {pager rowcount=$paging.total} --></div></div>
+		 </div>
+		</div>
+		</div>
+	  <div class="main_right_w230">
+		<div class="corner_box">
+		   <div class="title_bar_s4">
+		  <span class="title_top_s4"><span></span></span>
+		  <h3>{lang latest_tips}</h3>
+		</div>
+		   <div class="new_tips">
+		<ul>
+		{pb:feed row=10 name=feed}
+		  <li>{$feed.link}</li>
+		{/pb:feed}
+		</ul>
+	   </div>
+	   </div>
+	   </div>
+	  </div>
+	</div>
+</div>
+<!--{include file="../footer.html"}-->

@@ -1,0 +1,62 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang industry_news}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang industry_news}</h3> 
+    <ul class="subnav">
+		<li><a href="news.php">{lang management}</a></li>
+        <li><a href="news.php?do=edit">{lang add_or_edit}</a></li>
+        <li><a href="newstopic.php">{lang topic_news}</a></li>
+        <li><a href="newstype.php">{lang sorts}</a></li>
+        <li><a class="btn1" href="newsgather.php"><span>{lang collection}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="id" value="{$item.id}" />
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang category}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <select name="data[type_id]" id="DataTypeId">
+        {$NewstypeOptions}
+        </select>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang deal_the_same_title}</th>
+        <td class="paddingT15 wordSpacing5"><!--{html_radios name="throw_similar" options=$AskAction checked=1 separator=""}--></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang gather_url_and_rules}</th>
+        <td class="paddingT15 wordSpacing5"><!-- {literal} -->          
+		<textarea style="width:650px;height:150px;" name="rules">http://www.cpp1.cn/News.htm
+/^http:\/\/www\.cpp1\.cn\/News\/[0-9]{4}-[0-9]{1,2}\/[0-9]{1,2}\/[0-9]+\.htm/i
+/<span[^>]*id="ctl00_ContentPlaceHolder1_newsShow_ctl00_txtTitle">([^<>]*)<\/span>/si
+/<span[^>]*id="ctl00_ContentPlaceHolder1_newsShow_ctl00_txtBody"[^>]*>(.*?)<\/span>/si</textarea><!-- {/literal} --><br /><label class="field_notice">{lang gather_rules}</label></td>
+      </tr>      
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" id="Gather" name="gather" value="{lang immediately} {lang collection}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script src="{$SiteUrl}static/scripts/jquery/jquery.colorbox.js" type="text/javascript"></script>
+<link href="{$SiteUrl}static/scripts/jquery/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css"/>
+<script>
+var do_not_close_when_doing = "{lang do_not_close_when_doing}";
+</script>
+<!--{literal}-->
+<script>
+$(document).ready(function() {
+	$("#Gather").click( function () { 
+		$.colorbox({html:do_not_close_when_doing,width:300,height:100}); 
+	}); 
+});
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

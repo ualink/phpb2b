@@ -1,0 +1,69 @@
+{block name="title" prepend}{#product_management#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{lang product_management}</h2></div>
+	 <div class="hint">{lang tips_buy_no_repeat}"<a href="offer.php" class="orange">{lang modify}{lang our_offer}</a>"{lang repeat_function}</div>
+	 <div class="h30"><span class="btn_hint"><a href="product.php?do=import" class="btn_publish">{lang data_import} {lang product}</a></span><span class="btn_hint"><a href="price.php?do=edit" class="btn_publish">{lang price_allow}</a></span><span class="btn_hint"><a href="product.php?do=edit" class="btn_publish">{lang release_products}</a></span></div>
+		  <form name="typefrm" id="TypeFrm" method="get" action="">
+		   <table class="product_sort">
+            <tr>
+              <td>{lang according}
+                  <select name="typeid" onchange="$('#TypeFrm').submit();">
+                    <option value="0">{lang all_categories}</option>
+				  <!--{foreach from=$ProductTypes item=pt name=producttypes}-->
+				  <option value="{$pt.id}" {if $pt.id == $smarty.get.typeid}selected{/if}>{$pt.name}</option>
+					<!--{/foreach}-->
+                  </select>
+&nbsp;&nbsp;</td>
+             <td class="prev_page"><a href="{$plink}" title="{lang prev_page}"><img src="{$office_theme_path}images/page_prev.gif"></a>&nbsp;<a href="{$nlink}" title="{lang next_page}"><img src="{$office_theme_path}images/page_next.gif"></a></td>
+            </tr>
+          </table>
+		  </form>
+	     <table class="pagedown">
+	  <tr>
+		<td>
+		  <div id="msg" align="center">{$Msg}</div></td>
+	  </tr>
+	  </table>
+         <table class="bglist">
+              <!-- product -->
+                    <col width="75">
+                    <col width="260">
+                    <col width="80">
+                    <col width="120">
+                    <col width="120">
+                <tr>
+                   <th>{lang sample_image}</th>
+                   <th>{lang content}</th>
+                   <th>{lang product}</th>
+                   <th>{lang release}</th>
+                   <th>{lang operation}</th>
+                </tr> 
+              <!--{foreach item=item from=$Items}-->
+                <tr>
+                <td><img src="{$item.image}" width=75 height=75></td>
+                <td style='word-break: break-all'>
+                    <div style="text-align:left;"><strong><a href="product.php?do=edit&id={$item.id}" style="text-decoration:underline;">{$item.name|truncate:25}</a></strong><br />[{$CheckStatus[$item.status]}][{$ProductSorts[$item.sort_id]|default:#ordinary_goods#}]<br />{lang description}{$item.content|strip_tags|truncate:100}</div>
+                </td>
+                <td><!--{if $item.state eq 1}--><a href="{$smarty.server.PHP_SELF}?do=state&type=down&id={$item.id}" title="{lang web_down_shelves}"><img src="{$office_theme_path}images/state1.gif"></a><!--{else}--><a href="{$smarty.server.PHP_SELF}?do=state&type=up&id={$item.id}" title="{lang goods_on_shelves}"><img src="{$office_theme_path}images/state0.gif"></a><!--{/if}--></td>
+                <td><a href="offer.php?do=pro2offer&productid={$item.id}">{lang as_release_supply}</a>&nbsp;<a href="price.php?do=edit&productid={$item.id}">{lang prices}</a></td>
+                <td><a href="product.php?do=edit&id={$item.id}">{lang modify}</a>&nbsp;&nbsp;[<a href="{the_url id=$item.id module='product'}" target="_blank" title="{lang click_preview}">{lang click_preview}</a>]&nbsp;&nbsp;<a href="{$smarty.server.PHP_SELF}?act=del&id={$item.id}">{lang delete}</a></td>
+                </tr> 
+              <!--{/foreach}-->
+        </table> 
+         <!-- :~product  -->
+        <table class="room_pages">
+        <tr>
+          <td>{$pagenav}&nbsp;</td>
+        </tr>
+       </table>
+       <table class="trade_line">
+            <tr>
+          <td height="1" background="{$office_theme_path}images/index_trade_line.gif"></td>
+        </tr>
+        <tr>
+          <td align="center"></td>
+        </tr>
+      </table>
+{/block}

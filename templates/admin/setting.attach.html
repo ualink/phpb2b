@@ -1,0 +1,74 @@
+<!-- {include file="header.html"} -->
+<link href="../static/scripts/jquery/colorpicker.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="../static/scripts/jquery/colorpicker.js"></script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$.fn.colorPicker.defaultColors = ['00FFFF', '000000', '999999', 'FF0000', 'FFFF00', '0000FF', 'FFFFFF', '00FF7F', '00FF00'];
+	$('#color1').colorPicker();
+})
+</script>
+<!--{/literal}-->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang functions}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang functions}</h3> 
+	<ul class="subnav">
+		<li><a href="setting.php?do=functions">{lang static_optimization}</a></li>
+		<li><a class="btn1" href="setting.php?do=attach"><span>{lang attachment}{lang setting}</span></a></li>
+	</ul>
+</div>
+<div class="info"> 
+  <form action="setting.php" method="post" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="do" value="attach">
+    <table class="infoTable"> 
+		<tr> 
+			<th class="paddingT15">{lang whether_or} {lang retained_original}{lang colon}</th> 
+			<td class="paddingT15 wordSpacing5"><!--{html_radios name="data[setting][thumb_save_orignal]" options=$AskAction checked=$item.THUMB_SAVE_ORIGNAL|default:0 separator=""}--></td> 
+		</tr> 
+		<tr> 
+			<th class="paddingT15">{lang small_picture} {lang size}{lang colon}</th> 
+			<td class="paddingT15 wordSpacing5">{lang width}{lang colon}<input name="data[small_width]" type="text"  value="{$item.small_width|default:80}" style="width:35px;" />{lang height}{lang colon}<input name="data[small_height]" type="text"  value="{$item.small_height|default:80}" style="width:35px;"/></td> 
+		</tr> 
+		<tr> 
+			<th class="paddingT15">{lang middle_picture} {lang size}{lang colon}</th> 
+			<td class="paddingT15 wordSpacing5">{lang width}{lang colon}<input name="data[middle_width]" type="text"  value="{$item.middle_width|default:220}" style="width:35px;" />{lang height}{lang colon}<input name="data[middle_height]" type="text"  value="{$item.middle_height|default:220}" style="width:35px;"/></td> 
+		</tr> 
+		<tr> 
+			<th class="paddingT15">{lang big_picture} {lang size}{lang colon}</th> 
+			<td class="paddingT15 wordSpacing5">{lang width}{lang colon}<input name="data[large_width]" type="text"  value="{$item.large_width|default:0}" style="width:35px;" />{lang height}{lang colon}<input name="data[large_height]" type="text"  value="{$item.large_height|default:0}" style="width:35px;"/></td> 
+		</tr> 
+		<tr> 
+			<th class="paddingT15">{lang whether_or} {lang watermark}{lang colon}</th> 
+			<td class="paddingT15 wordSpacing5"><!--{html_radios name="data[setting][watermark]" options=$AskAction checked=$item.WATERMARK|default:0 separator=""}--></td> 
+		</tr>
+		<tbody id="tbWaterMark">
+		<tr> 
+			<th class="paddingT15">{lang whether_or} {lang picture} {lang watermark}{lang colon}</th> 
+			<td class="paddingT15 wordSpacing5"><!--{html_radios name="data[setting][waterimage]" options=$AskAction checked=$item.WATERIMAGE|default:0 separator=""}--></td> 
+		</tr> 
+		<tr> 
+			<th class="paddingT15">{lang watermark} {lang text}{lang colon}</th> 
+			<td class="paddingT15 wordSpacing5"><input name="data[setting][watertext]" value="{$item.WATERTEXT|default:$smarty.const.URL}" /><label class="field_notice">{lang the_default_is_site_url} {$SiteUrl}</label></td> 
+		</tr> 
+		<tr> 
+			<th class="paddingT15">{lang text} {lang font}{lang colon}</th> 
+			<td class="paddingT15 wordSpacing5"><select name="data[setting][waterface]">
+				{html_options options=$FontFaces selected=$item.WATERFACE|default:$DefaultFace}
+			</select></td> 
+		</tr> 
+		<tr> 
+			<th class="paddingT15">{lang text} {lang color}{lang colon}</th> 
+			<td class="paddingT15 wordSpacing5"><input name="data[setting][watercolor]" id="color1" value="{$item.WATERCOLOR|default:"#990000"}" /></td> 
+		</tr> 
+		</tbody>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save_attach" value="{lang save_setting}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div> 
+<!-- {include file="footer.html"} -->

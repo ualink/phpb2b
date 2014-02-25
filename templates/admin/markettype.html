@@ -1,0 +1,34 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang pro_market}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang pro_market}</h3> 
+    <ul class="subnav">
+		<li><a href="market.php">{lang management}</a></li>
+        <li><a href="markettype.php">{lang add_or_edit}</a></li>
+		<li><a class="btn1" href="markettype.php"><span>{lang types}</span></a></li>
+		<li><a href="quote.php">{lang price_quotes}</a></li>
+		<li><a href="quotetype.php">{lang quotes}{lang sorts}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="do" value="save" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang one_line_one_category}</th>
+        <td class="paddingT15 wordSpacing5"><textarea style="width:250px;height:100px;" name="data[sort]" id="dataSort">{$sorts}</textarea>
+		<label class="field_notice">{lang press_enter_add_new}</label></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" value="{lang save}" />
+		</td>
+
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

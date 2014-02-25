@@ -1,0 +1,228 @@
+{block name="title" prepend}{#company_information#}{/block}
+{block name="main"}
+<script type="text/javascript" src="../static/scripts/jquery/selectbox.js"></script>
+<script>
+var app_language = '{$AppLanguage}';
+</script>
+<script type="text/javascript" src="../data/cache/{$AppLanguage}/type.js"></script>
+<script>
+option_employee_amount = "{$item.option_employee_amount|default:0}";
+option_year_annual = "{$item.option_year_annual|default:0}";
+option_reg_fund = "{$item.option_reg_fund|default:0}";
+option_manage_type = "{$item.option_manage_type|default:0}";
+option_position = "{$item.option_position|default:0}";
+option_economic_type = "{$item.option_economic_type|default:0}";
+</script>
+<!--{literal}-->
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$('#dataCompanyEmployeeAmount').options(employee_amount);
+	$("#dataCompanyEmployeeAmount")[0].options[option_employee_amount].selected = true;
+	$('#dataCompanyYearAnnual').options(year_annual);
+	$("#dataCompanyYearAnnual")[0].options[option_year_annual].selected = true;
+	$('#dataCompanyRegFund').options(reg_fund);
+	$("#dataCompanyRegFund")[0].options[option_reg_fund].selected = true;
+	$('#dataCompanyManageType').options(manage_type);
+	$("#dataCompanyManageType")[0].options[option_manage_type].selected = true;
+	$('#dataCompanyPosition').options(position);
+	$("#dataCompanyPosition")[0].options[option_position].selected = true;
+	$('#dataCompanyEconomicType').options(economic_type);
+	$("#dataCompanyEconomicType")[0].options[option_economic_type].selected = true;
+	$("#CompanyFrm").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+})
+</script>
+<!--{/literal}-->
+<!--{editor type="tinymce"}-->
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+     <div class="hint">{lang must_input_with_star}</div>
+	  {$Errors}
+	  <form name="company_frm" id="CompanyFrm" action="{$smarty.server.PHP_SELF}" method="post" enctype="multipart/form-data">
+		 <input type="hidden" name="id" value="{$item.id}">        
+		 <input type="hidden" name="data[companyfield][company_id]" value="{$item.id}">        
+		 <!-- {formhash} -->        
+		 <input type="hidden" name="do" id="Do" value="save" />
+          <table class="offer_info_content">
+              <tr>
+                <th class="circle_left"><font class="red">*</font> {lang company_name_n}</th>
+                <td class="circle_right"><input type="text" name="data[company][name]" id="dataCompanyName" value="{$item.name}" size="30" class="required"></td>
+              </tr>
+              <tr>
+                <th> {lang company_en_name}</th>
+                <td><input name="data[company][english_name]" type="text" id="english_name" value="{$item.english_name}" size="30"></td>
+              </tr>
+              <tr>
+                <th> {lang sectors}</td>
+                <td>
+                <div id="dataIndustry">
+                    <select name="industry[id][1]" id="dataCompanyIndustryId1" class="level_1"  ></select>
+                    <select name="industry[id][2]" id="dataCompanyIndustryId2" class="level_2" ></select>
+                    <select name="industry[id][3]" id="dataCompanyIndustryId3" class="level_3" ></select>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th> {lang employees_number}</th>
+                <td><select id="dataCompanyEmployeeAmount" name="data[company][employee_amount]"><option value="0">{lang select}</option></select></td>
+              </tr>
+              <tr>
+                <th> {lang year_turnover}</th>
+                <td><select id="dataCompanyYearAnnual" name="data[company][year_annual]"><option value="0">{lang select}</option></select></td>
+              </tr>
+              
+              <tr>
+                <th> {lang business_model}</th>
+                <td><select id="dataCompanyManageType" name="data[company][manage_type]"><option value="0">{lang select}</option></select></td>
+              </tr>
+              <tr>
+                <th> {lang company_nature}</th>
+                <td><select id="dataCompanyEconomicType" name="data[company][property]"><option value="0">{lang select}</option></select></td>
+              </tr>
+              <tr>
+                <th><font class="red">*</font> {lang company_profile}</th>
+                <td><p>
+                    <textarea name="data[company][description]" rows="8" wrap="VIRTUAL" id="company_des" style="width:555px;" class="required">{$item.description}</textarea>
+                </p></td>
+              </tr>
+              <tr>
+                <th> {lang main_products}</th>
+                <td><textarea name="data[company][main_prod]" rows="4" id="main_prod" style="width:355px;">{$item.main_prod}</textarea><font class=S><br>{lang character_limit}</font></td>
+              </tr>
+              <tr>
+                <th>{lang location}</th>
+                <td>						
+                <div id="dataArea">
+                    <select name="area[id][1]" id="dataCompanyAreaId1" class="level_1" style="width:120px;" ></select>
+                    <select name="area[id][2]" id="dataCompanyAreaId2" class="level_2" style="width:120px;"></select>
+                    <select name="area[id][3]" id="dataCompanyAreaId3" class="level_3" style="width:120px;"></select>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <th><font class="red">*</font> {lang address}</th>
+                <td><input name="data[company][address]" type="text" id="address" value="{$item.address}" class="required"> </td>
+              </tr>
+              <tr>
+                <th><font class="red">*</font> {lang zip}</th>
+                <td><input name="data[company][zipcode]" type="text" id="zipcode" value="{$item.zipcode}" class="required"> </td>
+              </tr>
+              <tr>
+                <th>{lang legal_person}</th>
+                <td><font color="#666666"> <span class="zi">
+                  <input name="data[company][boss_name]" type="text" id="bossname" value="{$item.boss_name}">
+                </span> </font></td>
+              </tr>
+              <tr>
+                <th>{lang company_registration_place}</th>
+                <td><font color="#666666"> <span class="zi">
+                  <input name="data[company][reg_address]" type="text" id="reg_address" value="{$item.reg_address}">
+                </span> </font></td>
+              </tr>
+              <tr>
+                <th>{lang registration_year}</th>
+                <td><input type="text" name="data[company][found_date]" id="dataFoundDate" value="{$item.found_year}"></td>
+              </tr>
+              <tr>
+                <th>{lang registration_funds}</th>
+                <td> <select id="dataCompanyRegFund" name="data[company][reg_fund]"><option value="0">{lang select}</option></select>{lang real_fill}</td>
+              </tr>
+              <tr>
+                <th>{lang opening_bank}</th>
+                <td><input name="data[company][bank_from]" type="text" id="bank_from" value="{$item.bank_from}" size="32"></td>
+              </tr>
+              <tr>
+                <th>{lang account}</th>
+                <td><input name="data[company][bank_account]" type="text" id="bank_account" value="{$item.bank_account}" size="32"></td>
+              </tr>
+              <tr>
+                <th>{lang brand_name}</th>
+                <td><input name="data[company][main_brand]" type="text" id="main_brand" value="{$item.main_brand}" size="32"></td>
+              </tr>
+              <tr>
+                <th><font class="red">*</font> {lang main_business_place}</th>
+                <td><input name="data[company][main_biz_place]" type="text" id="main_biz_place" value="{$item.main_biz_place}" size="32" class="required"> 
+                {lang provinces_city_name}</td>
+              </tr>
+              <tr>
+                <th>{lang main_customer}</th>
+                <td><input name="data[company][main_customer]" type="text" id="main_customer" value="{$item.main_customer}" size="32">                          
+                {lang example}                       </td>
+              </tr>
+              <tr>
+                <th>{lang main_market}</th>
+                <td>{html_checkboxes name="data[company][main_market]" options=$MainMarkets checked=$SelectedMarket labels=false}</td>
+              </tr>
+              <tr>
+                <th><font class="red">*</font> {lang contact_people}</th>
+                <td><input name="data[company][link_man]" type="text" id="linkman" value="{$item.link_man}" size="32" class="required"></td>
+              </tr>
+              <tr>
+                <th>{lang contact_jobs}</th>
+                <td><select id="dataCompanyPosition" name="data[company][position]"><option value="0">{lang select}</option></select></td>
+              </tr>
+              <tr>
+                <th>{lang contact_phone}</th>
+                <td><input name="data[telcode]" type="text" id="telcode" value="{$item.telcode}" size="4" maxlength="4">
+                -
+                  <input name="data[telzone]" type="text" id="telzone" value="{$item.telzone}" size="4" maxlength="4">
+                -
+                <input name="data[tel]" type="text" id="tel" value="{$item.tel}" size="15">{lang format}</td>
+              </tr>
+              <tr>
+                <th>{lang fax_number}</th>
+                <td><input name="data[faxcode]" type="text" id="faxcode" value="{$item.faxcode}" size="4" maxlength="4">
+-
+<input name="data[faxzone]" type="text" id="faxzone" value="{$item.faxzone}" size="4" maxlength="4">
+-
+<input name="data[fax]" type="text" id="fax" value="{$item.fax}" size="15">{lang format}</td>
+              </tr>
+              
+              <tr>
+                <th>{lang mobile_number}</th>
+                <td><input name="data[company][mobile]" type="text" id="mobile" value="{$item.mobile}" size="32"></td>
+              </tr>
+              <tr>
+                <th>{lang company_home}</th>
+                <td><input name="data[company][site_url]" type="text" id="site_url" value="{$item.site_url}" size="32"></td>
+              </tr>
+              <tr>
+                <th>{lang longitude}</th>
+                <td><input name="data[companyfield][map_longitude]" type="text" id="map_longitude" value="{$item.map_longitude}" size="32">&nbsp;<a href="card.php">{lang click_and_search}</a></td>
+              </tr>
+              <tr>
+                <th>{lang latitude}</th>
+                <td><input name="data[companyfield][map_latitude]" type="text" id="map_latitude" value="{$item.map_latitude}" size="32">&nbsp;<a href="card.php">{lang click_and_search}</a></td>
+              </tr>
+              <tr>
+                <th><font class="red">*</font> {lang business_email_n}</th>
+                <td><input name="data[company][email]" type="text" id="email" value="{$item.email}" size="32" class="required"></td>
+              </tr>
+              <tr>
+                <th>{lang company_logo}</th>
+                <td><input name="pic" type="file" id="Picture" size="32" onchange="document.getElementById('CompanyLogo').innerHTML='<img src=\''+this.value+'\' width=117 height=63>'"><div id="CompanyLogo" style="width: 117px; height: 63px"><!--{if $item.logo}--><img src="{$item.logo}" width="117" height="63" alt="{lang logo_image}" /><!--{/if}--></div></td>
+              </tr>
+              <tr>
+               <th class="circle_bottomleft"></th>
+               <td class="circle_bottomright"><input name="company_edit" type="submit" id="CompanyEdit" value="{lang confirm_submit}"></td>
+              </tr>
+          </table>
+	</form>
+<script>
+var cache_path = "../";
+var area_id1 = {$item.area_id1|default:0};
+var area_id2 = {$item.area_id2|default:0};
+var area_id3 = {$item.area_id3|default:0};
+var industry_id1 = {$item.industry_id1|default:0};
+var industry_id2 = {$item.industry_id2|default:0};
+var industry_id3 = {$item.industry_id3|default:0};
+</script>
+<script src="../static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="../static/scripts/script_area.js"></script>
+<script src="../static/scripts/script_industry.js"></script>
+{/block}

@@ -1,0 +1,77 @@
+{block name="title" prepend}{#diy_website#}{/block}
+{block name="main"}
+ <div class="blank"></div>
+ <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+ <div class="offer_info_title"><h2>{$page_title}</h2></div>
+  <table class="bggray">
+	<tr>
+	  <td class="gray" style="width:545px;"><span class="orange">{lang friendly_tip}</span>{lang space_name}{lang change_style}</td>
+	  <td style="width:90px;"><a href="javascript:;" onclick="$('#SpaceNameModify').toggle();" class="btn_publish">{lang modify}{lang space_name}{lang name}</a> </td>
+      <td style="width:100px;"> <a href="{$COMPANYINFO.space_url}" target="_blank" class="btn_publish" >{lang click_preview}</a></td>
+	</tr>
+	<tbody id="SpaceNameModify" style="display:none;">
+	<form name="space_form" action="{$smarty.server.PHP_SELF}" method="post">
+	<tr>
+	  <td  colspan="3" class="gray">{lang space_name}{lang name_n}<input type="text" name="data[space_name]" id="dataSpaceName" value="{$COMPANYINFO.cache_spacename}" style="text-align:center;ime-mode:disabled;width:350px;" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" maxlength="100">&nbsp;<input type="submit" name="updateSpaceName" value="{lang submit_changes}">&nbsp;{lang left_bracket}{lang space_name}{lang english_number_portfolio}{lang right_bracket}
+	  </td>
+      
+	</tr>
+	</form>
+	</tbody>
+  </table>      
+  <form name="stylefrm" action="{$smarty.server.PHP_SELF}" method="post">
+  <!-- {formhash} -->
+  <table class="temp_style">
+	<tr>
+	<!--{foreach from=$Items item=item name="templet"}-->
+	  <td>
+	  <label for="style_{$item.id}"><a href="javascript:;" onclick="$('#skin_{$item.id}').show();"><img height="155" src="{$item.picture}" disabled="disabled"><span></span></a></label>
+		<br>
+		<label for="style_{$item.id}"><input type="radio" value="{$item.id}" name="data[member][styleid]" id="style_{$item.id}" {if $item.id==$templet_id}checked{/if}>{$item.title}</label>
+		{if $item.styles}
+		<div style="display:none;" id="skin_{$item.id}">
+		{lang theme_n}<select name="data[skin][{$item.id}]" id="skinsStyle{$item.id}">
+			<!--{foreach from=$item.styles item=skinitem key=skinkey}-->
+			<option value="{$skinkey}" {if $style_id==$skinkey}selected="selected"{/if}>{$skinitem}</option>
+			<!--{/foreach}-->
+			</select>
+		</div>
+		{/if}
+	</td>
+	<!--{if $smarty.foreach.templet.iteration is div by 4}-->
+	</tr><tr>
+	<!--{/if}-->
+	<!--{foreachelse}-->
+	<td>{lang no_provide_template}</td>
+	<!--{/foreach}-->
+	</tr>
+	</table>
+	  <table class="trade_line">
+		<tr>
+		  <td height="1" background="{$office_theme_path}images/index_trade_line.gif"></td>
+		</tr>
+	   <tr align="center" valign="bottom">
+	  <td height="40">
+	  <input name="save" type="submit" id="Save" value="{lang choose_submit}">
+	  </td>
+	</tr>
+  </table>
+  </form>
+	<table class="attentions">
+		<tr>
+		{lang change_style_tips}
+		</tr>
+	</table>
+<!-- {literal} -->
+<script type="text/javascript"> 
+var lb=document.getElementsByTagName('label'); 
+for (i=0;i<lb.length;i++) { 
+	lb[i].onclick=function () { 
+		var lbfor=this.getAttribute('for')?this.getAttribute('for'):this.getAttribute('HTMLfor')+''; 
+		document.getElementById(lbfor).click(); 
+		document.getElementById(lbfor).focus(); 
+	}             
+} 
+</script>
+<!-- {/literal} -->
+{/block}

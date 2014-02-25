@@ -1,0 +1,66 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang system_tool} &raquo; {lang log_browse}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang log_browse}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="log.php"><span>{lang administrator} {lang logs}</span></a></li>
+        <li><a href="log.php?do=clear">{lang clearing}</a></li>
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontr"> 
+        <form name="search_frm" id="SearchFrm" method="get">
+        <input type="hidden" name="do" value="search" />
+             <div> 
+				{lang keywords}<input class="queryInput" type="text" name="q" value="{$smarty.get.q}" /> 
+                <input type="submit" name="search" id="Search" class="formbtn" value="{lang searching}" /> 
+            </div> 
+        </form> 
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th><label for="idAll">{lang grade}</label></th>
+		  <th>{lang digest}</th>
+		  <th>{lang source_n}</th>
+		  <th>{lang date_and_time}</th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2">
+		  <td class="firstCell"><input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}"></td>
+		  <td><img src="{$item.label}" /></td>
+		  <td><label for="item_{$item.id}">{$item.description}</label></td>
+		  <td>{$item.source_module}</td>
+		  <td class="pb_datetime">{$item.pubdate}</td>
+		  <td class="handler">
+          <ul id="handler_icon">
+            <li><a class="btn_delete" href="log.php?do=del&id={$item.id}{$addParams}" title="{lang delete}">{lang delete}</a></li>
+          </ul> 
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="6">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="submit" name="del" value="{lang delete}" class="formbtn batchButton"/>
+    </div>
+    <div class="pageLinks">{$ByPages}</div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

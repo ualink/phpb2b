@@ -1,0 +1,102 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang pro_market}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang pro_market}</h3> 
+    <ul class="subnav">
+		<li><a href="market.php">{lang management}</a></li>
+        <li><a class="btn1" href="market.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+		<li><a href="markettype.php">{lang types}</a></li>
+		<li><a href="quote.php">{lang price_quotes}</a></li>
+		<li><a href="quotetype.php">{lang quotes}{lang sorts}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form action="market.php" method="post" id="EditFrm" name="edit_frm" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{$smarty.get.id}">
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang market}{lang naming_n}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[market][name]" value="{$item.name}" /><label class="field_notice">{lang naming}</label>        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang whether_or}{lang show_it}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><!--{html_radios name="data[market][status]" options=$MarketStatus checked=$item.status|default:1 separator=""}--></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang whether_or}{lang commend}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><!--{html_radios name="data[market][if_commend]" options=$AskAction checked=$item.if_commend|default:0 separator=""}--></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang in_industry}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <span id="dataIndustry">
+					<select name="industry[id][1]" id="dataMarketIndustryId1" class="level_1" style="width:120px;" ></select>
+					<select name="industry[id][2]" id="dataMarketIndustryId2" class="level_2" style="width:120px;"></select>
+					<select name="industry[id][3]" id="dataMarketIndustryId3" class="level_3" style="width:120px;"></select>
+		</span>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang in_area}</th>
+        <td class="paddingT15 wordSpacing5">
+			<span id="dataArea">
+						<select name="area[id][1]" id="dataMarketAreaId1" class="level_1" style="width:120px;" ></select>
+						<select name="area[id][2]" id="dataMarketAreaId2" class="level_2" style="width:120px;"></select>
+						<select name="area[id][3]" id="dataMarketAreaId3" class="level_3" style="width:120px;"></select>
+			</span>        
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang digest}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea style="width:550px;height:50px;" name="data[market][main_business]">{$item.main_business}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang description_n}</th>
+        <td class="paddingT15 wordSpacing5">
+        <textarea style="width:550px;height:50px;" name="data[market][content]" id="MarketContent" class="mceEditor">{$item.content}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang clicks}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[market][clicked]" value="{$item.clicked}" type="text" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang picture}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <input class="infoTableFile2" type="file" name="pic" id="pic" />
+          <label class="field_notice">{lang image_format_support}</label>
+          {if $item.picture}
+          <br /><span><img src="{$item.image}" alt="{$item.name}"/></span>
+          {/if}
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />
+		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+{editor type="tinymce" mode="specific_textareas"}
+<script>
+var cache_path = "../";
+var app_language = '{$AppLanguage}';
+var area_id1 = {$item.area_id1|default:0} ;
+var area_id2 = {$item.area_id2|default:0} ;
+var area_id3 = {$item.area_id3|default:0} ;
+var industry_id1 = {$item.industry_id1|default:0} ;
+var industry_id2 = {$item.industry_id2|default:0} ;
+var industry_id3 = {$item.industry_id3|default:0} ;
+</script>
+<script src="../static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="../static/scripts/script_area.js"></script>
+<script src="../static/scripts/script_industry.js"></script>
+<!-- {include file="footer.html"} -->

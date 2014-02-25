@@ -1,0 +1,108 @@
+<!-- {include file="header.html"} -->
+{fetch file="../static/scripts/date.js"}
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang member_center} &raquo; {lang administrator}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang administrator}</h3> 
+    <ul class="subnav">
+		<li><a href="adminer.php">{lang administrator}</a></li>
+		<li><a class="btn1"><span>{lang add_or_edit}</span></a></li>
+		<li><a href="adminer.php?do=admingroup">{lang admingroup}</a></li>
+        <li><a href="adminer.php?do=password">{lang password_edit}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="adminer.php" id="EditFrm" name="edit_frm">
+    <table class="infoTable">
+	{if $item.member_id}
+	  <input type="hidden" name="member_id" value="{$item.member_id}" />
+	  <input type="hidden" name="data[member][id]" value="{$item.member_id}" />
+      <tr>
+        <th class="paddingT15"> {lang cp_login} {lang cp_username_n}</th>
+        <td class="paddingT15 wordSpacing5">{$item.username}</td>
+      </tr>
+	{else}
+      <tr>
+        <th class="paddingT15"> {lang cp_username_n}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[username]" value="" /><label class="field_notice">{lang the_user_must_already_exist}</label></td>
+      </tr>
+	{/if}
+      <tr>
+        <th class="paddingT15"> {lang user_name_n}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[adminfield][last_name]" value="{$item.last_name}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang admingroup}</th>
+        <td class="paddingT15 wordSpacing5"><select name="data[adminrole_id]">
+			{html_options options=$adminrole_result selected=$item.adminrole_id}
+        </select></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> Email{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[member][email]" value="{$item.email}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang expire_date}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input id="date1" type="text" name="data[expired]" value="{$item.expire_date}" type="text"/><span class="btn_calendar" id="calendar-date1"></span><label class="field_notice">{lang expired_that_can_not_log_back}</label></td>
+      </tr>
+	  {if $AdministratorId==$current_adminer_id and $smarty.get.do=="edit"}
+      <tr>
+        <th class="paddingT15"> {lang menu_display}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<label for="all_privilege"><input type="radio" name="auth" id="all_privilege" onclick="$('#privileges').hide();" value="0">{lang all_of}</label>
+		<label for="limit_privilege"><input type="radio" name="auth" id="limit_privilege" value="1" onclick="$('#privileges').show();">{lang designated_authority}</label><label class="field_notice">{lang the_super_administrator_has_all_privileges}</label>
+		</td>
+      </tr>
+		  <tbody id="privileges" style="display:none;">
+		<!--{foreach from=$Privileges item=item2 key=key2}-->
+      <tr>
+        <th class="paddingT15"><label for="prt-{$key2}"><input type="checkbox" onclick="jqCheckAll3(this.id,'chd-{$key2}');" name="priv[]" id="prt-{$key2}" value="{$key2}" {if $item2.check==1 || $item.permissions==''}checked="checked"{/if}>{$item2.text}</label></th>
+        <td class="paddingT15 wordSpacing5">
+		<div id="chd-{$key2}">
+				<!--{foreach from=$item2.children item=item1 key=key1 name="chd"}-->
+					<label for="chd-{$key2}-{$key1}"><input type="checkbox" name="priv[]" id="chd-{$key2}-{$key1}" value="{$key1}" {if $item2.default==$key1 || $item1.check==1}checked="checked"{/if}>{$item1.text}</label>
+					{if $smarty.foreach.chd.iteration is div by 9}
+					<br />
+					{/if}
+				<!--{/foreach}-->
+		</div>
+		</td>
+      </tr>
+		<!--{/foreach}-->
+		</tbody>
+		{/if}
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var permissions = "{$item.permissions}";
+</script>
+<!--{literal}-->
+<script>
+function jqCheckAll3( id, pID )
+{
+   $( "#" + pID + " :checkbox").attr('checked', $('#' + id).is(':checked'));
+}
+jQuery(document).ready(function($) {
+	if(permissions!=""){
+		$('#limit_privilege').attr("checked", "checked");
+		$('#privileges').show();
+	}else{
+		$('#all_privilege').attr("checked", "checked");
+	}
+})
+Calendar.setup({
+	trigger    : "calendar-date1",
+	animation  : false,
+	inputField : "date1",
+	onSelect   : function() { this.hide() }
+});
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

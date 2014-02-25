@@ -1,0 +1,64 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang extension} &raquo; {lang options}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang options}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="type.php"><span>{lang all_options}</span></a></li>       
+        <li><a href="type.php?do=edit">{lang add_or_edit}</a></li>
+		<li><a href="type.php?do=refresh">{lang update_cache}</a></li>       
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontr"> 
+        <form name="search_frm" id="SearchFrm" method="get"> 
+        <input type="hidden" name="do" value="search" />
+             <div> 
+				{lang title_keywords} : <input class="queryInput" type="text" name="q" value="{$smarty.get.q}" /> 
+                <input type="submit" name="search" id="Search" class="formbtn" value="{lang searching}" /> 
+            </div> 
+        </form> 
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th><label for="idAll">{lang label}</label></th>
+		  <th>{lang var_name}</th>
+		  <th>{lang type_name}</th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2">
+		  <td class="firstCell"><input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}"></td>
+		  <td>
+          <input type="hidden" name="optid[]" value="{$item.id}" />
+          <input type="text" name="option_label[]" value="{$item.option_label}" onclick="$('#item_{$item.id}').attr('checked',true);" ></td>
+		  <td><input type="text" name="option_value[]" value="{$item.option_value}" onclick="$('#item_{$item.id}').attr('checked',true);" ></td>
+		  <td><a href="type.php?modelid={$item.typemodel_id}" title="{$item.typename|pl}" style="text-decoration:none;">{$item.typename|pl}</a></td>
+		  <td class="handler"><a href="type.php?do=edit&id={$item.id}">{lang edit}</a>&nbsp;<a href="type.php?do=del&id={$item.id}">{lang delete}</a></td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="5">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="submit" name="update" value="{lang updating}" class="formbtn batchButton"/>
+    </div>
+    <div class="pageLinks">{$ByPages}</div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

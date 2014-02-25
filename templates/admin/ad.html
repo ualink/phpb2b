@@ -1,0 +1,88 @@
+<!-- {include file="header.html"} -->
+<script src="{$SiteUrl}static/scripts/jquery/jquery.colorbox.js" type="text/javascript"></script>
+<link href="{$SiteUrl}static/scripts/jquery/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css"/>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$('a[rel*=lightbox]').colorbox() 
+})
+</script>
+<!--{/literal}-->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang ads} &raquo; {lang ads}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang ads}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="ad.php"><span>{lang management}</span></a></li>
+        <li><a href="ad.php?do=edit">{lang add_or_edit}</a></li>
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontr"> 
+        <form name="search_frm" id="SearchFrm" method="get"> 
+        <input type="hidden" name="do" value="search" />
+             <div> 
+                <select class="querySelect" name="adzone_id" id="AdzoneId">
+				<option value="0">{lang pls_select}{lang adzone}</option>
+				<!--{foreach from=$Adzones item=item}-->
+                <option value="{$item.id}">{$item.name}</option>
+                <!--{/foreach}-->
+				</select>
+                <input type="submit" class="formbtn" value="{lang searching}" /> 
+            </div> 
+        </form> 
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th><label for="idAll">{lang the_title}</label></th>
+		  <th>{lang position}</th>
+		  <th>{lang if_online}</th>
+		  <th>{lang if_valid_n}</th>
+		  <th>{lang screenshot}</th>
+		  <th>{lang clicks}</th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2">
+		  <td class="firstCell"><input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}"></td>
+		  <td><label for="item_{$item.id}">{$item.title}</label></td>
+		  <td><a title="{lang click_and_search}" href="ad.php?do=search&adzone_id={$item.adzone_id}">{$item.adzone}</a></td>
+		  <td>{$AdsStatus[$item.state]}</td>
+		  <td>{$AdsStatus[$item.status]}</td>
+		  <td>{if $item.is_image==1}<a href="{$item.src}" rel="lightbox"><img class="double-border" src="{$item.src}" width="150" /></a>{else}{$item.start_date|date_format:"%Y-%m-%d"}{lang arrive_to}{$item.end_date|date_format:"%Y-%m-%d"}{/if}</td>
+		  <td>{$item.clicked}</td>
+		  <td class="handler">
+          <ul id="handler_icon">
+            <li><a class="btn_delete" href="ad.php?id={$item.id}&adzone_id={$item.adzone_id}&do=del{$addParams}" title="{lang delete}">{lang delete}</a></li>
+            <li><a class="btn_edit" href="ad.php?do=edit&id={$item.id}{$addParams}" title="{lang edit}">{lang edit}</a></li>
+          </ul>      
+          </td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="7">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="submit" name="del" value="{lang delete}" class="formbtn batchButton"/>
+      <input type="submit" name="down" value="{lang set_offline}" class="formbtn batchButton"/>
+      <input type="submit" name="up" value="{lang set_online}" class="formbtn batchButton"/>
+    </div>
+    <div class="pageLinks">{$ByPages}</div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

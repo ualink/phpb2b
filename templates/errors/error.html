@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<base href="{$SiteUrl}">
+<link rel="stylesheet" type="text/css" href="{$theme_img_path}css/error.css" />
+<title>{$msg} - {$_G.site_title}</title>
+<div style="margin-top:24px">
+  <table width="700" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="10" height="10" class="top_left"></td>
+      <td class="top_center"></td>
+      <td width="10" height="10" class="top_right"></td>
+    </tr>
+    <tr>
+      <td class="left"></td>
+      <td bgcolor="#FFFFFF"><table width="92%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="line"><table width="300" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="60" height="60"><center>
+                      <img src="{$theme_img_path}images/tips_bg_error.png" width="46" height="46" align="absmiddle" />
+                    </center></td>
+                  <td><div class="title1" style="margin-top:4px">{lang error_occurred}</div>
+                    <div style="margin-top:4px">{lang error_type}{lang colon}<span id="ECode">{$msg}</span></div></td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td height="30"></td>
+          </tr>
+          <tr>
+            <td height="20">{lang you_can}<a href="javascript:void(0)" id="retry" onclick="location.reload();">{lang click_here_to_try_again}</a>,{lang revisit_this_page}</td>
+          </tr>
+          <tr>
+            <td height="20">{lang check_your_network}</td>
+          </tr>
+          <tr>
+            <td height="20"></td>
+          </tr>
+          <tr>
+            <td height="30">
+            <strong>{lang you_can}{lang colon}</strong>
+            <ul class="options">
+            	<li>{lang report_the_issue_to}<a href="mailto:{$service_email}">{lang administrator}</a></li>
+            	<li>{lang visit_again_soon}<a href="{$_G.REQUEST_URI}">{$url|urldecode}</a>{lang this_page}</li>
+                <li style="display:inline;">
+				<form id="searchForm" action="{the_url module=search}" method="get" target="_blank">
+				<input type="hidden" name="do" value="search">
+				<input type="hidden" name="action" value="lists">
+				<input type="hidden" name="module" value="product">
+                <div style="margin-top:10px;">{lang attemp_to_search_info}{lang colon}
+                  <div style="margin:-21px 0 0 105px">
+                    <input type="text" name="q" id="q" style="margin-right:10px" />
+                    <input type="submit" name="button" id="button" value="{lang search_now}" />
+                  </div>
+                </div>
+              </form>                
+			  </li>
+            </ul>
+</td>
+          </tr>
+          <tr>
+            <td height="20"></td>
+          </tr>
+        </table>
+      </td>
+      <td class="right"></td>
+    </tr>
+    <tr>
+      <td height="10" class="bot_left"></td>
+      <td class="bot_center"></td>
+      <td class="bot_right"></td>
+    </tr>
+  </table>
+  <table id="related" width="652" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="help"><div style="margin:15px 0 0 10px"><a href="{$SiteUrl}">{$_G.HTTP_HOST}</a> {lang sorry_for_the_page_absent}</div></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

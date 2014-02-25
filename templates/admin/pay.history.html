@@ -1,0 +1,44 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang ads} &raquo; {lang order_center}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang order_center}</h3> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="order.php" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onClick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th><label for="idAll">{lang trade_number}</label></th>
+		  <th>{lang member_name}</th>
+		  <th>{lang total}</th>
+		  <th>{lang times}</th>
+		</tr>
+    </thead>
+    <tfoot>
+		<tr>
+		  <th colspan="7"><div class="pageLinks">{$ByPages}</div></th>
+		</tr>
+    <tfoot>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2">
+		  <td class="firstCell"></td>
+		  <td><a href="order.php?id={$item.id}&do=view">{$item.trade_no}</a>{if $item.created>$today_timestamp}<span class="icon-new"></span>{/if}</td>
+		  <td>{$item.username}{if $item.true_name}({$item.true_name}){/if}</td>
+		  <td>{$item.amount}</td>
+		  <td>{$item.created|date_format:"%Y-%m-%d %H:%M"}</td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="5">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+    </div>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

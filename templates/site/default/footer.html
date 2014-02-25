@@ -1,0 +1,21 @@
+<div id="footer">
+	<div class="ins"> 
+	        <p id="f_language_bar"><!--{get do="cache" name="language" image="y" sep="&nbsp;" echo=y}--></p>
+		<!--{pb:userpage row=15 sep="<span>|</span>" name="page"}-->
+			{$page.link}
+		<!--{/pb:userpage}-->
+		<p>{$_G.site_name} {lang copyright}&copy;&nbsp;{lang service_hotline} {$service_tel}&nbsp;{lang service_email}:{mailto text="$service_email" address="$service_email" encode="javascript"}&nbsp;<a href="javascript:;" onclick="{literal}$('html, body').animate({scrollTop: '0px'}, 300);return false;{/literal}">{lang go_top}</a>     </p>
+		{if $icp_number}<p>{$icp_number}</p>{/if}
+		<p class="footer_im"><!--{im type="qq" id="$service_qq"}{im type="msn" id="$service_msn"}--></p>
+		<p>Powered by {lang soft_name} &copy;2007-2012 <a href="http://www.phpb2b.com/" target="_blank"><strong>Ualink</strong></a> Inc.</p>
+		<!-- {if $site_theme_styles} -->
+		<ul id="style_switch">
+			<!-- {loop $site_theme_styles item} -->
+				<li><a style="background:{$item.background};" label="{$item.label}" title="{$item.name}" href="javascript:;">{$item.name}</a></li>
+			<!-- {/loop} -->
+		</ul>
+		<!-- {/if} -->
+	</div>
+</div>
+</body>
+</html>

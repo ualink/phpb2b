@@ -1,0 +1,30 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang service_center}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang service_center}</h3> 
+    <ul class="subnav">
+		<li><a href="service.php">{lang out_station_submit}</a></li>
+		<li><a class="btn1" href="service.php?do=client"><span>{lang terms_of_service}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="service.php">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"><label for="price_format"> {lang terms_of_service}{lang colon}</label></th>
+        <td class="paddingT15 wordSpacing5"><textarea name="data[setting][service_client]" id="SERVICE_CLIENT" style="width:650px;height:300px;" >{$item.SERVICE_CLIENT}</textarea>
+		</td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20"><input class="formbtn" type="submit" name="save_client" value="{lang submit}" />
+          <input class="formbtn" type="reset" name="reset" value="{lang reset}" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{editor type="tinymce"}
+<!-- {include file="footer.html"} -->

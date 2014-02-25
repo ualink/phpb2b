@@ -1,0 +1,42 @@
+{block name="title" prepend}{#company_job#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+     <div class="hint"><span class="btn_hint"><a href="job.php?do=edit"  class="btn_publish">{lang add}</a></span>{lang job_list}</div>
+        
+		<form name="TradeFrm" method="post" action="{$smarty.env.PHP_SELF}">
+		<!-- {formhash} -->
+	    <table class="news">
+              <tr>
+                <th><p align="left"><strong>{lang job_title}</strong></p></th>
+                <th  align="center"><strong>{lang created_date}</strong></th>
+                <th align="center" ><strong>{lang due_date}</strong></th>
+                <th align="center" ><strong>{lang status}</strong></th>
+                <th align="center"><strong>{lang operation}</strong></th>
+                </tr>
+              <tr>
+		      <td height="5" colspan="4" align="center" valign="middle"></td></tr>
+			  <!--{foreach from=$Items item=item}-->
+			  <tr bgcolor="{cycle values="#F3F3F3,#ffffff"}">
+              <td height="25" align="left">{$item.name|truncate:25|strip_tags}</td>
+		      <td align="center" valign="middle">{$item.pubdate}</td>
+		      <td align="center" valign="middle">{$item.expire_date}</td>
+		      <td align="center" valign="middle">{$CheckStatus[$item.status]}</td>
+		      <td align="center" valign="bottom"><a href="job.php?do=edit&id={$item.id}" target="_self">{lang modify}</a>&nbsp;<a href="job.php?do=del&id={$item.id}">{lang delete}</a></td>
+		      </tr>
+              <!--{foreachelse}-->
+              <tr><td colspan="4"><div align="center">{lang no_datas_now}</div></td></tr>
+			  <!--{/foreach}-->
+
+          </table>
+          <table>
+          <tr>
+            <td height="40" align="center">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+		</form>
+{/block}

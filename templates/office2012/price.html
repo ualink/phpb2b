@@ -1,0 +1,50 @@
+{block name="title" prepend}{#product_prices#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <table class="offer_count">
+         <tr>
+          <td><strong>{lang success_release}<span class="font14b_org"> {$Amount}</span> {lang number}{$ActionName}{lang product_prices}</strong></td>
+          <td class="height35"><a title="{lang release}{$ActionName}" href="price.php?do=edit" class="btn_publish">{lang add}{lang product_prices}</a></td>
+        </tr>
+      </table>      
+      <form name="listfrm" action="{$smarty.server.PHP_SELF}" method="post">
+	  <!-- {formhash} -->
+      <table class="offer_publish_list">
+        <tr>
+          <td>
+          <table class="bglist">
+            <tr>
+              <th>{lang product_name}</th>
+              <th>{lang prices}</th>
+              <th>{lang times}</th>
+              <th>{lang operation}</th>
+            </tr>
+			<!--{foreach from=$Items item=item}-->
+            <tr align="center" class="bgwhite">
+              <td><a href="{the_url module=product id=$item.product_id}" style="text-decoration:underline" target="_blank">{$item.title}</a></td>
+              <td>{$item.price}{$Monetaries[$item.currency]}/{$Measuries[$item.units]}</td>
+              <td class="orange">{$item.created|date_format:"%Y-%m-%d"}</td>
+              <td><a href="price.php?do=edit&id={$item.id}">{lang modify}</a>&nbsp;&nbsp;<a href="price.php?do=del&id={$item.id}">{lang delete}</a>&nbsp;&nbsp;</td>
+            </tr>
+			<!--{foreachelse}-->
+			<tr><td colspan="5"><a href="price.php?do=edit">{lang no_prices_and_add_it}</a></td></tr>
+			<!--{/foreach}-->
+          </table></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>
+          <table class="room_pages">
+              <tr>
+                <td>{$ByPages}</td>
+              </tr>
+          </table>
+          </td>
+        </tr>
+      </table>
+      </form>
+{/block}

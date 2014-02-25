@@ -1,0 +1,86 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang pro_market}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang pro_market}</h3>
+    <ul class="subnav">
+          <li><a href="market.php">{lang management}</a></li>
+          <li><a href="quote.php">{lang price_quotes}</a></li>
+          <li><a class="btn1" href="quote.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+		<li><a href="quotetype.php">{lang quotes}{lang sorts}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" id="EditFrm" action="quote.php" name="edit_frm"  >
+    <input type="hidden" name="id" value="{$item.id}" />
+   <input type="hidden" name="page" value="{$smarty.get.page}" />
+  <input type="hidden" name="market_name" value="{$item.marketname}" />
+  <input type="hidden" name="product_name" value="{$item.productname}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15">{lang the_title}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[title]" value="{$item.title}" />
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang sorts}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+		<select name="data[type_id]" id="Quotetypes">
+		<option value="0">{lang no}</option>
+        {$typeOptions}
+		</select>        
+		</td>
+      </tr>
+	  <tr style="display:none;">
+        <th class="paddingT15"> {lang prices}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">{lang maximum}{lang colon}<input class="infoTableInput2" name="data[max_price]" value="{$item.max_price}" /> {lang minimum}{lang colon}<input class="infoTableInput2" name="data[min_price]" value="{$item.min_price}" /> {lang measure_unit}{lang colon}<select name="data[units]" id="ProductpriceUnits">
+        {html_options options=$Measuries selected=$item.units}
+		</select> {lang currency_unit}{lang colon}<select name="data[currency]" id="ProductpriceCurrency">
+       {html_options options=$Monetaries selected=$item.currency}
+		</select>  </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang prices_trend}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><a href="#" onclick="$('#flowPic').toggle();">{lang add}</a></td>
+      </tr>
+	  <tbody id="flowPic" style="display:none;">
+      <tr>
+        <th class="paddingT15"> {lang horizontal}{lang colon}</th>
+        <td><textarea name="trend_data[x]" rows="" cols="" style="width:125px;">{$item.trend_x}</textarea><label class="field_notice">{lang add_more_than_one_line_on_behalf_of_a_record}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang vertical}{lang colon}</th>
+        <td><textarea name="trend_data[y]" rows="" cols="" style="width:125px;">{$item.trend_y}</textarea><label class="field_notice">{lang add_more_than_one_line_on_behalf_of_a_record}</label></td>
+      </tr>
+	  </tbody>
+      <tr>
+        <th class="paddingT15"> {lang detailed_contents}</th>
+        <td class="paddingT15 wordSpacing5"><textarea style="width:650px;height:300px;" name="data[content]" id="dataProductContent" class="mceEditor">{$item.content}</textarea>
+		</td>
+
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save}" />
+		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var cache_path = "../";
+var app_language = '{$AppLanguage}';
+var type_id = "{$item.type_id|default:0}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#Quotetypes").val(type_id)
+})
+</script>
+<!--{/literal}-->
+{editor type="tinymce" mode="specific_textareas"}
+<!-- {include file="footer.html"} -->

@@ -1,0 +1,50 @@
+<!--{include file="../header.html" page_title="$page_title" nav_id=12}-->
+<div class="wrapper">
+	<div class="tips"><span>{$position}</span></div>
+	<div class="blank6"></div>  
+	<div class="content clearfix">
+	  <div class="main_left_w720">
+         <div class="base_title">
+		     <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{$item.word}</span><span class="corner_t_r"></span></h2>
+		 </div>
+	   <div class="lemma_list">
+		 <ul>
+		 <li>
+		 <p>{lang alias_name}{if $item.word_name}({$item.word_name}){/if}</p>
+		 <p>{lang categories}<a href="{the_url module=search do=dict action=lists typeid=$item.dicttype_id}">{$item.typename}</a></p>
+		 <p>{lang views}<span>{$item.hits}</span>{lang times}</p>
+		 </li>
+         <hr class="hr_dashed" />
+		  <li>
+		 {lang digest}
+			<p>{$item.digest|nl2br}</p>
+		 </li>
+         <hr class="hr_dashed" />
+		  <li>
+		 {lang refer_content}
+			<p>{$item.content|nl2br}</p>
+		 </li>
+         <hr class="hr_dashed" />
+		  <li>
+		 {lang refer_info}
+		<p>{$item.refer|nl2br}</p>
+		 </li>
+		 </ul>
+	   </div>
+	  </div>
+	  <div class="main_right_w230">
+		<div class="title_bar_s4">
+	   <span class="title_top_s4"><span></span></span>
+	   <h3>{lang similar_words}</h3>
+	   </div>
+	   <div class="dictionary">
+		<ul>
+			{pb:dict row=10 name=dict}
+				<li>{$dict.link}</li>
+			{/pb:dict}
+		</ul>
+	   </div>
+	  </div>
+	</div>
+</div>
+<!--{include file="../footer.html"}-->

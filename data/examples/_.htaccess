@@ -1,0 +1,24 @@
+# BEGIN REWRITE
+ErrorDocument 404 /index.php?do=error&action=redirect&code=404
+ErrorDocument 403 /index.php?do=error&action=redirect&code=403
+ErrorDocument 500 /index.php?do=error&action=redirect&code=500
+ErrorDocument 502 /index.php?do=error&action=redirect&code=502
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteBase /
+RewriteRule ^(.*)space/(.*)/([a-z]+)/list-([0-9]+)-([0-9]+)\.html$ space/index.php\?userid=$2&do=$3&typeid=$4&page=$5 [QSA,L]
+RewriteRule ^(.*)space/(.*)/([a-z]+)/detail-([0-9]+)\.html$ space/index.php\?userid=$2&do=$3&nid=$4[QSA,L]
+RewriteRule ^(.*)space/(.*)/([a-z]+)/$ space/index.php\?userid=$2&do=$3 [QSA,L]
+RewriteRule ^(.*)space/(.*)/$ space/index.php\?userid=$2 [QSA,L]
+RewriteRule ^(.*)/detail/([0-9]+)\.html\?*(.*)$ index.php\?do=$1&action=detail&id=$2 [QSA,L]
+RewriteRule ^(.*)tag/([a-zA-Z]+)-(.*)/$ index.php\?do=search&action=lists&module=$2&q=$3 [QSA,L]
+RewriteRule ^(.*)page/(.*)/$ index.php\?do=page&title=$2 [QSA,L]
+RewriteCond %{HTTP_HOST} ^(www.)?(?!/.|www|bbs|demo)(.*)\.yourdomain\.com$
+RewriteRule ^/?$ %{HTTP_HOST}
+RewriteRule ([^.]+)\.yourdomain\.com$ space/index.php\?userid=$1
+RewriteRule ^(.*)space/([a-z]+)\.html$ space/index.php\?do=$2
+RewriteRule ^(.*)space/([a-z]+)/type-([0-9]+)\.html$ space/index.php\?do=$2&typeid=$3
+RewriteRule ^(.*)space/([a-z]+)/list-([0-9]+)\.html$ space/index.php\?do=$2&page=$3
+RewriteRule ^(.*)space/([a-z]+)/detail-([0-9]+)\.html$ space/index.php\?do=$2&nid=$3
+</IfModule>
+# END REWRITE

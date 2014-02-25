@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<title>{$page_title} - {$_G.site_title}</title>
+<base href="{$SiteUrl}">
+<meta name ="keywords" content="{$metakeywords}">
+<meta name ="description" content="{$metadescription}"> 
+<script src="{$WebRootUrl}static/scripts/jquery.js"></script>
+<script src="{$WebRootUrl}data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<style type="text/css">
+@import url({$WebRootUrl}{$theme_img_path}css/search.css);
+</style>
+<script>
+var input_keywords = "{lang input_keywords}";
+var select_item = "{$module}";
+var site_name = "{$_G.site_name}";
+var site_url = "{$SiteUrl}";
+</script>
+<script src="{$WebRootUrl}static/scripts/jquery/jquery.validate.js"></script>
+<script src="{$WebRootUrl}static/scripts/validate.js"></script>
+<!-- {literal} -->
+<script> 
+$(document).ready(function(){   
+	if($("#item_"+select_item).length>0){
+		$("#item_"+select_item).addClass("stab"); 
+		//$("#Do").val(select_item);
+	}else{
+		$("#nav_items").find('a:first').addClass("stab"); 
+	}
+	//Set Homepage and add favorite link
+	$("#sethomepage").click(function(){
+	if (window.sidebar) { 
+		window.sidebar.addPanel(site_name,site_url,""); 
+		return false;
+	} else if( document.all ) { 
+		window.external.AddFavorite(site_url,site_name); 
+		return false;
+	} else if( window.opera && window.print ) { 
+		return true; 
+	}
+	});
+});
+</script>
+<style>
+p,table{width:550px;border:0}
+td,p,#u{font-size:12px}
+#u{font-family:arial;padding-right:10px;line-height:19px;text-align:right;margin:0 0 13px}
+#b,#u,#l td,a{font-family:arial}
+#l{margin:18 0 3px 0px}
+#l td{padding-left:142px;height:1.28em}
+#lg{margin: 16px 57px 8px 0px}
+
+#b{height:30px;padding-top:4px}
+#b,#b a{color:#909090;text-decoration:none}
+#sb {width: 6.0em; height: 2em}
+.adw {
+    color: #7777CC;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding-left: 190px;
+}
+#lft td,#sb{font-size:14px}
+#lft a,#lft b{margin-right:1.15em;}
+
+#myurl {border:#018c3a 1px solid;left:280px;width:460px;position:absolute;background-color:#ffffff;margin:-153 0 0 0}
+.toocle1 {display: none}
+.fleft {float:left}.fright{float:right}.flo{}
+.index_4{line-height:140%;border-bottom:#f2f2f2 1px solid}
+a.an:link{font-size:13px;color:#0331bc;text-decoration:none}
+a.an:visited{font-size:13px;color:#0331bc;text-decoration:none}
+a.an:hover{font-size:13px;color:#0331bc;text-decoration:underline}
+a.anmyb2b:link{font-size:13px;color:#ff0000;text-decoration:none}
+a.anmyb2b:visited{font-size:13px;color:#ff0000;text-decoration:none}
+a.anmyb2b:hover{font-size:13px;color:#ff0000;text-decoration:underline}
+a.tab { cursor:pointer;text-decoration:underline}
+a.stab { font-weight:bold; color:#000000; text-decoration:none; cursor:default}
+</style>
+<!-- {/literal} -->
+</head>
+<body>
+<div id="u">
+<a href="{$WebRootUrl}">{lang back_portal}</a>&nbsp;|&nbsp;<!-- {if !$pb_username} --><a href="{$WebRootUrl}logging.php" id="lb">{lang pls_login}</a><!-- {else} -->{#hello#|sprintf:$pb_username}&nbsp;|&nbsp;<a href="{$WebRootUrl}redirect.php?url=/virtual-office" target="_officeroom">{lang my_office_room}</a><!-- {/if} -->
+</div>
+<center>
+<a href="{$WebRootUrl}"><img id="lg" src="{$WebRootUrl}{$site_logo}"></a>
+
+<table id="lft" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td style="padding-left: 30px; height: 32px;" nowrap="nowrap">
+<div id="nav_items">
+	  <a href="{the_url do=search module=product}" id="item_product">{lang product}</a>
+	  <a href="{the_url do=search module=offer}" id="item_offer">{lang offer}</a>
+	  <a href="{the_url do=search module=company}" id="item_company">{lang yellow_page}</a>
+	  <a href="{the_url do=search module=news}" id="item_news">{lang information}</a>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+
+<table cellpadding="0" cellspacing="1" id="SearchBtn">
+<tbody>
+<form name="search_frm" method="get" action="{$_G.PHP_SELF}">
+<input type="hidden" name="do" id="Do" value="search">
+<input type="hidden" name="action" id="Action" value="lists">
+<input type="hidden" name="module" id="Module" value="{$module|default:product}">
+<tr valign="top"><td style="padding-left: 30px; height: 32px;" nowrap="nowrap">
+<input value="" name="q" id="kw" rel="kw" size="42" maxlength="90"> <span class="btn_wr"><input type="submit" onmouseout="this.className='btn'" onmousedown="this.className='btn btn_h'" class="btn" id="su" value="{lang search}"></span></td></tr>
+</form>
+</tbody>
+</table>
+	     
+<table width="100%" cellpadding="0" cellspacing="3" id="SearchBannerWords">
+<tbody><tr><td class="adw" style="padding-left: 115px; height: 32px;" nowrap="nowrap">{$site_banner_word}</td></tr>
+</tbody>
+</table>
+  
+<span id="btn1" class="toocle2">&nbsp;<a href="javascript:;" title="{$_G.site_name} {lang set_home_page}" id="sethomepage"></a></span></p>
+<table class="toocle2" id="myurldiv" style="margin: 3px 0pt 20px 28px; width: 550px;" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td class="index_4" width="75" height="22">
+<div id="myurl0"><a href="index.php?do=topic&action=industry" target="_blank" class="anmyb2b">{lang industry_category}</a></div>
+</td>
+<!-- {pb:industry level=1 row=5 name=industry} -->
+    <td class="index_4" width="75"><div id="myurl1"><a href="index.php?do=topic&action=industry&id={$industry.id}" target="_blank" class="an">{$industry.name|pl}</a></div></td>
+<!-- {/pb:industry} -->
+    <td class="index_4"><div id="myurl7"><a href="index.php?do=topic&action=industry" class="an">{lang more}&raquo;</a></div></td>
+</tr>
+  <tr><td class="index_4" height="22"><div id="myurl6"><a href="index.php?do=topic&action=area" target="_blank" class="anmyb2b">{lang area_category}</a></div></td>
+<!-- {pb:area level=1 row=5 name=area} -->
+    <td class="index_4"><div id="myurl7"><a href="index.php?do=topic&action=area&id={$area.id}" class="an">{$area.name|pl}</a></div></td>
+<!-- {/pb:area} -->
+    <td class="index_4"><div id="myurl7"><a href="index.php?do=topic&action=area" class="an">{lang more}&raquo;</a></div></td>
+</tr>
+</tbody>
+</table>  
+
+<p>
+<!--{pb:userpage row=15 sep="<span>&nbsp;|&nbsp;</span>" name="page"}-->
+	{$page.link}
+<!--{/pb:userpage}-->
+</p>
+
+<p id="b">{lang copyright}&copy;&nbsp;{lang service_hotline}{$service_tel}&nbsp;{lang service_email}:{mailto text="$service_email" address="$service_email" encode="javascript"}</p>
+</center>
+</body>
+</html>

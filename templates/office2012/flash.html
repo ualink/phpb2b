@@ -1,0 +1,17 @@
+{block name="title" prepend}{$title}{/block}
+{block name="main"}
+{$redirect}
+     <div class="blank"></div>
+     <div class="offer_info_title"><h2>{lang action_tip}</h2></div>
+        <table class="offer_info_tips">
+        <tr>
+        <th rowspan="2"><img src="{$office_theme_path}images/{$action_img}"></th>
+        <td>{$message}</td>
+      </tr>
+      <tr>
+        <td><span><a href="{$url}" class="btn_publish">{lang go_back}</a></span><span><a href="index.php" class="btn_publish">{lang go_office_room}</a></span></td>
+      </tr>
+      </table>
+     </div>
+   </div>
+{/block}

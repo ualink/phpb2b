@@ -1,0 +1,84 @@
+<!--{include file="../header.html" page_title="$page_title"}-->
+<div class="wrapper">
+  <div class="content clearfix">
+  <div class="second_nav clearfix">
+        <div id="second_all_nav">{lang category_nav}</div>
+        <div class="news_nav_txt">
+        <!-- {pb:newstype row=25 level=1 name="item"} -->
+        <a href="{the_url module=search do=news action=lists typeid=$item.id}">{$item.name}</a>
+        <!-- {/pb:newstype} -->
+        </div>
+    </div>
+  <div class="blank6"></div>
+  <div class="news_mainbody">
+  <div class="news_mainleft">
+      <div class="news_mainbody_left">
+      	<div class="news_mainbody_left_top">
+			<!-- {ads type="focus"} --><!-- This text is replaced by the Flash movie. --><!-- {/ads} -->
+		</div>
+        <div class="blank6"></div>
+        <div class="news_mainbody_left_con">
+            <div class="title_bar_s1">
+                <span class="title_top_s1"><span></span></span>
+                <h2>{lang hot_news}</h2>
+             </div>
+            <div class="news_mainbody_left_con_body">
+             <ul>
+             <!-- {pb:news row=10 titlelen="35" name="item" dateline=$date_line} -->
+				<li>{$item.link}</li>
+             <!-- {/pb:news} -->  
+			</ul> 
+			</div>
+        </div>
+      </div>
+      <div class="news_mainbody_mid">
+         <div class="title_bar_s2">
+             <span class="title_top_s2"><span></span></span>
+             <h2>{lang latest_news}</h2>
+         </div>
+            <ul class="news_mainbody_mid_con clearfix">
+            <!-- {pb:news row=44 titlelen="25" name="item"} -->
+            <li>{$item.link}</li>  
+            <!-- {/pb:news} -->
+            </ul> 
+        	
+      </div>
+  </div>
+   <div class="news_mainbody_right">
+        <div class="title_bar_s1">
+             <span class="title_top_s1"><span></span></span>
+             <h2>{lang industry_info}</h2>
+         </div>
+        <div class="news_mainbody_right_con">
+         {$Calendar}
+      </div>
+      <div class="blank6"></div>
+       <div class="title_bar_s1">
+           <span class="title_top_s1"><span></span></span>
+           <h2>{lang topic_news}</h2>
+       </div>
+      
+      <div class="news_mainbody_right_con">
+         <ul>
+			<!--{pb:topic type="news" row=3 name="item"}-->
+				 <li>
+				   <a href="{$item.url}" title=""><img src="{$item.src}"/></a>
+				   <div>{$item.link}</div>
+				 </li>
+			<!--{/pb:topic}-->
+         </ul>
+       </div>
+   
+   </div>
+  
+  </div>   
+    
+  </div>
+  <div class="clear"></div>
+</div>
+<script>
+$("#SearchFrm").attr("action","{the_url module=search}");
+$("#hdModule").val("news");
+$("#topMenuNews").addClass("lcur");
+</script>
+<!--{include file="../footer.html"}-->

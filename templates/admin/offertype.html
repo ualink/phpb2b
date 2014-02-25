@@ -1,0 +1,95 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang offer}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang offer}</h3> 
+    <ul class="subnav">
+		<li><a href="offer.php">{lang management}</a></li>
+		<li><a href="offer.php?do=setting">{lang setting}</a></li>
+		<li><a class="btn1" href="offertype.php"><span>{lang sorts}</span></a></li>
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontl">{lang if_you_changed}</div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="offertype.php" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+	<tr class="header">
+		<th class="firstCell"><label for="idAll"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></label></th>
+		<th>{lang display_order}</th>
+		<th>{lang naming}</th>
+		<th></th>
+		<th>{lang serial_number}</th>
+		<th></th>
+	</tr>
+    </thead>
+    <tbody>
+	<!--{foreach from=$Items item=item}-->
+	<!-- {if $item.parent_id eq "0"} -->
+	<tr class="tatr2">
+	<td class="firstCell"><input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}"></td>
+	<td><input type="text" size="3" name="display_order[]" value="{$item.display_order}" /></td>
+	<td><div><input type="text" name="name[]" value="{$item.name}" size="15" />&nbsp;&nbsp;<a href="###" onclick="addrowdirect=1;addrow(this, 1, {$item.id})" class="addchildboard">{lang add} {#type_levels#|sprintf:2}</a></div></td>
+	<td></td>
+	<td><input type="text" name="tid[]" value="{$item.id}" size="15" /></td>
+	<td class="handler">
+           <ul id="handler_icon">
+            <li><a class="btn_delete" href="offertype.php?id={$item.id}&do=del" title="{lang delete}">{lang delete}</a></li>
+          </ul>		  </td>
+	</tr>
+	<!--{foreach from=$Items item=item1}-->
+	<!-- {if $item1.parent_id eq $item.id} -->
+	<tr class="tatr2">
+	<td></td>
+	<td><input type="text" size="3" name="display_order[]" value="{$item1.display_order}" /></td>
+	<td><div class="lastboard"><input type="text" name="name[]" value="{$item1.name}" size="15" /></div></td>
+	<td></td>
+	<td><input type="text" name="tid[]" value="{$item1.id}" size="15" /></td>
+	<td class="handler">
+           <ul id="handler_icon">
+            <li><a class="btn_delete" href="offertype.php?id={$item1.id}&do=del" title="{lang delete}">{lang delete}</a></li>
+          </ul>		  </td>
+	</tr>
+	<!-- {/if} -->
+	<!--{/foreach}-->
+	<!-- {/if} -->
+	<!--{foreachelse}-->
+	<tr class="no_data info">
+	  <td colspan="5">{lang no_datas}</td>
+	</tr>
+	<!--{/foreach}-->
+	<tr><td colspan="1"></td><td colspan="5"><div><a href="###" onclick="addrow(this, 0, 0)" class="addtr">&nbsp;{lang add} {#type_levels#|sprintf:1}</a></div></td></tr>
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="submit" name="del" value="{lang delete}" class="formbtn batchButton"/>
+      <input type="submit" name="update" value="{lang submit}" class="formbtn batchButton"/>
+    </div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+{literal}
+<script type="text/JavaScript">
+	var rowtypedata = [
+		[[1, '', 'td25'], [1,'<input name="newdisplayorder[]" value="" size="3" type="text">', 'td25'], [1, '<input name="newname[]" value="" size="15" type="text">'], [1, '', ''], [5, '<input name="newid[]" value="" size="15" type="text"><input type="hidden" name="newparentid[]" value="0" />']],
+		[[1, '', 'td25'], [1,'<input name="newdisplayorder[]" value="" size="3" type="text">', 'td25'], [1, '<div class=\"board\"><input name="newname[]" value="" size="15" type="text"></div>'], [1, '', ''], [5, '<input name="newid[]" value="" size="15" type="text"><input type="hidden" name="newparentid[]" value="{1}" />']]
+	];
+	function app(obj) {
+		var inputs = obj.parentNode.parentNode.getElementsByTagName('input');
+		for(var i = 0; i < inputs.length; i++) {
+			if(inputs[i].name == 'newname[]') {
+				inputs[i].value = obj.options[obj.options.selectedIndex].innerHTML;
+			} else if(inputs[i].name == 'newid[]') {
+				inputs[i].value = obj.value;
+			}
+		}
+	}
+</script>
+{/literal}
+<!-- {include file="footer.html"} -->

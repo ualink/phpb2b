@@ -1,0 +1,21 @@
+<!--{include file="header.html" page_title="$page_title"}-->
+<!--{$redirect}-->
+<!--{$js_head}-->
+<div class="wrapper">
+  <div class="subnav">{lang action_tip} &raquo; <span class="black">{$message|strip_tags}</span></div>
+  <div class="blank6"></div>
+  <div class="content">
+	 <div class="info_tip clearfix">
+		<div class="info_tip_left">
+		<div class="info_tip_service clearfix">
+			<span class="{$action_style}">{$message}</span>
+		</div>
+		</div>
+		<div class="info_tip_right">
+		<p class="back"><a href="javascript:history.go(-1);">{lang go_back}</a></p>
+		<p class="close"><a href="javascript:;" onclick="window.opener=null;window.close();">{lang close_window}</a></p>
+	   </div>         
+	 </div>
+  </div>
+</div>
+<!--{include file="footer.html"}-->

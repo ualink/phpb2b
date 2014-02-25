@@ -1,0 +1,85 @@
+<!--{include file="../header.html" page_title=#yellow_page#}-->
+<div class="wrapper">
+<div class="content">
+<div class="company_list_left fl">
+<div class="co_store">
+    <div class="title_bar_s1">
+    <span class="title_top_s1"><span></span></span>
+    <h3>{lang yellow_page}</h3>
+    </div>
+</div>
+<div class="co_store_c">
+	{lang find_marketing_company}
+	<p><a href="{if $reg_filename!=''}{$reg_filename}{else}register.php{/if}?type=company" class="submit_w118">{lang add_company}</a></p>
+	<p class="hotline">{lang hotline}{$service_tel}</p>
+</div>
+<div class="co_store co_good">
+    <div class="title_bar_s1">
+    <span class="title_top_s1"><span></span></span>
+    <h3>{lang new_recommended_company}</h3>
+    </div>
+</div>
+<div class="co_store_c">
+	<ul>
+    	{pb:company row=11 name="item"}
+		<li>{$item.link}</li>
+        {/pb:company}
+	</ul>
+</div>
+<div class="blank6"></div>
+<div class="fincco_ad"><!--{ads typeid=7 name="ads"}--><span>{$ads.link}</span><!--{/ads}--></div>
+<div class="blank6"></div>
+<!-- {assign var="do" value="company"} -->
+<div class="co_store co_good">
+    <div class="title_bar_s1">
+    <span class="title_top_s1"><span></span></span>
+    <h3>{lang join_company}</h3>
+    </div>
+</div>
+<div class="co_store_c">
+	<ul>
+    	{pb:company row=10 name="item"}
+		<li>{$item.link}</li>
+        {/pb:company}
+	</ul>
+</div>
+</div>
+<div class="company_list_right fr">
+<div class="co_type fl">
+    <div class="title_bar_s1" style="height:28px; overflow:hidden">
+         <span class="title_top_s1"><span></span></span>
+         <h4><span class="titlebg_l"></span><span class="titlebg_m title_mouse">{lang industry_sort}</span><span class="titlebg_r"></span></h4>
+    </div>
+	<div class="co_type_c">
+	<!-- {get var="IndustryList" from="industry"} -->
+	    <!--{foreach from=$IndustryList item=item0 key=key0 name=level_0}-->
+		<div class="co_type_c_title clearfix">
+		<span class="more"><a href="{the_url module=special type=industry do=company id=$item0.id}">{lang more}</a></span>
+		<h3><em><a href="{the_url module=search do=company industryid=$item0.id}">{$item0.name}</a></em></h3>
+		</div>
+		<ul class="clearfix">
+        <!-- {if $item0.sub} -->
+        <!--{foreach from=$item0.sub name=level_1_industry item=level1 key=key_level1}-->
+		   <li>
+			<a href="{the_url module=company do=search industryid=$level1.id}" title="{$level1.name}" class="co_type_f">{$level1.name}</a>
+            <br />
+            <!--{foreach from=$level1.sub name=level_2_industry item=level2 key=key_level2}-->
+			<a href="{the_url module=company do=search industryid=$level2.id}" title="{$level2.name}">{$level2.name}</a><em>|</em>
+            <!--{/foreach}-->
+		</li>
+		
+        <!--{/foreach}-->
+        <!-- {/if} -->
+		</ul>
+        <!--{/foreach}-->
+		<div class="cb"></div>
+	</div>
+</div>
+</div>
+<div class="blank6"></div>
+<script>
+$("#SearchFrm").attr("action","{the_url module=search}");
+$("#hdModule").val("company");
+$("#topMenuCompany").addClass("lcur");
+</script>
+<!--{include file="../footer.html"}-->

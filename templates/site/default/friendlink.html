@@ -1,0 +1,80 @@
+<!--{include file="header.html" page_title=#apply_friendlink#}-->
+<div class="content">
+  <div class="tips"><span>{$position}</span></div>
+  <div class="blank6"></div>
+  <div class="add_link clearfix">
+    <div class="add_link_left">    
+         <div class="title_bar_s1">
+            <span class="title_top_s1"><span></span></span>
+            <h2>{lang friend_links}</h2>
+       </div>
+        <div class="add_link_leftcon">
+          <ul>
+		  	<!-- {pb:friendlink name=link row=10} -->
+            <li>{$link.link}</li>
+			<!-- {/pb:friendlink} -->
+          </ul>
+        </div>
+    </div>
+    <div class="add_link_right">
+       <div class="title_bar_s1">
+            <span class="title_top_s1"><span></span></span>
+            <h2>{lang apply_friendlink}</h2>
+      </div>
+      <div class="add_link_rightcon">
+          <form action="index.php?do=friendlink&action=add" method="post" name="friendlink_frm" id="FriendlinkFrm">
+          <!-- {formhash} -->
+          <input type="hidden" name="do" value="apply_friendlink">
+          <table class="add_link_rightcon_info">
+            <tr>
+              <th>{lang local_sitename}</th>
+              <td align="left">{$_G.site_name}</td>
+            </tr>
+            <tr>
+              <th>{lang local_siteurl}</th>
+              <td align="left">{$site_url}</td>
+            </tr>
+            <tr>
+              <th>{lang local_sitelogo}</th>
+              <td rowspan="2" align="left"><img src="{$site_logo}" alt="{$_G.site_title}"></td>
+            </tr>
+            <tr align="left">
+              <th height="25">&nbsp;</th>
+            </tr>
+            <tr>
+              <th>{lang local_logourl}</th>
+              <td align="left">{$SiteUrl}{$site_logo}</td>
+            </tr>
+         
+             <tr>
+                <th>{lang your_site_name}</th>
+                <td ><input name="friendlink[title]" type="text" size="20"  class="form_text"/></td>
+              </tr>
+              <tr>
+                <th>{lang your_site_address}</th>
+                <td><input name="friendlink[url]" type="text" size="20"  class="form_text"/></td>
+              </tr>
+              <tr>
+                <th>{lang your_site_logo}</th>
+                <td><input name="friendlink[logo]" type="text" size="20"  class="form_text"/></td>
+              </tr>
+              <tr>
+                <th>{lang contact_mail}{lang colon}</th>
+                <td><input name="data[email]" type="text" size="20"  class="form_text"/></td>
+              </tr>
+              <tr>
+                <th>{lang your_site_description}</th>
+                <td><textarea name="friendlink[description]" cols="40" rows="5"></textarea></td>
+              </tr>
+              
+              <tr>
+                <th></th>
+                <td><input name="btn_friendlink" type="button" value="{lang submit}" class="btn_submit" onclick="$('#FriendlinkFrm').submit();"/>&nbsp;&nbsp;&nbsp;&nbsp;<input name="reset" type="reset" value="{lang reset}" class="btn_submit"/></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<!--{include file="footer.html"}-->

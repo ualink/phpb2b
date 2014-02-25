@@ -1,0 +1,65 @@
+<!--{include file="header.html" page_title="#get_password#"}-->
+<div class="wrapper">
+<div class="content">
+  <div class="tips"><span>{$position}</span></div>
+  <div class="base_title">
+        <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang reset_password}</span><span class="corner_t_r"></span></h2> 
+   </div>
+   <div class="quhuimima">
+		<div class="remessagecon">
+		<form id="ResetFrm" name="reset_frm" method="post" action="index.php?do=member&action=getpasswd">
+		<input type="hidden" name="data[username]" value="{$username}" />
+		<input type="hidden" name="do" value="reset" />
+		<!-- {formhash} -->
+		<p>{lang input_info_reset_password}</p><br />
+        <table class="messagecon_list">
+          <tr>
+            <th>{lang user_authentication}</th>
+            <td> <input type="text" value="{$username}" disabled /> &nbsp;{lang login_your_account}</td>
+          </tr>
+          <tr>
+            <th class="resetfont">{lang reset_password}</th>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>{lang new_password}</th>
+            <td> <input type="password" name="data[password1]" id="password1" /> &nbsp;{lang set_new_password}</td>
+          </tr>
+          <tr>
+            <th>{lang re_enter_new_password}</th>
+            <td> <input type="password" name="data[password1]" id="password2" /> &nbsp;{lang enter_new_password_again}</td>
+          </tr>
+          <tr>
+            <th>&nbsp;</th>
+            <td><input type="button" name="Submit" value="{lang submit_reset_password}" class="submit_w118" onclick="return check();" /></td>
+          </tr>
+        </table>
+		</form>
+
+	</div>
+</div>
+
+<script>
+var enter_valid_password = "{lang enter_valid_password}";
+var enter_correct_password = "{lang enter_correct_password}";
+var enter_password_different = "{lang enter_password_different}";
+</script>
+<!--{literal}-->
+<script>
+function check(){
+	if($("#password1").val()=="" || $("#password2").val()==""){
+		alert(enter_correct_password);
+		return false;
+	}else if($("#password1").val().length<6 ){
+	alert(enter_valid_password)
+	return false;
+	}else if($("#password1").val()!=$("#password2").val()){
+		alert(enter_password_different);
+		return false;
+	}else{
+		$("#ResetFrm").submit();
+	}
+}
+</script>
+<!--{/literal}-->
+<!--{include file="footer.html"}-->

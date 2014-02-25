@@ -1,0 +1,24 @@
+{extends file="layout.html"} 
+{block name="title" prepend}{#space_intro#}{/block}
+{block name="content"}
+<!-- {get do="cache" var="options" name="typeoption"} -->
+<div class="right_barintro">
+	<div class="pic"><img src="{$COMPANY.logo}" /><p><span>{lang space_intro}</span><br /><br />    {$COMPANY.description}</p>
+	<div class="clear"></div>
+	</div>
+	<div class="text">
+		<ul>
+			<li><p><span>{lang boss_name}</span></p><p>{$COMPANY.boss_name}</p></li>
+			<li><p><span>{lang main_prod}</span></p><p>{$COMPANY.main_prod}</p></li>
+			<li><p><span>{lang main_market}</span></p><p>{$COMPANY.markets}</p></li>
+			<li><p><span>{lang company_property}</span></p><p>{$options.economic_type[$COMPANY.property]}</p></li>
+			<li><p><span>{lang manage_type}</span></p><p>{$COMPANY.manages}</p></li>
+			<li><p><span>{lang main_biz_place}</span></p><p>{$COMPANY.main_biz_place}</p></li>
+			<li><p><span>{lang reg_fund}</span></p><p>{$options.reg_fund[$COMPANY.reg_fund]}</p></li>
+			<li><p><span>{lang year_annual}</span></p><p>{$options.year_annual[$COMPANY.year_annual]}</p></li>
+			<li><p><span>{lang found_date}</span></p><p>{$COMPANY.found_date|date_format:"%Y"}</p></li>
+			<li><p><span>{lang reg_address}</span></p><p>{$COMPANY.reg_address}</p></li>
+		</ul>
+	</div>
+</div>
+{/block}

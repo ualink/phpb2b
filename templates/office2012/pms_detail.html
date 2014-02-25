@@ -1,0 +1,31 @@
+{block name="title" prepend}{#view_message#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+     <div class="blank"></div>
+	  <form name="message_frm" id="MessageFrm" action="pms.php?do=send&to={$item.cache_from_username}" method="post">
+         <table class="offer_info_content">
+          <tr>
+            <th class="circle_left">{lang sender}</th>
+          <td class="circle_right">{$item.cache_from_username}</td>
+          </tr>
+           <tr>
+              <th>{lang time_n}</th>
+              <td>{$item.pubdate}</td>
+            </tr>
+           <tr>
+              <th>{lang theme_n}</th>
+              <td>{$item.title}</td>
+             </tr>
+          <tr>
+			  <th>{lang content}</th>
+			  <td>{$item.content}</td>
+          </tr>
+          <tr>
+			  <th class="circle_bottomleft"></th>
+			  <td class="circle_bottomright"><input type="submit" value=" {lang reply} " name="submit">&nbsp;<input type="button" value=" {lang back} " name="back" onclick="history.go(-1);"></td>
+          </tr>
+      </table>
+	  </form>
+{/block}

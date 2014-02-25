@@ -1,0 +1,67 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang system_tool} &raquo; {lang file_checksum}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang file_checksum}</h3> 
+</div>
+{if $flag=="0"}
+<div class="mrightTop"> 
+    <div class="fontl"> 
+	{#check_that_the_file#|sprintf:#soft_name#}
+    </div> 
+    <div class="fontl"></div> 
+</div> 
+<div class="info">
+  <form method="post" action="checkfile.php" id="EditFrm" name="edit_frm">
+  <input type="hidden" name="check" value="check" />
+    <table class="infoTable">
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="button" name="check"  id="Submit"  value="{lang start_check}" />		</td>
+      </tr>
+    </table>
+  </form>
+  </div>
+  {else}
+   <div class="tdare">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <tbody>
+		<tr>
+		  <td>{lang file_name}</td>
+		  <td>{lang file_size}</td>
+		  <td>{lang last_modified}</td>
+		  <td>{lang status}</td>
+		</tr>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2">
+		  <td>{$item.name}</td>
+		  <td>{$item.size}</td>
+		  <td>{$item.time}</td>
+		  <td>{$item.status}</td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="5">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+</div>
+{/if}
+<script language="JavaScript">
+var please_wait = "{lang please_wait}";
+</script>
+<!--{literal}-->
+<script language="JavaScript">
+$(document).ready(function() { 
+$('#Submit').click(function() {
+	$('#Submit').attr('disabled',"true");
+	$('#Submit').val(please_wait);
+	$('#EditFrm').submit();
+});
+})
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

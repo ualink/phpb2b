@@ -1,0 +1,68 @@
+<!-- {include file="header.html"} -->
+<link href="../static/scripts/jquery/alerts/jquery.alerts.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="../static/scripts/jquery/alerts/jquery.alerts.js"></script>
+<link href="../static/scripts/jquery/showLoading/css/showLoading.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="../static/scripts/jquery/showLoading/jquery.showLoading.js"></script>
+<script language="javascript">
+var submit_and_tips = "{lang submit_and_tips}";
+var please_wait = "{lang please_wait}";
+</script>
+<!-- {literal} -->
+<script type="text/javascript">
+$(document).ready( function() {
+	$("#Save").click( function() {
+		jConfirm(submit_and_tips, please_wait, function(r) {
+			if(r){
+				$(".tdare").showLoading();
+				$("#ListFrm").submit();
+			}else{
+				return false;
+			}
+		});
+	});
+});
+</script>
+<!-- {/literal} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang templet} &raquo; {lang templet_language}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang templet_language}</h3> 
+</div>
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="" method="post">
+  <input type="hidden" name="action" value="language">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell">{lang naming}</th>
+		  <th>{lang screenshot}</th>
+		  <th>{lang whether_or}{lang setup}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<input type="hidden" name="data[language][{$item.name}][title]" value="{$item.title}" />
+		<input type="hidden" name="data[language][{$item.name}][img]" value="{$item.img}" />
+		<tr class="tatr2">
+		  <td class="firstCell">{$item.title}</td>
+		  <td><!-- {if $item.img} --><img src="{$item.img}" border="0" alt="{$item.title}"><!-- {else} -->{$item.title}<!-- {/if} --></td>
+		  <td><input type="checkbox" name="data[item][]" value="{$item.name}" {if $item.available}checked="checked"{/if}></td>  
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="3">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="button" id="Save" name="Save" value="{lang submit}" class="formbtn batchButton"/>&nbsp;<input type="checkbox" name="update_dot">{lang if_also_update_language_files}
+    </div>
+    <div class="pageLinks">{$ByPages}</div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

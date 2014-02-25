@@ -1,0 +1,113 @@
+<!--{include file="../header.html" page_title=#hr# nav_id=9}-->
+<script src="data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<div class="wrapper">
+	<div class="content">
+		<div class="job_type fl">
+          <div class="title_bar_s1" style="height:28px;">
+           <span class="title_top_s1"><span></span></span>
+           <h3>{lang industry_sort}</h3>
+          </div>
+			<!-- {get from="type" name="jobtype" var="Items"} -->
+			<!-- {if $Items|@count eq 0} -->
+			<!-- {get var="IndustryList" from="industry"} -->
+			<!-- {else} -->
+			<!-- {assign var="IndustryList" value=$Items} -->
+			<!-- {/if} -->
+		<div class="job_type_c">
+            <!--{foreach from=$IndustryList item=industry_item name=IndustryList}-->
+			  <h3><em><a href="index.php?do=job&action=lists&industryid={$industry_item.id}" title="{$industry_item.name}">{$industry_item.name}</a></em></h3>
+				<div class="cb">
+                	<!--{foreach from=$industry_item.sub item=industry_item2 key=industry_key2}-->
+                    <a href="index.php?do=job&action=lists&industryid={$industry_item2.id}" title="{$industry_item2.name}">{$industry_item2.name|pl}</a><em>|</em>
+                    <!--{/foreach}-->
+              </div>
+           <!--{/foreach}-->
+		  </div>
+		</div>
+        
+		<div class="job_ss fl">
+			<form action="index.php" method="get">
+            <input type="hidden" name="do" value="job" />
+            <input type="hidden" name="action" value="lists" />
+			<h2>{lang jobs_search}</h2>
+			<table width="390" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td align="right" width="65">{lang salary}</td>
+				<td width="325" align="left">
+                <select name="data[salary_id]">
+						{html_options options=$Salary}
+						</select></td>
+			  </tr>
+			  <tr>
+				<td align="right">{lang jobs_area}</td>
+				<td align="left">
+                <div id="dataArea">
+							<select name="data[area_id1]" id="dataAreaId1" class="level_1" style="width:90px;"></select>
+							<select name="data[area_id2]" id="dataAreaId2" class="level_2" style="width:90px;"></select>
+							<select name="data[area_id3]" id="dataAreaId3" class="level_3" style="width:90px;"></select>
+						</div>
+                        </td>
+			  </tr>
+			  <tr>
+				<td align="right">{lang keyword}</td>
+				<td align="left">
+					<input type="text" name="q" value="" class="job_gjz" />
+					</td>
+			  </tr>
+			  <tr>
+				<td>&nbsp;</td>
+				<td align="left"><input type="submit" value="{lang search}" class="submit" /></td>
+			  </tr>
+			</table>
+			</form>
+		</div>
+		<div class="job_reg fr">
+            <div class="title_bar_s1">
+               <span class="title_top_s1"><span></span></span>
+               <h5>{lang after_free_reg}</h5>
+            </div>
+
+			<div class="job_reg_c">
+				<p class="fl"><a>{lang build_your_site}</a></p>
+				<p class="fl"><a>{lang post_offer_trade}</a></p>
+				<p class="fl"><a>{lang spread_your_products}</a></p>
+				<p class="fl"><a>{lang meet_more_friends}</a></p>
+				<div class="reg big-color-weight">
+                <span><a href="member.php" class="btn_free">{lang free_reg}</a><span>
+            </div>
+		</div>
+		</div>
+		<div class="job_area fl">
+			<h2>{lang hot_area}</h2>
+			<div>
+            <!--{pb:area level=1 name=area}-->
+            <a href="index.php?do=job&action=lists&areaid={$area.id}">{$area.title|pl}</a>
+            <!--{/pb:area}-->
+          </div>
+		</div>
+		<div class="job_new fl">
+			<div class="base_title">
+                 <span class="more"><a href="index.php?do=job&action=lists">{lang more}&raquo;</a></span>
+				<h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang new_hr}</span><span class="corner_t_r"></span></h2> 
+				
+			</div>
+			<div class="job_new_c fl box_bord">
+				<ul>
+                <!-- {pb:job row=28 name=job} -->
+					<li><p class="fl">{$job.link}</p><em class="fr"><a href="{$job.space_url}">{$job.companyname}</a></em></li>
+                <!-- {/pb:job} -->
+			  </ul>
+			</div>
+		</div>
+		<div class="blank6"></div>
+		</div>
+</div>
+<script>
+var app_language = '{$AppLanguage}';
+var area_id1 = 0;
+var area_id2 = 0;
+var area_id3 = 0;
+</script>
+<script src="static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="static/scripts/script_area.js"></script>
+<!--{include file="../footer.html"}-->

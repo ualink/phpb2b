@@ -1,0 +1,220 @@
+<!-- {include file="header.html"} -->
+<script language="javascript" src="../static/scripts/swfobject.js"></script>
+<link href="../static/scripts/jquery/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="../static/scripts/jquery/uploadify/jquery.uploadify.js"></script>
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang trade_management} &raquo; {lang industry_news}</p>
+</div>
+{fetch file="../static/scripts/date.js"}
+<script>
+var click_copy_to_clipboard = "{lang click_copy_to_clipboard}";
+</script>
+<!-- {literal} -->
+<script type="text/javascript">
+$(document).ready(function()
+{
+	$("#save_draft").click(
+		function(){
+			$("#is_draft").val(1);
+			$("#EditFrm").submit();
+		}
+	);
+	$("#uploadify").uploadify({
+		'uploader': '../static/scripts/jquery/uploadify/uploadify.swf',
+		'script': '../ajax.php',
+		'cancelImg': '../static/scripts/jquery/uploadify/cancel.png',
+		'queueID': 'fileQueue',
+		'method'      : 'post',
+		'expressInstall' : '../static/images/expressinstall.swf',
+		'auto': false,
+		'buttonText' : 'Select ...',
+		'scriptData'  : {'do_action':'uploadify'},     
+		'onComplete'     : function(event,queueId,fileObj,response,data){ 
+							//eval("var obj1="+response);
+							var obj1=jQuery.parseJSON(response);
+							$("#message").append("<p><a href='"+obj1.url+"' title='"+obj1.name+"' target='_blank'>"+obj1.name+"</a>&nbsp;<a href='javascript:;' onclick=\"clipboardData.setData('Text','"+obj1.url+"');\">"+click_copy_to_clipboard+"</a></p>");
+					   },
+		'multi': true
+	});
+});  
+</script>
+<!-- {/literal} -->
+<div id="rightTop"> 
+    <h3>{lang industry_news}</h3> 
+    <ul class="subnav">
+		<li><a href="news.php">{lang management}</a></li>
+        <li><a class="btn1" href="news.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+        <li><a href="newstopic.php">{lang topic_news}</a></li>
+        <li><a href="newstype.php">{lang sorts}</a></li>
+		<li><a href="newsgather.php">{lang collection}</a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="news.php" id="EditFrm" name="edit_frm" enctype="multipart/form-data">
+  <input type="hidden" name="id" value="{$item.id}" />
+  <input type="hidden" name="do" value="save_news" />
+  <input type="hidden" name="is_draft" id="is_draft" value="0" />
+  <input type="hidden" name="page" value="{$smarty.get.page}" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input name="data[news][title]" value="{$item.title}" /></td>
+      </tr>      
+      <tr>
+        <th class="paddingT15"> {lang types}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <select name="data[news][type_id]" id="NewsTypeId">
+        <option value="0">{lang pls_select}</option>
+        {$NewstypeOptions}
+        </select>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15">flag {lang param_value}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[news][flag]" value="{$item.flag}" type="text" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang in_area}</th>
+        <td class="paddingT15 wordSpacing5">
+        <select name="data[news][area_id]" id="NewsAreaId">
+        <option value="0">{lang no}</option>
+        <optgroup label="{#area_levels#|sprintf:1}">
+        <!--{foreach from=$CacheAreas[1] key=key1 item=item1}-->
+        <option value="{$key1}" {if $key1==$item.area_id}selected="selected"{/if}>{$item1}</option>
+        <!--{/foreach}-->
+        </optgroup>
+        <optgroup label="{#area_levels#|sprintf:2}">
+        <!--{foreach from=$CacheAreas[2] key=key2 item=item2}-->
+        <option value="{$key2}" {if $key2==$item.area_id}selected="selected"{/if}>{$item2}</option>
+        <!--{/foreach}-->
+        </optgroup>
+        </select>
+       </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang industry_sort}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <select name="data[news][industry_id]" id="NewsIndustryId">
+        <option value="0">{lang no}</option>
+        <optgroup label="{#type_levels#|sprintf:1}">
+        <!--{foreach from=$CacheIndustries[1] key=key3 item=item3}-->
+        <option value="{$key3}" {if $key3==$item.industry_id}selected="selected"{/if}>{$item3}</option>
+        <!--{/foreach}-->
+        </optgroup>
+        <optgroup label="{#type_levels#|sprintf:2}">
+        <!--{foreach from=$CacheIndustries[2] key=key4 item=item4}-->
+        <option value="{$key4}" {if $key4==$item.industry_id}selected="selected"{/if}>{$item4}</option>
+        <!--{/foreach}-->
+        </optgroup>
+        </select>
+       </td>
+      </tr>
+	  {if $item.type==1 or $smarty.get.action=="convert"}
+	  <input type="hidden" name="data[news][type]" value="1" />      
+	  <tr>
+        <th class="paddingT15"> {lang content}</th>
+        <td class="paddingT15 wordSpacing5"><input type="text" name="data[news][content]" value="{$item.content}" /></td>
+      </tr>
+	  {else}
+      <tr>
+        <th class="paddingT15">{lang source_n}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[news][source]" value="{$item.source}" type="text" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang visit_permission}</th>
+        <td class="paddingT15 wordSpacing5">
+        <select multiple name="require_membertype[]" id="NewsRequireMembertype">
+			<option value="0">{lang no_limit}</option>
+			<!--{foreach from=$Membertypes name=membertype key=key1 item=item1}-->
+			<option value="{$key1}">{$item1}</option>
+			<!--{/foreach}-->
+		</select>{lang click_ctrl_n_select}</td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang attachments}</th>
+        <td class="paddingT15 wordSpacing5">
+<div id="fileQueue"></div>
+<div id="message"></div>
+		<input type="file" name="uploadify" id="uploadify" />
+  <a href="javascript:$('#uploadify').uploadifyUpload()">{lang upload}</a> | 
+  <a href="javascript:$('#uploadify').uploadifyClearQueue()">{lang cancel} {lang upload}</a>
+</td>
+      </tr>      
+      <tr>
+        <th class="paddingT15"> {lang labels}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[tag]" type="text" id="tag" value="{$item.tag}" /><label class="field_notice">{lang multi_seperate_by_quot_or_space}</label>        </td>
+      </tr>      
+      <tr>
+        <th class="paddingT15"> {lang effective_period}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        	<input type="text" name="data[news][start_time]" id="date1" value="{$item.start_time}" /><span class="btn_calendar" id="calendar-date1"></span>{lang arrive_to}<input type="text" name="data[news][end_time]" id="date2" value="{$item.end_time}" /><span class="btn_calendar" id="calendar-date2"></span>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang seo_title}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[meta][title]" type="text" id="seo_title" value="{$item.seo_title}" />        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang seo_keyword}</th>
+        <td class="paddingT15 wordSpacing5"><input class="infoTableInput2" name="data[meta][keyword]" type="text" id="seo_kewyord" value="{$item.seo_keyword}" />        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang seo_description}</th>
+        <td class="paddingT15 wordSpacing5"><input name="data[meta][description]" type="text" id="seo_description" value="{$item.seo_description}" />        </td>
+      </tr>
+	  <tr>
+        <th class="paddingT15"> {lang content}</th>
+        <td class="paddingT15 wordSpacing5"><textarea style="width:550px;height:100px;" name="data[news][content]" id="NewsContent">{$item.content}</textarea></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang picture}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">
+        <input class="infoTableFile2" type="file" name="pic" id="pic" />
+          <label class="field_notice">{lang image_format_support}</label>
+          {if $item.picture}
+          <br /><span><img src="{$item.image}" alt="{$item.name}"/></span>
+          {/if}
+        </td>
+      </tr>
+	  {/if}
+      <tr>
+        <th class="paddingT15">{lang whether_or}{lang commend}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<!--{html_radios name="data[news][if_commend]" options=$AskAction checked=$item.if_commend|default:"0" separator=" "}--></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+		{if !$item.id}
+		<input class="formbtn" type="button" id="save_draft" name="save_draft" value="{lang save_draft}" />
+		{/if}
+			<input class="formbtn" type="submit" name="save" id="save" value="{lang save_and_pub}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script>
+var type_id = "{$item.type_id|default:0}";
+</script>
+{editor type="tinymce"}
+<!--{literal}-->
+<script>
+Calendar.setup({
+	trigger    : "calendar-date1",
+	animation  : false,
+	inputField : "date1",
+	onSelect   : function() { this.hide() }
+});
+Calendar.setup({
+	trigger    : "calendar-date2",
+	animation  : false,
+	inputField : "date2",
+	onSelect   : function() { this.hide() }
+});
+jQuery(document).ready(function($) {
+	$("#NewsTypeId").val(type_id)
+})
+</script>
+<!--{/literal}-->
+<!-- {include file="footer.html"} -->

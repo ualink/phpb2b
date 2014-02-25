@@ -1,0 +1,49 @@
+<!--{include file="../header.html" page_title=#wholesale# nav_id=11}-->
+<script src="static/scripts/swfobject1.5.js" type="text/javascript"></script>
+<div class="wrapper clearfix">
+   <!-- {pb:industry include="1,2,3" name="industry"} -->
+   <div class="full_width_col">
+	<div class="nominate_market">
+       <div class="title_bar_s1">
+            <span class="title_top_s1"><span></span></span>
+            <h3><span class="title_more"><a href="index.php?do=offer&action=lists&industryid={$industry.id}&typeid=4"><span class="raquo">&raquo;</span>{lang more}</a></span>{$industry.title|pl}</h3>
+       </div>
+	   <div class="whole_sale_con nominate_list clearfix">
+		  <ul>
+			<!-- {pb:offer row=12 type="image" depth=1 industryid=$industry.id typeid=4 name="offer"} -->
+			 <li><a href="{$offer.url}"><img src="{$offer.src}" width="100" height="80" alt="{$offer.name}" /></a>
+			  <p>{$offer.link}</p>
+			  <p>{lang wholesale_price}<span>{$offer.price}</span></p>
+			</li>
+			<!-- {/pb:offer} -->
+		  </ul>
+	   </div>
+	  </div>
+	  <div class="blank6"></div>
+   </div><!-- end full_width_col -->
+	<div class="main_right_w230">
+		<div class="cornerbox">
+		   <div class="title_bar_s1">
+				<span class="title_top_s1"><span></span></span>
+				<h3><span class="title_more"><a href="index.php?do=offer&action=post&typeid=4&industryid={$industry.id}"><span class="raquo">&raquo;</span>{lang free_post}</a></span>{$industry.title|pl}</h3>
+		   </div>
+			<div class="corner_content_s6">
+			   <ul>
+				  <!-- {pb:offer row=12 name="item1" depth=1 titlelen="12" industryid=$industry.id typeid=4} -->
+				  <li><span>{$item1.link}</span><em>{$item1.price}</em></li>
+				  <!-- {/pb:offer} -->
+			   </ul>
+			</div>
+			<div class="corner_bottom">
+				<div class="corner_bottom_l"></div>
+				<div class="corner_tottom_r"></div>
+			</div>
+		</div>
+	<div class="clear"></div>
+	</div><!-- end right_w220 -->
+	<!-- {/pb:industry} -->
+	<div class="notic_b">
+		<div class="notic_bo">{#law_statement#|sprintf:$site_name}</div>
+	</div>
+</div>
+<!--{include file="../footer.html"}-->

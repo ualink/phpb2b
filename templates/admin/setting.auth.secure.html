@@ -1,0 +1,52 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang setting_global} &raquo; {lang secure_auth}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang secure_auth}</h3> 
+    <ul class="subnav">
+        <li><a href="setting.php?do=secure" class="btn1"><span>{lang security}</span></a></li>
+		<li><a href="setting.php?do=auth">{lang secure_auth}</a></li>
+    </ul>
+</div>
+<div class="info"> 
+    <form method="post" action="setting.php" name="edit_frm"> 
+        <table class="infoTable"> 
+         	<tr> 
+                <th class="paddingT15">{lang website} {lang security_key}</th> 
+              	<td class="paddingT15 wordSpacing5"><input name="data[setting][auth_key]" value="{$item.AUTH_KEY}" /><label class="field_notice">{lang used_to_identify_the_site_as_a_unique_string}</label></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang visitors} {lang allow_the_release}{lang offer}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="data[setting][vis_post]" options=$AskAction checked=$item.VIS_POST|default:0 separator=""}--></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang tags} {lang verify}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="data[setting][tag_check]" options=$AskAction checked=$item.TAG_CHECK|default:1 separator=""}--></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang guest_post_trade} {lang verify}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="data[setting][vis_post_check]" options=$AskAction checked=$item.VIS_POST_CHECK|default:1 separator=""}--></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang open} {lang sell} {lang information}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="data[setting][sell_logincheck]" options=$AskAction checked=$item.SELL_LOGINCHECK|default:1 separator=""}--></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang open} {lang buy} {lang information}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="data[setting][buy_logincheck]" options=$AskAction checked=$item.BUY_LOGINCHECK|default:1 separator=""}--></td> 
+          	</tr> 
+			<tr> 
+                <th class="paddingT15">{lang open} {lang company} {lang information}{lang colon}</th> 
+       			<td class="paddingT15 wordSpacing5"><!--{html_radios name="data[setting][company_logincheck]" options=$AskAction checked=$item.COMPANY_LOGINCHECK|default:1 separator=""}--></td> 
+          	</tr> 
+            <tr> 
+            <th></th> 
+            <td class="ptb20"> 
+                <input class="formbtn" type="submit" name="save_auth_secure" value="{lang submit}" /> 
+            </td> 
+        </tr> 
+        </table> 
+    </form> 
+</div> 
+<!-- {include file="footer.html"} -->

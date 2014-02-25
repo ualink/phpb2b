@@ -1,0 +1,31 @@
+{block name="title" prepend}{#company_album#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+      <div class="hint"><span class="btn_hint"><a href="album.php?do=edit" class="btn_publish">{lang click_add}</a></span>{lang upload_business_license}</div>               
+	<table cellspacing="0" id="dataTable" class="datas">
+		<thead>
+		<tr>
+			<td>{lang picture}</td>
+			<td>{lang details}</td>
+			<td>{lang operation}</td>
+		</tr>
+		</thead>
+		<tbody>
+          <!--{foreach from=$Items item=item}-->
+          <tr>
+          <td><a href="album.php?do=edit&id={$item.attachment_id}"><img src="{$item.image}" alt="" border="0" width="80" height="80" style="padding: 6px; border: 1px solid #CCC; background-color: #FFF;"/></a></td>
+          <td>
+		  <p><b>{lang title}{lang colon}</b>{$item.title}</p>
+            <p><b>{lang description}</b>{$item.description}</p>
+          </td>
+			<td><a href="album.php?do=edit&id={$item.attachment_id}">{lang modify}</a>&nbsp;<a href="album.php?do=del&id={$item.id}">{lang delete}</a></td>
+          </tr>
+          <!--{foreachelse}-->
+          <tr><td colspan="2"><div align="center">{lang no_datas_now}</div></td></tr>
+          <!--{/foreach}-->
+		</tbody>
+	</table>
+	<div id="footer" style="margin-top: 40px;">{$ByPages}</div>
+{/block}

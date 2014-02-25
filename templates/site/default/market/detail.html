@@ -1,0 +1,46 @@
+<!--{include file="../header.html" page_title="$page_title" nav_id=7}-->
+<script src="static/scripts/jquery.autoresize.js" charset="{$charset}"></script>
+<!--{literal}-->
+<script>
+$(document).ready(function(){
+    $('.all_left_con').autoResize({width: 600});  //ÓÃ·¨
+});
+</script>
+<!--{/literal}-->
+<div class="wrapper">
+	<div class="content">
+	<div class="tips"><span>{$position}</span></div>
+	<div class="maincon clearfix">
+        <div class="all_left">
+            <div class="title_bar_s4">
+                <span class="title_top_s4"><span></span></span>
+                <h3>{$item.name}</h3>
+            </div>
+        <div class="all_left_con"><!-- {the_attachment name=$item.picture} --><br>{$item.content}</div>
+        </div>
+        <div class="all_right">
+           <div class="title_bar_s4">
+                <span class="title_top_s4"><span></span></span>
+                <h3>{lang news_market}</h3>
+            </div>
+           <div class="all_right_con">
+        <!-- {pb:market row=10 name=market} -->
+        <p>{$market.link}</p>
+        <!-- {/pb:market} -->
+        </div>
+		<div class="blank6"></div>
+        <div class="all_right">
+           <div class="title_bar_s4">
+                <span class="title_top_s4"><span></span></span>
+                <h3>{lang new_offer}</h3>
+            </div>
+           <div class="all_right_con">
+			<!-- {pb:offer row=10 orderby="rand()" titlelen="15"} -->
+			<p>{$row.link}</p>
+			<!-- {/pb:offer} -->
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!--{include file="../footer.html"}-->

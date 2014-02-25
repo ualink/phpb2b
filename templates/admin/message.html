@@ -1,0 +1,69 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang member_center} &raquo; {lang pms}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang pms}</h3> 
+    <ul class="subnav">
+		<li><a class="btn1" href="message.php"><span>{lang management}</span></a></li>
+        <li><a href="message.php?do=send">{lang send}</a></li>
+    </ul>
+</div>
+<div class="mrightTop"> 
+    <div class="fontr"> 
+        <form name="search_frm" action="message.php" id="SearchFrm" method="get"> 
+        <input type="hidden" name="do" value="search" />
+             <div> 
+				{lang title_keywords} : <input class="queryInput" type="text" name="q" value="{$smarty.get.q}" /> 
+                <input type="submit" name="search" id="Search" class="formbtn" value="{lang searching}" /> 
+            </div> 
+        </form> 
+    </div> 
+    <div class="fontr"></div> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="message.php" method="post">
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onclick="pbCheckAll(this,'id[]');" title="{lang select_switch}"></th>
+		  <th><label for="idAll">{lang serial_number}</label></th>
+		  <th>{lang sender}</th>
+		  <th>{lang accepter}</th>
+		  <th>{lang the_title}/{lang content_n}</th>
+		  <th>{lang send_time}</th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2" title="{$item.content|truncate:100}">
+		  <td class="firstCell"><input type="checkbox" name="id[]" value="{$item.id}" onclick="pbCheckItem(this,'idAll');" id="item_{$item.id}" title="{$item.id}"></td>
+		  <td><label for="item_{$item.id}">{$item.id}</label></td>
+		  <td>{$item.cache_from_username}</td>
+		  <td>{$item.cache_to_username}</td>
+		  <td>{$item.title}<br /><small>{$item.content|truncate:100}</small></td>
+		  <td class="pb_datetime">{$item.pubdate}</td>
+		  <td class="handler">
+          <ul id="handler_icon">
+            <li><a class="btn_delete" href="message.php?id={$item.id}&do=del{$addParams}" title="{lang delete}">{lang delete}</a></li>
+          </ul>  
+		 </td>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="7">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="submit" name="del" value="{lang delete}" class="formbtn batchButton"/>
+    </div>
+    <div class="pageLinks">{$ByPages}</div>
+    <div class="clear"/>
+    </div>
+	</form>
+</div>
+<!-- {include file="footer.html"} -->

@@ -1,0 +1,29 @@
+{extends file="layout.html"} 
+{block name="title" prepend}{#feed_back_to_company#}{/block}
+{block name="content"}
+		<div class="rightbarcontact">
+					<div class="playercontact">
+					<div class="playerheadcontact"><span class="playlistcontact">{lang feed_back_to_company}</span><span class="player_head_concontact"></span><img src="{$SpaceUrl}images/contactus_13.jpg" /></div>
+					<div class="clear"></div>
+					<div class="playerconmessage">
+						<form name="feedfrm" action="index.php?do=message&action=add" method="post">
+						<input type="hidden" name="companyid" value="{$COMPANY.id}">
+						<input type="hidden" name="space_name" value="{$MEMBER.space_name}">
+						  <label class="messagecon">{lang leave_content}</label>
+						  <label>
+						  <textarea name="feed[content]" class="textarea"><!--{if $pb_userid==""}-->{lang pls_login_first}...<!--{/if}--></textarea>
+						  </label>
+						  <div class="clear"></div>
+						  <label>
+						  <input type="submit" name="save" value="{lang submit}"  class="massage_button1" {if $pb_userid==""}disabled="disabled"{/if}/>
+						  </label>
+						  <label>
+						  <input type="submit" name="reset" value="{lang reset}"  class="massage_button"/>
+						  </label>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+{/block}

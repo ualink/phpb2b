@@ -1,0 +1,137 @@
+{block name="title" prepend}{#profile#}{/block}
+{block name="main"}
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+     <div class="hint">{lang must_input_with_star}</div>
+	  <form name="companyeditfrm" id="Frm1" method="post" enctype="multipart/form-data">
+	  <!-- {formhash} -->
+
+	       <table class="offer_info_content">
+                      <tr>
+                        <th class="circle_left"><font color="#FF6600">*</font>{lang vorname}</th>
+                        <td class="circle_right"><input name="memberfield[first_name]" type="text" id="memberlastname" value="{$item.first_name}" size="5">&nbsp;<input name="memberfield[last_name]" type="text" id="memberlastname" value="{$item.last_name}" class="required" size="10"></td>
+                      </tr>
+                      
+                      <tr>
+                        <th>{lang sex_n}</th>
+                        <td>{html_radios name="memberfield[gender]" options=$Genders checked=$item.gender|default:"1" separator=" "}</td>
+                      </tr>
+                      <tr>
+                        <th>{lang provinces_city}</th>
+                        <td>
+						<div id="dataArea">
+							<select name="area[id][1]" id="dataMemberfieldAreaId1" class="level_1" style="width:120px;" ></select>
+							<select name="area[id][2]" id="dataMemberfieldAreaId2" class="level_2" style="width:120px;"></select>
+							<select name="area[id][3]" id="dataMemberfieldAreaId3" class="level_3" style="width:120px;"></select>
+						</div>
+						</td>
+                      </tr>
+                      <tr>
+                        <th><font color="#FF6600">*</font>{lang address}</th>
+                        <td><input name="memberfield[address]" type="text" id="memberaddress" value="{$item.address}" class="required"></td>
+                      </tr>
+                      <tr>
+                        <th>{lang postcode}</th>
+                        <td><input name="memberfield[zipcode]" type="text" id="memberzipcode" value="{$item.zipcode}"></td>
+                      </tr>
+                      <tr>
+                        <th>QQ{lang number_n}</th>
+                        <td><input name="memberfield[qq]" type="text" id="memberqq" value="{$item.qq}"></td>
+                      </tr>
+                      <tr>
+                        <th>ICQ{lang number_n}</th>
+                        <td><input name="memberfield[icq]" type="text" id="membericq" value="{$item.icq}"></td>
+                      </tr>
+                      <tr>
+                        <th>Msn Messenger{lang colon}</th>
+                        <td><input name="memberfield[msn]" type="text" id="membermsn" value="{$item.msn}"></td>
+                      </tr>
+                      <tr>
+                        <th>Yahoo Messenger{lang colon}</th>
+                        <td><input name="memberfield[yahoo]" type="text" id="memberyahoo" value="{$item.yahoo}"></td>
+                      </tr>
+                      <tr>
+                        <th>Skype{lang colon}</th>
+                        <td><input name="memberfield[skype]" type="text" id="memberskype" value="{$item.skype}"></td>
+                      </tr>
+                      <tr>
+                        <th>{lang contact_phone}</th>
+                        <td><input name="memberfield[tel]" type="text" id="membertel" value="{$item.tel}"></td>
+                      </tr>
+                      <tr>
+                        <th>{lang fax_number}</th>
+                        <td><input name="memberfield[fax]" type="text" id="memberfax" value="{$item.fax}"></td>
+                      </tr>
+                      <tr>
+                        <th>{lang mobile_number}</th>
+                        <td><input name="memberfield[mobile]" type="text" id="membermobile" value="{$item.mobile}"></td>
+                      </tr>
+                      <tr>
+                        <th>{lang personal_homepage}</th>
+                        <td><input name="memberfield[site_url]" type="text" id="site_url" value="{$item.site_url}"></td>
+                      </tr>
+                      <tr>
+                        <th><font color="#FF6600">*</font>{lang email_addr}</th>
+                        <td><input name="member[email]" type="text" id="memberemail" value="{$item.email}" size="32" class="required email">(<a name="mod" href="javascript:;" onclick="javascript:$('#memberemail').attr('disabled',false);">{lang modify}</a>)</td>
+                      </tr>
+                      <tr>
+                        <th>{lang job_status}</th>
+                        <td><input type="radio" name="personal[resume_status]" value="1" {if $resume_status==1}checked="checked"{/if}>{lang like_job}<input type="radio" name="personal[resume_status]" value="0" {if $resume_status==0}checked="checked"{/if}>{lang not_like_job}</td>
+                      </tr>
+                      <tr>
+                        <th>{lang highest_education}</th>
+                        <td>
+						<select name="personal[max_education]" id="MaxEducation">
+						<!--{foreach from=$Educations name=Educations item=item1 key=key1}-->
+						<option value="{$key1}" {if $max_education==$key1}selected{/if}>{$item1}</option>
+						<!--{/foreach}-->
+						</select>
+						</td>
+                      </tr>
+                      <tr>
+                        <th>{lang personal_picture}</th>
+                        <td><input type="file" name="photo" id="MemberPhoto">
+						<!--{if $item.photo}--><br /><img src="{$item.image}" /><!--{/if}-->
+						</td>
+                      </tr>
+                       <tr>
+                        <th>{lang login_jump}</th>
+                        <td><select name="member[office_redirect]" id="MemberOfficeRedirect">
+							<!--{foreach from=$OfficeRedirects name=office_redirect key=key1 item=item1}-->
+							<option value="{$key1}" {if $key1==$item.office_redirect}selected{/if}>{$item1}</option>
+							<!--{/foreach}-->
+                        </select></td>
+                      </tr>
+                      <tr>
+						<th class="circle_bottomleft"></th>
+                        <td class="circle_bottomright"><input name="save" type="submit" id="save" value="{lang save}"></td>
+                      </tr>
+                 </table>
+	</form>
+  </div>
+ </div>
+<script language="javascript">
+var enter_name = "{lang enter_name}";
+var enter_website_error = "{lang enter_website_error}";
+var cache_path = "../";
+var app_language = '{$AppLanguage}';
+var area_id1 = {$item.area_id1|default:0} ;
+var area_id2 = {$item.area_id2|default:0} ;
+var area_id3 = {$item.area_id3|default:0} ;
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#Frm1").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+})
+</script>
+<!--{/literal}-->
+<script src="../static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="../static/scripts/script_area.js"></script>
+{/block}

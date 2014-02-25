@@ -1,0 +1,68 @@
+{block name="title" prepend}{#company_album#}{/block}
+{block name="main"}
+<script src="{$SiteUrl}static/scripts/jquery/jquery.colorbox.js" type="text/javascript"></script>
+<link href="{$SiteUrl}static/scripts/jquery/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css"/>
+<script src="../static/scripts/jquery/jquery.textbox.js" charset="{$charset}"></script>
+<script>
+var allows_maximum_input = "{lang allows_maximum_input}";
+var can_also_enter = "{lang can_also_enter}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#Content").textbox({
+		maxLength: 120,
+		onInput: function(event, status) {
+			$("#txtTips").html(allows_maximum_input+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.maxLength + "</strong> "+can_also_enter+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.leftLength + "</strong>");
+		}
+	});
+	$('a[rel*=lightbox]').colorbox({maxWidth:600,opacity:0.1});
+})
+</script>
+<!--{/literal}-->
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+     <div class="hint">{lang must_input_with_star}</div>
+
+	  <form name="edit_frm" method="post" action="album.php" enctype="multipart/form-data" onsubmit="$('#BtnSubmit').attr('disabled',true);">
+	  <!-- {formhash} -->
+	  <input type="hidden" name="id" value="{$item.id}">
+	  <input type="hidden" name="do" value="save">
+
+       <table class="offer_info_content">
+          <tr>
+            <th class="circle_left"><font class="red">*</font>{lang show_title}</th>
+            <td class="circle_right"><input type="text" name="album[title]" value="{$item.title}" /></td>
+          </tr>
+          <tr>
+            <th>{lang categories}</th>
+            <td><select name="album[type_id]">
+				{html_options options=$AlbumTypes selected=$item.type_id}
+            </select></td>
+          </tr>
+          <tr>
+            <th><font class="red">&nbsp; </font>{lang simple_description}</th>
+            <td><textarea name="album[description]" id="Content" cols="60" rows="8" wrap="VIRTUAL">{$item.description}</textarea><div id="txtTips"></div></td>
+          </tr>
+          <tr>
+            <th>{lang attachment_upload}</th>
+            <td>
+                <input name="pic" type="file" id="uploadfile" onchange="preview()" />
+                <span class="gray"><br>
+                  {lang image_size_format_provision}</span>
+             </td>
+          </tr>
+		  <!--{if $item.image}-->
+          <tr>
+           <th></th>
+             <td><a href="{$item.image}" id="uploadpic_hover" rel="lightbox"><img id="uploadpic" src="{$item.image}.small.jpg" alt="{$item.title}" width="80" height="80" border="0" /></a></td>
+          </tr>
+          <!--{/if}-->
+          <tr>
+           <th class="circle_bottomleft"></th>
+             <td class="circle_bottomright"><input name="btnSubmit" type="submit" id="BtnSubmit" value=" {lang confirm_submit} "></td>
+          </tr>
+       </table>
+	</form>
+{/block}

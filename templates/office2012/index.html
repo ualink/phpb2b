@@ -1,0 +1,64 @@
+{block name="title" prepend}{#home_page#}{/block}
+{block name="main"}
+<link href="../static/scripts/jquery/ui.css" rel="stylesheet" type="text/css"/>
+<script src="../static/scripts/jquery/ui.core.js"></script>
+<script>
+var service_days = {$service_days|default:1};
+</script>
+<!--{literal}-->
+<script>
+$(document).ready(function() {
+	$("#progressbar").progressbar({ value:service_days});
+	$("#info-manage").removeClass("current_nav");
+	$("#home-page").toggleClass("current_nav");
+});
+</script>
+<!--{/literal}-->
+        <div class="main_content_left">
+          <div class="visit_time">
+            {#my_honour#|sprintf:$UserName:$MemberInfo.gender_names:$LastLogin}
+          </div>
+          <div class="base_info">
+              <h2>{lang basic_info}</h2>
+              <table class="base_member">
+               <tr>
+                <td colspan="3"><div class="blank"></div></td>
+              </tr>
+              <tr>
+                <td rowspan="3"><div class="avatar"><img src="{$MemberInfo.avatar}"></div></td>
+                <td class="member_upgrade">{lang now_you_are}{$group.name|pl}(<a href="../purchase.php?do=upgrade" title="" target="_blank">{lang upgrade_now}</a>)(<a href="../purchase.php?do=charge" title="" target="_blank">{lang charge_now}</a>)</td>
+                <td rowspan="3" width="100" title="{$group.name}"><img src="../static/images/group/{$group.image}" alt="{$group.name}" /></td>
+              </tr>
+              <tr>
+                <td>{lang year_service} {$MemberInfo.start_date}{lang arrive_to}{$MemberInfo.end_date}</td>
+                </tr>
+             <tr>
+                <td><div id="progressbar"></div>&nbsp;<!--{if $service_days>=100}--><strong>{lang been_expired}<a href="../purchase.php?do=upgrade" target="_blank">{lang upgrade_now}</a></strong><!--{/if}--></td>
+               </tr>
+              <tr>
+                <td colspan="3"><div class="blank"></div></td>
+              </tr>
+            </table>
+          </div> 
+           <div class="blank"></div>
+           <div class="count_info">
+              <h2>{lang statistics}</h2> 
+              <div class="count_info_content">
+                <p class="credit"><strong>{lang your_account}</strong>{lang balance_amount}<em>{$MemberInfo.balance_amount|default:0}</em> | {lang your_points}<em>{$MemberInfo.points|default:0}</em></p>
+                <p class="info"><strong>{lang information_n}</strong><!--{foreach from=$items_offer name=items_offer item=item key=key}-->{$key}{lang colon}<em>{$item}</em> {lang number}<!--{if !$smarty.foreach.items_offer.last}--> <!--{/if}--><!--{/foreach}--></p>
+                <p class="message"><strong>{lang messages}</strong>{lang common_message} <em>{$pm.user|default:0}</em> {lang number} | {lang system_message} <em>{$pm.system|default:0}</em> {lang number} | {lang query_message} <em>{$pm.inquery|default:0}</em> {lang number}</p>
+                <p class="collect"><strong>{lang favorites}</strong><a href="favor.php">{lang manage_favorite}</a></p>
+              </div>
+           </div> 
+         </div>
+        <div class="main_content_right">
+           <div class="notice">
+              <h2>{lang announce}</h2>
+              <ul>
+				<!-- {pb:announce row=10 name="announce"} -->
+					<li><a href="{$announce.url}" target="_blank">{$announce.title}</a></li>
+				<!-- {/pb:announce} -->
+              </ul>
+           </div>
+        </div>
+{/block}

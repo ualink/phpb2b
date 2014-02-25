@@ -1,0 +1,24 @@
+{extends file="layout.html"} 
+{block name="title" prepend}{#home_page#}{/block}
+{block name="content"}
+<div class="rightbar">
+	<div class="welcome">
+		<img src="{$COMPANY.logo}"/>
+		<p><span class="title">{lang you_are_welcome}{$COMPANY.name}</span><br/><br/>  {$COMPANY.description|truncate:300}<br/><br/><span class="more"><a title="{lang more_company_info}" href="{$Menus.intro}">{lang more_company_info}>></a></span></p>
+		<div class="clear"></div>
+	</div>
+	<br clear="all"/>
+	<div class="player">
+		<div class="playerhead"><span class="playlist">{lang space_product}</span><span class="playerheadcon"><a href="{$Menus.product}" title="{lang space_product}"><img src="{$SpaceUrl}images/pic_08.gif"/></a></span><img src="{$SpaceUrl}images/contactus_13.jpg" /></div>
+		<div class="clear"></div>
+		<div class="playercon clearfix">
+			<ul>
+			<!-- {pb:product name="item" companyid=$COMPANY.id memberid=$MEMBER.id row=12} -->
+				<li><a href="{the_url module=product id=$item.id}" target="_blank"><img src="{$WebRootUrl}attachment/{$item.picture}.small.jpg" alt="{$item.name}" width="80" height="80" border="0" /></a>
+				<p><a href="{the_url module=product id=$item.id}" target="_blank" title="{$item.name}">{$item.name}</a></p></li>
+			<!-- {/pb:product} -->
+			</ul>
+		</div>
+	</div>
+</div>
+{/block}

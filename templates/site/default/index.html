@@ -1,0 +1,400 @@
+<!-- {assign var="metakeywords" value="$site_description"} -->
+<!-- {assign var="metadescription" value="$site_description"} -->
+<!-- {assign var="do" value="offer"} -->
+<!-- {assign var="home_title" value=$_G.site_name} -->
+<!--{include file="header.html" page_title="$home_title" nav_id=1}-->
+<style type="text/css">
+@import url({$theme_img_path}css/effect.css);
+</style>
+<script src="static/scripts/jquery.tools.js"></script>
+<div class="adv">
+	<!--{ads typeid=1 row="8" name="ads"}--><span>{$ads.link}</span><!--{/ads}-->
+</div>
+<div class="wrapper">
+	<div class="content clearfix">
+	   <div class="fl notebox mr7">
+        <div class="title_bar_s2">
+            <span class="title_top_s2"><span></span></span>
+            <h2><span class="title_more"><a href="index.php?do=announce" title="{lang more}" target="_blank"><span class="raquo">&raquo;</span>{lang more}</a></span>{lang board}</h2>
+            </div>
+			<div class="notecont clearfix">
+               <div class="note_bar">
+				<img src="{$theme_img_path}images/notice.gif" alt="{lang board}" />
+				<!--{pb:announce titlelen=9 infolen=40 row=1}-->
+				<dl>
+					<dt><strong>{$row.link}</strong></dt>
+					<dd>{$row.link}</dd>
+				</dl>
+				<!--{/pb:announce}-->
+               </div>
+				<ul class="note_title clearfix">
+					<!--{pb:announce titlelen=15 row=4 name="item"}-->
+					<li>{$item.link}</li>
+					<!--{/pb:announce}-->
+				</ul>
+			</div>
+			<div class="corner_bottom_bar">
+                 <span class="corner_bottom_s1"><span></span></span>
+			</div>
+		</div>
+	   <div class="fl">
+			<!--{ads typeid=5}--><!-- This text is replaced by the Flash movie. --><!--{/ads}-->
+		</div>
+       <div class="fr freereg">
+                <div class="reg_bar_s1">
+                   <span class="reg_top_s1"><span></span></span>
+                  <h2>{lang after_free_reg}</h2>
+                  <div class="freeregc clearfix cursor-hand">
+                    <p class="fl freetit"><a>{lang build_your_site}</a></p>
+                    <p class="fl freetit"><a>{lang post_offer_trade}</a></p>
+                    <p class="fl freetit"><a>{lang spread_your_products}</a></p>
+                    <p class="fl freetit"><a>{lang meet_more_friends}</a></p>
+                    <p class="fl mt10 big-color-weight"><a class="btn_free" href="member.php" title="{lang register}">{lang free_reg_member}</a></p>
+                   </div>
+                </div>
+                <div class="reg_bottom_bar">
+                    <span class="reg_bottom_s1"><span></span></span>
+                </div>
+            </div>
+	</div>
+	<div class="blank6"></div>
+	<div class="content">
+		<!--{ads typeid=2 name="ads1"}--><span>{$ads1.link}</span><!--{/ads}-->
+	</div>
+	<div class="blank6"></div>
+	<div class="content clearfix">
+		<div class="fl notebox mr7">
+				<div class="title_bar_s1">
+                <span class="title_top_s1"><span></span></span>
+                <h2><span class="title_more"><a href="index.php?do=fair&action=lists" title="{lang more}"><span class="raquo">&raquo;</span>{lang more}</a></span>{lang new_fair}</h2>
+                </div>
+			    <ul class="hot_list">
+					<!--{pb:fair row=10 infolen="18" titlelen=40 name="item"}-->
+					{if $item.rownum==0 && $item.picture neq ''}
+					<li style="height:78px; background:url({$item.src}) no-repeat; padding:0 0 0 90px; overflow:hidden; width:120px;"><h3  style="padding:0 0 0 5px;">{$item.link}</h3>{$item.content}</li>
+					{else}
+					<li>{$item.link}</li>
+					{/if}
+					<!--{/pb:fair}-->
+				</ul>
+		</div>
+		<div class="fl latest">
+         <!--# the tabs #-->
+            <ul class="tabs2 title_mouse">
+                  <li><a href="index.php?do=offer&action=lists&typeid=2"><span>{lang newest_sell}</span></a></li>
+                  <li><a href="index.php?do=offer&action=lists&typeid=1"><span>{lang newest_buy}</span></a></li>
+            </ul>
+            <!--# tab "panes" #-->
+            <div class="panes box_bord">
+                <div class="lasestcontbox underline" id="latest-offer-1">
+				<div class="lasestcontboxh">
+					<ul>
+						<!--{pb:offer typeid="2" type="image" row=5 titlelen="10" name="item"}-->
+						<li><a href="{$item.url}"><img src="{$item.thumb}" alt="{$item.title}" /></a><p>{$item.link}</p></li>
+						<!--{/pb:offer}-->
+					</ul>
+				</div>
+				<div class="lasestcontboxb">
+					<ul>
+						<!--{pb:offer row=14 typeid="2" name="item"}-->
+						<li>{$item.link}</li>
+						<!--{/pb:offer}-->
+					</ul>
+				</div>
+			    </div>
+                <div class="lasestcontbox underline" id="latest-offer-2" style="display:none;">
+				<div class="lasestcontboxh">
+					<ul>
+						<!--{pb:offer type="image" row=5 titlelen="10" typeid="1" name="item"}-->
+						<li><a href="{$item.url}"><img src="{$item.thumb}" alt="{$item.title}" /></a><p>{$item.link}</p></li>
+						<!--{/pb:offer}-->
+					</ul>
+				</div>
+				<div class="lasestcontboxb">
+					<ul>
+						<!--{pb:offer typeid="1" row=14}-->
+						<li>{$row.link}</li>
+						<!--{/pb:offer}-->
+					</ul>
+				</div>
+			</div>
+            </div>
+		</div>
+		<div class="fr notebox">
+            <div class="title_bar_s1">
+            <span class="title_top_s1"><span></span></span>
+            <h2><span class="title_more"><a href="purchase.php">{lang member_upgrade}</a></span>{lang newest_company}</h2>
+            </div>
+			<div class="vipcont clearfix">
+				<ul class="mulitline">
+					<!--{pb:company row=13 name="item"}-->
+					<li>{$item.link}</li>
+					<!--{/pb:company}-->
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	<div class="blank6"></div>
+<div class="content clearfix">
+
+		<div class="type">
+        
+			<div class="title_bar_s1">
+				<span class="title_top_s1"><span></span></span>
+				<h4><span class="titlebg_l"></span><span class="titlebg_m title_mouse">{lang industry_sort}</span><span class="titlebg_r"></span><span class="title_more">{lang select_industry_and_post}</span></h4>
+            </div>
+			<div class="hot_search underline"><h3>{lang hots}</h3>
+            <div><!--{pb:tag row=15 name="item" flag=1}--><a href="{$item.url}" rel="nofollow" target="_blank" title="{$item.title}">{$item.title}</a><!--{/pb:tag}--></div>
+            </div>
+			<div class="typecont">
+			<!--{get var="IndustryList" from="industry"}-->
+            <!--{loop $IndustryList item0 level_0 key0}-->
+			  <div class="typebox clearfix bg_hover">
+                <div class="category_title category_title_width"><a href="index.php?do=product&action=lists&industryid={$item0.id}" title="{$item0.name}">{$item0.name}</a></div>
+                 <div class="category_content clearfix">
+                    <!-- {if $item0.sub!=''} -->
+					<ul>
+                    	<!--{loop $item0.sub level1 level_1_industry key_level1}-->
+						<li>
+							<a href="index.php?do=product&action=lists&industryid={$level1.id}" title="{$level1.name}" class="typeboxlet01">{$level1.name}</a><br />
+                        <!--{loop $level1.sub level2 level_2_industry key_level2}-->
+							<a href="index.php?do=product&action=lists&industryid={$level2.id}" title="{$level2.name}">{$level2.name}</a>
+                            <!-- {if !$smarty.foreach.level_2_industry.last} -->
+                            <span>|</span>
+                            <!-- {/if} -->
+                        <!--{/loop}-->
+						</li>
+                        <!--{/loop}-->
+					</ul>
+                    <!-- {/if} -->
+                   </div>
+			  </div>
+                <!-- {if !$smarty.foreach.level_0.last} -->
+				<div class="line"></div>                
+                <!-- {/if} -->
+            <!--{/loop}-->
+			</div>
+		</div>
+		<div class="fr notebox">
+			<div class="fl notebox">
+				<div class="title_bar_s1">
+               <span class="title_top_s1"><span></span></span>
+               <h2><span class="title_more"><a href="redirect.php?url=/virtual-office/brand.php" title="{lang apply_industry_brand}" target="_blank">{lang apply_industry_brand}</a></span>{lang industry_brand}</h2>
+              </div>
+				<div class="brandcont clearfix">
+				<!--{pb:brand type="image" row=10 name="item"}-->
+					<li><a href="{$item.url}" target="_blank"><img src="{$item.thumb}" title="{$item.name}" /></a><p>{$item.title}</p></li>
+				<!--{/pb:brand}-->
+				</div>
+				<div class="corner_bottom_bar">
+                 <span class="corner_bottom_s1"><span></span></span>
+			    </div>
+			</div>
+			<div class="blank6"></div>
+			<!--{ads typeid=7 name="ads"}--><span>{$ads.link}</span><!--{/ads}-->
+			<div class="blank6"></div>
+			<div class="fl notebox">
+				<div class="title_bar_s1">
+                <span class="title_top_s1"><span></span></span>
+                <h2><span class="title_more"><a href="index.php?do=offer&action=lists&typeid=3" title="{lang more}"><span class="raquo">&raquo;</span>{lang more}</a></span>{lang agent}</h2>
+                </div>
+			   <ul class="hot_list">
+				<!--{pb:offer row=9 typeid="1" infolen="35" name="item"}-->
+					<!-- {if $item.rownum==0 && $item.picture neq ""} -->
+					<li style="height:70px; background:url({$item.thumb}) no-repeat; padding:0 0 0 90px; overflow:hidden; width:120px;"><h3 style="padding:0 0 0 5px;">{$item.link}</h3></li>
+					<!-- {else} -->
+					<li>{$item.link}</li>
+					<!-- {/if} -->
+				<!--{/pb:offer}-->
+			   </ul>
+			</div>
+			<div class="blank6"></div>
+			<div class="fl notebox">
+				 <div class="title_bar_s1">
+                <span class="title_top_s1"><span></span></span>
+                <h2><span class="title_more"><a href="index.php?do=offer&action=lists&typeid=5" title="{lang more}"><span class="raquo">&raquo;</span>{lang more}</a></span>{lang investment}</h2>
+                </div>
+			   <ul class="hot_list">
+				<!--{pb:offer row=9 typeid="2" infolen="35" name="item"}-->
+					<!-- {if $item.rownum==0 && $item.picture neq ""} -->
+					<li style="height:70px; background:url({$item.thumb}) no-repeat; padding:0 0 0 90px; overflow:hidden; width:120px;"><h3 style="padding:0 0 0 5px;">{$item.link}</h3></li>
+					<!-- {else} -->
+					<li>{$item.link}</li>
+					<!-- {/if} -->
+				<!--{/pb:offer}-->
+			   </ul>
+			</div>
+			<div class="blank6"></div>
+			<div class="fl notebox">
+				<div class="title_bar_s1">
+                <span class="title_top_s1"><span></span></span>
+                <h2><span class="title_more"><a href="{the_url action=list do=news typeid=3}" title="{lang more}"><span class="raquo">&raquo;</span>{lang more}</a></span>{lang site_news}</h2>
+                </div>
+			   <ul class="hot_list">
+				<!--{pb:news typeid=4 row=9 titlelen=30 infolen=25 name="item"}-->
+					{if $item.rownum==0 && $item.src neq ''}
+					<li style="height:80px; background:url({$item.src}) no-repeat; padding:0 0 0 90px; overflow:hidden; width:120px;"><h3  style="padding:0 0 0 5px;">{$item.link}</h3>{$item.content}</li>
+					{else}
+					<li>{$item.link}</li>
+					{/if}
+				<!--{/pb:news}-->
+			   </ul>
+			</div>
+			<div class="blank6"></div>
+			<div class="fl notebox">
+				<div class="title_bar_s1">
+                <span class="title_top_s1"><span></span></span>
+                <h2>{lang idea_or_advise}</h2>
+                </div>
+				<div class="hotcont_service">
+					{lang welcome_your_idea_or_advise}
+					<form action="index.php?do=service&action=post" name="service_frm" id="ServiceFrm" method="post">
+					<!-- {formhash} -->
+					<input type="hidden" name="save_service" value="save_service">
+					<textarea name="service[content]" cols="" rows=""></textarea>
+					{lang your_email}<input type="text" name="service[email]" value="">
+					<div class="blank6"></div>
+					<input type="button" name="btn_submit" value="{lang submit}" class="btn_submit_w45" onclick="$('#ServiceFrm').submit();" />
+					<input type="reset" value="{lang reset}" name="" class="btn_submit_w45"/>
+					</form>
+				   
+				</div>
+			</div>
+		</div>
+	   
+	</div>
+	<div class="blank6"></div>
+	<div class="content">
+		<div class="news clearfix">
+			<h3 class="newstit title_color break"><strong>{lang new_products}</strong></h3>
+			<ul class="clearfix">
+			<!--{pb:product row=9 type="image" titlelen="10" name="item"}-->
+				<li><a href="{$item.url}"><img src="{$item.src}" alt="{$item.name}" /></a>
+                <p><a href="{$item.url}">{$item.name}</a></p>
+                </li>
+			<!--{/pb:product}-->
+			</ul>
+		</div>
+	</div>
+	<div class="blank6"></div>
+	<div class="content">
+		<div class="corner_2px_t">
+           <div class="corner_2px_l"></div>
+           <div class="corner_2px_r"></div>
+		</div>
+		<div class="bottomc">
+			<div class="fl newscar mr7">
+                 <!--# the tabs #-->
+                <ul class="tabs2 fxg_width title_mouse">
+                      <li><!-- {pb:newstype id=4 name="newstype" row=1} --><a href="{$newstype.url}"><span>{$newstype.title}</span></a><!-- {/pb:newstype} --></li>
+                      <li><!-- {pb:newstype id=1 name="newstype" row=1} --><a href="{$newstype.url}"><span>{$newstype.title}</span></a><!-- {/pb:newstype} --></li>
+                </ul>
+                <!--# tab "panes" #-->
+                <div class="panes box_bord">
+                   	<div class="law" id="Newstype1List">
+					<ul class="law_list">
+					<!-- {pb:news typeid=2 row=9 titlelen=34 infolen=35 name="item"} -->
+						{if $item.rownum==0 && $item.src neq ''}
+						<li style="height:62px; background:url({$item.src}) no-repeat; padding:0 0 0 90px; overflow:hidden; width:120px;"><h3  style="padding:0 0 0 5px;">{$item.link}</h3>{$item.content}</li>
+						{else}
+						<li>{$item.link}</li>
+						{/if}
+					<!-- {/pb:news} -->
+					</ul>
+				</div>
+				    <div class="law" id="Newstype2List" style="display:none;">
+					<ul class="law_list">
+					<!-- {pb:news typeid=1 row=9 titlelen=34 infolen=35 name="item"} -->
+						{if $item.rownum==0 && $item.src neq ''}
+						<li style="height:62px; background:url({$item.src}) no-repeat; padding:0 0 0 90px; overflow:hidden; width:120px;"><h3  style="padding:0 0 0 5px;">{$item.link}</h3>{$item.content}</li>
+						{else}
+						<li>{$item.link}</li>
+						{/if}
+					<!-- {/pb:news} -->
+				 </ul>
+				</div>
+                </div>
+				
+			</div>
+			<div class="fl latest02">
+				<div class="title_bar_s1">
+                <span class="title_top_s1"><span></span></span>
+                <h2><span class="title_more"><a href="{the_url do=news type=hot action=lists}" title="{lang more}"><span class="raquo">&raquo;</span>{lang more}</a></span>{lang hot_news}</h2>
+                </div>
+				<div class="newscarcontbox">
+					<div class="lasestcontboxh02">
+						<ul>
+							<!--{pb:news row=4 type="image" titlelen="10" name="item"}-->
+							<li><a href="{$item.url}"><img src="{$item.src}" alt="{$item.title}" /></a>
+                            <p>{$item.link}</p>
+                            </li>
+							<!--{/pb:news}-->
+						</ul>
+					</div>
+					<div class="newscarcontboxb">
+						<ul>
+							<!--{pb:news row=14 name="item"}-->
+							<li>{$item.link}</li>
+							<!--{/pb:news}-->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="fr hotzt">
+				<div class="hotztbox">
+                   <div class="title">
+					<span class="more"><a href="index.php?do=topic&action=lists"><span class="raquo">&raquo;</span>{lang more}</a></span><h2>{lang topic_news}</h2>
+                    </div>
+                     <ul>
+					<!--{pb:topic type="news" row=3 name="item"}-->
+                         <li>
+                           <a href="{$item.url}" title="">{the_attachment name=$item.picture type='small'}</a>
+                           <div>{$item.link}</div>
+                         </li>
+					<!--{/pb:topic}-->
+                     </ul>
+				</div>
+			</div>
+		</div>
+		<div class="corner_2px_b">
+		    <div class="corner_2px_bl"></div>
+            <div class="corner_2px_br"></div>
+		</div>
+	</div>
+	<div class="blank6"></div>
+	<div class="content">
+		<div class="pardent">
+			<p><a href="index.php?do=friendlink" title="{lang apply_friendlink}" class="fr"><span class="raquo">&raquo;</span>{lang apply_friendlink}</a></p>
+			<div class="pardentbox clearfix">
+			<table width="100%" border="0">
+			  <tr>
+				<th class="friend_link">{lang friend_links}:</th>
+				<td class="friend_link_content">
+				<!--{pb:friendlink typeid="1" sep="<span>|</span>" name="link" row=15}-->
+					{$link.link}
+				<!--{/pb:friendlink}-->
+				</td>
+			  </tr>
+			  <tr>
+				<th class="friend_link">{lang membership_links}:</th>
+				<td class="friend_link_content">
+				<!--{pb:friendlink typeid="2" sep="<span>|</span>" name="link" row=15}-->
+					{$link.link}
+				<!--{/pb:friendlink}-->
+				</td>
+			  </tr>
+			</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!--{literal}-->
+<script>
+$("#topMenuOffer").addClass("lcur");
+$(function(){
+    $("ul.tabs2").tabs("div.panes > div", {event:'mouseover'});
+});
+</script>
+<!--{/literal}-->
+<!--{include file="footer.html"}-->

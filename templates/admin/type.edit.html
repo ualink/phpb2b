@@ -1,0 +1,62 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang extension} &raquo; {lang options}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang options}</h3> 
+    <ul class="subnav">
+		<li><a href="type.php">{lang management}</a></li>
+        <li><a class="btn1" href="type.php?do=edit"><span>{lang add_or_edit}</span></a></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post" action="type.php" id="EditFrm" name="edit_frm">
+  	<input type="hidden" name="page" value="{$smarty.get.page}" />
+	<input type="hidden" name="id" value="{$item.id}" />
+	<input type="hidden" name="do" value="typeoption" />
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {lang title}{lang colon}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[typeoption][option_label]" value="{$item.option_label}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {lang param_value}</th>
+        <td class="paddingT15 wordSpacing5">          
+		<input class="infoTableInput2" name="data[typeoption][option_value]" value="{$item.option_value}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{lang param_type}</th>
+        <td class="paddingT15 wordSpacing5">
+		<div id="divEdit" style="display: block;">
+		<select name="data[typeoption][typemodel_id]">
+		<!-- {foreach from=$TypeModels item="item1"} -->
+		<option value="{$item1.id}" {if $item1.id==$item.typemodel_id}selected="selected"{/if}>{$item1.title}:{$item1.type_name}</option>
+		<!-- {/foreach} -->
+		</select>&nbsp;<input class="formbtn" type="button" name="add" id="Add" value="{lang add}" />
+		</div>
+		<div id="divAdd" style="display: none;">
+		<input class="infoTableInput2" name="data[typemodel][title]" value="" />:<input class="infoTableInput2" name="data[typemodel][type_name]" value="" />
+		</div>
+		</td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20">
+			<input class="formbtn" type="submit" name="save" value="{lang save_and_pub}" />		</td>
+      </tr>
+    </table>
+  </form>
+</div>
+<!-- {literal} -->
+<script language="javascript">
+$(function(){
+	$("#Add").click(
+		function(){
+				$("#divAdd").slideToggle('fast');
+			}
+		);
+	})
+</script>
+<!-- {/literal} -->
+<!-- {include file="footer.html"} -->

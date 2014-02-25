@@ -1,0 +1,57 @@
+<!-- {include file="header.html"} -->
+<div id="currentPosition">
+	<p>{lang your_current_position} {lang ads} &raquo; {lang order_center}</p>
+</div>
+<div id="rightTop"> 
+    <h3>{lang order_center}</h3> 
+    <ul class="subnav"> 
+		<li><a href="order.php">{lang management}</a></li>
+        <li><a class="btn1" href="order.php?do=view&id={$smarty.get.id}"><span>{lang cp_view} {lang service}</span></a></li>
+    </ul> 
+</div> 
+<div class="tdare">
+  <form name="list_frm" id="ListFrm" action="order.php" method="post">
+  <input type="hidden" name="order_id" value="{$smarty.get.id}" />
+  <table width="100%" cellspacing="0" class="dataTable" summary="{lang data_zone}">
+    <thead>
+		<tr>
+		  <th class="firstCell"><input type="checkbox" name="idAll" id="idAll" onClick="pbCheckAll(this,'good_id[]');" title="{lang select_switch}"></th>
+		  <th><label for="idAll">{lang trade_number}</label></th>
+		  <th><span>{lang service} {lang naming}</span></th>
+		  <th>{lang subtotal}</th>
+		  <th>{lang action}</th>
+		</tr>
+    </thead>
+    <tbody>
+		<!--{foreach from=$Items item=item}-->
+		<tr class="tatr2">
+		  <td class="firstCell"><input type="checkbox" name="good_id[]" value="{$item.good_id}" onClick="pbCheckItem(this,'idAll');" id="item_{$item.good_id}" title="{$item.id}"></td>
+		  <td><label for="item_{$item.good_id}">{$item.order_id}</label></td>
+		  <td>{if $item.charge==1}{lang recharge}{else}{$item.name}{/if}</td>
+		  <td>{$item.price}</td>
+		  <td class="handler">
+              <ul id="handler_icon">
+                <li><a class="btn_delete" href="order.php?good_id={$item.good_id}&order_id={$item.id}&do=del" title="{lang delete}">{lang delete}</a></li>
+              </ul>
+		</tr>
+		<!--{foreachelse}-->
+		<tr class="no_data info">
+		  <td colspan="5">{lang no_datas}</td>
+		</tr>
+		<!--{/foreach}-->
+		<tr>
+		  <td colspan="3" class="firstCell">{lang total}</td>
+		  <td colspan="2">{$TotalPrice}</td>
+	    </tr>
+    </tbody>
+	</table>
+	<div id="dataFuncs" title="{lang action_zone}">
+    <div class="left paddingT15" id="batchAction">
+      <input type="submit" name="del_ordergoods" value="{lang delete}" class="formbtn batchButton"/>
+    </div>
+    <div class="pageLinks">{$ByPages}</div>
+    <div class="clear"/>
+    </div>
+  </form>
+</div>
+<!-- {include file="footer.html"} -->

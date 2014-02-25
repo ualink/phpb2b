@@ -1,0 +1,58 @@
+<!--{include file="../header.html" page_title="$page_title"}-->
+<div class="wrapper">
+	<div class="tips"><span>{$position}</span></div>
+	<div class="blank6"></div>  
+	<div class="content clearfix">
+	  <div class="main_left_w720">
+		 <div class="service_center_txt">
+             <div class="intro">
+             <span>{lang focus_user_service}</span><em>{lang service_for_your_internet}</em>
+             </div>
+             <div class="title">{lang customer_service}</div>
+         </div>
+		 <div class="corner_box">        
+			 <div class="title_bar_s4">
+			   <span class="title_top_s4"><span></span></span>  
+			   <div class="service_detail_answer01">{lang answered}</div>  
+			 </div> 
+			 <div class="service_detail_content box_bord">
+				<p><strong>{$item.title}</strong>{if $item.revert_date}<span>({lang reply_time}:{$item.revertdate})</span>{/if}</p>
+                <p>{$item.content|nl2br}</p>
+				</ul> 
+			  </div>
+			 <div class="corner_bottomtxt_bar">
+				 <span class="corner_bottomtxt_s1"><span></span></span>
+			  </div>
+		 </div>
+		 <div class="blank6"></div>
+		 <div class="corner_box">        
+			 <div class="title_bar_s4">
+			   <span class="title_top_s4"><span></span></span>  
+			   <div class="service_detail_answer02">{lang answer_content}</div>  
+			 </div> 
+			 <div class="service_detail_content box_bord">
+			  	<p>{$item.revert_content|nl2br}</p>
+			 </div>
+			 <div class="corner_bottomtxt_bar">
+				 <span class="corner_bottomtxt_s1"><span></span></span>
+		   </div>
+		 </div>
+		</div>
+	  <div class="main_right_w230">
+		<div class="corner_box">
+		   <div class="title_bar_s4">
+		  <span class="title_top_s4"><span></span></span>
+		  <h3>{lang latest_tips}</h3>
+		</div>
+		<div class="new_tips">
+		<ul>
+		{pb:feed row="10" name=feed}
+		  <li>{$feed.link}</li>
+		{/pb:feed}
+		</ul>
+	   </div>
+	   </div>
+	  </div>
+	</div>
+</div>
+<!--{include file="../footer.html"}-->

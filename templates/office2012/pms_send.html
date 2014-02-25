@@ -1,0 +1,52 @@
+{block name="title" prepend}{#send_message#}{/block}
+{block name="main"}
+<script src="../static/scripts/jquery/jquery.textbox.js" charset="{$charset}"></script>
+<script>
+var allows_maximum_input = "{lang allows_maximum_input}";
+var can_also_enter = "{lang can_also_enter}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#Content").textbox({
+		maxLength: 255,
+		onInput: function(event, status) {
+			$("#txtTips").html(allows_maximum_input+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.maxLength + "</strong> "+can_also_enter+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.leftLength + "</strong>");
+		}
+	});
+	$("#Frm1").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+})
+</script>
+<!--{/literal}-->
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{$page_title}</h2></div>
+     <div class="hint">{lang must_input_with_star}</div>
+	  <form name="sendmsgfrm" id="Frm1" action="pms.php" method="post">
+	  <!-- {formhash} -->
+       <table class="offer_info_content">
+          <tr>
+            <th class="circle_left"><font color="#FF6600">*</font>{lang send_to}</th>
+             <td class="circle_right"><input name="to" type="text" id="To" size="30" value="{$item.to}" class="required"><font color="#666666">{lang send_other_username}</font></td>
+          </tr>
+          <tr>
+            <th> <font color="#FF6600">*</font>{lang theme_n}</th>
+            <td><input name="pms[title]" type="text" id="title" size="30" value="" class="required"></td>
+          </tr>
+          <tr>
+             <th><font color="#FF6600">*</font>{lang content}</th>
+             <td><textarea name="pms[content]" id="Content" cols="50" rows="6" wrap="VIRTUAL" class="required"></textarea><div id="txtTips"></div></td>
+          </tr>
+          <tr>
+             <th class="circle_bottomleft"></th>
+             <td class="circle_bottomright"><input name="send" type=submit id="Send" value=" {lang send} ">&nbsp;&nbsp;<input name=reset type=reset id="reset" value=" {lang cancel} "></td>
+          </tr>
+           
+        </table>
+	  </form>
+{/block}

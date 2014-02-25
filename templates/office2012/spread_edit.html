@@ -1,0 +1,74 @@
+{block name="title" prepend}{#keyword_adwords#}{/block}
+{block name="main"}
+{fetch file="../static/scripts/date.js"}
+<script src="../static/scripts/jquery/jquery.textbox.js" charset="{$charset}"></script>
+<script>
+var allows_maximum_input = "{lang allows_maximum_input}";
+var can_also_enter = "{lang can_also_enter}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#dataContent").textbox({
+		maxLength: 255,
+		onInput: function(event, status) {
+			$("#txtTips").html(allows_maximum_input+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.maxLength + "</strong> "+can_also_enter+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.leftLength + "</strong>");
+		}
+	});
+	$("#Frm1").validate({
+	submitHandler: function(form) {
+		$(form).find(":submit").attr("disabled", true).attr("value",pb_lang.DO_PROCESSING);
+		form.submit();
+	}
+	});
+})
+</script>
+<!--{/literal}-->
+     <div class="blank"></div>
+	 <div class="offer_banner"><img src="{$office_theme_path}images/offer_01.gif" /></div>
+     <div class="offer_info_title"><h2>{lang keyword_adwords}</h2></div>
+
+	  <form method="post" action="spread.php" id="Frm1">
+	  <!-- {formhash} -->
+	  <input type="hidden" name="id" value="{$item.id}">
+	  <input type="hidden" name="do" value="spread">
+       <div class="hint">{lang must_input_with_star}</div>
+        <table class="offer_info_content">
+			  <tr>
+				<th><font class="red">*</font>{lang keyword_advertising}{lang colon}</th>
+				<td><input name="spread[keyword_name]" type="text" id="dataKeywordName" value="{$item.keyword_name}" class="required" maxlength="15"></td>
+			  </tr>
+			  <tr>
+				<th><font class="red">*</font>{lang show_title}</th>
+				<td><input name="spread[title]" type="text" id="dataTitle" value="{$item.title}" class="required" maxlength="25"></td>
+			  </tr>
+			  <tr>
+				<th><font class="red">*</font>{lang link_address}{lang colon}</th>
+				<td><input name="spread[target_url]" type="text" id="dataTargetUrl" value="{$item.target_url}" class="required optional defaultInvalid url"></td>
+			  </tr>
+			  <tr>
+				<th>{lang expire_date}{lang colon}</th>
+				<td><input name="exp_date" type="text" id="date1" value="{$item.exp_date}"><span class="btn_calendar" id="calendar-date1"></span></td>
+			  </tr>
+			  <tr>
+                <th>{lang description}</th>
+                   <td class="tdright"><textarea name="spread[content]" id="dataContent" rows="8" wrap="VIRTUAL" style="width:370px;" class="required">{$item.content}</textarea><div id="txtTips"></div></td>
+                  </tr>
+			  <tr>
+			  <tr>
+				<th class="circle_bottomleft"></th>
+				<td class="circle_bottomright"><input name="save" type="submit" id="save" value=" {lang confirm_submit} "></td>
+			  </tr>
+          </table>
+	</form>
+<!--{literal}-->
+<script>
+Calendar.setup({
+	trigger    : "calendar-date1",
+	animation  : false,
+	inputField : "date1",
+	onSelect   : function() { this.hide() }
+});
+</script>
+<!--{/literal}-->
+{/block}

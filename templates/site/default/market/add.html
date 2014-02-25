@@ -1,0 +1,117 @@
+<!--{include file="../header.html" page_title=#add_market# nav_id=7}-->
+<script src="data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<script src="static/scripts/jquery/jquery.textbox.js" charset="{$charset}"></script>
+<script>
+var allows_maximum_input = "{lang allows_maximum_input}";
+var can_also_enter = "{lang can_also_enter}";
+</script>
+<!--{literal}-->
+<script>
+jQuery(document).ready(function($) {
+	$("#Content").textbox({
+		maxLength: 255,
+		onInput: function(event, status) {
+			$("#txtTip").html(allows_maximum_input+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.maxLength + "</strong> "+can_also_enter+" <strong style='font-family:Arial;font-size:1.5em;'>" + status.leftLength + "</strong>");
+		}
+	});
+})
+</script>
+<!--{/literal}-->
+<div class="wrapper">
+  <div class="content">
+    <div class="tips"><span>{$position}</span></div>
+    <div class="add_info">
+      <div class="add_infoleft"> 
+        <div class="add_infoleft_con">
+         <div class="title_bar_s4">
+          <span class="title_top_s4"><span></span></span>
+          <h3>{lang recommended_market}</h3>
+       </div>
+          <ul class="add_infoleft_conlist">
+          <!-- {pb:market row=10 name=market} -->
+          <li>{$market.link}</li>
+          <!-- {/pb:market} -->
+          </ul>
+        </div>
+      </div>
+      <div class="add_inforight">
+       <div class="base_title">
+        <span class="search_more" ><a href="index.php?do=market&action=lists"><span class="raquo">&raquo;</span>{lang more} {lang market_info}</a></span>
+        <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang added_market}</span><span class="corner_t_r"></span></h2>
+	</div>        
+        <div class="add_inforight_con">
+				<form name="marketfrm" id="marketFrm" action="{$_G.REQUEST_URI}" method="post">
+				<input type="hidden" name="do" value="add_market" />
+				<!-- {formhash} -->
+            <table border="0" id="table_con">
+              <tr>
+                <td width="113" align="center" valign="middle">{lang market_name}</td>
+                <td height="30"><label>
+                  <input type="text" name="data[market][name]" id="MarketName" value="">
+                </label></td>
+              </tr>
+              <tr>
+                <td align="center" valign="middle">{lang area}</td>
+                <td height="30" align="left" valign="middle">
+				<p id="dataArea">
+					<select name="area[id][1]" id="dataMarketAreaId1" class="level_1" style="width:120px;" ></select>
+					<select name="area[id][2]" id="dataMarketAreaId2" class="level_2" style="width:120px;"></select>
+					<select name="area[id][3]" id="dataMarketAreaId3" class="level_3" style="width:120px;"></select>
+				</p>
+                 </td>
+              </tr>
+              <tr>
+                <td align="center" valign="middle">{lang belong_industry}</td>
+                <td height="30" align="left" valign="middle">
+				<p id="dataIndustry">
+					<select name="industry[id][1]" id="dataMarketIndustryId1" class="level_1" style="width:120px;" ></select>
+					<select name="industry[id][2]" id="dataMarketIndustryId2" class="level_2" style="width:120px;"></select>
+					<select name="industry[id][3]" id="dataMarketIndustryId3" class="level_3" style="width:120px;"></select>
+				</p>                
+                </td>
+              </tr>
+              <tr>
+                <td align="center" valign="middle">{lang market_introduction}</td>
+                <td><label>
+                  <textarea name="data[market][content]" id="Content" rows="5" cols="35"></textarea>
+                  </label><div id="txtTip"></div></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td height="30" valign="middle">
+                  <input name="image_button" type="button" id="addmarket" alt="{lang submit}" onclick="return checkFrm();" class="submit_w118" value="{lang submit_market}" />
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script>
+var app_language = '{$AppLanguage}';
+</script>
+<script src="static/scripts/jquery.js"></script>
+<script src="static/scripts/multi_select.js" charset="{$charset}"></script>
+<script src="static/scripts/script_area.js"></script>
+<script src="static/scripts/script_industry.js"></script>
+<script>
+$("#MarketName").focus();
+var input_market_name = "{lang input_market_name}";
+</script>
+<!--{literal}-->
+<script>
+function checkFrm(){
+	if($("#MarketName").val()==""){
+		alert(input_market_name);
+		$("#MarketName").focus();
+		return false;
+	}else{
+		$("#marketFrm").submit();
+		return true;
+	}
+}
+</script>
+<!--{/literal}-->
+<!--{include file="../footer.html"}-->

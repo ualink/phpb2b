@@ -1,0 +1,181 @@
+<!--{include file="../header.html" page_title="$page_title" nav_id="$nav_id"}-->
+<script src="static/scripts/jquery/cookie/jquery.cookie.js" type="text/javascript"></script>
+<script>
+var obj = eval("("+$.cookie("latest_browse")+")");
+</script>
+<div class="wrapper">
+	<div class="tips"><span>{$position}</span></div>
+    <div class="blank6"></div>
+	<div class="kinds">
+		<p>
+		<span>{lang sort_screening}</span>
+		<!--{get from="cache" name="type" key="offertype" var="offertypes"}-->
+		<a href="{the_url module=offer action=list typeid=$key}" title="">{lang all_categories}</a>
+		<!-- {loop $offertypes item type key} -->
+		<a href="{the_url module=offer action=list typeid=$key}" title="{$type_item}">{$item}</a>
+		<!-- {/loop} -->
+		</p>
+		<p>
+		<span>{lang industry_screening}</span>
+		<a href="{the_url module=offer action=list industryid='' level=''}" title="">{lang all_categories}</a>
+		<!--{pb:industry name=item parentid=$_G.industryid}-->
+		<a href="{the_url module=offer action=list industryid=$item.id level=$item.level+1}" title="{$item.name|pl}">{$item.title|pl}</a>
+		<!--{/pb:industry}-->
+		</p>
+		<p>
+		<span>{#area_choose#|sprintf:#the_area#}{lang colon}</span>
+		<a href="{the_url module=offer action=list areaid='' level=''}" title="">{lang all_categories}</a>
+		<!--{pb:area name=item parentid=$_G.areaid}-->
+		<a href="{the_url module=offer action=list areaid=$item.id level=$item.level+1}" title="{$item.name|pl}">{$item.title|pl}</a>
+		<!--{/pb:area}-->
+		</p>
+	</div>
+<div class="qiugoucontent clearfix">
+	<div class="qiugoucontentleft">
+	<div class="related">
+		<form name="relate_frm" method="get" id="RelateFrm">
+		<div class="basic">            
+				<ul>
+					<li class="filt-price">
+						<label>{lang the_price}</label>
+						<input type="text" value="" name="price_start" id="DataPriceStart">
+						<span>{lang arrive_to}</span>
+						<input type="text" value="" name="price_end" id="DataPriceEnd">
+					</li>
+					<li class="filt-begin">
+						<label><input type="checkbox" value="1" name="picture" id="DataPicture">{lang picture}</label>
+						<label><input type="checkbox" value="1" name="commend" id="DataCommend">{lang commend}</label>
+						<label><input type="checkbox" value="1" name="urgent" id="DataUrgent">{lang urgent}</label>
+					</li>
+					<li class="filt-begin">
+						<select name="country" id="DataCountry">
+							<option value="" selected>{lang country}</option>
+							<!-- {loop $countries country} -->
+							<option value="{$country.id}">{$country.name}</option>
+							<!-- {/loop} -->
+						</select>
+					</li>
+					<li class="filt-begin">
+						<select name="date" id="DataDate">
+							<option value="" selected>{lang pub_date}</option>
+							<option value="86400">1 {lang days}</option>
+							<option value="172800">3 {lang days}</option>
+							<option value="604800">1 {lang weeks}</option>
+							<option value="2592000">1 {lang month}</option>
+							<option value="7948800">3 {lang month}</option>
+						</select>
+					</li>
+					<li class="filt-begin">
+						<select name="sure" id="DataSure">
+							<option value="" selected>{lang trust_type}</option>
+							<!-- {loop $trusttype trust_type} -->
+							<option value="{$trust_type.id}">{$trust_type.name}</option>
+							<!-- {/loop} -->
+						</select>
+					</li>
+					<li class="filt-btn">
+						<button class="submit" type="submit">{lang sure}</button>
+					</li>
+				</ul>
+			</div>
+			</form>
+		</div>
+		<div class="base_title">
+			<span class="more"><a href="index.php?do=help">{lang how_bump_to_top}</a></span>
+			<h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang search_result}</span><span class="corner_t_r"></span></h2>
+		</div>
+		<div class="qiugouleftcon box_bord">
+			<form name="offer_list_frm">
+            <table>
+				<tr>
+					<th>{lang picture}</th>
+					<th>{lang offer}/{lang publisher}</th>
+					<th></th>
+					<th>{lang area_n}</th>
+					<th>{lang member_group}</th>
+					<th>{lang contact_us}</th>
+				</tr>
+				{if $StickyItems}
+					<!--{loop $StickyItems sticky sticky_offer}-->
+					<tr style="background:#FFF8DD;">
+					<td class="offer_img"><img src="{$sticky.image}" border=0 alt="{$sticky.title}"></td>
+					<td class="title_link">
+					<p><span><a href="{the_url module=offer typeid=$sticky.type_id id=$sticky.id}" title="{$sticky.title}">{$sticky.title}</a></span>[{$sticky.pubdate}]</p>
+					<p>{lang abstract}{$sticky.content|truncate:100}</p>
+					<p>{lang publisher}{if $sticky.companyname}<a href="{the_url module=space userid=$sticky.username}">{$sticky.companyname}</a>{else}{$sticky.username}{/if}</p>     
+					</td>
+					<td>{if $sticky.if_commend>0}<span class="icon-commend"></span>{/if}{if $sticky.if_urgent>0}<span class="icon-hurry"></span>{/if}<img src="static/images/top.gif" alt="{lang bump_to_top}" /></td>
+					<td><p>{if $sticky.area_id1}{$Areas[1][$sticky.area_id1]}<br />{$Areas[2][$sticky.area_id2]}{/if}</p></td>
+					<td>{if $sticky.gradename}<span title="{$sticky.gradename}"><!-- {$sticky.gradeimg} --></span>{/if}</td>
+					<td>					
+						{$sticky.im}
+						{if $sticky.companyname!=""}
+						<a href="{the_url module=space userid=$sticky.userid}"><span class="im_pms">{lang station_message}</span></a>
+						{elseif $sticky.username}
+						<a href="virtual-office/pms.php?do=send&to={$sticky.username}"><span class="im_pms">{lang send_message}</span></a>
+						{/if}
+					</td>
+					</tr>
+					<!--{/loop}-->
+				{/if}
+				<!--{loop $items item offer}-->
+				<tr>
+				<td class="offer_img"><a href="{the_url module=offer typeid=$item.type_id id=$item.id}"><img src="{$item.image}" border=0 alt="{$item.title}"></a></td>
+				<td class="title_link list_offer_content_width">
+				<p><span><a href="{the_url module=offer typeid=$item.type_id id=$item.id}" title="{$item.title}">{$item.title|pl}</a></span><span class="gray">[{$item.pubdate}]</span></p>
+				<p>{lang abstract}{$item.content|pl|truncate:100}</p>
+				<p>{lang publisher}{if $item.companyname}<a href="{the_url module=space userid=$item.username}">{$item.companyname}</a>{else}{$item.username}{/if}</p>     
+				</td>
+				<td>{if $item.if_commend>0}<span class="icon-commend"></span>{/if}{if $item.if_urgent>0}<span class="icon-hurry"></span>{/if}</td>
+				<td>{$item.country}</td>
+				<td><!-- {if $item.gradename} -->{$item.gradeimg}<!-- {/if} --></td>
+				<td>
+					{$item.im}
+					{if $item.companyname!=""}
+					<a href="{the_url module=space userid=$item.userid}"><span class="im_pms">{lang station_message}</span></a>
+					{elseif $item.username}
+					<a href="virtual-office/pms.php?do=send&to={$item.username}"><span class="im_pms">{lang send_message}</span></a>
+					{/if}
+				 </td>
+				</tr>
+				<!--{/loop}-->
+            </table>
+			<div><!-- {the_page limit=10 rowcount=$paging.total class_active="current"} --></div>
+			</form>
+		</div>
+	</div>
+	<div class="qiugoucontentright">
+		<div class="recommendcompany">
+			<div class="recommendcompanytop"><img src="{$theme_img_path}images/lhighs.gif" />&nbsp;{lang commend} {lang offer}</div>
+			{pb:offer row=10 type="commend" typeid=$typeid name="item"}
+			<p>{$item.link}</p>
+			{/pb:offer}
+			<div class="clear"></div>
+		</div>
+		<div class="recommendcompany">
+			<div class="recommendcompanytop"><img src="{$theme_img_path}images/lhighs.gif" />&nbsp;{lang recommended_company}</div>
+			{pb:company row=15 name=company}
+			<p>{$company.link}</p>
+			{/pb:company}
+			<div class="clear"></div>
+		</div>
+</div>
+</div>
+<script>
+$("#topMenuOffer").addClass("lcur");
+$("#DataPriceStart").val("{$_G.price_start}");
+$("#DataPriceEnd").val("{$_G.price_end}");
+$("#DataCountry").val("{$_G.country}");
+$("#DataDate").val("{$_G.date}");
+$("#DataSure").val("{$_G.sure}");
+$("#DataPicture").attr("checked","{$_G.picture}");
+$("#DataCommend").attr("checked","{$_G.commend}");
+$("#DataUrgent").attr("checked","{$_G.urgent}");
+</script>
+<!-- {if $highlight_str} -->
+<script language="javascript" src="static/scripts/highlight.js"></script>
+<script>
+$(".qiugouleftcon").highlight("{$highlight_str}");
+</script>
+<!-- {/if} -->
+<!--{include file="../footer.html"}-->
