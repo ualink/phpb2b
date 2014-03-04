@@ -88,7 +88,7 @@ language : \"{$language}\"
 </script>
 ";
 			break;
-		case "tinymce":
+		default:
 			if (isset($params['language'])) {
 				$language = trim($params['language']);
 			}else{
@@ -111,25 +111,6 @@ tinymce.init({";
 	}
     $output.="theme: 'modern'
  });
-</script>
-";
-			break;
-		default:
-			if (!isset($params['mode']) || empty($params['mode'])) {
-				$mode = "mode : \"textareas\",";
-			}else{
-				$mode = "mode : \"specific_textareas\",
-editor_selector : \"mceEditor\",
-";
-			}
-			$output.="<script type=\"text/javascript\" src=\"{$base_path}".STATICURL."scripts/tiny_mce/tiny_mce.js\"></script>\n";
-			$output.="<script>
-tinyMCE.init({
-{$mode}
-theme : \"simple\",
-theme_advanced_toolbar_location : \"top\",
-theme_advanced_toolbar_align : \"left\"
-});
 </script>
 ";
 			break;

@@ -11,6 +11,7 @@ require("libraries/common.inc.php");
 require("share.inc.php");
 require(LIB_PATH."sendmail.inc.php");
 require(LIB_PATH.'passport.class.php');
+//require(CACHE_LANG_PATH."lang_emails.php");
 $G['membergroup'] = cache_read("membergroup");
 $passport = new Passports();
 uses("member","company","companyfield", "memberfield","membergroup");

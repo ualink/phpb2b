@@ -7,6 +7,8 @@
  */
 $theme_name = "default";//templet
 $tpl_dir = "templates";
+//if(is_dir(PHPB2B_ROOT. "templates/".$app_lang."/")) $theme_name = $app_lang;
+//$limit = 10;//site every page set.
 $pos = 0;
 if (isset($_GET['pos'])) {
 	$pos = intval($_GET['pos']);

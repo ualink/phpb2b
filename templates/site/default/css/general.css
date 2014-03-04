@@ -1,5 +1,5 @@
 /*  
-The Name: Default style
+The Name: é»˜è®¤æ¨¡æ¿
 The URI: http://demo.phpb2b.com/cn/
 Description: A PHPB2B Default Templet. Enjoy!
 Author: PB TEAM
@@ -139,7 +139,7 @@ padding-right:13px;
 .hotztbox li div { height:20px; overflow: hidden;}
 .bottomc{ height:auto;}
 .hotzt{width:232px;}
-/*°ïÖúÁĞ±íÒ³----------------------------------------------------*/
+/*å¸®åŠ©åˆ—è¡¨é¡µ----------------------------------------------------*/
 .contentbox{ padding:6px 0;}
 .breadnav img{ margin-right:10px;}
 .help_l{ width:232px; overflow:hidden;}
@@ -883,7 +883,7 @@ height: expression(this.height > 125 ? 125 : true);
 .brand_list li { width:76px;padding:10px 16px; display:block; overflow:hidden;text-align:center; float:left;}
 .brand_list div span {display:table-cell;vertical-align:middle}
 .brand_list div span {
-    _height: 100%; /* Òª±£Ö¤ºÍ¸¸ÔªËØ¸ß¶ÈÒ»Ñù²ÅĞĞ */
+    _height: 100%; /* è¦ä¿è¯å’Œçˆ¶å…ƒç´ é«˜åº¦ä¸€æ ·æ‰è¡Œ */
     _writing-mode: tb-rl;
     _vertical-align: middle;
   }/* IE6 */
