@@ -85,6 +85,7 @@ class Search extends PbController {
 			}
 			ksort($modules);
 			setvar("top_modules", $modules);
+			setvar("current_module", $option);
 			unset($modules[$option]);
 			array_unshift($modules, L(array_search($option, $this->allowed_search)));
 			setvar("modules", $modules);
