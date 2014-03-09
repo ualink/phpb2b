@@ -1,7 +1,7 @@
 PHPB2B
 =======
 
-[![PHPB2B](http://http://www.phpb2b.com/media/image/logo.png)](http://www.phpb2b.com)
+[![PHPB2B](http://www.phpb2b.com/media/image/logo.png)](http://www.phpb2b.com)
 
 PHPB2B is an opensource and free b2b program.
 
