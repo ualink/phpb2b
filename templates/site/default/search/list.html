@@ -72,7 +72,7 @@ $(document).ready(function(){
 	<div class="tbos" id="all_cats"><a href="javascript:;" id="link_all_cats" class="q">{lang all_of}{$list_module}</a></div>
 	<div id="sub_cats">
 		<!-- {foreach from=$cats item=item1 key=key1} -->
-		<div class="tbou"><a href="{the_url do=search module=$list_module typeid=$key1 pos='' total_count=''}" class="q" style="{if $_G.typeid eq $key1}font-weight:bold;{/if}">{$item1}</a></div>
+		<div class="tbou"><a href="{the_url do=search module=$current_module typeid=$key1 pos='' total_count=''}" class="q" style="{if $_G.typeid eq $key1}font-weight:bold;{/if}">{$item1}</a></div>
 		<!-- {/foreach} -->
 	</div>
 	<!-- {else} -->
@@ -146,8 +146,8 @@ $(document).ready(function(){
   </div><!-- picture END -->
   {$itemb.digest|pl|truncate:100}<br>
   <cite>
-  <!-- {if $itemb.extra} -->{$itemb.extra}<!-- {/if} -->
-  <!-- {if $itemb.pubdate} -->- ({$itemb.pubdate})<!-- {/if} -->
+  <!-- {if $itemb.extra} -->{$itemb.extra}- <!-- {/if} -->
+  <!-- {if $itemb.pubdate} -->({$itemb.pubdate})<!-- {/if} -->
   </cite>
   
   </div>

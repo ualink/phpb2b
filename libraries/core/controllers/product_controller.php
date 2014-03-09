@@ -183,7 +183,7 @@ class Product extends PbController {
 		$result = $this->product->Search($pos, $this->displaypg);
 		setvar("items", $result);
  		$this->view->assign("total_count", $this->product->amount);
-		render("list.default");
+		render("product/list");
 	}
 }
 ?>

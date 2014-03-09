@@ -37,6 +37,9 @@ class Market extends PbController {
 	
 	function lists()
 	{
+		global $viewhelper, $pos;
+		$viewhelper->setPosition(L("market", 'tpl'), 'index.php?do=market');
+		$viewhelper->setTitle(L("market", 'tpl'));
 		render("list.default");
 	}
 	

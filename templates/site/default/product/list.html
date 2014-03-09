@@ -14,7 +14,7 @@
                 <div class="base_list clearfix">
                     {if $item.picture}<div class="base_list_img"><img src="{$item.image}" /></div>{/if}
                     <div class="base_list_info">
-                      <span class="title title_link"><a href="{the_url id=$item.id do=$_G.do}">{$item.title|pl|truncate:80}</a></span>
+                      <span class="title title_link"><a href="{the_url id=$item.id do=product}">{$item.title|pl|truncate:80}</a></span>
                       <p> {$item.digest}</p>
                       <div class="update_time"><em>{lang update_time}({$item.pubdate})</em>
 					  <!-- {if $item.typename} -->
@@ -28,7 +28,6 @@
                  </div>
                  <hr class="hr_dashed" />
                <!--{/loop}-->
-				<!-- {if !$items} -->{#no_search_result_for_you#|sprintf:#market#}<!-- {/if} -->
                 <div class="pagination2">{if $total_count>0}<!-- {the_page limit=10 rowcount=$total_count class_active="pagination-active"} -->{/if}</div>
            </div>
         </div>

@@ -973,11 +973,11 @@ function pb_configmake($lang, $exit = true)
 function pb_attack_filter($StrFiltKey,$StrFiltValue,$ArrFiltReq){
 	if(is_array($StrFiltValue))
 	{
-		$StrFiltValue=implode($StrFiltValue);
+		$StrFiltValue=@implode(",", $StrFiltValue);
 	}
 	if (preg_match("/".$ArrFiltReq."/is",$StrFiltValue)==1){
-		echo $ArrFiltReq;
-		echo $StrFiltValue;
+//		echo $ArrFiltReq;
+//		echo $StrFiltValue;
 		header_sent("Warning : Illegal operation!");
 		exit();
 	}
