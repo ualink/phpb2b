@@ -181,7 +181,7 @@ if (isset($_GET['do']) || isset($_GET['act'])) {
 	}	
 }
 if (isset($_GET['typeid']) && !empty($_GET['typeid'])) {
-	$conditions[] = "type_id = ".intval($_GET['typeid']);
+	$conditions[] = "type_id = '".intval($_GET['typeid'])."'";
 }
 $amount = $product->findCount(null, $conditions,"Product.id");
 $page->setPagenav($amount);
