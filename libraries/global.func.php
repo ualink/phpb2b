@@ -883,6 +883,17 @@ function pb_configmake($lang, $exit = true)
 	global $charset;
 	//read the csv files at languages.
 	$language_files = array();
+	$handler = opendir(PHPB2B_ROOT.'languages/');
+    while (($lang_dir = readdir($handler)) !== false) {
+	if ($lang_dir != "." && $lang_dir != ".." && is_dir(PHPB2B_ROOT.'languages/'.$lang_dir)) {
+			$lang_dirs[] = $lang_dir ;
+	   }
+	}
+    closedir($handler);
+	if(!in_array($lang_dir, $lang_dirs)){
+		header_sent("Wrong with application language.");
+		exit;
+	}
 	require_once SOURCE_PATH. 'Excel/reader.php';
 	$reader = new Spreadsheet_Excel_Reader();
 	foreach(glob(PHPB2B_ROOT.'languages/'.$lang.'/*.csv') as $single){

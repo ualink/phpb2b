@@ -155,6 +155,7 @@ if(!MAGIC_QUOTES_GPC) {
     $_GET = pb_addslashes($_GET);
     $_POST = pb_addslashes($_POST);
     $_COOKIE = pb_addslashes($_COOKIE);
+    $_SERVER = pb_addslashes($_SERVER);
 }
 if($_SERVER['REQUEST_URI']) { 
 	$temp = urldecode($_SERVER['REQUEST_URI']); 
