@@ -17,13 +17,13 @@ if (isset($_GET['do'])) {
 			if (empty($_GET['aid'])) {
 				flash();
 			}
-			$attach_id = authcode(rawurldecode($_GET['aid']), "DECODE");
+			$attach_id = intval($_GET['aid']);
 			if (empty($attach_id)) {
 				flash();
 			}
 			require(LIB_PATH. "func.download.php");
 			require(CLASS_PATH. "js.class.php");
-			$filename = rawurlencode($attachment->getAttachFileName($attach_id));
+			$filename = $attachment->getAttachFileName($attach_id);
 			$filename = $attachment->file_url;
 			if(!sendFile($filename))
 			{

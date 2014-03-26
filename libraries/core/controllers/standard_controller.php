@@ -115,7 +115,7 @@ class Standard extends PbController {
 			$viewhelper->setTitle($info['title']);
 			$viewhelper->setPosition($info['title']);
 			if (!empty($info['attachment_id'])) {
-				$info['attach_hashid'] = rawurlencode(authcode($info['attachment_id']));
+				$info['attach_hashid'] = $info['attachment_id'];
 			}
 			$info['download_article'] = 1;
 			//neighbour
