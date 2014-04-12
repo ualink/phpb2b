@@ -31,6 +31,8 @@ if (isset($_POST['save'])) {
 		$vals['photo'] = $attachment->file_full_url;
 	}
     $_POST['memberfield']['area_id'] = PbController::getMultiId($_POST['area']['id']);
+	unset($vals['created']);
+	unset($_POST['memberfield']['created']);
 	$result = $member->save($vals, "update", $the_memberid);
 	$memberfield->primaryKey = "member_id";
 	$result = $memberfield->save($_POST['memberfield'], "update", $the_memberid);

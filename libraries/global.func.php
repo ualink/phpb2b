@@ -987,8 +987,8 @@ function pb_attack_filter($StrFiltKey,$StrFiltValue,$ArrFiltReq){
 		$StrFiltValue=@implode(",", $StrFiltValue);
 	}
 	if (preg_match("/".$ArrFiltReq."/is",$StrFiltValue)==1){
-//		echo $ArrFiltReq;
-//		echo $StrFiltValue;
+		echo $ArrFiltReq;
+		echo $StrFiltValue;
 		header_sent("Warning : Illegal operation!");
 		exit();
 	}

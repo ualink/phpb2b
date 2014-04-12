@@ -55,6 +55,7 @@ if (isset($_POST['do'])) {
 		}
 		if (!empty($id)) {
 			$vals['modified'] =$time_stamp;
+			unset($vals['created']);
 			$result = $productprices->save($vals, "update", $id);
 		}else{
 			$vals['created'] = $vals['modified'] =$time_stamp;

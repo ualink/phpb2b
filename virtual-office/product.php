@@ -62,6 +62,7 @@ if (isset($_POST['save'])) {
 			$item_ids = $form->Add($id,$_POST['data']['formitem'], $form_id, $form_type_id);
 			$product->params['data']['product']['modified'] = $time_stamp;
 			$product->params['data']['product']['formattribute_ids'] = $item_ids;
+			unset($product->params['data']['product']['created']);
 			$result = $product->save($product->params['data']['product'], "update", $id, null, $conditions);
 		}else {
 			if ($g['max_product'] && $now_product_amount>=$g['max_product']) {

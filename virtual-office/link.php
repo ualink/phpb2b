@@ -33,6 +33,7 @@ if (isset($_POST['save'])) {
 		$id = intval($_POST['id']);
 	}
 	if (!empty($id)) {
+		unset($vals['created']);
 		$updated = $spacelink->add($vals, "update", $id, "{$tb_prefix}spacelinks", "member_id=".$the_memberid." AND company_id=".$companyinfo['id']);
 	}else{
 		if ($pdb->GetOne("SELECT id FROM {$tb_prefix}spacelinks WHERE member_id=".$the_memberid." AND url='".$vals['url']."'")) {

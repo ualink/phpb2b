@@ -95,6 +95,7 @@ if (isset($_POST['do']) && !empty($_POST['data']['company'])) {
     $vals['area_id'] = PbController::getMultiId($_POST['area']['id']);
 	if(!empty($company_id)){
 		$vals['modified'] = $time_stamp;
+		unset($vals['created']);
 		$vals['cache_membergroupid'] = $memberinfo['membergroup_id'];
 		$company->save($vals, "update", $company_id, null, "member_id=".$the_memberid);
 		$company->updateCachename($company_id, $vals['name']);

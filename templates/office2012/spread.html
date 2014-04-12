@@ -24,7 +24,7 @@
             </tr>
 			<!--{foreach from=$Items item=item}-->
             <tr align="center" class="bgwhite">
-              <td><a href="{$SiteUrl}{the_url action=lists module=search do=product q=$item.keyword_name}" target="_blank" style="text-decoration:underline;">{$item.keyword_name}</a></td>
+              <td><a href="{the_url action=lists module=search do=product q=$item.keyword_name}" target="_blank" style="text-decoration:underline;">{$item.keyword_name}</a></td>
               <td>{$item.title}</td>
               <td><a href="{$item.target_url}" target="_blank" style="text-decoration:underline;">{$item.target_url}</a></td>
               <td>{$CheckStatus[$item.status]}</td>

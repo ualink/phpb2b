@@ -48,6 +48,7 @@ if (isset($_POST['save']) && !empty($_POST['data']['name'])) {
 	$record['name'] = $_POST['data']['name'];
 	if(!empty($id)){
 		$record['modified'] = $time_stamp;
+		unset($vals['created']);
 		$result = $producttype->save($record, "update", $id, null, $conditions);
 	}else{
 		$orignal_count = $producttype->findCount(null, $conditions);

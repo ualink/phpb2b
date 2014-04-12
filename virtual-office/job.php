@@ -71,6 +71,7 @@ if (!empty($_POST['job']) && $_POST['save']) {
     $vals['area_id'] = PbController::getMultiId($_POST['area']['id']);
 	if(!empty($id)){
 		$vals['modified'] = $time_stamp;
+		unset($vals['created']);
 		$result = $job->save($vals, "update", $id, null, "member_id=".$the_memberid);
 	}else{
     	if ($g['max_job'] && $now_job_amount>=$g['max_job']) {

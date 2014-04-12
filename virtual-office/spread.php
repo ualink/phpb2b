@@ -15,13 +15,17 @@ $tpl_file = "spread";
 $conditions = "member_id=".$the_memberid;
 if (isset($_POST['save'])) {
 	pb_submit_check('save');
-	$record = array();
-	$vals = $_POST['spread'];
+	$record = $vals = array();
 	if (isset($_POST['id'])) {
 		$id = intval($_POST['id']);
 	}
+	$vals['keyword_name'] = $_POST['spread']['keyword_name'];
+	$vals['title'] = $_POST['spread']['title'];
+	$vals['target_url'] = $_POST['spread']['target_url'];
+	$vals['content'] = $_POST['spread']['content'];
 	if (!empty($id)) {
-		$updated = $spread->save($vals, 'update', $id, null, $conditions);
+		unset($vals['created']);
+		$updated = $spread->save($vals, "update", $id, null, $conditions);
 	}else{
 		$vals['created'] = $time_stamp;
 		//default one week

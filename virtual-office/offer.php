@@ -191,6 +191,8 @@ if (isset($_GET['do'])) {
     if ($do=="update" && !empty($id)) {
     	$vals = array();
     	$vals['modified'] = $time_stamp;
+		unset($vals['created']);
+		unset($vals['created']);
     	$conditions[]= "status='1'";
     	$pre_update_time = $pdb->GetOne("select modified from {$tb_prefix}trades where id=".$id." and member_id=".$the_memberid);
     	if ($pre_update_time>($time_stamp-$tMaxHours*3600)) {
@@ -210,6 +212,7 @@ if (isset($_GET['do'])) {
     		flash("allow_refresh_day");
     	}
     	$vals['submit_time'] = $time_stamp;
+		unset($vals['created']);
     	$vals['expire_days'] = 1;
     	$vals['expire_time'] = $time_stamp+(24*3600*$vals['expire_days']);
     	$conditions[]= "status='1'";
@@ -289,6 +292,7 @@ if (isset($_POST['do']) && !empty($_POST['data']['trade'])) {
 		$res['formattribute_ids'] = $item_ids;
     	$tradefield_res['trade_id'] = $id;
         $res['modified'] = $time_stamp;
+		unset($vals['created']);
         unset($res['member_id'], $res['company_id']);
         $res = $trade->save($res, "update", $id, null, $conditions);
     }else {

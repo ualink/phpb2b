@@ -56,6 +56,7 @@ if (isset($_POST['save'])) {
     }	
 	if(!empty($_POST['newsid'])){
 		$vals['modified'] = $time_stamp;
+		unset($vals['created']);
 		$companynews->save($vals, "update",$_POST['newsid'],null, "member_id=".$the_memberid);
 		pheader("location:news.php?action=list");
 	}else {
