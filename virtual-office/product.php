@@ -173,7 +173,7 @@ if (isset($_GET['do']) || isset($_GET['act'])) {
 	if (($do == "del" || $_GET['act']=="del") && !empty($id)) {
 		$res = $product->read("id",$id);
 		if($res){
-			if(!$product->del($_GET['id'], $conditions)){
+			if(!$product->del($id, $conditions)){
 				flash();
 			}
 		}else {

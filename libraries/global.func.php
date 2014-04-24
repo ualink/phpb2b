@@ -890,7 +890,7 @@ function pb_configmake($lang, $exit = true)
 	   }
 	}
     closedir($handler);
-	if(!in_array($lang_dir, $lang_dirs)){
+	if(!in_array($lang, $lang_dirs)){
 		header_sent("Wrong with application language.");
 		exit;
 	}
@@ -903,7 +903,7 @@ function pb_configmake($lang, $exit = true)
 		$language_files[basename($single, ".xls")] = PHPB2B_ROOT.'languages/'.$lang.'/'.basename($single);
 	}
 	if (!is_dir(PHPB2B_ROOT.'./languages/'.$lang)) {
-		header_sent("Wrong with languages.");
+		header_sent("Wrong with languages, or language ".$lang." not exists.");
 		exit;
 	}
 	if (!is_dir(PHPB2B_ROOT.'data'.DS.'language'.DS.$lang)) {
@@ -976,7 +976,7 @@ function pb_configmake($lang, $exit = true)
 			return ;
 		}
 	}else{
-		header_sent("Wrong with language maken.");
+		header_sent("Wrong with language maken, or language ".$lang." not exists.");
 		exit;
 	}
 }
