@@ -51,7 +51,11 @@ if (isset($_POST['do_action'])) {
 				$tAdminInfo = authcode($_COOKIE[$cookiepre.'admin'], "DECODE");
 				$tAdminInfo = explode("\n", $tAdminInfo);
 				if (!empty($tAdminInfo)) {
-					$authed = true;
+					//check admin password
+					$adminPasswd = $member->field("userpass", array("username"=>$tAdminInfo['username']));
+					if(pb_strcomp($tAdminInfo['userpass'], $adminPasswd)){
+						$authed = true;
+					}
 				}
 			}
 			$targetPath = PHPB2B_ROOT. $attachment->attachment_dir.DS."swfupload".DS.gmdate("Y").gmdate("m").DS.gmdate("d").DS;
@@ -78,7 +82,11 @@ if (isset($_POST['do_action'])) {
 				$tAdminInfo = authcode($_COOKIE[$cookiepre.'admin'], "DECODE");
 				$tAdminInfo = explode("\n", $tAdminInfo);
 				if (!empty($tAdminInfo)) {
-					$authed = true;
+					//check admin password
+					$adminPasswd = $member->field("userpass", array("username"=>$tAdminInfo['username']));
+					if(pb_strcomp($tAdminInfo['userpass'], $adminPasswd)){
+						$authed = true;
+					}
 				}
 			}
 			if (!empty($pb_user['pb_userid'])) {
