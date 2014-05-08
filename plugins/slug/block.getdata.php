@@ -119,6 +119,7 @@ function smarty_block_getdata($params, $content, Smarty_Internal_Template $sTemp
 	}
 	if (isset($params['exclude'])) $conditions[] = $M->getExcludeIds($params['exclude']);
 	if (isset($params['include'])) $conditions[] = $M->getIncludeIds($params['include']);
+	if (isset($params['orderby'])) $orderbys[] = trim($params['orderby']);
 	if(isset($row) && $row!='all'){
 		$M->setLimitOffset($offset, $limit);
 		$mysql_limit = $M->getLimitOffset();
@@ -140,7 +141,8 @@ function smarty_block_getdata($params, $content, Smarty_Internal_Template $sTemp
 		# ************************************************************************
 		# Main content
 		$M->setCondition($conditions);
-		$sql = sprintf("SELECT * FROM %s%s %s %s", $M->table_prefix,$C->pluralize($_table), $M->getCondition(),  $mysql_limit);
+		$M->setOrderby($orderbys);
+		$sql = sprintf("SELECT * FROM %s%s %s %s %s", $M->table_prefix,$C->pluralize($_table), $M->getCondition(),  $M->getOrderby(), $mysql_limit);
 		$sTemplate->block_data[$iTags] = $M->GetArray($sql);
 		//如果没有数据，那就不用再执行了(repeat)
 		if(!$sTemplate->block_data[$iTags]) return $repeat = false;
