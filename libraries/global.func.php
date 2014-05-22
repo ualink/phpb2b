@@ -981,22 +981,44 @@ function pb_configmake($lang, $exit = true)
 	}
 }
 
+function pb_array_multi2single($array,$clear_repeated=false){
+	if(!isset($array)||!is_array($array)||empty($array)){
+		return false;
+	}
+	if(!in_array($clear_repeated,array('true','false',''))){
+		return false;
+	}
+	static $result_array=array();
+	foreach($array as $value){
+		if(is_array($value)){
+			pb_array_multi2single($value);
+		}else{
+			$result_array[]=$value;
+		}
+	}
+	if($clear_repeated){
+		$result_array=array_unique($result_array);
+	}
+	return $result_array;
+}
+
 function pb_attack_filter($StrFiltKey,$StrFiltValue,$ArrFiltReq){
 	if(is_array($StrFiltValue))
 	{
 		$StrFiltValue=@implode(",", $StrFiltValue);
 	}
 	if (preg_match("/".$ArrFiltReq."/is",$StrFiltValue)==1){
-		echo $ArrFiltReq;
-		echo $StrFiltValue;
+		echo $ArrFiltReq."\n";
+		echo $StrFiltValue."\n";
 		header_sent("Warning : Illegal operation!");
 		exit();
 	}
 }
 function pb_hack_check(){
-	$getfilter="'|(and|or)\\b.+?(>|<|=|in|like)|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT|UPDATE.+?SET|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE).+?FROM|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
-	$postfilter="\\b(and|or)\\b.{1,6}?(=|>|<|\\bin\\b|\\blike\\b)|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT|UPDATE.+?SET|ascii|load_file|substring|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE).+?FROM|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
+	$getfilter = "\\<.+javascript:window\\[.{1}\\\\x|<.*=(&#\\d+?;?)+?>|<.*(data|src)=data:text\\/html.*>|\\b(alert\\(|confirm\\(|expression\\(|prompt\\(|benchmark\s*?\\(\d+?|sleep\s*?\\([\d\.]+?\\)|load_file\s*?\\()|<[a-z]+?\\b[^>]*?\\bon([a-z]{4,})\s*?=|^\\+\\/v(8|9)|\\b(and|or)\\b\\s*?([\\(\\)'\"\\d]+?=[\\(\\)'\"\\d]+?|[\\(\\)'\"a-zA-Z]+?=[\\(\\)'\"a-zA-Z]+?|>|<|\s+?[\\w]+?\\s+?\\bin\\b\\s*?\(|\\blike\\b\\s+?[\"'])|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT(\\(.+\\)|\\s+?.+?)|UPDATE(\\(.+\\)|\\s+?.+?)SET|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE)(\\(.+\\)|\\s+?.+?\\s+?)FROM(\\(.+\\)|\\s+?.+?)|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
+	$postfilter = "<.*=(&#\\d+?;?)+?>|<.*data=data:text\\/html.*>|\\b(alert\\(|confirm\\(|expression\\(|prompt\\(|benchmark\s*?\\(\d+?|sleep\s*?\\([\d\.]+?\\)|load_file\s*?\\()|<[^>]*?\\b(onerror|onmousemove|onload|onclick|onmouseover)\\b|\\b(and|or)\\b\\s*?([\\(\\)'\"\\d]+?=[\\(\\)'\"\\d]+?|[\\(\\)'\"a-zA-Z]+?=[\\(\\)'\"a-zA-Z]+?|>|<|\s+?[\\w]+?\\s+?\\bin\\b\\s*?\(|\\blike\\b\\s+?[\"'])|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT(\\(.+\\)|\\s+?.+?)|UPDATE(\\(.+\\)|\\s+?.+?)SET|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE)(\\(.+\\)|\\s+?.+?\\s+?)FROM(\\(.+\\)|\\s+?.+?)|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
 	$_PG=array_merge($_GET,$_POST);
+	$_PG=pb_array_multi2single($_PG);
 	foreach($_PG as $key=>$value){
 		pb_attack_filter($key,$value,$getfilter);
 		pb_attack_filter($key,$value,$postfilter);
