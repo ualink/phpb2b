@@ -21,6 +21,12 @@ if($app_lang == "en") $app_lang = "en-us";//for older version
 if(!isset($debug)) $debug = 0;
 require(PHPB2B_ROOT. 'libraries'.DS.'core'.DS.'paths.php');
 require(PHPB2B_ROOT. 'libraries'.DS.'global.func.php');
+if($_SERVER['REQUEST_URI']) { 
+	//XSS 
+	$_GET = pb_htmlspecialchar($_GET);
+	$_POST = pb_htmlspecialchar($_POST);
+}
+if(!$admin_runquery) pb_hack_check();//safe check to post, get. 
 list($accept_language) = explode(",", $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 if(!empty($accept_language)) $app_lang = strtolower($accept_language);
 if (isset($_COOKIE[$cookiepre.'lang'])) {
@@ -43,7 +49,6 @@ $php_self = pb_getenv('PHP_SELF');
 $base_script = basename($php_self);
 list($basefilename) = explode('.', $base_script);
 define('WEBROOT_DIR', basename(dirname(dirname(__FILE__))));
-if(!$admin_runquery) pb_hack_check();//safe check to post, get. 
 if(!defined('URL')) {
 	$s = null;
 	if (pb_getenv('HTTPS')) {
@@ -156,12 +161,6 @@ if(!MAGIC_QUOTES_GPC) {
     $_POST = pb_addslashes($_POST);
     $_COOKIE = pb_addslashes($_COOKIE);
     $_SERVER = pb_addslashes($_SERVER);
-}
-if($_SERVER['REQUEST_URI']) { 
-	$temp = urldecode($_SERVER['REQUEST_URI']); 
-	if(strpos($temp, '<')!==false || strpos($temp, '"')!==false) { 
-		$_GET = pb_htmlspecialchar($_GET);//XSS 
-	} 
 }
 $G = am($G,$_GET,$_POST);
 $viewhelper = new PbView();
