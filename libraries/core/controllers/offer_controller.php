@@ -49,13 +49,13 @@ class Offer extends PbController {
 			$info['title'].=(($G['setting']['offer_expire_method']==1||$G['setting']['offer_expire_method']==3) && $info['expdate']<$offer->timestamp)?"[".L("has_expired", "tpl")."]":'';
 			$info['title'].=(!empty($info['if_urgent']))?"[".L("urgent_buy", "tpl")."]":'';
 			if ($info['expdate']<$offer->timestamp && $G['setting']['offer_expire_method']==2) {
-				flash("has_been_expired", URL, 0, $info['title']);
+				flash("has_been_expired", URL, 0, $info['title_clear']." ");
 			}
 		}else{
 			flash("data_not_exists", '', 0);
 		}
 		if ($info['status']!=1) {
-			flash("under_checking", null, 0, $info['title']);
+			flash("under_checking", null, 0, $info['title_clear']." ");
 		}
 		$trade_types = $trade->getTradeTypes();
 		$viewhelper->setTitle($trade_types[$info['type_id']]);
