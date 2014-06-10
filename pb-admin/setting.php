@@ -167,13 +167,17 @@ function edit_config($configs) {
 if (isset($_POST['savebasic'])) {
         $sp_search = array('\\\"', "\\\'", "'");
         $sp_replace = array('&amp;', '&quot;', '&#39;');
-        if (!empty($_POST['data']['setting']['site_url']) && substr($_POST['data']['setting']['site_url'], -1, 1)!='/') {
-        	$_POST['data']['setting']['site_url'].="/";
+		$siteurl = $_POST['data']['setting']['site_url'];
+        if (!empty($siteurl) && substr($siteurl, -1, 1)!='/') {
+        	$siteurl.="/";
         }
-        $_POST['data']['setting']['site_description'] = pb_lang_merge($_POST['data']['multita']);
-        if (!empty($_POST['data']['setting']['site_description'])) {
-                $_POST['data']['setting']['site_description'] = str_replace($sp_search, $sp_replace, $_POST['data']['setting']['site_description']);
-        }
+		$_POST['data']['setting']['site_url'] = $siteurl;
+		if(isset($_POST['data']['multita'])){
+			$_POST['data']['setting']['site_description'] = pb_lang_merge($_POST['data']['multita']);
+			if (!empty($_POST['data']['setting']['site_description'])) {
+					$_POST['data']['setting']['site_description'] = str_replace($sp_search, $sp_replace, $_POST['data']['setting']['site_description']);
+			}
+		}
         if (!empty($_POST['data']['setting'])) {
                 $updated = $setting->replace($_POST['data']['setting']);
                 if($updated) $cache->writeCache("setting", "setting");
