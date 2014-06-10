@@ -299,7 +299,7 @@ function fileext($filename) {
 function pb_htmlspecialchar($string) {
 	if(is_array($string)) {
 		foreach($string as $key => $val) {
-			$string[$key] = pb_remove_xss($val);
+			$string[$key] = pb_htmlspecialchar($val);
 		}
 	} else {
 		$string = pb_remove_xss($string);
@@ -1103,5 +1103,17 @@ function pb_ismobile() {
         } 
     } 
     return false;
+}
+
+//rebuild a array
+function pb_rebuild_array($arr){ 
+	static $tmp=array();
+	for($i=0; $i<count($arr); $i++){
+		if(is_array($arr[$i])) 
+			pb_rebuild_array($arr[$i]);
+		else 
+			$tmp[]=$arr[$i];
+	}
+	return $tmp;
 }
 ?>
