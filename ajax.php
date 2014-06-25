@@ -84,7 +84,7 @@ if (isset($_POST['do_action'])) {
 				if (!empty($tAdminInfo)) {
 					//check admin password
 					$adminPasswd = $member->field("userpass", array("username"=>$tAdminInfo['username']));
-					if(pb_strcomp($tAdminInfo['userpass'], $adminPasswd)){
+					if(pb_strcomp($tAdminInfo[2], $adminPasswd)){
 						$authed = true;
 					}
 				}
