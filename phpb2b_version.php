@@ -6,6 +6,6 @@
  *
  *      @version $Revision: 2959 $
  */
-define('PHPB2B_VERSION', '5.0.2');
-define('PHPB2B_RELEASE', '20140415');
+define('PHPB2B_VERSION', '5.0.3');
+define('PHPB2B_RELEASE', '20140626');
 ?>
