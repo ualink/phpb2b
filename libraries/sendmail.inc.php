@@ -48,6 +48,8 @@ function pb_sendmail($to_users = array(), $subject, $template = null, $body = nu
 		$content = $smarty->fetch($tpl_file);
 	}elseif (!empty($body)){
 		$content = $body;
+	}else{
+		$content = "Get blank messages, please contact administrator.\n".$mail->AltBody;
 	}
 	$mail->MsgHTML($content);
 	if (!empty($to_users)) {
