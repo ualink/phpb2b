@@ -13,6 +13,7 @@
 <script src="../static/scripts/jquery.js"></script>
 <script src="../data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
 <script src="../static/scripts/jquery/jquery.validate.js"></script>
+<script src="../static/scripts/jquery/stickUp.js"></script>
 <script src="../static/scripts/general.js"></script>
 <!--{literal}-->
 <script>
@@ -103,7 +104,7 @@ $(document).ready(function() {
 					</tr>
 					<tr>
 					  <td align="center" background="{$office_theme_path}images/left_mid.gif">
-					  <table class="menu_nav_content" id="MenuTrade">
+					  <table class="menu_nav_content" id="MenuTrade" name="MenuTrade">
 						  <tr>
 							<th><img src="{$office_theme_path}images/sell_add.gif"></th>
 							<td><a href="offer.php?do=edit">{lang release_supply}</a></td>
@@ -226,11 +227,11 @@ $(document).ready(function() {
 						<table class="menu_nav_content" id="MenuPMS" style="{$MenuHide}">
 							<tr>
 							  <th><img src="{$office_theme_path}images/message_out.gif" /></th>
-							  <td><a href="pms.php">{lang sms}</a></td>
+							  <td><a href="pms.php#MenuTrade">{lang sms}</a></td>
 							</tr>			
 							<tr>
 							  <th><img src="{$office_theme_path}images/message.gif"/></th>
-							  <td><a href="pms.php?do=send">{lang send_message}</a></td>
+							  <td><a href="pms.php?do=send#MenuTrade">{lang send_message}</a></td>
 							</tr>
 						</table>
 						</td>
@@ -249,22 +250,22 @@ $(document).ready(function() {
 					  </tr>
 					  <tr>
 						<td align="center" background="{$office_theme_path}images/left_mid.gif">
-						<table class="menu_nav_content" id="MenuService" style="{$MenuHide}">
+						<table class="menu_nav_content" id="MenuService" name="MenuService" style="{$MenuHide}">
 							<tr>
 							  <th><img src="{$office_theme_path}images/news.gif" /></th>
-							  <td><a href="ads.php">{lang site_advertising}</a></td>
+							  <td><a href="ads.php#MenuTrade">{lang site_advertising}</a></td>
 							</tr>
 							<tr>
 							  <th><img src="{$office_theme_path}images/adword.gif" /></th>
-							  <td><a href="spread.php">{lang keyword_advertising}</a></td>
+							  <td><a href="spread.php#MenuTrade">{lang keyword_advertising}</a></td>
 							</tr>
 							<tr> 
 							  <th><img src="{$office_theme_path}images/style.gif"></th>
-							  <td><a href="space.php">{lang diy_website}</a></td>
+							  <td><a href="space.php#MenuTrade">{lang diy_website}</a></td>
 							</tr>
 							<tr> 
 							  <th><img src="{$office_theme_path}images/sell_add.gif"></th>
-							  <td><a href="order.php">{lang order_manage}</a></td>
+							  <td><a href="order.php#MenuTrade">{lang order_manage}</a></td>
 							</tr>
 						</table>
 						</td>
@@ -286,15 +287,15 @@ $(document).ready(function() {
 						<table class="menu_nav_content" id="MenuBasic">
 							<tr>
 							  <th><img src="{$office_theme_path}images/personals.gif"></th>
-							  <td><a href="personal.php">{lang profile}</a></td>
+							  <td><a href="personal.php#MenuTrade">{lang profile}</a></td>
 							</tr>
 							<tr> 
 							  <th><img src="{$office_theme_path}images/password.gif"></th>
-							  <td><a href="changepass.php">{lang change_password}</a></td>
+							  <td><a href="changepass.php#MenuTrade">{lang change_password}</a></td>
 							</tr>
 							<tr> 
 							  <th><img src="{$office_theme_path}images/code.gif"></th>
-							  <td><a href="invite.php">{lang our_invitation_code}</a></td>
+							  <td><a href="invite.php#MenuTrade">{lang our_invitation_code}</a></td>
 							</tr>
 						</table></td>
 					  </tr>
@@ -329,5 +330,14 @@ $(document).ready(function() {
 </div>
 </div>
 </div>
+<!--{literal}-->
+<script type="text/javascript"> 
+jQuery(function($) { 
+	$(document).ready( function() { 
+		$('#main-nav').stickUp();
+	}); 
+}); 
+</script>
+<!--{/literal}-->
 </body>
 </html>
