@@ -741,5 +741,22 @@ class PbModel
 		$ret['next'] = $this->GetRow($sql_next);
 		return $ret;
 	}
+	
+	/**
+	 * check submit form inupts.
+	 *
+	 * @param array $inputs
+	 * @param array $exceptions
+	 */
+	function checkException($inputs, $exceptions)
+	{
+		$_input_keys = array_keys($inputs);
+		$ret = array_diff($_input_keys, $exceptions);
+		if (!empty($ret)) {
+			return false;
+		}else{
+			return true;
+		}
+	}
 }
 ?>
