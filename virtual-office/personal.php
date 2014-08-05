@@ -16,6 +16,13 @@ $typeoption = new Typeoption();
 $conditions = null;
 if (isset($_POST['save'])) {
 	pb_submit_check('member');
+	//exception
+	if(!$member->checkException($_POST['member'], array(
+	'email',
+	'office_redirect',
+	))){
+		flash("sys_error");
+	}
 	$vals['office_redirect'] = $_POST['member']['office_redirect'];
 	$vals['email'] =  $_POST['member']['email'];
 	if (empty($_POST['member']['email'])) {

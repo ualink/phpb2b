@@ -94,6 +94,14 @@ if(isset($_POST['register'])){
 	}
 	$member->setParams();
 	$memberfield->setParams();
+	//exception
+	if(!$member->checkException($member->params['data']['member'], array(
+	'username',
+	'email',
+	'userpass',
+	))){
+		flash("sys_error");
+	}
 	$member->params['data']['member']['membergroup_id'] = $default_membergroupid;
 	$time_limits = $pdb->GetOne("SELECT default_live_time FROM {$tb_prefix}membergroups WHERE id={$default_membergroupid}");
 	$member->params['data']['member']['service_start_date'] = $time_stamp;

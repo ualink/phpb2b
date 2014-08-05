@@ -710,8 +710,8 @@ function cache_read($file = null, $item = null, $prefix = true, $remove_params =
 		$return = $_required;
 	}
 	/**
-	 * ÔÝÊ±È¥³ý 2012.12.2
-	 * ÒòÎª»áÒýÆð Fatal error: Allowed memory size of 134217728 bytes exhausted
+	 * ï¿½ï¿½Ê±È¥ï¿½ï¿½ 2012.12.2
+	 * ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Fatal error: Allowed memory size of 134217728 bytes exhausted
 	 */
 	if (is_array($return)) {
 		$return = array_map_recursive("pb_lang_split", $return);
@@ -860,7 +860,7 @@ function clear_html($string)
 	);
 	$tarr = array(
 	" ",
-	"£¼\1\2\3£¾",
+	"ï¿½ï¿½\1\2\3ï¿½ï¿½",
 	"\1\2",
 	);
 	if(is_array($string)) {
@@ -1034,7 +1034,6 @@ function pb_attack_filter($StrFiltKey,$StrFiltValue,$ArrFiltReq){
 		$StrFiltValue=@implode(",", $StrFiltValue);
 	}
 	if (preg_match("/".$ArrFiltReq."/is",$StrFiltValue)==1){
-		echo $ArrFiltReq;
 		echo $StrFiltValue;
 		header_sent("Warning : Illegal operation!");
 		exit();

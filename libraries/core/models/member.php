@@ -7,6 +7,7 @@ class Members extends PbModel {
  	var $mask_user_name = "admin";
  	var $ins_passport = true;
  	var $default_cachetime = 86400;
+	var $exception = array();
  	public static $instance = NULL;
 
  	function __construct()
