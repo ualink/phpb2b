@@ -9,7 +9,7 @@ class PbModel
 {
 	public static $instance;
 	public $param;
-	public $displaypg = 9;
+	public $displaypg = 10;
 	var $primaryKey = "id";
 	var $id = null;
 	var $catchIds = null;

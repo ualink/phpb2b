@@ -12,6 +12,8 @@ $tpl_dir = "templates";
 $pos = 0;
 if (isset($_GET['pos'])) {
 	$pos = intval($_GET['pos']);
+}elseif(isset($_GET['start'])){
+	$pos = intval($_GET['start']);
 }
 $_G['nav'] = cache_read("nav");
 setvar("navs", $_G['nav']['navs']);
