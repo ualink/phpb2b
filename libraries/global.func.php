@@ -296,13 +296,15 @@ function fileext($filename) {
 	return substr(($t=strrchr($filename,'.'))!==false?".".$t:'',1);
 }
 
-function pb_htmlspecialchar($string) {
-	if(is_array($string)) {
-		foreach($string as $key => $val) {
-			$string[$key] = pb_htmlspecialchar($val);
+function pb_htmlspecialchar($string, $force = false) {
+	if($force){
+		if(is_array($string)) {
+			foreach($string as $key => $val) {
+				$string[$key] = pb_htmlspecialchar($val, $force);
+			}
+		} else {
+			$string = pb_remove_xss($string);
 		}
-	} else {
-		$string = pb_remove_xss($string);
 	}
 	return $string;
 }
