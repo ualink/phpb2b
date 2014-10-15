@@ -41,6 +41,8 @@ function smarty_block_getdata($params, $content, Smarty_Internal_Template $sTemp
 		case "price":
 			$_table = "productprice";
 			break;
+		case "adses":
+			break;
 		default:
 			break;
 	}
@@ -134,7 +136,11 @@ function smarty_block_getdata($params, $content, Smarty_Internal_Template $sTemp
 		$conditions[] = "company_id=".intval($params['companyid']);
 	}
 	if (!empty($params['typeid'])) {
-		$conditions[] = "type_id=".intval($params['typeid']);
+		if($_table=='adses'){
+			$conditions[] = "adzone_id=".intval($params['typeid']);
+		}else{
+			$conditions[] = "type_id=".intval($params['typeid']);
+		}
 	}
 	if(empty($sTemplate->block_data[$iTags]))
 	{
