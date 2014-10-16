@@ -7,7 +7,7 @@
  */
 function smarty_block_getdata($params, $content, Smarty_Internal_Template $sTemplate, &$repeat)
 { 
-	$conditions = array();
+	$conditions = $orderbys = array();
 	$mysql_limit = $mysql_orderby = $image_col = $_seperate = '';
 	$target = "_blank";
 	extract($params);
@@ -195,7 +195,7 @@ function smarty_block_getdata($params, $content, Smarty_Internal_Template $sTemp
 			$_title = $item['title'] = $item['word'];
 		}
 		$_title_full = $_title;
-		$_title = strip_tags(pb_lang_split($_title));
+		$item['title'] = $_title = strip_tags(pb_lang_split($_title));
 		$_title_full = strip_tags(pb_lang_split($_title_full));
 		if (!empty($titlelen)) {
 			$_title = mb_substr($_title, 0, $titlelen);
