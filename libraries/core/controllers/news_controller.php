@@ -51,6 +51,8 @@ class News extends PbController {
 		setvar("Calendar", $cal->getMonthView($month, $year));
 		$cache_id = $year.$month.$day;
 		//end cal
+		$_PB_CACHE['newstype'] = cache_read("type", "newstype");
+		setvar("NewsTypes", $_PB_CACHE['newstype']);
 		render("news/index");
 	}
 	

@@ -135,6 +135,9 @@ function smarty_block_getdata($params, $content, Smarty_Internal_Template $sTemp
 	if (!empty($params['companyid'])) {
 		$conditions[] = "company_id=".intval($params['companyid']);
 	}
+	if (!empty($params['industryid'])) {
+		$conditions[] = "industry_id=".intval($params['industryid']);
+	}
 	if (!empty($params['typeid'])) {
 		if($_table=='adses'){
 			$conditions[] = "adzone_id=".intval($params['typeid']);
