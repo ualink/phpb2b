@@ -712,8 +712,8 @@ function cache_read($file = null, $item = null, $prefix = true, $remove_params =
 		$return = $_required;
 	}
 	/**
-	 * ��ʱȥ�� 2012.12.2
-	 * ��Ϊ������ Fatal error: Allowed memory size of 134217728 bytes exhausted
+	 * @date 2012.12.2
+	 * @abstract Fatal error: Allowed memory size of 134217728 bytes exhausted
 	 */
 	if (is_array($return)) {
 		$return = array_map_recursive("pb_lang_split", $return);

@@ -14,6 +14,12 @@ function smarty_function_get($params, &$smarty)
 		$var = "item";
 	}
 	if (!empty($from)) {
+		if (class_exists("Industries")) {
+			$industry = new Industries();
+		}else{
+			uses("industry");
+			$industry = new Industries();
+		}
 		switch ($from) {
 			case "market":
 				$num = 4;
