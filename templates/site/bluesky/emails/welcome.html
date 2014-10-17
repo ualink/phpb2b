@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title><{$site_title}></title>
+<meta http-equiv="Content-Type" content="text/html; charset=<{$Charset}>" />
+<base target="_blank" />
+<style>
+div, h1, p{ margin: 0; padding: 0;}
+#sendbox { width:600px; padding:10px; background:#fff; font-size:12px; font-family:Arial, Helvetica, sans-serif}
+#sendbox .content { border:1px solid #ccc; padding:10px;}
+#sendbox .content h1 { font-size:24px; font-weight:bold; line-height:160%;}
+#sendbox .content em { color:#ccc; font-size:12px; display:block; margin-bottom:20px;font-style:normal;}
+#sendbox .content p { text-indent:22px;line-height:18px;}
+#sendbox .info p { color:#ccc; padding:5px 10px 0 10px; line-height:18px;}
+</style>
+</head>
+
+<body>
+<div id="sendbox">
+    <div class="content">
+        <h1><{$user_name}>，您好，感谢您注册<{$site_name}></h1>
+        <em>请您仔细阅读客户服务条款。</em>
+        <div><p><{$user_name}>，您已经注册成为<{$site_name}>的会员，如果您有什么疑问可以联系客服Email: <a href="mailto:<{$service_email}>"><{$service_email}></a>。</p></div>
+    </div>
+    <div class="info">
+        <p>该邮件是<a href="<{$SiteUrl}>"><{$site_name}></a>发送给您的。</p>
+    </div>
+</div>
+</body>
+</html>

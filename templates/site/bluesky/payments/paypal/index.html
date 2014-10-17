@@ -1,0 +1,71 @@
+﻿<!--{include file="header.html" page_title=#online_pay#}-->
+<link href="{$theme_img_path}payments/paypal/css.css" rel="stylesheet" type="text/css">
+<!-- {literal} -->
+<script language=javascript>
+<!-- 
+//Check  -->
+function CheckForm()
+{
+	if ($("#body").val()=="") {
+		alert("Please enter memo.");
+		$("#body").focus();
+		return false;
+	}
+	if ($("#money").length>0 && $("#money").val() <= 0) {
+		alert("Please enter money.");
+		$("#money").focus();
+		return false;
+	}
+	var reg	= new RegExp(/^\d*\.?\d{0,2}$/);
+	if ($("#money").length>0 && ! reg.test($("#money").val()))
+	{
+        alert("Please enter money");
+		$("#money").focus();
+		return false;
+	}
+	if (Number($("#money").val()) < 0.01) {
+		alert("Warning:min money is 0.01.");
+		$("#money").focus();
+		return false;
+	}
+}  
+</script>
+<!-- {/literal} -->
+<div class="clear1"></div>
+<div id="box">
+
+	<div style="height:20px;"></div>
+	<div class="pay">
+		<strong>Pay online</strong>
+		<div class="pay_ts">
+		<p>Tips:</p>
+		<ol>
+			<li>{$payment_info.description|strip_tags}</li>
+			<li>Any problem, contact us:{$service_tel}</li>
+		</ol>
+		</div>
+
+	</div>
+	<div class="clear1"></div>
+	<form name="alipaysubmit" id="alipaysubmit" onSubmit="return CheckForm();" action="purchase.php" method="post" target="_blank">
+	<input type="hidden" name="do" value="paynow">
+	<!-- {formhash} -->
+	<input type="hidden" name="tradeno" value="{$item.trade_no}">
+	<input type="hidden" name="pay_method" value="paypal">
+	<div class="payinput">
+	<ul>
+	<!-- {if $item.trade_no} -->
+ 	<li><p>Order Num.</p>{$item.trade_no}</li>
+	<!-- {/if} -->
+ 	<li><p>Receiver:</p>{$site_name}</li>
+	<li><p>Total:</p>
+	<!-- {if $item.total_price>0} -->{$item.total_price}<!-- {else} --><INPUT maxLength=10 size=30 id="money" class="input175" name="money" value=""/><span>Please enter money, such as 200.01</span><!-- {/if} --></li>
+	<li><p>Attention:</p><TEXTAREA name="body" id="body" rows=2 cols=40 wrap="physical" class="inputtext"></TEXTAREA><span>Please enter comments, make us more informed you are the requirements to provide you with better service. If the transaction is tax price, and the need invoice, please enter the invoice and delivery address of the rise, our company will give you timely delivery invoice.</span></li>
+	<li><p>&nbsp;</p><input type="submit" id="NextStep" value="Next"></li>
+	</ul>
+	</div>
+	</form>
+</div>
+</div>
+</div>
+<!--{include file="footer.html"}-->

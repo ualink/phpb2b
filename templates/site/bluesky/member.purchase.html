@@ -1,0 +1,178 @@
+{assign var="page_title" value=#select_buy_service#}
+{include file="header.html"}
+<style type="text/css">
+@import url({$theme_img_path}widgets.css);
+@import url({$theme_img_path}effect.css);
+</style>
+<script src="static/scripts/jquery.tools.js"></script>
+<div class="wrapper">
+	<div class="tips"><span>{$position}</span></div>  
+	<div class="blank6"></div>
+         <!-- the tabs -->
+        <ul class="tabs2 title_mouse">
+              <li><a href="javascript:;"><span>{lang member_upgrade}</span></a></li>
+              <li><a href="javascript:;"><span>{lang add_charge}</span></a></li>
+              <li><a href="javascript:;"><span>{lang buy_advertising}</span></a></li>
+        </ul>
+        <!-- tab "panes" -->
+	<div class="panes box_bord">
+		<div class="charge_txt" style="display:none;">
+			<table>
+				<form method="post" name="apply_frm" id="ApplyFrm" action="{$smarty.server.PHP_SELF}" target="_self" />
+				<input type="hidden" name="formhash" value="{$formhash}" />
+				<input type="hidden" name="product_id" value="1" />
+				<input type="hidden" name="do" value="apply" />
+				  <tr>
+					<th>{lang applicant_name}</th>
+					<td>{if $pb_userid}{$pb_username}{else}<input name="username" type="text" id="username"><span>*<span><br>
+							{lang applicant_name_conditions}</span>{/if}</td>
+				  </tr>
+				  <tr>
+					<th>{lang applicant_type}</th>
+					<td><label>
+					  <select name="item_id" id="TotalPrice1">
+							  {foreach from=$Items item=item}
+							  <option value="{$item.id}">{$item.name}&nbsp;{$item.price}</option>
+							  {/foreach}
+							</select>
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>{lang telephone}</th>
+					<td><label>
+					  <input name="tel" type="text" class="linehui" id="member_tel" value="{$MemberInfo.tel}" disabled="disabled">
+							  <span>{lang left_bracket}<a href="javascript:;" onclick="$('#member_tel').attr('disabled',false);">{lang modify}</a>{lang right_bracket}</span>
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>{lang email}</th>
+					<td><label>
+					  <input name="email" type="text" class="linehui" id="member_email" value="{$MemberInfo.email}" disabled="disabled">
+							  <span class="fontred">{lang left_bracket}<a href="javascript:;" onclick="$('#member_email').attr('disabled',false);">{lang modify}</a>{lang right_bracket}</span>
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>{lang description}</th>
+					<td><label>
+					  <input name="content" type="text" class="linehui" id="content2" value="" />
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>&nbsp;</th>
+					<td><input type="button"  value="{lang next_step}" onclick="$('#ApplyFrm').submit();"/></td>
+				  </tr>
+				  </form>
+			</table>
+		</div>
+        <div class="charge_txt" style="display:none;">
+			<table>
+				<form method="post" name="charge_frm" id="ChargeFrm" action="{$smarty.server.PHP_SELF}" target="_self" />
+				<input type="hidden" name="formhash" value="{$formhash}" />
+				<input type="hidden" name="product_id" value="2" />
+				<input type="hidden" name="do" value="apply" />
+				  <tr>
+					<th>{lang buyer_name}</th>
+					<td>{if $pb_userid}{$pb_username}{else}<input name="username" type="text" id="username"><span>*<span><br>
+							{lang applicant_name_conditions}</span>{/if}</td>
+				  </tr>
+				  <tr>
+					<th>{lang charge_value}</th>
+					<td><label>
+					<input name="total_price" id="TotalPrice2" type="text" class="linehui" value="">
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>{lang telephone}</th>
+					<td><label>
+					  <input name="tel" type="text" class="linehui" id="member_tel2" value="{$MemberInfo.tel}" disabled="disabled">
+							  <span>{lang left_bracket}<a href="javascript:;" onclick="$('#member_tel2').attr('disabled',false);">{lang modify}</a>{lang right_bracket}</span>
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>{lang email}</th>
+					<td><label>
+					  <input name="email" type="text" class="linehui" id="member_email2" value="{$MemberInfo.email}" disabled="disabled">
+							  <span class="fontred">{lang left_bracket}<a href="javascript:;" onclick="$('#member_email2').attr('disabled',false);">{lang modify}</a>{lang right_bracket}</span>
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>{lang select_pay_method}</th>
+					<td><label>
+					  <select name="payment_id" id="PaymentId">
+							  {foreach from=$payments item=item}
+							  <option value="{$item.id}">{$item.title}</option>
+							  {/foreach}
+							</select>
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>{lang description}</th>
+					<td><label>
+					  <input name="content" type="text" class="linehui" id="content3" value="" />
+					</label></td>
+				  </tr>
+				  <tr>
+					<th>&nbsp;</th>
+					<td><input type="button"  value="{lang next_step}" onclick="$('#ChargeFrm').submit();"/></td>
+				  </tr>
+				  </form>
+			</table>
+        </div>
+        <div class="charge_txt" style="display: none;">
+			<table>
+			<form method="post" name="abuy_frm" id="BuyFrm" action="{$smarty.server.PHP_SELF}" target="_self" />
+			<input type="hidden" name="formhash" value="{$formhash}" />
+			<input type="hidden" name="product_id" value="3" />
+			<input type="hidden" name="do" value="apply" />
+			  <tr>
+				<th>{lang nick_name}</th>
+				<td>{if $pb_userid}{$pb_username}{else}<input name="username" type="text" id="username"><span>*<span><br>
+						{lang applicant_name_conditions}</span>{/if}</td>
+			  </tr>
+			  <tr>
+				<th>{lang adzone_type}</th>
+				<td><label>
+				<select name="item_id" id="TotalPrice3">
+						  {foreach from=$Adzones item=item}
+						  <option value="{$item.id}">{$item.name}&nbsp;{$item.price}</option>
+						  {/foreach}
+						</select>
+				</label></td>
+			  </tr>
+			  <tr>
+				<th>{lang telephone}</th>
+				<td><label>
+				  <input name="tel" type="text" class="linehui" id="member_tel3" value="{$MemberInfo.tel}" disabled="disabled">
+						  <span>{lang left_bracket}<a href="javascript:;" onclick="$('#member_tel3').attr('disabled',false);">{lang modify}</a>{lang right_bracket}</span>
+				</label></td>
+			  </tr>
+			  <tr>
+				<th>{lang email}</th>
+				<td><label>
+				  <input name="email" type="text" class="linehui" id="member_email3" value="{$MemberInfo.email}" disabled="disabled">
+						  <span class="fontred">{lang left_bracket}<a href="javascript:;" onclick="$('#member_email3').attr('disabled',false);">{lang modify}</a>{lang right_bracket}</span>
+				</label></td>
+			  </tr>
+			  <tr>
+				<th>{lang description}</th>
+				<td><label>
+				  <input name="content" type="text" class="linehui" id="content1" value="" />
+				</label></td>
+			  </tr>
+			  <tr>
+				<th>&nbsp;</th>
+				<td><input type="button"  value="{lang next_step}" onclick="$('#BuyFrm').submit();"/></td>
+			  </tr>
+			  </form>
+			</table>
+        </div>
+      </div>
+</div>
+<!-- {literal} -->
+<script>
+$(function() {
+$("ul.tabs2").tabs("div.panes > div",{initialIndex:{$index|default:0}});
+});
+</script>
+<!-- {/literal} -->
+{include file="footer.html"}

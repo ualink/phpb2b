@@ -1,0 +1,134 @@
+{assign var="page_title" value=#login#}
+{include file="header.html"}
+<script src="data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<link href="{$theme_img_path}css/login.css" rel="stylesheet" type="text/css" />
+
+  <div class="bread_line">{$position}</div>
+ 
+  <div class="tbody_login">
+    <div class="tbody_login_left"></div>
+    <div class="tbody_login_middle">
+      <div class="float_left_login">
+
+        <div class="row_01_login">
+          <div class="float_left_ibt"></div>
+          <div class="float_left_txt">
+            <ul>
+              <li>- Your online office </li>
+              <li class="align_r">- Made by you, made for you...</li>
+            </ul>
+          </div>
+
+          <div class="clear"></div>
+        </div>
+		<div class="row_02_login">
+		  <div class="float_ad_txt">
+		    <ul>
+			  
+			  <li class="font12b"><a href="#">{lang online_business}</a></li>
+			  <li class="pad_top_10px"><a href="#">{lang internet_power_promotion}</a></li>			
+              <li class="font12b"><a href="#">{lang products_show}</a></li>
+			  <li class="pad_top_10px"><a href="#">{lang illustrated_display_product}</a></li>			
+			  <li class="font12b"><a href="#">{lang hr}</a></li>
+			  <li class="pad_top_10px"><a href="#">{lang talents_join}</a></li>			
+			  <li class="font12b"><a href="#">{lang agent_join}</a></li>
+			  <li class="pad_top_10px"><a href="#">{lang development_agent_join}</a></li>			
+			</ul>
+		  </div>
+
+		</div>
+      
+      </div>
+      <div class="float_right_login">
+        <div class="login_box">
+		 <form name="loggingfrm"  id="LoggingFrm" method="post" action="logging.php">
+        	<input type="hidden" name="action" value="logging">
+			<!-- {formhash} -->
+			<input type="hidden" name="forward" value="{$forward}" />
+          <div class="login_bar">
+
+		  <div class="font14b pad_bottom_10px" id="errorspan" style=" color:#CC0000; font-weight:normal; display:none"></div>
+            <div class="font14b pad_bottom_10px">Member's Login </div>{if $LoginError}{$LoginError}{/if}
+            <div class="form_login">
+              <ul>
+                <li class="form_width_01">Member:</li>
+                <li class="form_width_02">
+                 {if $pb_username!=""}
+                        <input type="text" name="data[login_name]" id="LoginName" value="{$pb_username|default:#account_n_email_n_mobile#}">
+                        {else}
+                        <input type="text" style="color: #CCCCCC;" name="data[login_name]" id="LoginName" value="{lang account_n_email_n_mobile}" tabindex="1">
+                        {/if}
+<!-- {literal} -->
+<script language="javascript">
+<!--
+	$('user_name').select();
+-->
+</script>
+<!-- {/literal} -->
+                </li>
+              </ul>
+              <div class="clear"></div>
+            </div>
+            <div class="form_login">
+              <ul>
+                <li class="form_width_01">Password:</li>
+
+                <li class="form_width_02">
+                   <input name="data[login_pass]" type="password" id="LoginPass" value="" tabindex="2">
+                </li>
+              </ul>
+              <div class="clear"></div>
+              <div style="text-align:right"><a href="getpasswd.php">{lang forget_password}</a></div>
+            </div>
+            <div class="form_login">
+              <ul>
+               
+                  {if $ifcapt}
+                  <li class="form_width_01">Securty Code: </li>
+                    <li class="form_width_02">
+                        <input name="data[capt_logging]" id="LoginAuth" type="text" value="" size="5" maxlength="5" tabindex="3"><a href="javascript:;" onclick="$('#imgcaptcha').attr('src','captcha.php?sid=' + Math.random());return false;"><img width="120" src="captcha.php?sid={$sid}" id="imgcaptcha" alt="{lang unclear_see_numbers}" title="{lang unclear_see_numbers}"/></a>
+                    <p class="loadingp1">{lang refresh_code}</p>
+					</li>
+					<div class="clear"></div>
+                    {/if}
+              </ul>
+              <div class="clear"></div>
+            </div>
+            <div class="align_c pad_top_btm_10px">  <input type="submit" name="log_in" id="LogIn" value="Login" class="login_btn" />
+            </div>
+       </form>
+            <div class="align_c pad_top_btm_20px"><b>Not a member yet?</b></div>
+            <div class="align_c">
+         <input type="button"  value="Sign Up Now" class="sign_btn" onclick="redirect('member.php');return false;"/>
+            </div>
+          </div>
+		
+          </div>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+    <div class="tbody_login_right"></div>
+    <div class="clear"></div>
+  </div>
+</div>
+<script>
+var account_n_email_n_mobile = "{#account_n_email_n_mobile#}";
+</script>
+<script language="javascript" src="static/scripts/jquery/jquery.validate.js"></script>
+<script language="javascript" src="static/scripts/validate.js" charset="{$charset}"></script>
+<!-- {literal} --> 
+<script>
+$(document).ready(function(){
+	$("#LoginName").focus(function(){
+		if($("#LoginName").val()==account_n_email_n_mobile){
+			$("#LoginName").val('').css('color', '#000');
+		};
+	}).blur(function(){
+		if($("#LoginName").val()==''){
+		$("#LoginName").val(account_n_email_n_mobile).css("color","#ccc")};
+	});
+});
+</script>
+<!-- {/literal} --> 
+{include file="footer.html"}

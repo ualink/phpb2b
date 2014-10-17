@@ -1,0 +1,34 @@
+{assign var="page_title" value=#online_pay#}
+{include file="header.html"}
+<style type="text/css">
+@import url({$theme_img_path}widgets.css);
+@import url({$theme_img_path}effect.css);
+</style>
+	<div class="tips"><span>{lang correct_operation}</span></div>  
+	<div class="blank6"></div>
+	<div class="charge_box">
+		<div class="charge_online">
+		  <p>{lang confirm_pay_amount}</p>
+		<table>
+			{if $OnlineSupport}
+			<form method="post" name="pay_frm" id="PayFrm" action="{$OnlineSupportUrl}" target="_blank" />
+			<input type="hidden" name="total_price" value="{$total_price}" />
+			<tr>
+				<th>{lang pay_amount}</th>
+				<td><input name="total_price_format" value="{$total_price|number_format}" readonly type="text" />&nbsp;</td>
+			</tr>
+			<tr>
+				<th>&nbsp;</th>
+				<td><input type="submit"  value="{lang next_pay_amount}"/></td>
+			</tr>
+			</form>
+			{else}
+			<tr>
+				<th>{lang pay_description}</th>
+				<td class="pay_description">{$Description}</td>
+			</tr>
+		{/if}
+		</table>
+		</div>		
+	</div> 
+{include file="footer.html"}

@@ -1,0 +1,22 @@
+{assign var="page_title" value=#announce#}
+{assign var="nav_id" value="$nav_id"}
+{include file="header.html"}
+<style type="text/css">
+@import url({$theme_img_path}widgets.css);
+</style>
+  <div class="content">
+    <div class="tips"><span>{$position}</span></div>
+    <div class="blank"></div>
+    <div class="title_bar_s1 txt_center">
+            <h2>{lang announce}</h2>
+      </div> 
+     <div class="content_bord"> 
+		<ul class="announce_list">
+			{foreach from=$Items name=announce item=item}
+			<li><a href="announce.php?id={$item.id}" target="_blank">{$item.subject}</a>&nbsp;[{$item.pubdate}]</li>
+			{/foreach}
+		</ul>
+	 </div> 
+       <div class="blank"></div>
+    </div>
+{include file="footer.html"}

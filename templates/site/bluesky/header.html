@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<title>{$page_title} - {$site_title}</title>
+<base href="{$SiteUrl}">
+<meta name ="keywords" content="{$metakeywords}">
+<meta name ="description" content="{$metadescription}"> 
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<link href="{$theme_img_path}layout.css" rel="stylesheet" type="text/css" />
+<link href="{$theme_img_path}css/link.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="static/css/common.css" />
+<!-- {literal} -->
+<script language="javascript">
+var keywords_sample = "{lang keywords_sample}";
+var input_keywords = "{lang input_keywords}";
+var SiteUrl = "{$SiteUrl}";
+var show_ajax = "{$show_ajax}";
+var nav_id = "{$nav_id}";
+var search_url = "{the_url module=search}";
+</script>
+<!-- {/literal} -->
+<script src="static/scripts/jquery.js"></script>
+<script src="static/scripts/general.js" charset="{$Charset}"></script>
+<!-- {literal} -->
+<script language="javascript">
+<!--
+$(document).ready(function() {
+	if($("#nav_{$nav_id}").length>0){
+		$("#nav_{$nav_id}").addClass('nav_a').removeClass('nav_b');
+	}
+	$("#SearchKeyword").focus(function(){
+		if($("#SearchKeyword").val()=='{#keywords_sample#}'){
+			$("#SearchKeyword").val("").css('color', '#000000')
+			};
+		}).blur(function(){
+		if($("#SearchKeyword").val()==''){
+			$("#SearchKeyword").val("{#keywords_sample#}").css('color', '#ccc')
+			};
+	});
+	$("#BtnSearch").click(function(){
+		if($('#SearchKeyword').val()=='{#keywords_sample#}') {alert('{#input_keywords#}');$('#SearchKeyword').focus();return false;}
+	})
+})
+//-->
+</script>
+<!-- {/literal} -->
+</head>
+<body>
+<div id="content">
+	<div id="header">
+		<span class="left" id="favorites"><a href="javascript:void(0);" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.busytrade.com');">Make {$site_name} Your Homepage</a> | <a href="javascript:void(0);" onclick="window.external.AddFavorite('http://www.phpb2b.com','phpb2b.com - '+document.title)">Add to Favorites</a>| 
+        {if $pb_username!=""}
+        &nbsp;&nbsp;&nbsp;{#hello#|sprintf:$pb_username}
+        <a href="redirect.php?url=/virtual-office/">[{lang my_office_room}]</a>
+        {if $is_admin}<a  href="pb-admin/login.php" target="_blank">[{lang control_pannel}]</a>{/if}
+        <a href="logging.php?action=logout">[{lang login_out}]</a>
+        {else}
+        &nbsp;&nbsp;&nbsp;
+		<a title="Login" rel="nofollow" href="logging.php">Login</a> |
+	  	<a rel="nofollow" href="member.php">Sign Up</a> |
+        {/if}
+</span>
+		<span class="right">
+	  <a href="index.php?do=offer&action=post">{lang free_post}</a> | 
+      <a rel="nofollow" href="index.php?do=service">Services</a> |
+      <a rel="nofollow"	href="index.php?do=standard">Help</a>
+		</span>
+	</div>
+	<div id="top">
+		<div class="logo"><a href="{$SiteUrl}"><img src="{$site_logo}" border="0" alt="{$site_banner_word}" /></a></div>
+		<div class="search">
+			<span class="search_left_bg"></span>
+			<span class="search_middle_bg">
+				<div class="search_tag">
+					<div class="search_tag_b" id="topMenuProduct"><a href="index.php?do=product">{lang search_product}</a></div>
+					<div class="tag_line"></div>
+					<div class="search_tag_b" id="topMenuCompany" ><a href="index.php?do=company">{lang search_company}</a></div>
+					<div class="tag_line"></div>
+					<div class="search_tag_b" id="topMenuOffer"><a href="index.php?do=offer">{lang search_offer}</a></div>
+					<div class="tag_line"></div>
+					<div class="search_tag_b" id="topMenuNews"><a href="index.php?do=news">{lang search_news}</a></div>
+					<div class="clear"></div>
+				</div>
+
+				<div class="search_input">
+					<div class="search_from">
+            <form name="search_frm" id="SearchFrm" method="get" action="index.php">
+            <input type="hidden" name="do" id="hdDo" value="search" />
+            <input type="hidden" name="action" id="hdAct" value="lists" />
+            <input type="hidden" name="module" id="hdModule" value="offer" />
+						  <input type="text" name="q" id="SearchKeyword" size="60"  class="input_bg" value="{$_G.q|default:#keywords_sample#}"/>
+					  &nbsp;&nbsp;
+						  <button type="submit" id="BtnSearch" value="{lang search}" class="search-bar-button">{lang search}</button>
+                  <button type="submit" id="BtnCompany" value="{lang search}" class="search-bar-button">{lang company_direct}</button>
+						  <a href="index.php?do=search">{lang adv_search}</a>
+						  </form>
+					</div>
+					<div class="search_keywords"><strong>Hot Keywords: </strong><!--{pb:tag row=3 name="tag1"}-->{$tag1.link}<!--{/pb:tag}--></div>				
+                </div>
+
+			</span>
+			<span class="search_right_bg"></span>
+		</div>
+	</div>
+	<div id="topnav">
+		<span class="nav_bg_left"></span>
+		<span class="nav_bg_middle">
+		<div class="nav">
+			<!-- {foreach from=$navs name=navs item=item key=key} -->
+			<div class="nav_b" id="nav_{$item.id}">
+			  <div><a href="{$item.url}" target="_self">{$item.name}</a></div>
+			</div>
+			<!-- {/foreach} -->
+	    </div>
+		</span>
+		<span class="nav_bg_right"></span>
+
+        <div class="nav_btm"></div>
+	</div>
+    

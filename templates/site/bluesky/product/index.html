@@ -1,0 +1,117 @@
+{assign var="page_title" value="$page_title"}
+{include file="header.html"}
+<link href="{$theme_img_path}css/real_buy.css" rel="stylesheet" type="text/css" />
+{literal}
+<style type="text/css">
+<!--
+.button_create{
+text-align:center;font-size:12px; background:url(/images/busy_b_a.gif); width:56px; height:21px; color:#FFFFFF;
+border-style: none;
+}
+.c_kj{padding:10px 0px 0px 0px;}
+.createabusyalert {
+	width: 200px;
+	border: 1px solid #A9BAD3;
+}
+.Create_title{
+font-weight:bold; font-family: Arial; font-size:12px;
+color:#000000;
+padding:5px 10px 10px 10px;
+background-image:url(/images/colum_bg.gif);
+
+}
+.Subscribe_txt{
+ font-family: Arial; font-size:12px; line-height:18px;
+ 
+	padding:5px 10px 5px 10px;
+}
+.content_one_txt{
+   
+ padding:5px 5px 5px 10px;
+ line-height:20px;
+ font-size:12px;
+}
+.content_two_txtbox{
+	padding:0px 10px 0px 5px;
+	font-size:12px;
+	line-height:32px;
+}
+
+-->
+</style>
+{/literal}
+<div class="breadline">{$position}</div>
+<div class="tbody">
+    <div class="float_left">
+         <div class="title">
+              <div>
+              <span><a href="#"><img border="0" title="Latest  Products" src="{$theme_img_path}images/more_blue.gif" alt="" /></a></span>
+               Latest  Products 
+               </div>
+          </div>
+          <div class="border">
+              <div class="today_new">
+               {pb:product row=8 type="image" name="item"}
+                  <div>
+                     <div class="pic"><a href="{$item.url}"><img src="{$item.src}" width="48" height="48" alt="{$item.title}" /></a></div>
+                    <div class="product_title">
+                        <ul>
+                           <li style="background:none; padding-left:8px; padding-top:0px;" class="break"><span> {$item.title}</span></li>
+                           <li style="background:none; padding-left:8px; padding-top:0px;"><a title="{$item.company}" href="index.php?do=product&actioin=detail&id={$item.id}" class="dark_blue">{$item.company}</a></li>
+                           
+                        </ul>
+    
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>	
+                  {/pb:product}
+               </div>
+	          <div class="clear"></div>
+          </div> 
+    </div>
+    <div class="float_middle">
+        <div class="pad_top_10px">
+            <div class="middle_title_bg">
+            <div  class="navbg">
+              <div>Products</div>
+            </div>
+            <div class="clear"></div>
+            </div>
+            <div class="border">
+            <div style="padding:15px;"> 
+<!--{get var="IndustryList" from="industry"}-->
+			{foreach from=$IndustryList item=industry_item key=industry_key}
+            <div class="list_txt">
+                 <div class="pad_top_3px">
+            <div class="bold"><a href="index.php?do=product&action=lists&industryid={$industry_key}">{$industry_item.name}</div>
+			{if $industry_item.sub}
+            <div class="pad_top_3px pad_left_5px">
+              <ul>
+            {foreach from=$industry_item.sub item=item_child}
+			<li>&raquo; <a href="index.php?do=product&action=lists&industryid={$item_child.id}">{$item_child.name}</a></li>
+			{/foreach}
+              </ul>
+              <div class="clear"></div>
+			  </div>
+			  {/if}
+            </div>
+            <div class="clear"></div>
+			</div>
+			{/foreach}
+            <div class="clear"></div>
+            </div>
+        </div>
+     </div>
+</div>
+<div class="float_right">
+		<div></div>
+	<div class="pad_top_10px"></div>	   
+	</div>
+	<div class="clear"></div>
+</div>
+<script>
+$("#SearchFrm").attr("action","index.php");
+$("#topMenuProduct").addClass("search_tag_a");
+</script>
+{include file="footer.html"}

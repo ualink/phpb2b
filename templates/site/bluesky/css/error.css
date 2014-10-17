@@ -1,0 +1,106 @@
+/**For errors**/
+body {
+	background-color: #f5f6f7;
+	font: 12px verdana, arial, sans-serif;
+	color: #5e5e5e;
+}
+input{
+	font: 12px verdana, arial, sans-serif;;
+}
+.top_left {
+	background-image: url(../images/corner_top_left.gif);
+	background-repeat: no-repeat;
+}
+.top_center {
+	background-image: url(../images/corner_top_center.gif);
+	background-repeat: repeat-x;
+}
+.top_right {
+	background-image: url(../images/corner_top_right.gif);
+	background-repeat: no-repeat;
+}
+.left {
+	background-image: url(../images/corner_left.gif);
+	background-repeat: repeat-y;
+}
+.right {
+	background-image: url(../images/corner_right.gif);
+	background-repeat: repeat-y;
+}
+.bot_left {
+	background-image: url(../images/corner_bot_left.gif);
+	background-repeat: no-repeat;
+}
+.bot_right {
+	background-image: url(../images/corner_bot_right.gif);
+	background-repeat: no-repeat;
+}
+.bot_center {
+	background-image: url(../images/corner_bot_center.gif);
+	background-repeat: repeat-x;
+}
+.title1 {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000000;
+}
+.line {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #b2bad3;
+}
+a:link {
+	color: #1f72d0;
+	text-decoration: underline;
+}
+a:visited {
+	color: #4e4e4e;
+	text-decoration: underline;
+}
+a:hover {
+	color: #ff0000;
+}
+a:active {
+	color: #1f72d0;
+	text-decoration: underline;
+}
+form {
+	margin:0;
+	padding:0;
+}
+#button, #button2 {
+	width:80px;
+	height:25px;
+}
+
+body{
+	margin:0;
+	padding:0;
+}
+a:link, a:visited {
+	color:#1F72D0;
+}
+a:hover, a:active {
+	color:#FF5A00;
+}
+.clear {
+	clear:both;
+	font-size:0;
+	line-height:0;
+}
+.options{
+	margin:0;
+	padding:10px 0 10px 40px;
+}
+.help  { font: 12px verdana, arial, sans-serif; color: red;}
+input.error {border: 1px solid red; }
+label.error {
+background:url("../../../images/check_error.gif") no-repeat 0px 0px;
+  padding-left: 16px;
+  padding-bottom: 2px;
+  font-weight: bold;
+  color: red;
+}
+label.checked {
+background:url("../../../images/check_right.gif") no-repeat 0px 0px;
+}

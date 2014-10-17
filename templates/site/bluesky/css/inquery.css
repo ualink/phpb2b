@@ -1,0 +1,160 @@
+.orange{color:#FF6600; text-decoration:underline;}
+.orange:hover{color:#FF6600; text-decoration:none}
+.center{ text-align:center}
+.margin_01{margin-top:5px;}
+.pad_01{padding-top:20px;}
+.float_left{float:left;}
+.float_right{float:right;}
+h3{margin:0; padding:0; font-size:14px; font-weight:bold;}
+h3 span{ color:#f00}
+.pad_bottom{padding-bottom:20px;}
+
+.main{ width:960px; margin:0 auto;}
+
+.basket_bg{background:url(../images/basket_bg.gif); height:70px; width:960px;}
+.basket_bg .txt{padding-left:290px;}
+.basket_bg .txt .li42{line-height:19px; height:42px; font-weight:bold; color:#1b5790;}
+.basket_bg .txt .li21{line-height:19px; height:21px; font-weight:bold; color:#1b5790;}
+
+.breadline{ margin:0 0 10px 0}
+.breadline .breadline_left{background:url(../images/breadline_left.gif); width:10px; line-height:28px; height:28px; float:left;}
+.breadline .breadline_right{background:url(../images/breadline_right.gif); width:10px; line-height:28px; height:28px; float:left;}
+.breadline .breadline_middle{background:url(../images/breadline_middle.gif); height:28px; width:760px; line-height:28px; float:left;
+font-weight:bold; font-size:14px; color:#1b5790;}
+
+.table_box{margin-top:5px; border:1px solid #4273a5;}
+.table_box .table_collapse{border-collapse:collapse;}
+.table_box td{padding:3px 0;}
+.table_box .tb_01{border:1px solid #a6cae4; width:100px; text-align:center; line-height:21px;}
+.table_box .tb_02{border:1px solid #a6cae4; background:#e5edf3; font-weight:bold; width:265px; line-height:21px; padding:0 10px;}
+.table_box .tb_03{border:1px solid #a6cae4; background:#e5edf3; font-weight:bold; width:100px; text-align:center; line-height:21px;}
+.table_box .tb_04{border:1px solid #a6cae4; line-height:21px;width:265px;  padding:0 10px;}
+
+.signin{float:left; width:375px; height:163px; background:url(../images/member_bg.gif);}
+.signup{float:right; width:395px; height:163px; background:url(../images/not_member_bg.gif);}
+.signup .pad_02{padding:38px 0 0 70px; font-size:18px; font-weight:bold;}
+.signup .pad_03{padding:25px 0 0 30px; font-size:14px; font-weight:bold;}
+.signup .pad_04{padding:10px 0 0 30px;}
+.signup .pad_05{text-align:right; padding:10px 20px 0 0;}
+.signin .pad_02{padding:30px 0 0 100px; font-size:18px; font-weight:bold;}
+.signin .pad_03{padding:10px 0 0 100px;}
+.signin .pad_04{padding:5px 0 0 100px;}
+.signin .pad_05{padding:5px 0 0 175px;}
+
+
+.inquiry_bgcolor{background:#fff; width:958px;}
+.title_bg{background:url(../images/title_top_bg.gif) repeat-x; height:28px; margin-top:10px; font-size:14px; border-right:1px solid #b9b9b9;}
+.title_bg div{background:url(../images/title_top_x.gif) left no-repeat; padding:0 15px; height:28px; line-height:28px;}
+.title_bg div span{float:right; font-size:11px;}
+
+.content{
+	border-bottom:1px solid #ffffff;
+	padding-top: 5px;
+	padding-right: 0;
+	padding-bottom: 10px;
+	padding-left: 0;
+}
+.content li{float:left; padding-left:5px; display:block; line-height:30px;}
+.tit_tishi_2{ margin:5px 0 15px 15px; background:#ffeadc; border:1px solid #ff6600; padding:10px; line-height:20px;}
+.content2{padding:2px 0;}
+.content2 li{float:left; padding-left:5px; display:block}
+.lf_con_str{width:160px; padding-left:10px; background:url(../images/from_list_left.gif) repeat-y;
+line-height:25px; height:25px; font-weight:bold;}
+.lf_con{width:160px; text-align:right;}
+.lf_con1{width:160px; text-align:left; background:url(../images/from_list_left.gif) repeat-y;
+line-height:25px; height:25px; font-weight:bold;}
+.lf_con_add {
+	width: 110px;
+	background-position: left;
+	margin-left: 10px;
+	font-size: 11px;
+	color: #333333;
+}
+
+.rht_con{color:#999;}
+.r_con{width:90px; height:25px; line-height:25px;}
+.content span{color:#f00}
+.content2 span{color:#f00}
+.sub{ margin:10px 0}
+.ms_tab{ width:100%; background:#5580C0}
+.ms_tab th{ background:#dfefff; padding:5px 0}
+.ms_tab td{ background:#fff; padding:5px}
+.operate{ margin:5px 0}
+.operate span{ float:right}
+.content3{padding:3px 0; border-bottom:1px solid #ffffff;}
+.content3 li{display:block; line-height:20px; padding-left:155px;}
+.margin_top_10px{margin-top:10px;}
+.pad_bottom_10px{padding-bottom:10px;}
+
+.tit_tishi_2{ margin:15px 0 0 0;background:#ffeadc; border:1px solid #ff6600; padding:10px; line-height:20px;}
+.register_ts_2{
+	color:#999;
+	font-size:11px;
+	line-height: 16px;
+}
+
+/*发布信息成功页面*/
+.congratulate{ margin:10px 0 30px 0}
+.bigtext{color:#ff6600; font-size:14px;}
+.congr_message{background:url(../images/ibusytrade/success.gif) no-repeat; padding-left:70px;}
+.congr_other{margin-top:20px; background:#f8f8f8; padding:10px;}
+
+/*-----------------------------Busytrade_01-------------------------------------------------*/
+* {margin:0;padding:0;}
+body {font-size:12px;}
+img {border:0; vertical-align:middle;}
+ul,li {list-style:none;}
+.clear {clear:both;display:block;}
+.float_l {float:left;}
+.float_r {float:right;}
+.width_100 {width:100%}
+.padding_0 {padding:auto 0;}
+.margin_top_5px {margin-top:5px;}
+.margin_top_10px {margin-top:10px;}
+.text_center {width:100%; text-align:center;}
+.font_B { font-weight:bold;}
+.color_ff66 { color:#FF6600;}
+.color_red  { color:#FF0000;}
+.color_blue  { color:#1D98CD;}
+/*-----------------------------Busy_alert-------------------------------------------------*/
+
+
+.ib_input_button{line-height:20px;height:26px; overflow:hidden;padding:0 10px;}
+.ib_input_button_2{line-height:20px;height:26px; overflow:hidden;padding:0 20px;}
+
+.ib_input_button {
+height:auto;
+*height:22px;
+font-size:12px;
+line-height:13px;
+padding:0 15px;
+*padding:1px 0 4px 0 ;
+vertical-align:top;
+margin-top:-1px;
+*margin-top:0px;
+overflow:hidden;
+}
+
+.ib_input_text{border:1px #4497C4 solid; width:260px; height:18px;vertical-align:bottom;}
+.ib_content{padding:10px 40px;}
+.ib_h1 {font-size:14px;
+        font-weight:bold;
+		color:#FF6600;
+		padding:5px 10px;
+		border-bottom:1px #f1f1f1 solid;
+}
+.ib_h2 {font-size:14px;
+		color:#1F7EA7;
+		padding:5px 10px;
+		background:url(../../images/busy_alert/menu_bg.gif);
+		border:1px #C7DFED solid;
+}
+.ib_txt {padding:5px 10px;}
+.ib_font_eg{color:#999999;}
+.ib_checkbox {padding:10px 0;border-bottom:1px #C7DFED solid;}
+.checkbox_list ul {width:600px;margin-left:15px;}
+.checkbox_list li {float:left;width:300px;margin-top:5px;}
+.style_li ul{margin-left:40px;}
+.style_li li{margin-top:5px;}
+.foot{background:url(../images/foot_bg.gif) repeat-x;height:90px;}
+.foot li{line-height:18px;text-align:center;font-family:Verdana, Arial, Helvetica, sans-serif;}

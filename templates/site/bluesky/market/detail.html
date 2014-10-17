@@ -1,0 +1,44 @@
+{assign var="page_title" value="$page_title"}
+{assign var="nav_id" value="7"}
+{include file="header.html"}
+<style type="text/css">
+@import url({$theme_img_path}general.css);
+@import url({$theme_img_path}style.css);
+</style>
+<div class="wrapper">
+	<div class="content">
+	<div class="tips"><span>{$position}</span></div>
+	<div class="maincon clearfix">
+        <div class="all_left">
+            <div class="title_bar_s1">
+                <span class="title_top_s4"><span></span></span>
+                <h2>{$item.name}</h2>
+            </div>
+        <div class="all_left_con">{$item.content}</div>
+        </div>
+        <div class="all_right">
+           <div class="title_bar_s1">
+                <span class="title_top_s1"><span></span></span>
+                <h2>{lang news_market}</h2>
+            </div>
+           <div class="all_right_con">
+        {pb:market row=10 name="item"}
+        <p><a href="index.php?do=market&action=detail&id={$item.id}">{$item.title}</a></p>
+        {/pb:market}
+        </div>
+		<div class="blank6"></div>
+        <div class="all_right">
+           <div class="title_bar_s1">
+                <span class="title_top_s4"><span></span></span>
+                <h2>{lang new_offer}</h2>
+            </div>
+           <div class="all_right_con">
+			{pb:offer row=10 orderby="rand()" name="item"}
+			<p><a href="index.php?do=offer&action=detail&id={$item.id}">{$item.title}</a></p>
+			{/pb:offer}
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+{include file="footer.html"}

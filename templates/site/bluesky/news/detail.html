@@ -1,0 +1,46 @@
+﻿{assign var="page_title" value="$page_title"}
+{assign var="nav_id" value="7"}
+{include file="header.html"}
+<style type="text/css">
+@import url({$theme_img_path}general.css);
+@import url({$theme_img_path}style.css);
+</style>
+<div class="wrapper">
+	<div class="content">
+	<div class="tips"><span>{$position}</span></div>
+	<div class="maincon clearfix">
+        <div class="all_left">
+            <div class="title_bar_s1">
+                <span class="title_top_s4"><span></span></span>
+                <h2>{$item.title}</h2>
+            </div>
+        <div class="all_left_con">{$item.content}</div>
+				<p>{lang source}<span class="gray">{if $item.source}{$item.source}{else}{$site_name}{/if}</span>{lang publish_time}<span class="gray">{$item.pubdate}</span>{lang categories}<span class="gray">[<a href="index.php?do=news&action=lists&typeid={$item.type_id}">{$item.typename}</a>]</span> {lang keyword}<span class="gray">{$item.tag}</span></p>
+        </div>
+        <div class="all_right">
+           <div class="title_bar_s1">
+                <span class="title_top_s1"><span></span></span>
+                <h2>{lang news_market}</h2>
+            </div>
+           <div class="all_right_con">
+        {pb:news row=10 name="item" item=item}
+        <p><a href="{$item.url}">{$item.title}</a></p>
+        {/pb:news}
+        </div>
+		<div class="blank6"></div>
+        <div class="all_right">
+           <div class="title_bar_s1">
+                <span class="title_top_s4"><span></span></span>
+                <h2>{lang new_offer}</h2>
+            </div>
+           <div class="all_right_con">
+			{pb:offer row=10 orderby="rand()" name="item" item=item}
+			<p><a href="{$item.url}">{$item.title}</a></p>
+			{/pb:offer}
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+{include file="footer.html"}

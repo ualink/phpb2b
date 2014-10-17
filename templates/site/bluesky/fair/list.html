@@ -1,0 +1,56 @@
+<!--{include file="header.html" page_title="$page_title"}-->
+<link rel="stylesheet" type="text/css" href="{$theme_img_path}css/general.css" />
+<link rel="stylesheet" type="text/css" href="{$theme_img_path}css/type.css" />
+<link rel="stylesheet" type="text/css" href="{$theme_img_path}css/widgets.css" />
+<div class="wrapper">
+  <div class="content clearfix">
+    <div class="tips"><span>{$position}</span></div>
+    <div class="blank6"></div>
+    <div class="companylistconleft">
+        <div class="base_title">
+          <h2><span class="corner_t_l"></span><span class="corner_t_m title_mouse">{lang search_result}</span><span class="corner_t_r"></span></h2> 
+	    </div>
+        <div class="base_list_box box_bord">
+           <div class="base_list_head"><strong>{lang puglish_time}</strong><a href="{the_url module=list extra=filter_2592000 type=filter}">{lang this_month}</a><a href="{the_url module=list extra=filter_604800 type=filter}">{lang this_week}</a><a href="{the_url module=list extra=filter_86400 type=filter}">{lang today_hours}</a></div>
+           <div class="base_list_content clearfix">	
+           <!--{foreach from=$items name=items item=item}-->
+                <div class="base_list clearfix">
+                    {if $item.picture}<div class="base_list_img"><img src="{$item.image}" /></div>{/if}
+                    <div class="base_list_info">
+                      <span class="title title_link"><a href="index.php?do=fair&action=detail&id={$item.id}">{$item.title|truncate_multi:80}</a></span>
+                      <p> {$item.digest}</p>
+                      <div class="update_time"><em>{lang update_time}({$item.pubdate})</em>{lang categories}[<a href="index.php?do=fair&action=lists&typeid={$item.expotype_id}">{$item.typename}</a>]</div>
+                      <div class="txt_source"><span class="fr link-underline"><a href="index.php?do=fair&action=detail&id={$item.id}">{lang visit_full_content}...</a></span>{$item.clicked} {lang visited}&nbsp;{lang source}{$item.source|default:$site_name}</div>
+                  </div>
+                 </div>
+                 <hr class="hr_dashed" />
+               <!--{/foreach}-->
+                <div class="pagination2"><!-- {pager rowcount=$paging.total} --></div>
+           </div>
+        </div>
+    </div>
+    <div class="companylistconright">
+      <div class="lookcompany">
+        <div class="recommendcompanytop"><img src="{$theme_img_path}images/lhighs.gif" />{lang category_nav}</div>
+        <div class="companylistseecon">
+          <ul>
+          	<!--{foreach from=$SubCats item=item1}-->
+            <li><a href="{the_url module=list extra=$item1.id type=type_id}">{$item1.name}</a></li>
+            <!--{/foreach}-->
+          </ul>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="lookcompany" style="margin-top:10px;">
+       <div class="companylistseecon" >
+        <form action="{the_url module=search do=news}" method="get" id="NewsSearchFrm"><input type="text" name="q" value="" class="input"/><input type="button" value="{lang search}" onclick="$('#NewsSearchFrm').submit();" class="submit"/></form></div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+<script>
+$("#SearchFrm").attr("action","{the_url module=search}");
+$("#topMenuNews").addClass("lcur");
+</script>
+<!--{include file="footer.html"}-->

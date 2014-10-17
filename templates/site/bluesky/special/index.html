@@ -1,0 +1,55 @@
+{assign var="page_title" value="$page_title"}
+{include file="header.html"}
+<link href="{$theme_img_path}css/sitemap4.css" type="text/css" rel="stylesheet">
+<div class="tips"><span>{$position}</span></div>
+<div class="blank6"></div>  
+<div class="content clearfix">
+  <div class="main_left_w750"> 
+   <!-- id=content start -->
+	<div id="content">
+		<div id="left">
+			<div class="left_a">
+				<h4>All Categories</h4>
+				<ul id="menu">
+					<!--{get var="IndustryList" from="industry"}-->
+		            <!--{foreach from=$IndustryList item=item0 key=key0 name=level_0}-->
+							<li><strong><a href="{$smarty.server.REQUEST_URI}#the{$item0.id}">{$item0.name}</a></strong></li>
+					<!--{/foreach}-->
+				</ul>
+				<div class="menu_bottom"></div>
+			</div>
+		</div>
+		<div id="seo">
+			<div class="first">
+						<!--{get var="IndustryList" from="industry"}-->
+			            <!--{foreach from=$IndustryList item=item0 key=key0 name=level_0}-->
+						<dl>
+							<dt>
+								<a name="the{$item0.id}"></a>
+								<a href="index.php?do=product&action=lists&industryid={$item0.id}">{$item0.name}</a>
+							</dt>
+							<!-- {if $item0.sub} -->
+							<!--{foreach from=$item0.sub name=level_1_industry item=level1 key=key_level1}-->
+								<dd>
+									<a href="index.php?do=product&action=lists&industryid={$level1.id}" title="{$level1.name}" class="typeboxlet01">{$level1.name}</a>
+								</dd>
+								<!-- {if $level1.sub} -->
+									<!--{foreach from=$level1.sub name=level_2_industry item=level2 key=key_level2}-->
+									<dd>
+									<a href="index.php?do=product&action=lists&industryid={$level2.id}" title="{$level2.name}">{$level2.name}</a>
+									</dd>
+									<!--{/foreach}-->
+								<!-- {/if} -->
+							<!--{/foreach}-->
+							<dt><dd>
+							<h4 class="ui-box-title" align="right"><a href="{$smarty.server.REQUEST_URI}#" rel="nofollow">Back To Top</a></h4></dd>
+							</dt>
+							<!-- {/if} -->
+						</dl> 
+						<!--{/foreach}-->
+			</div>
+		</div>
+	</div>
+ </div>
+</div>
+{include file="footer.html"}

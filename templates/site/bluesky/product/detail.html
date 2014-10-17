@@ -1,0 +1,110 @@
+﻿{assign var="page_title" value="$page_title"}
+{assign var="nav_id" value="$nav_id"}
+{include file="header.html"}
+<link href="{$theme_img_path}css/index_global.css" rel="stylesheet" type="text/css" />
+<link href="{$theme_img_path}css/general.css" rel="stylesheet" type="text/css" />
+<link href="{$theme_img_path}css/detail.css" rel="stylesheet" type="text/css" />
+<div class="main">
+	<div class="trans_bread"><span>{$position}</span></div>	
+	<div class="transition">
+		<div class="column_1">
+			<div class="trans_info_top">
+				<h1>{$item.title}</h1>
+				{if $item.picture}
+				<div class="trans_pic">
+					<div id="preview_pic">
+						<a href="misc.php?source={$item.image_url}" target="_blank" title="antimony ore "><img alt="antimony ore " src="{$item.image}" width="200" height="200"/></a>
+					</div>
+					<p>	{$item.tag}</p>
+				</div>
+			{/if}
+                <div class="trans_products">
+                    <ul>
+                        <li>
+                            <strong>Category:</strong>
+                            <span>{$item.industry_names}
+                            </span>
+                        </li>
+                        <li>
+                            <strong>Keyword:</strong>
+                            <span>{$item.tag} </span>
+                        </li>
+                        <li>
+                            <strong>Post Date:</strong>
+                            <span>{$item.pubdate}</span>
+                        </li>
+                    </ul>					
+                    <div class="trans_products_btn">
+                        <input type="image" alt="Inquire Now" src="{$theme_img_path}images/header_26.gif"  name="Submit3" style="cursor:pointer"  onclick="redirect('{$SiteUrl}product/inquery.php?id={$item.id}');"/>
+                        </form>
+ 
+                      </div>                                                                                       
+                 </div>					 				
+				<div class="trans_right">
+					<div class="trans_company">
+						<div class="trans_company_tl"></div>
+						<div class="trans_company_tr"></div>
+						<div class="trans_company_bl"></div>
+						<div class="trans_company_br"></div>
+						<div class="trans_company_tm"></div>
+						<div class="trans_company_bm"></div>
+						<div class="trans_company_ml"></div>
+						<div class="trans_company_mr"></div>
+						<div class="trans_company_info">
+							<div class="title">Buyer Details</div>
+
+					        <div class="noread" id="show_info">
+            {if $pb_username==""}
+								<p>If you want to view the contact information of buying leads, please <span><a href="{$SiteUrl}logging.php"><img src="{$theme_img_path}images/btn_login.gif" alt="Login" border="0" align="absmiddle" /></a></span></p>
+							{else}
+				<p>{lang address}{$item.address}<br /> 
+				   {lang zip}{$item.zipcode}<br /> 
+				   {lang phone}{$item.tel}<br />
+				   {lang fax}{$item.fax}<br /> 
+				   {lang website}:{$item.site_url}</p>
+				   {/if}
+				   </div>
+							<div class="noread" id="watch_info" style="display:none;"></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+		<!-- Description -->
+		<div class="column_1">
+			<h2>
+				Description
+				<span></span>
+			</h2>
+			<div class="description">	
+				<!--h3>Product Description:</h3-->
+				<div class="description_info">
+				<table width="578" border="0">
+                {foreach from=$ObjectParams name=op item=tparam}
+					<tr>
+					  <td class="tableblue">{$tparam.label}</td>
+					  <td classs="lightblue">{$tparam.value}</td>
+				</tr>
+               	{/foreach}
+			   </table>
+               {$item.content|nl2br}			
+               </div>
+
+				<div class="description_btn">
+						<span class="inquiry_now"><strong><input type="button" value="Inquire Now"  onclick="redirect('{$SiteUrl}product/inquery.php?id={$item.id}');"/></strong></span>
+					</form>
+				</div>
+
+			</div>
+		</div>		
+	</div>
+
+
+    <div class="clear"></div>
+    <script>
+$("#SearchFrm").attr("action","index.php");
+$("#topMenuProduct").addClass("search_tag_a");
+</script>
+{include file="footer.html"}
