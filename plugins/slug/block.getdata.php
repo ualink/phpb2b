@@ -226,8 +226,16 @@ function smarty_block_getdata($params, $content, Smarty_Internal_Template $sTemp
 		}
 		$item['content'] = $_content = strip_tags(pb_lang_split($_content));
 //		if($seperate) $_title = ($key==$counts-1)?$_title:$_title.$seperate;	
-		$item['link'] = '<a title="'.$_title_full.'" href="'.$url.'" target="'.$target.'">'.$_title.'</a>'.$_seperate;	
-		if(!empty($item['picture'])) $item['thumb'] = $item['src'] = pb_get_attachmenturl($item['picture'], '', 'small');
+		$item['link'] = '<a title="'.$_title_full.'" href="'.$url.'" target="'.$target.'">'.$_title.'</a>'.$_seperate;
+		$media_url = '';
+		if(!empty($item['picture'])){
+			$media_url = $item['picture'];
+			if(!empty($media_url)) $item['thumb'] = $item['src'] = pb_get_attachmenturl($media_url, '', 'small');
+		}
+		if(!empty($item['source_url'])) {
+			$media_url = $item['source_url'];
+			if(!empty($media_url)) $item['thumb'] = $item['src'] = $media_url;
+		}
 		if (isset($item['highlight'])) {
 			$item['style'] = parse_highlight($item['highlight']);
 		}

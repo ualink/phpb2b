@@ -582,9 +582,10 @@ function parse_highlight($highlight, $return_color = false) {
 	return $style;
 }
 
-function pb_get_attachmenturl($src, $path = '', $size = '', $force = false)
+function pb_get_attachmenturl($src, $path = '', $size = '', $force = false, $attach_path = true)
 {
 	global $attachment_dir, $attachment_url;
+	$attach_url = '';
 	$default_thumb_img = STATICURL. 'images/nopicture_small.gif';
 	if (empty($size)) {
 		$size = "small";
@@ -612,7 +613,8 @@ function pb_get_attachmenturl($src, $path = '', $size = '', $force = false)
 	if ($force) {
 		$default_thumb_img = STATICURL.'images/nopicture_'.$force.'.gif';
 	}
-	$img =  $src ? $attachment_url.$src : $default_thumb_img;
+	$attach_url = $attach_path?$attachment_url.$src : $src;
+	$img =  $src ? $attach_url : $default_thumb_img;
 	if ($scope && ($img!=$default_thumb_img)) {
 		$img.="{$scope}.jpg";
 	}
