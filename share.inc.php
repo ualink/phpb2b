@@ -5,7 +5,10 @@
  *
  *      @version $Revision: 2075 $
  */
-$theme_name = "default";//templet
+$theme_name = "default";//templet name, default as 'default'
+/**
+ * templates directory, DO NOT change.
+ */
 $tpl_dir = "templates";
 //if(is_dir(PHPB2B_ROOT. "templates/".$app_lang."/")) $theme_name = $app_lang;
 //$limit = 10;//site every page set.

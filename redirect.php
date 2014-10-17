@@ -11,8 +11,11 @@ require("libraries/common.inc.php");
 require("share.inc.php");
 $sid = session_id();
 //search the urls at the url table.
-if (!empty($_GET['url'])) {
+if (!empty($_GET['url']) || !empty($_GET['app_lang'])) {
 	$url = htmlspecialchars(trim($_GET['url']));
+	if(empty($url)){
+		$url = URL;
+	}
 	if (isset($_GET['app_lang'])){
 		usetcookie("lang", $_GET['app_lang']);
 		pheader("location:".$url);
