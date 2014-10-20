@@ -27,13 +27,15 @@ if($_SERVER['REQUEST_URI']) {
 	$_POST = pb_htmlspecialchar($_POST);
 }
 if(!$admin_runquery) pb_hack_check();//safe check to post, get. 
-list($accept_language) = explode(",", $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-if(!empty($accept_language)) $app_lang = strtolower($accept_language);
-if (isset($_COOKIE[$cookiepre.'lang'])) {
-	$app_lang = $_COOKIE[$cookiepre.'lang'];
-}
 if (isset($_GET['app_lang'])) {
 	$app_lang = $_GET['app_lang'];
+}else if (isset($_COOKIE[$cookiepre.'lang'])) {
+	$app_lang = $_COOKIE[$cookiepre.'lang'];
+}else if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+	list($accept_language) = explode(",", $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+	if(is_dir(PHPB2B_ROOT."languages".DS.$accept_language.DS)){
+		$app_lang = strtolower($accept_language);
+	}
 }
 if (!is_file(PHPB2B_ROOT."data".DS."language".DS.$app_lang.DS."default.conf")) {
 	pb_configmake($app_lang);
