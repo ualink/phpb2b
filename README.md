@@ -17,6 +17,6 @@ Some Handy Links
 Get Support!
 ------------
 
-[GitHub Issues](https://github.com/ulinke/phpb2b) - Got issues? Please tell us!
+[GitHub Issues](https://github.com/ulinke/phpb2b/issues) - Got issues? Please tell us!
 
-[![Demo Status](http://yanshi.phpb2b.com/cn5/static/images/logo.jpg)](http://yanshi.phpb2b.com/cn5/)
+[![Demo Status](http://yanshi.phpb2b.com/cn5/static/images/logo.jpg)](http://demo.phpb2b.com/v5/redirect.php?app_lang=en-us)
