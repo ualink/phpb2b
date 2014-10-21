@@ -56,7 +56,7 @@ if (isset($_GET['do'])) {
 		$entry = trim($_GET['entry']);
 		$tpl_file = "payment.setting";
 		if ($do == "install") {
-			$cfg = $pay_controller->getSkinData($payment->payment_path.$entry.".php");
+			$cfg = $pay_controller->getSkinData($payment->payment_path.$entry."/".$entry.".php");
 			$item = $cfg;
 			$item['name'] = $entry;
 			$item['title'] = $cfg['Name'];
@@ -72,7 +72,7 @@ if (isset($_GET['do'])) {
 				$item = $result;
 			}
 		}
-		require_once(PHPB2B_ROOT. 'plugins'.DS.'payments'.DS.$entry.".php");
+		require_once(PHPB2B_ROOT. 'plugins'.DS.'payments'.DS.$entry."/".$entry.".php");
 		$ext_arr = $modules[$entry]['config'];
 		for ($i=0; $i<count($ext_arr); $i++) {
 			$ext_arr[$i]['value'] = $configs[$ext_arr[$i]['name']];

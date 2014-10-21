@@ -46,7 +46,6 @@ if (!empty($pay_code))
 		flash();
 	}
 }
-
 if(isset($_GET['do'])){
     $do = trim($_GET['do']);
     $pay_method = null;
@@ -63,7 +62,7 @@ if(isset($_GET['do'])){
     			$payment_info = $pdb->GetRow("SELECT * FROM ".$tb_prefix."payments WHERE id=".$order_result['pay_id']);
     			//check pay_method
     			if (empty($payment_info)) {
-    				flash(L("data_not_exists"), "index.php");
+    				flash(L("data_not_exists"));
     			}
     			$pay_method = $payment_info['name'];
     			setvar("item", $order_result);
@@ -71,7 +70,7 @@ if(isset($_GET['do'])){
     	}
     	$payment_info = $pdb->GetRow("SELECT * FROM ".$tb_prefix."payments where name='".$pay_method."'");
     	setvar("payment_info", $payment_info);
-    	$smarty->display($tpl_dir. "/payments/".$pay_method."/index".$smarty->tpl_ext);
+    	$smarty->display(PLUGIN_PATH. "payments/".$pay_method."/template/index".$smarty->tpl_ext);
     	exit;
 	}
 }

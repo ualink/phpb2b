@@ -7,7 +7,7 @@
  */
 define('APP_PATH', PHPB2B_ROOT .'app'.DS);
 define('PLUGIN_PATH', PHPB2B_ROOT .'plugins'.DS);
-define('SLUGIN_PATH', PHPB2B_ROOT .'plugins'.DS.'slug'.DS);
+define('SLUGIN_PATH', PHPB2B_ROOT .'libraries'.DS.'slug'.DS);
 //Cache sets
 define('DATA_PATH', PHPB2B_ROOT."data".DS);
 define('CACHE_ROOT', PHPB2B_ROOT."data".DS."cache".DS);

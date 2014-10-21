@@ -56,12 +56,12 @@ class Payments extends PbObject
 		}
 		$template_dir = dir($this->payment_path);
 		while($entry = $template_dir->read())  {
-			$tpldir = realpath($this->payment_path.$entry);
+			$file_name = realpath($this->payment_path.$entry)."/".$entry.".php";
 			$k = reset(explode(".", $entry));
-			if((!in_array($entry, array('.', '..', '.svn'))) && (!in_array($k, $temp)) && is_file($tpldir)) {
+			if((!in_array($entry, array('.', '..', '.svn'))) && (!in_array($k, $temp)) && is_file($file_name)) {
 				//get info from tip
 				$pay_controller = new PbController();
-				$cfg = $pay_controller->getSkinData($tpldir);
+				$cfg = $pay_controller->getSkinData($file_name);
 				$uninstalled[] = array(
 				'name' => $k,
 				'title' => $cfg['Name'],

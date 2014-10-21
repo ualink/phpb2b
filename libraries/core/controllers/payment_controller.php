@@ -22,9 +22,9 @@ class Payment extends PbController {
 	function setPay($pay_code)
 	{
 		if (!in_array($pay_code, array("alipay", "paypal"))) {
-			flash();		
+			//flash();		
 		}
-		$file_name = $this->payment_path.$pay_code.".php";
+		$file_name = $this->payment_path.$pay_code."/".$pay_code.".php";
 		if (is_file($file_name)) {
 			require($file_name);
 			$this->payer = new $pay_code();
