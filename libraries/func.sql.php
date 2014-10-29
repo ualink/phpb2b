@@ -12,6 +12,7 @@ function sql_run($sql, $default_table_prefix = 'pb_') {
         $sql = preg_replace("/TYPE=(InnoDB|MyISAM)( DEFAULT CHARSET=[^; ]+)?/", "TYPE=\\1 DEFAULT CHARSET=".$dbcharset,$sql);
     }
     if($tb_prefix != $default_table_prefix) {
+    	$sql = str_replace($tb_prefix, $default_table_prefix, $sql);
     	$sql = str_replace($default_table_prefix, $tb_prefix, $sql);
     }
     $sql = str_replace("\r", "\n", $sql);
