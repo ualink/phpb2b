@@ -1119,4 +1119,8 @@ function pb_rebuild_array($arr){
 	}
 	return $tmp;
 }
+
+function pb_inject_check($str) {     
+	return preg_match('/select|from|where|insert|and|update|import|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile/is', $str); 
+}
 ?>

@@ -18,8 +18,11 @@ if (!empty($_GET['do'])) {
 	}
 }
 $img->code_length = 4;
-//$img->gd_font_file = 3;
-$img->ttf_file = 'data/ttffonts/COOLVETI.ttf';
+if (is_file('data/ttffonts/COOLVETI.ttf')){
+	$img->ttf_file = 'data/ttffonts/COOLVETI.ttf';
+}else{
+	$img->gd_font_file = 3;
+}
 $img->wordlist_file = 'data/words/words.txt';
 //Change some settings
 $img->perturbation = 0.45;

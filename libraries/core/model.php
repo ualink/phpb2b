@@ -269,7 +269,7 @@ class PbModel
 		$cols = implode($keys,",");
 		$tbname = (is_null($tbname))? $this->getTable():trim($tbname);
 		$this->table_name = $tbname;
-		//Todo:2010.04.14, by john
+		//Todo:2010.04.14, by steven
 		if(!empty($id)){
 			$sql = "SELECT $cols FROM ".$tbname." WHERE ".$this->primaryKey."='".$id."'";
 		}elseif(!empty($posts[$this->primaryKey])){
@@ -290,6 +290,10 @@ class PbModel
 		$rs = $this->dbstuff->Execute($sql);
 		$record = array();
 		foreach ($keys as $colname) {
+			if(pb_inject_check($colname)){
+				unset($posts[$colname]);
+				continue;
+			}
 			$sp_search = array('\\\"', "\\\'", "'","&nbsp;", '\n','\\\&quot;');
 			$sp_replace = array('&quot;', '&#39;', '&#39;',' ', '<br />','');
 			$slash_col = str_replace($sp_search, $sp_replace, $posts[$colname]);
