@@ -303,7 +303,7 @@ function pb_htmlspecialchar($string, $force = false) {
 				$string[$key] = pb_htmlspecialchar($val, $force);
 			}
 		} else {
-			$string = pb_remove_xss($string);
+			$string = pb_remove_xss(htmlspecialchars($string));
 		}
 	}
 	return $string;
