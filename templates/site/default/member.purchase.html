@@ -45,19 +45,22 @@
 					  <input name="email" type="text" class="linehui" id="member_email" value="{$MemberInfo.email}" disabled="disabled">
 							  <span class="fontred">{lang left_bracket}<a href="javascript:;" onclick="$('#member_email').attr('disabled',false);">{lang modify}</a>{lang right_bracket}</span>
 					</label></td>
-				  </tr>				  
+				  </tr>
 				  <tr>
 					<th>{lang select_pay_method}</th>
 					<td><label>
+					<!-- {if $payments} -->
 					  <select name="payment_id" id="PaymentId">
 							  <!--{loop $payments item}-->
 							  <option value="{$item.id}">{$item.title}</option>
 							  <!--{/loop}-->
 							  <option value="">{lang please_select}</option>
 							</select>
+				  <!-- {else} -->
+				  {lang no_subclass}
+				  <!-- {/if} -->
 					</label></td>
 				  </tr>
-
 				  <tr>
 					<th>{lang description}</th>
 					<td><label>

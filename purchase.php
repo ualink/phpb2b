@@ -5,7 +5,7 @@
  *
  *      @version $Revision: 2186 $
  */
-define('CURSCRIPT', 'upgrade');
+define('CURSCRIPT', 'purchase');
 require("libraries/common.inc.php");
 require("share.inc.php");
 session_start();
@@ -72,6 +72,11 @@ if(isset($_GET['do'])){
     	setvar("payment_info", $payment_info);
     	$smarty->display(PLUGIN_PATH. "payments/".$pay_method."/template/index".$smarty->tpl_ext);
     	exit;
+	}else{
+		//get all goods.
+		$sql = "SELECT * FROM ".$tb_prefix."goods";
+		$data= $pdb->GetAll($sql);
+		setvar("Items", $data);
 	}
 }
 if (isset($_POST['do'])) {

@@ -8,23 +8,25 @@
 		</div>
 		<div class="charge_online">
 		  <p>{lang confirm_pay_amount}</p>
-		<table>
-			{if $OnlineSupport}
-			<form method=get action="">
-			<input type="hidden" name="tradeno" value="{$tradeno}">
-			<input type="hidden" name="do" value="pay">
-			<tr>
-				<th>&nbsp;</th>
-				<td><input type="submit" class="submit_w118" value="{lang next_pay_amount}"/></td>
-			</tr>
-			</form>
-			{elseif $Description}
-			<tr>
-				<th>{lang pay_description}</th>
-				<td class="pay_description">{$Description}</td>
-			</tr>
-		{/if}
-		</table>
+			<!-- {if $OnlineSupport} -->
+			<table>
+				<form method="get" action="">
+				<input type="hidden" name="tradeno" value="{$tradeno}">
+				<input type="hidden" name="do" value="pay">
+				<tr>
+					<th>&nbsp;</th>
+					<td><input type="submit" class="submit_w118" value="{lang next_pay_amount}"/></td>
+				</tr>
+				</form>
+				{elseif $Description}
+				<tr>
+					<th>{lang pay_description}</th>
+					<td class="pay_description">{$Description}</td>
+				</tr>
+			</table>
+		<!-- {else} -->
+		<p style="color:red;"><!-- {lang system_error} --></p>
+		<!-- {/if} -->
 		</div>
 		<div class="corner_bottomtxt_bar">
 		  <span class="corner_bottomtxt_s1"><span></span></span>

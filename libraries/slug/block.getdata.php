@@ -122,7 +122,7 @@ function smarty_block_getdata($params, $content, Smarty_Internal_Template $sTemp
 	if (isset($params['exclude'])) $conditions[] = $M->getExcludeIds($params['exclude']);
 	if (isset($params['include'])) $conditions[] = $M->getIncludeIds($params['include']);
 	if (isset($params['orderby'])) $orderbys[] = trim($params['orderby']);
-	if(isset($row) && $row!='all'){
+	if(!empty($row) && $row!='all' && $row!=-1){
 		$M->setLimitOffset($offset, $limit);
 		$mysql_limit = $M->getLimitOffset();
 	}
