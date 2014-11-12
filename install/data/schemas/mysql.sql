@@ -838,7 +838,7 @@ CREATE TABLE `pb_industries` (
   `attachment_id` int(9) NOT NULL DEFAULT '0',
   `industrytype_id` smallint(3) NOT NULL DEFAULT '0',
   `child_ids` text,
-  `path` varchar(100) NOT NULL,
+  `path` varchar(100) NOT NULL default '',
   `name` varchar(255) NOT NULL DEFAULT '',
   `url` varchar(255) NOT NULL DEFAULT '',
   `alias_name` varchar(255) NOT NULL DEFAULT '',
