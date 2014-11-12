@@ -99,10 +99,10 @@ if (isset($_POST['save'])) {
 		if (!empty($names)) {
 			foreach ($names as $val) {
 				$name = $val;
-				if(!empty($name)) $tmp_name[] = "('".$name."','".$_POST['data']['industry']['url']."','".$parent_id."','".$top_parentid."','".$level."','".$_POST['data']['industry']['display_order']."','".$_POST['data']['industry']['industrytype_id']."')";
+				if(!empty($name)) $tmp_name[] = "('".$name."','".$_POST['data']['industry']['url']."','".$parent_id."','".$top_parentid."','".$level."','".$_POST['data']['industry']['display_order']."','".$_POST['data']['industry']['industrytype_id']."','')";
 			}
 			$values = implode(",", $tmp_name);
-			$sql = "INSERT INTO {$tb_prefix}industries (name,url,parent_id,top_parentid,level,display_order,industrytype_id) VALUES ".$values;
+			$sql = "INSERT INTO {$tb_prefix}industries (name,url,parent_id,top_parentid,level,display_order,industrytype_id,path) VALUES ".$values;
 			$result = $pdb->Execute($sql);
 		}
 	}

@@ -121,10 +121,10 @@ if (isset($_POST['save'])) {
 		if (!empty($names)) {
 			foreach ($names as $val) {
 				$name = $val;
-				if(!empty($name)) $tmp_name[] = "('".$name."','".$_POST['data']['area']['url']."','".$parent_id."','".$top_parentid."','".$level."','".$_POST['data']['area']['display_order']."','".$_POST['data']['area']['areatype_id']."')";
+				if(!empty($name)) $tmp_name[] = "('".$name."','".$_POST['data']['area']['url']."','".$parent_id."','".$top_parentid."','".$level."','".$_POST['data']['area']['display_order']."','".$_POST['data']['area']['areatype_id']."','')";
 			}
 			$values = implode(",", $tmp_name);
-			$sql = "INSERT INTO {$tb_prefix}areas (name,url,parent_id,top_parentid,level,display_order,areatype_id) VALUES ".$values;
+			$sql = "INSERT INTO {$tb_prefix}areas (name,url,parent_id,top_parentid,level,display_order,areatype_id,path) VALUES ".$values;
 			$result = $pdb->Execute($sql);
 		}
 	}
