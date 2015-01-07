@@ -170,7 +170,13 @@ class Companies extends PbModel {
 	{
 		$condition = array();
 		if (is_array($ids)) {
-			$condition[] = "id IN (".implode(",", $ids).")";
+			$_ids = '';
+			foreach($ids as $iid){
+				$_id = intval($iid);
+				if($_id) $_ids[] = $_id;
+			}
+			if(!empty($_ids)) $_ids = implode(",", $_ids);
+			$condition[] = "id IN (".$_ids.")";
 		}else{
 			$condition[] = "id=".$ids;
 		}
