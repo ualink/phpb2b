@@ -332,7 +332,7 @@ class Members extends PbModel {
 			if (in_array($administrator_id, $ids)) {
 				flash("cant_del_founder");
 			}
-			$_ids = '';
+			$_ids = array();
 			foreach($ids as $iid){
 				$_id = intval($iid);
 				if($_id) $_ids[] = $_id;

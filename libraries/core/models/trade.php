@@ -242,7 +242,7 @@ class Trades extends PbModel {
 			return false;
 		}
 		if (is_array($ids)) {
-			$_ids = '';
+			$_ids = array();
 			foreach($ids as $iid){
 				$_id = intval($iid);
 				if($_id) $_ids[] = $_id;
