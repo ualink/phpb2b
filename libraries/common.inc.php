@@ -24,7 +24,7 @@ require(PHPB2B_ROOT. 'libraries'.DS.'global.func.php');
 if($_SERVER['REQUEST_URI']) { 
 	//XSS 
 	$_GET = pb_htmlspecialchar($_GET);
-	$_POST = pb_htmlspecialchar($_POST, 1);
+	$_POST = pb_htmlspecialchar($_POST);
 }
 if(!$admin_runquery) pb_hack_check();//safe check to post, get. 
 if (isset($_GET['app_lang'])) {
