@@ -14,9 +14,15 @@ if (!$company->Validate($companyinfo)) {
 }
 if (isset($_POST['delete'])) {
 	$deleted = false;
+	$idss = array();
 	if (is_array($_POST['id'])) {
-		$ids = "(".implode(",", $_POST['id']).")";
-		$deleted = $pdb->Execute("DELETE FROM {$tb_prefix}spacelinks WHERE member_id={$the_memberid} AND id IN $ids");
+		foreach($_POST['id'] as $key=>$val){
+			$idss[] = intval($val);
+		}
+		if(!empty($idss)){
+			$ids = "(".implode(",", $idss).")";
+			$deleted = $pdb->Execute("DELETE FROM {$tb_prefix}spacelinks WHERE member_id={$the_memberid} AND id IN $ids");
+		}
 		if($deleted){
 			flash("success");
 		}else{

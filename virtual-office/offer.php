@@ -333,7 +333,15 @@ if (isset($_POST['do']) && !empty($_POST['data']['trade'])) {
 }
 if (isset($_POST['del']) && !empty($_POST['tradeid'])) {
 	$tRes = $trade->del($_POST['tradeid'], "member_id = ".$the_memberid);
-	if($tRes) $pdb->Execute("DELETE from {$tb_prefix}tradefields WHERE member_id={$the_memberid} AND trade_id IN (".implode(",",$_POST['tradeid']).")");
+	$ids = array();
+	$idss = '';
+	if(!empty($_POST['tradeid'])){
+		foreach($_POST['tradeid'] as $key=>$val){
+			$ids[] = intval($val);
+		}
+		$idss = implode(",",$ids);
+	}
+	if($tRes && !empty($idss)) $pdb->Execute("DELETE from {$tb_prefix}tradefields WHERE member_id={$the_memberid} AND trade_id IN (".$idss.")");
 }
 if(isset($_POST['refresh'])){
 	if (!empty($_POST['refresh']) && !empty($_POST['tradeid'])) {

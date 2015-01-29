@@ -230,9 +230,13 @@ class PbModel
 	{
 		$del_id = $this->primaryKey;
 		$tmp_ids = $condition = null;
+		$idss = array();
 		if (is_array($ids))
 		{
-			$tmp_ids = implode(",",$ids);
+			foreach($ids as $key=>$val){
+				$idss[] = intval($val);
+			}
+			$tmp_ids = implode(",",$idss);
 			$cond[] = "{$del_id} IN ({$tmp_ids})";
 			$this->catchIds = serialize($ids);
 		}
