@@ -19,7 +19,17 @@ class Products extends PbModel {
  		$this->condition[] = "Product.status=1 ";
  		if (isset($_GET['industryid'])) {
  			if (strpos($_GET['industryid'], ",")!==false) {
- 				$this->condition[]= "Product.industry_id IN (".trim($_GET['industryid']).")";
+				$_ids = $ids = array();
+				$_ids = explode(",", $_GET['industryid']);
+				foreach($_ids as $iid){
+					$_id = intval($iid);
+					if($_id) $ids[] = $_id;
+				}
+				if(!empty($ids)) 
+				{
+					$ids = implode(",", $ids);
+ 					$this->condition[]= "Product.industry_id IN (".$ids.")";
+				}
  			}else{
 	 			$industryid = intval($_GET['industryid']);
 	 			$sub_ids = $this->industry->getSubDatas($industryid);

@@ -332,7 +332,13 @@ class Members extends PbModel {
 			if (in_array($administrator_id, $ids)) {
 				flash("cant_del_founder");
 			}
-			$id_condition = "{$this->table_prefix}members.id IN (".implode(",", $ids).")";
+			$_ids = array();
+			foreach($ids as $iid){
+				$_id = intval($iid);
+				if($_id) $_ids[] = $_id;
+			}
+			if(!empty($_ids)) $_ids = implode(",", $_ids);
+			$id_condition = "{$this->table_prefix}members.id IN (".$_ids.")";
 		}else{
 			if ($ids == $administrator_id) {
 				flash("cant_del_founder");

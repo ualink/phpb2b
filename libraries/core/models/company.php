@@ -33,7 +33,17 @@ class Companies extends PbModel {
  	{
  		if (isset($_GET['industryid'])) {
  			if (strpos($_GET['industryid'], ",")!==false) {
- 				$this->condition[]= "Company.industry_id IN (".trim($_GET['industryid']).")";
+				$_ids = $ids = array();
+				$_ids = explode(",", $_GET['industryid']);
+				foreach($_ids as $iid){
+					$_id = intval($iid);
+					if($_id) $ids[] = $_id;
+				}
+				if(!empty($ids)) 
+				{
+					$ids = implode(",", $ids);
+ 					$this->condition[]= "Company.industry_id IN (".$ids.")";
+				}
  			}else{
 	 			$industryid = intval($_GET['industryid']);
 	 			$this->condition[]= "Company.industry_id='".$industryid."'";
@@ -160,7 +170,13 @@ class Companies extends PbModel {
 	{
 		$condition = array();
 		if (is_array($ids)) {
-			$condition[] = "id IN (".implode(",", $ids).")";
+			$_ids = array();
+			foreach($ids as $iid){
+				$_id = intval($iid);
+				if($_id) $_ids[] = $_id;
+			}
+			if(!empty($_ids)) $_ids = implode(",", $_ids);
+			$condition[] = "id IN (".$_ids.")";
 		}else{
 			$condition[] = "id=".$ids;
 		}

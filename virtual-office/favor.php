@@ -12,8 +12,13 @@ $trade = new Trade();
 $trade_model = new Trades();
 if (isset($_POST['del'])) {
 	pb_submit_check('id');
-	$ids = implode(",", $_POST['id']);
-	$ids = "(".$ids.")";
+	$_ids = array();
+	foreach($_POST['id'] as $iid){
+		$_id = intval($iid);
+		if($_id) $_ids[] = $_id;
+	}
+	if(!empty($_ids)) $_ids = implode(",", $_ids);
+	$ids = "(".$_ids.")";
 	$sql = "DELETE FROM {$tb_prefix}favorites WHERE id IN ".$ids." AND member_id=".$the_memberid;
 	$res = $pdb->Execute($sql);
 	if (!$res) {

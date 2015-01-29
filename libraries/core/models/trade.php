@@ -49,7 +49,17 @@ class Trades extends PbModel {
  		}
  		if (isset($_GET['industryid'])) {
  			if (strpos($_GET['industryid'], ",")!==false) {
- 				$this->condition[]= "industry_id IN (".trim($_GET['industryid']).")";
+				$_ids = $ids = array();
+				$_ids = explode(",", $_GET['industryid']);
+				foreach($_ids as $iid){
+					$_id = intval($iid);
+					if($_id) $ids[] = $_id;
+				}
+				if(!empty($ids)) 
+				{
+					$ids = implode(",", $ids);
+ 					$this->condition[]= "industry_id IN (".$ids.")";
+				}
  			}else{
 	 			$industryid = intval($_GET['industryid']);
 	 			$this->condition[]= "industry_id='".$industryid."'";
@@ -179,7 +189,13 @@ class Trades extends PbModel {
 	{
 		$condition = array();
 		if (is_array($ids)) {
-			$condition[] = "id IN (".implode(",", $ids).")";
+			$_ids = '';
+			foreach($ids as $iid){
+				$_id = intval($iid);
+				if($_id) $_ids[] = $_id;
+			}
+			if(!empty($_ids)) $_ids = implode(",", $_ids);
+			$condition[] = "id IN (".$_ids.")";
 		}else{
 			$condition[] = "id=".$ids;
 		}
@@ -226,7 +242,13 @@ class Trades extends PbModel {
 			return false;
 		}
 		if (is_array($ids)) {
-			$condition = "id IN (".implode(",", $ids).")";
+			$_ids = array();
+			foreach($ids as $iid){
+				$_id = intval($iid);
+				if($_id) $_ids[] = $_id;
+			}
+			if(!empty($_ids)) $_ids = implode(",", $_ids);
+			$condition[] = "id IN (".$_ids.")";
 		}else{
 			$condition = "id=".$ids;
 		}
