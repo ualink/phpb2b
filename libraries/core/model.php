@@ -229,16 +229,16 @@ class PbModel
 	function del($ids, $conditions = null, $table = null)
 	{
 		$del_id = $this->primaryKey;
-		$tmp_ids = $condition = null;
-		$idss = array();
+		$tmp_ids = $condition = $_ids = null;
 		if (is_array($ids))
 		{
-			foreach($ids as $key=>$val){
-				$idss[] = intval($val);
+			foreach($ids as $iid){
+				$_id = intval($iid);
+				if($_id) $_ids[] = $_id;
 			}
-			$tmp_ids = implode(",",$idss);
-			$cond[] = "{$del_id} IN ({$tmp_ids})";
-			$this->catchIds = serialize($ids);
+			if(!empty($_ids)) $_ids = implode(",", $_ids);
+			$cond[] = "{$del_id} IN ({$_ids})";
+			$this->catchIds = serialize($_ids);
 		}
 		else
 		{
