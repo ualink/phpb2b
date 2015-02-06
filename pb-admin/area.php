@@ -214,6 +214,7 @@ if (!empty($result)) {
 		if($result[$i]['level']>1){
 			if($result[$i]['level']>2){
 				$tmp_name[] = $result[$i]['name'];
+				if($_PB_CACHE['area'][3][$result[$i]['parent_id']]) $tmp_name[] = "<a href='area.php?do=search&parentid=".$result[$i]['parent_id']."'>".$_PB_CACHE['area'][3][$result[$i]['parent_id']]."</a>";
 				if($_PB_CACHE['area'][2][$result[$i]['parent_id']]) $tmp_name[] = "<a href='area.php?do=search&parentid=".$result[$i]['parent_id']."'>".$_PB_CACHE['area'][2][$result[$i]['parent_id']]."</a>";
 				if($_PB_CACHE['area'][1][$result[$i]['top_parentid']]) $tmp_name[] = "<a href='area.php?do=search&parentid=".$result[$i]['top_parentid']."'>".$_PB_CACHE['area'][1][$result[$i]['top_parentid']]."</a>";
 			}else{

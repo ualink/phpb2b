@@ -67,17 +67,23 @@ if (isset($_POST['save'])) {
 			$level = $_POST['data']['industry']['level'] = 1;
 		}else{
 			if (array_key_exists($parent_id, $cache_items[1])) {
-				$level = $_POST['data']['industry']['level'] = 2;
+				$level = $_POST['data']['industry']['level'] = 1;
 				$top_parentid = $_POST['data']['industry']['top_parentid'] = $parent_id;
 			}elseif (array_key_exists($parent_id, $cache_items[2])){
+				$level = $_POST['data']['industry']['level'] = 2;
+				$top_parentid = $_POST['data']['industry']['top_parentid'] = $pdb->GetOne("SELECT top_parentid FROM {$tb_prefix}industries WHERE id=".$parent_id);
+			}elseif(array_key_exists($parent_id, $cache_items[3])){
 				$level = $_POST['data']['industry']['level'] = 3;
-				$top_parentid = $_POST['data']['industry']['top_parentid'] = $pdb->GetOne("SELECT parent_id FROM {$tb_prefix}industries WHERE id=".$parent_id);
+				$top_parentid = $_POST['data']['industry']['top_parentid'] = $pdb->GetOne("SELECT top_parentid FROM {$tb_prefix}industries WHERE id=".$parent_id);
 			}
 		}
 	}
 	if (isset($_POST['id'])) {
 		$id = intval($_POST['id']);
 		$vals = $_POST['data']['industry'];
+		$vals['parent_id'] = $parent_id;
+		if(!empty($level)) $vals['level'] = $level;
+		$vals['top_parentid'] = $top_parentid;
 		//highlight
 		$highlight_style = $_POST['highlight']['style'];//array
 		$highlight_color = array_search(strtoupper($_POST['highlight']['color']), $viewhelper->colorarray);
@@ -175,11 +181,12 @@ if (!empty($result)) {
 		if($result[$i]['level']>1){
 			if($result[$i]['level']>2){
 				$tmp_name[] = $result[$i]['name'];
-				if($_PB_CACHE['industry'][2][$result[$i]['parent_id']]) $tmp_name[] = "<a href='industry.php?do=search&parentid=".$result[$i]['parent_id']."'>".$_PB_CACHE['industry'][2][$result[$i]['parent_id']]."</a>";
-				if($_PB_CACHE['industry'][1][$result[$i]['top_parentid']]) $tmp_name[] = "<a href='industry.php?do=search&parentid=".$result[$i]['top_parentid']."'>".$_PB_CACHE['industry'][1][$result[$i]['top_parentid']]."</a>";
+				if(isset($_PB_CACHE['industry'][3][$result[$i]['parent_id']])) $tmp_name[] = "<a href='industry.php?do=search&parentid=".$result[$i]['parent_id']."'>".$_PB_CACHE['industry'][3][$result[$i]['parent_id']]."</a>";
+				if(isset($_PB_CACHE['industry'][2][$result[$i]['parent_id']])) $tmp_name[] = "<a href='industry.php?do=search&parentid=".$result[$i]['parent_id']."'>".$_PB_CACHE['industry'][2][$result[$i]['parent_id']]."</a>";
+				if(isset($_PB_CACHE['industry'][1][$result[$i]['top_parentid']])) $tmp_name[] = "<a href='industry.php?do=search&parentid=".$result[$i]['top_parentid']."'>".$_PB_CACHE['industry'][1][$result[$i]['top_parentid']]."</a>";
 			}else{
 				$tmp_name[] = "<a href='industry.php?do=search&parentid=".$result[$i]['id']."'>".$result[$i]['name']."</a>";
-				if($_PB_CACHE['industry'][1][$result[$i]['parent_id']]) $tmp_name[] = "<a href='industry.php?do=search&parentid=".$result[$i]['parent_id']."'>".$_PB_CACHE['industry'][1][$result[$i]['parent_id']]."</a>";
+				if(isset($_PB_CACHE['industry'][1][$result[$i]['parent_id']])) $tmp_name[] = "<a href='industry.php?do=search&parentid=".$result[$i]['parent_id']."'>".$_PB_CACHE['industry'][1][$result[$i]['parent_id']]."</a>";
 			}
 		}else{
 			$tmp_name[] = "<a href='industry.php?do=search&parentid=".$result[$i]['id']."'>".$result[$i]['name']."</a>";

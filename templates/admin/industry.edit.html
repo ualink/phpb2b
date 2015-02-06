@@ -87,11 +87,15 @@ jQuery(document).ready(function($) {
     </table>
   </form>
 </div>
+<script>
+var sel_parent_id = {$item.parent_id|default:0};
+var sel_industrytype_id = {$item.industrytype_id|default:0};
+</script>
 <!-- {literal} -->
 <script>
 jQuery(document).ready(function($) {
-	$('#dataParentId').val("{$item.parent_id|default:0}");
-	$('#dataTypeId').val("{$item.industrytype_id|default:0}");
+	$('#dataParentId').val(sel_parent_id);
+	$('#dataTypeId').val(sel_industrytype_id);
 })
 </script>
 <!-- {/literal} -->
