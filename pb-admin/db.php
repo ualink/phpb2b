@@ -156,7 +156,7 @@ if (isset($_GET['do'])) {
 			$tpl_file = "db.query";
 			break;
 		case "restore":
-			$smarty->register_modifier('get_custom_size', 'size_info');
+			$smarty->registerPlugin('modifier', 'get_custom_size', 'size_info');
 			$narray = array();
 			$dir = DATA_PATH. "backup_".$backupdir.DS;
 			if (is_dir($dir)) {
