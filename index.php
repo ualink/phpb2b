@@ -11,7 +11,7 @@ $htmlize = true;
 require("libraries/common.inc.php");
 require("share.inc.php");
 if (!empty($_GET['do'])) {
-	$action = isset($_GET['action']) ?trim($_GET['action']) : 'index' ;
+	$action = isset($_GET['action']) ?htmlspecialchars(trim($_GET['action'])) : 'index' ;
 	$do = $_GET['do'] == '' ? 'home' : htmlspecialchars(trim($_GET['do']));
 	$c_file = LIB_PATH .'core/controllers/'.$do.'_controller.php';
 	$c_do = ucwords($do);
