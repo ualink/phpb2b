@@ -7,17 +7,19 @@ global $ADODB_INCLUDED_MEMCACHE;
 $ADODB_INCLUDED_MEMCACHE = 1;
 
 global $ADODB_INCLUDED_CSV;
-if (empty($ADODB_INCLUDED_CSV)) include(ADODB_DIR.'/adodb-csvlib.inc.php');
+if (empty($ADODB_INCLUDED_CSV)) include_once(ADODB_DIR.'/adodb-csvlib.inc.php');
 
 /*
 
-  V5.19  23-Apr-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+  @version   v5.20.14  06-Jan-2019
+  @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+  @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence. See License.txt.
   Set tabs to 4 for best viewing.
 
-  Latest version is available at http://adodb.sourceforge.net
+  Latest version is available at http://adodb.org/
 
 Usage:
 
@@ -48,7 +50,7 @@ $db->CacheExecute($sql);
 		var $_connected = false;
 		var $_memcache = false;
 
-		function ADODB_Cache_MemCache(&$obj)
+		function __construct(&$obj)
 		{
 			$this->hosts = $obj->memCacheHost;
 			$this->port = $obj->memCachePort;

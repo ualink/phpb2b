@@ -1468,7 +1468,6 @@ class PHPMailer {
       }
       if (PHP_VERSION < 6) {
         $magic_quotes = get_magic_quotes_runtime();
-        set_magic_quotes_runtime(0);
       }
       $file_buffer  = file_get_contents($path);
       $file_buffer  = $this->EncodeString($file_buffer, $encoding);
