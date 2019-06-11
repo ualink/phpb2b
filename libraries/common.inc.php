@@ -67,7 +67,7 @@ if(!defined('URL')) {
 }
 $time_start = getmicrotime();
 $time_stamp = time();
-require_once(SOURCE_PATH. 'ADOdb-5.20.14'.DS.'adodb.inc.php');
+require_once(SOURCE_PATH. 'adodb'.DS.'adodb.inc.php');
 $pdb = ADONewConnection($database);
 require(LIB_PATH. 'template.class.php');
 $smarty = new TemplateEngines();
