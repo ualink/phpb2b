@@ -132,7 +132,7 @@ switch($step)
 		if(function_exists('imagejpeg')) $gd_support .= ' jpg';
 		if(function_exists('imagegif')) $gd_support .= ' gif';
 	}
-	$is_right = (phpversion() >= '4.3.0' && extension_loaded('mysql')) ? 1 : 0;
+	$is_right = (phpversion() >= '5.0.0' && extension_loaded('mysqli')) ? 1 : 0;
 	include "step".$step.".inc.php";
 	break;
 	case '4':

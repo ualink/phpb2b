@@ -26,9 +26,9 @@
                   </tr>
                   <tr>
                     <td>Mysql <?php echo $extension;?></td>
-                    <td><?php if(extension_loaded('mysql')){ ?>&radic;<?php }else{ ?>&times;<?php }?></td>
+                    <td><?php if(extension_loaded('mysqli')){ ?>&radic;<?php }else{ ?>&times;<?php }?></td>
                     <td><?php echo $open_fine;?></td>
-                    <td><?php if(extension_loaded('mysql')){ ?><font color="yellow">&radic;</font><?php }else{ ?><font color="red"><?php echo $cant_install;?></font><?php }?></td>
+                    <td><?php if(extension_loaded('mysqli')){ ?><font color="yellow">&radic;</font><?php }else{ ?><font color="red"><?php echo $cant_install;?></font><?php }?></td>
                   </tr>
                   <tr>
                     <td>GD <?php echo $extension;?></td>
