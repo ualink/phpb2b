@@ -7,7 +7,6 @@
  */
 session_start();
 error_reporting(E_ERROR | E_NOTICE);
-set_magic_quotes_runtime(0);
 ini_set('magic_quotes_sybase', 0);
 ini_set('max_execution_time', '300');
 if (isset($_GET['act'])) {
