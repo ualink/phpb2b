@@ -29,7 +29,7 @@ $tb_prefix = 'pb_';
 /**
  * database and codec
  */
-$database = 'mysql';					// database type
+$database = 'mysqli';					// database type
 $dbcharset = 'utf8';					// MySQL charset, 'gbk', 'big5', 'utf8', 'latin1'
 
 /**
