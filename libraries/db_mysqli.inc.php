@@ -2541,12 +2541,12 @@ class Db_Mysqli
 	}
 
 
-	public function version(){
+    public function version(){
 		return mysqli_get_server_info($this->_mysqli['default']);
 	}
 
 	public function error(){
-		return mysqli_error();
+		return mysqli_error($this->_mysqli['default']);
 	}
 }
 

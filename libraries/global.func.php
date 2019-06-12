@@ -1168,28 +1168,38 @@ function pb_inject_check($str)
 }
 
 if (!function_exists('mysql_connect')) {
-	function mysql_connect($dbhost, $dbuser, $dbpass)
+	function mysql_connect($dbhost, $dbuser, $dbpass, $dbname = '')
 	{
 		global $dbport;
-		global $dbname;
 		global $mysqli;
 		if (empty($dbport)) {
 			$dbport = 3306;
 		}
-		$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass);
+		if ($dbname) {
+			$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass, $dbname);
+		} else {
+
+			$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass);
+		}
 		return $mysqli;
 	}
-	function mysql_pconnect($dbhost, $dbuser, $dbpass)
+	
+	function mysql_pconnect($dbhost, $dbuser, $dbpass, $dbname = '')
 	{
 		global $dbport;
-		global $dbname;
 		global $mysqli;
 		if (empty($dbport)) {
 			$dbport = 3306;
 		}
-		$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass);
+		if ($dbname) {
+			$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass, $dbname);
+		} else {
+
+			$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass);
+		}
 		return $mysqli;
 	}
+
 	function mysql_select_db($dbname)
 	{
 		global $mysqli;

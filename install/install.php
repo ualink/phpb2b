@@ -291,7 +291,6 @@ switch ($step) {
 				$r = sql_run($structure_sql_data1);
 				$structure_sql_data2 = file_get_contents($schema_common_path . "mysql.data.industry.sql");
 				$r = sql_run($structure_sql_data2);
-				@touch(PHPB2B_ROOT . './data/install.lock');
 				if (!empty($testdata)) {
 					$source = "data/attachment/sample";
 					$dest = "../attachment/sample";
@@ -343,6 +342,7 @@ switch ($step) {
 				$cache->writeCache("javascript", "javascript");
 				$cache->updateTypes();
 				$cache->updateIndexCache();
+				@touch(PHPB2B_ROOT . './data/install.lock');
 				header("Location:install.php?step={$step}&do=complete&app_lang=" . $app_lang);
 			} else {
 				$db_error = true;
