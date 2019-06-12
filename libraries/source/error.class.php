@@ -12,7 +12,7 @@ class Errors
 		
 	}
 	
-	function showError($msg, $type = null)
+	public static function showError($msg, $type = null)
 	{
 	global $charset;
 	$host = pb_getenv('HTTP_HOST');
