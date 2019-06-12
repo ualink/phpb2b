@@ -1176,7 +1176,7 @@ if (!function_exists('mysql_connect')) {
 		if (empty($dbport)) {
 			$dbport = 3306;
 		}
-		$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass, $dbname);
+		$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass);
 		return $mysqli;
 	}
 	function mysql_pconnect($dbhost, $dbuser, $dbpass)
@@ -1187,7 +1187,7 @@ if (!function_exists('mysql_connect')) {
 		if (empty($dbport)) {
 			$dbport = 3306;
 		}
-		$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass, $dbname);
+		$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass);
 		return $mysqli;
 	}
 	function mysql_select_db($dbname)
