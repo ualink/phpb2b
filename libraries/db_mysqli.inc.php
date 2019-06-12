@@ -2530,6 +2530,24 @@ class Db_Mysqli
         }
         return $info;
     }
+	
+	/* private: error handling */
+	private function halt($msg) {
+		die("Session halted.</div>");
+	}
+
+	private function haltmsg($msg) {
+		printf("<div style='font-family: Tahoma,Arial;'><b>Database error:</b> %s<br>\n", $msg);
+	}
+
+
+	public function version(){
+		return mysqli_get_server_info($this->_mysqli['default']);
+	}
+
+	public function error(){
+		return mysqli_error();
+	}
 }
 
 // END class
