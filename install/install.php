@@ -202,7 +202,6 @@ switch ($step) {
 			$sitetitle = L("a_new_b2b_title", "tpl");
 		}
 		$conn = mysql_connect($dbhost, $dbuser, $dbpasswd);
-		
 		$db = new Db_Mysqli($dbhost, $dbuser, $dbpasswd, $dbname);
 		if ($conn) {
 			$version = mysql_get_server_info();
@@ -223,13 +222,16 @@ switch ($step) {
 					} else {
 						mysql_query("CREATE DATABASE IF NOT EXISTS $dbname;");
 					}
-					mysql_close();
+					$conn = mysql_connect($dbhost, $dbuser, $dbpasswd, $dbname);
+					$db = new Db_Mysqli($dbhost, $dbuser, $dbpasswd, $dbname);
 				} else {
 					$error_info = mysql_errno() . " : " . mysql_error() . "<br>";
 					$db_error = true;
 					break;
 				}
 			} else {
+				$conn = mysql_connect($dbhost, $dbuser, $dbpasswd, $dbname);
+				$db = new Db_Mysqli($dbhost, $dbuser, $dbpasswd, $dbname);
 				$sqldump = null;
 				if ($version > '4.1' && $charset) {
 					$db->query($set_names);
