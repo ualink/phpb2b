@@ -1061,10 +1061,24 @@ function pb_configmake($lang, $exit = true)
 	}
 }
 
+function array_multi2single($array)
+{
+	static $result_array = array();
+	foreach ($array as $value) {
+		if (is_array($value)) {
+
+			array_multi2single($value);
+		} else
+			$result_array[] = $value;
+	}
+	return $result_array;
+}
+
 function pb_attack_filter($StrFiltKey, $StrFiltValue, $ArrFiltReq)
 {
 	if (is_array($StrFiltValue)) {
-		$StrFiltValue = @implode(",", $StrFiltValue);
+		$StrFiltValue = array_multi2single($StrFiltValue);
+		$StrFiltValue = implode(",", $StrFiltValue);
 	}
 	if (preg_match("/" . $ArrFiltReq . "/is", $StrFiltValue) == 1) {
 		echo $StrFiltValue;

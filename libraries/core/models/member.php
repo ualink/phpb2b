@@ -290,9 +290,10 @@ class Members extends PbModel {
 		$this->params['data']['member']['userpass'] = $this->authPasswd($this->params['data']['member']['userpass']);
 		if(empty($this->params['data']['member']['space_name']))
 		$this->params['data']['member']['space_name'] = PbController::toAlphabets($space_name);//Todo:
-		$uip = pb_ip2long(pb_getenv('REMOTE_ADDR'));
+		$ipRemote = pb_getenv('REMOTE_ADDR');
+		$uip = pb_ip2long($ipRemote);
 		if(empty($uip)){
-			pheader("location:".URL."redirect.php?message=".urlencode(L('sys_error')));
+			$uip = '0';
 		}
 		$this->params['data']['member']['last_login'] = $this->params['data']['member']['created'] = $this->params['data']['member']['modified'] = $this->timestamp;
 		$this->params['data']['member']['last_ip'] = pb_get_client_ip('str');

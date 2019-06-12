@@ -7,9 +7,9 @@
  */
 require(LIB_PATH . "smarty/Smarty.class.php");
 class TemplateEngines extends Smarty {
-	var $flash_layout = 'flash';
-	var $tpl_ext = '.html';
-	var $compile_sub_dirs = true;
+	public $flash_layout = 'flash';
+	public $tpl_ext = '.html';
+	public $compile_sub_dirs = true;
 
 	function __construct()
 	{
@@ -59,7 +59,7 @@ class TemplateEngines extends Smarty {
 					break;
 			}
 		}
-		$this->smarty->addPluginsDir(SLUGIN_PATH)
+		$this->addPluginsDir(SLUGIN_PATH)
 			->addTemplateDir(PHPB2B_ROOT ."templates".DS, 'main')
 			->setConfigDir(array('config'=>PHPB2B_ROOT ."configs".DS, 'lang'=>PHPB2B_ROOT."data".DS."language".DS.$app_lang.DS))
 			->setCompileDir(DATA_PATH."templates_c".DS.$app_lang.DS)

@@ -193,7 +193,7 @@ class PbController extends PbObject
 		return $tmp_str;
 	}
 	
-	function getMultiId($arr){
+	public static function getMultiId($arr){
 		$r = -1;
 		//$arr = array_filter($arr);
 		krsort($arr);
@@ -300,12 +300,12 @@ class PbController extends PbObject
 		return $return;
 	}
 	
-	function normalize($charset) {
+	public function normalize($charset) {
 		$charset = strtolower(preg_replace("/[\-\_]*/", "", $charset));
 		return $charset;
 	}
 	
-	function translate($string, $in_charset, $out_charset='utf-8') {
+	public function translate($string, $in_charset, $out_charset='utf-8') {
 		if(function_exists('mb_convert_encoding')) {
 			return mb_convert_encoding($string, $out_charset, $in_charset);
 		} elseif(function_exists('iconv')) { // iconv is flakey
@@ -319,14 +319,14 @@ class PbController extends PbObject
 		} // end else clause
 	}
 	
-	public function toAlphabets($str)
+	public static function toAlphabets($str)
 	{
 		global $plugin;
 		$ret = $plugin->trigger('pinyin', $str);
 		return !empty($ret)?$ret:$str;
 	}
 	
-	public function getInitial($str)
+	public static function getInitial($str)
 	{
 		global $plugin;
 		$ret = $plugin->trigger('pinyin', $str);

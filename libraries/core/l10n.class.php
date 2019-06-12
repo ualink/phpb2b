@@ -208,7 +208,7 @@ class L10n extends PbObject {
 	 * @param unknown_type $string
 	 * @return unknown
 	 */
-	function getinitial($string)
+	public static function getinitial($string)
 	{
 		global $charset;
 	    $firstchar_ord=ord(strtoupper($string{0})); 

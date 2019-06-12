@@ -76,7 +76,7 @@
 "copy_to_clipboard","复制到剪贴板"
 "old_password","旧密码："
 "repeat","重复"
-"password_description","<strong>【请注意】：</strong> <br><span class="zi">1. 请不要使用和用户名有雷同的密码。<br>2. 密码建议长度为6-20位之间，尽量使用数字和字母的结合。<br></span>"
+"password_description","<strong>【请注意】：</strong> <br><span class='zi'>1. 请不要使用和用户名有雷同的密码。<br>2. 密码建议长度为6-20位之间，尽量使用数字和字母的结合。<br></span>"
 "company_en_name","公司英文名称："
 "sectors","行业类别："
 "employees_number","员工人数："
