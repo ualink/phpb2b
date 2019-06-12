@@ -12,6 +12,7 @@ $dbhost = 'localhost';					// database server
 $dbuser = 'root';						// database user
 $dbpasswd = '';					// database user password
 $dbname = 'phpb2b';				// database user
+$dbport = 3306;				// database port
 $pconnect = 0;							// if database long connect
 
 /**
