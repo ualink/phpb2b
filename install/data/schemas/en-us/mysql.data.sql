@@ -37,7 +37,6 @@ INSERT INTO `pb_companies` (`id`, `member_id`, `cache_spacename`, `cache_memberg
 --
 
 INSERT INTO `pb_countries` (`id`, `name`, `picture`, `display_order`) VALUES(1, 'China', 'cn.gif', 0);
-INSERT INTO `pb_countries` (`id`, `name`, `picture`, `display_order`) VALUES(3, 'Hongkong', 'hk.gif', 0);
 
 --
 -- Table Datas `pb_formitems`
@@ -166,12 +165,12 @@ INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(350, 0,
 INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(4, 0, 'company_name', 'Copyright');
 INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(352, 0, 'site_url', 'http://www.host.com/');
 INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(353, 0, 'icp_number', 'ICP Num.');
-INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(7, 0, 'service_tel', '(86)10-41235678');
-INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(8, 0, 'sale_tel', '(86)10-41235678');
+INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(7, 0, 'service_tel', '(86)10-12345678');
+INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(8, 0, 'sale_tel', '(86)10-12345678');
 INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(9, 0, 'service_qq', '1319250566');
 INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(10, 0, 'service_msn', 'service@host.com');
 INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(11, 0, 'service_email', 'service@host.com');
-INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(324, 0, 'site_description', '<p>phpb2b description</p>');
+INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(324, 0, 'site_description', '<p>Site description</p>');
 INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(13, 0, 'cp_picture', '0');
 INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(14, 0, 'register_picture', '0');
 INSERT INTO `pb_settings` (`id`, `type_id`, `variable`, `valued`) VALUES(15, 0, 'login_picture', '0');
