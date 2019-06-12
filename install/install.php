@@ -6,7 +6,7 @@
  *      @version $Revision: 2048 $
  */
 session_start();
-// error_reporting(E_ERROR | E_NOTICE);
+error_reporting(E_ERROR | E_NOTICE);
 ini_set('magic_quotes_sybase', 0);
 ini_set('max_execution_time', '300');
 if (isset($_GET['act'])) {
@@ -62,7 +62,6 @@ if (!defined('CACHE_PATH')) {
 //language
 $smarty = new TemplateEngines();
 $sections = array('install', 'javascript');
-//da($smarty);
 $smarty->configLoad('default.conf', $sections);
 $arrTemplate = $smarty->getConfigVars();
 extract($arrTemplate);
@@ -214,23 +213,24 @@ switch ($step) {
 			if ($version > '5.0') {
 				mysql_query($set_modes, $conn);
 			}
-			if (!mysql_select_db($dbname)) {
+			$db_select = mysql_select_db($dbname);
+			if (!$db_select) {
 				if ($createdb == 1) {
-					if (mysql_get_server_info() > '4.1') {
+					if ($version > '4.1') {
 						mysql_query("CREATE DATABASE IF NOT EXISTS"
 							. " $dbname DEFAULT CHARACTER SET $dbcharset;");
 					} else {
 						mysql_query("CREATE DATABASE IF NOT EXISTS $dbname;");
 					}
-					$conn = mysql_connect($dbhost, $dbuser, $dbpasswd, $dbname);
 					$db = new Db_Mysqli($dbhost, $dbuser, $dbpasswd, $dbname);
 				} else {
 					$error_info = mysql_errno() . " : " . mysql_error() . "<br>";
 					$db_error = true;
 					break;
 				}
+				mysql_select_db($dbname);
 			} else {
-				$conn = mysql_connect($dbhost, $dbuser, $dbpasswd, $dbname);
+				mysql_select_db($dbname);
 				$db = new Db_Mysqli($dbhost, $dbuser, $dbpasswd, $dbname);
 				$sqldump = null;
 				if ($version > '4.1' && $charset) {
@@ -260,16 +260,13 @@ switch ($step) {
 						unset($sqldump);
 					}
 				}
-				$db->free();
 			}
-			ob_start();
 			$schema_path = "data/schemas/" . $app_lang . "/";
 			$schema_common_path = "data/schemas/";
 			if (!file_exists($schema_path)) {
 				die(L("congratulate", "msg", $schema_path));
 			}
 			
-
 			if (file_exists($schema_common_path . "mysql.sql")) {
 				if ($version > '4.1' && $charset) {
 					$db->query($set_names);
