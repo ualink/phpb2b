@@ -11,10 +11,11 @@ function da($arr_str, $exit = false)
 	$x .= print_r($arr_str, 1);
 	$x .= "</pre>";
 	print $x;
-	($exit)?exit:'';
+	($exit) ? exit : '';
 }
 
-function pb_getenv($key) {
+function pb_getenv($key)
+{
 	if ($key == 'HTTPS') {
 		if (isset($_SERVER['HTTPS'])) {
 			return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
@@ -67,8 +68,8 @@ function pb_getenv($key) {
 			return str_replace(pb_getenv('DOCUMENT_ROOT'), '', pb_getenv('SCRIPT_FILENAME'));
 			break;
 		case "REQUEST_URI":
-			if(!isset($_SERVER['REQUEST_URI'])) {
-			    $_SERVER['REQUEST_URI'] = substr($_SERVER['argv'][0], strpos($_SERVER['argv'][0], ';') + 1);
+			if (!isset($_SERVER['REQUEST_URI'])) {
+				$_SERVER['REQUEST_URI'] = substr($_SERVER['argv'][0], strpos($_SERVER['argv'][0], ';') + 1);
 			}
 			return $_SERVER['REQUEST_URI'];
 			break;
@@ -83,9 +84,9 @@ function pb_getenv($key) {
 			return '.' . $host;
 			break;
 		case 'HTTP_HOST':
-			if(isset($_SERVER['SERVER_NAME'])){
+			if (isset($_SERVER['SERVER_NAME'])) {
 				return $_SERVER['SERVER_NAME'];
-			}else{
+			} else {
 				return $_SERVER['HTTP_HOST'];
 			}
 			break;
@@ -93,46 +94,48 @@ function pb_getenv($key) {
 	return null;
 }
 
-function pb_strcomp($str1,$str2)
+function pb_strcomp($str1, $str2)
 {
-	if (strcmp(trim($str1),trim($str2)) == 0) {
+	if (strcmp(trim($str1), trim($str2)) == 0) {
 		return true;
-	}else {
+	} else {
 		return false;
 	}
 }
 
-function pb_radom($len=6,$recycle=1){
+function pb_radom($len = 6, $recycle = 1)
+{
 	$str = 'ABCDEFGHJKMNPQRSTUVWXYabcdefghjkmnpqrstuvwxy';
-	$str.= '123456789';
-	$str = str_repeat($str,$recycle);
-	return substr(str_shuffle($str),0,$len);
+	$str .= '123456789';
+	$str = str_repeat($str, $recycle);
+	return substr(str_shuffle($str), 0, $len);
 }
 
-function setvar($name,$var)
+function setvar($name, $var)
 {
 	global $smarty;
-	$smarty->assign($name,$var);
+	$smarty->assign($name, $var);
 }
 
 function uaAssign($names)
 {
 	global $smarty;
 	if (is_array($names)) {
-		foreach ($names as $smt_key=>$smt_val) {
-			$smarty->assign($smt_key,$smt_val);
+		foreach ($names as $smt_key => $smt_val) {
+			$smarty->assign($smt_key, $smt_val);
 		}
 	}
 }
 
-function pheader($string, $replace = true, $http_response_code = 0) {
+function pheader($string, $replace = true, $http_response_code = 0)
+{
 	$string = str_replace(array("\r", "\n"), array('', ''), $string);
-	if(empty($http_response_code)) {
+	if (empty($http_response_code)) {
 		@header($string, $replace);
 	} else {
 		@header($string, $replace, $http_response_code);
 	}
-	if(preg_match('/^\s*location:/is', $string)) {
+	if (preg_match('/^\s*location:/is', $string)) {
 		exit();
 	}
 }
@@ -141,11 +144,11 @@ function flash($message_title = '', $back_url = '', $pause = 3, $extra = '')
 {
 	global $smarty;
 	if (empty($back_url)) {
-		if (defined('CURSCRIPT')) {	
-			$back_url = CURSCRIPT. ".php";
-		}elseif (isset($_SERVER['HTTP_REFERER'])){
+		if (defined('CURSCRIPT')) {
+			$back_url = CURSCRIPT . ".php";
+		} elseif (isset($_SERVER['HTTP_REFERER'])) {
 			$back_url = $_SERVER['HTTP_REFERER'];
-		}else{
+		} else {
 			$back_url = "javascript:;";
 		}
 	}
@@ -153,15 +156,15 @@ function flash($message_title = '', $back_url = '', $pause = 3, $extra = '')
 	$message_code = $message_title;
 	$images = array("failed.png", "success.png", "notice.png");
 	$styles = array("error", "true");
-	if (empty($message_code) || !$message_code || $message_code=="failed") {
+	if (empty($message_code) || !$message_code || $message_code == "failed") {
 		$image = $images[0];
 		$message = L('action_failed', "msg", $extra);
 		$style = $styles[0];
-	}elseif($message_code=="success" or true===$message_code or strstr("success", $message_code)){
+	} elseif ($message_code == "success" or true === $message_code or strstr("success", $message_code)) {
 		$image = $images[1];
 		$style = $styles[1];
 		$message = L("success", "msg", $extra);
-	}else{
+	} else {
 		$image = $images[2];
 		$style = null;
 		$message = L($message_code, "msg", $extra);
@@ -171,19 +174,19 @@ function flash($message_title = '', $back_url = '', $pause = 3, $extra = '')
 	$smarty->assign('url', $url);
 	$smarty->assign('message', $message);
 	$smarty->assign('title', strip_tags($message));
-	if($pause!=0){
+	if ($pause != 0) {
 		$smarty->assign('redirect', $smarty->redirect($url, $pause));
 	}
 	$smarty->assign('page_title', strip_tags($message));
 	//add default flash page
-	$smarty->addTemplateDir(PHPB2B_ROOT."templates".DS."errors".DS);
+	$smarty->addTemplateDir(PHPB2B_ROOT . "templates" . DS . "errors" . DS);
 	//if (!$viewhelper->tpl_exists('flash'.$smarty->tpl_ext)) {
 	//	die($message);
 	//}
-	if (defined("IN_OFFCE")) 
-	$smarty->display("extends:layout".$smarty->tpl_ext."|".'flash'.$smarty->tpl_ext);
+	if (defined("IN_OFFCE"))
+		$smarty->display("extends:layout" . $smarty->tpl_ext . "|" . 'flash' . $smarty->tpl_ext);
 	else
-	$smarty->display('flash'.$smarty->tpl_ext);
+		$smarty->display('flash' . $smarty->tpl_ext);
 	exit();
 }
 
@@ -198,13 +201,13 @@ function pb_get_cache($models, $path = '')
 {
 	if (is_array($models)) {
 		foreach ($models as $model) {
-			$cache_file = $path?CACHE_PATH.$path."cache_".$model.".php":CACHE_PATH."cache_".$model.".php";
+			$cache_file = $path ? CACHE_PATH . $path . "cache_" . $model . ".php" : CACHE_PATH . "cache_" . $model . ".php";
 			if (file_exists($cache_file)) {
 				include $cache_file;
 			}
 		}
-	}else{
-		$cache_file = $path?CACHE_PATH.$path."cache_".$models.".php":CACHE_PATH."cache_".$models.".php";
+	} else {
+		$cache_file = $path ? CACHE_PATH . $path . "cache_" . $models . ".php" : CACHE_PATH . "cache_" . $models . ".php";
 		if (file_exists($cache_file)) {
 			include $cache_file;
 		}
@@ -214,44 +217,44 @@ function pb_get_cache($models, $path = '')
 //only for site front.
 function render($filename = null, $exit = false)
 {
-	global $smarty, 
-	$viewhelper, 
-	$theme_name, 
-	$cache_id, 
-	$dir_name, 
-	$default_html_filename, 
-	$re_create_file;
+	global $smarty,
+		$viewhelper,
+		$theme_name,
+		$cache_id,
+		$dir_name,
+		$default_html_filename,
+		$re_create_file;
 	$return = false;
-//	$tmp_themename = '';
-//	$smarty->setTemplateDir(PHPB2B_ROOT ."templates".DS."site".DS, 'main');
+	//	$tmp_themename = '';
+	//	$smarty->setTemplateDir(PHPB2B_ROOT ."templates".DS."site".DS, 'main');
 	$smarty->assign('position', $viewhelper->getPosition());
 	$smarty->assign('page_title', $viewhelper->getTitle());
-	$tpl = $theme_name.DS.$filename.$smarty->tpl_ext;
-	if ($theme_name=='blue' || !$viewhelper->tpl_exists($tpl)) {
-//		$tmp_themename = 'default';
-		$tpl = $filename.$smarty->tpl_ext;
+	$tpl = $theme_name . DS . $filename . $smarty->tpl_ext;
+	if ($theme_name == 'blue' || !$viewhelper->tpl_exists($tpl)) {
+		//		$tmp_themename = 'default';
+		$tpl = $filename . $smarty->tpl_ext;
 	}
 	if (empty($filename)) {
 		//Todo:auto select template default
 	}
-//	$smarty->assign('ThemeName', $tmp_themename?$tmp_themename:$theme_name);
+	//	$smarty->assign('ThemeName', $tmp_themename?$tmp_themename:$theme_name);
 	if (!empty($viewhelper->metaDescription)) {
-		$smarty->assign("metadescription", $viewhelper->metaDescription);		
+		$smarty->assign("metadescription", $viewhelper->metaDescription);
 	}
 	if (!empty($viewhelper->metaKeyword)) {
 		$smarty->assign("metakeywords", $viewhelper->metaKeyword);
-	}elseif (!empty($viewhelper->metaDescription)){
+	} elseif (!empty($viewhelper->metaDescription)) {
 		$viewhelper->setMetaKeyword($viewhelper->metaDescription);
 		$smarty->assign("metakeywords", $viewhelper->metaKeyword);
 	}
 	if ($smarty->caching) {
-		$cache_id = $_GET['page']."|".$_GET['id']."|".$_GET['pos'];
+		$cache_id = $_GET['page'] . "|" . $_GET['id'] . "|" . $_GET['pos'];
 	}
-	if (defined("SMARTY_CACHE") && SMARTY_CACHE){
+	if (defined("SMARTY_CACHE") && SMARTY_CACHE) {
 		$smarty->caching = 1;
 	}
 	if ($smarty->caching) {
-		$cache_id = substr(md5(pb_getenv('REQUEST_URI').$cache_id), 0, 16);
+		$cache_id = substr(md5(pb_getenv('REQUEST_URI') . $cache_id), 0, 16);
 	}
 	$return = $smarty->display($tpl, $cache_id);
 	if ($exit) {
@@ -264,42 +267,51 @@ function template($filename = null, $exit = false)
 {
 	global $smarty;
 	$return = false;
-	$return = $smarty->display($filename.$smarty->tpl_ext);
+	$return = $smarty->display($filename . $smarty->tpl_ext);
 	if ($exit) {
 		exit;
 	}
 	return $return;
 }
 
-function pb_check_email($email){
+function pb_check_email($email)
+{
 	$return = false;
-	if(strstr($email, '@') && strstr($email, '.')){
-		if(preg_match("/^([_a-z0-9]+([\._a-z0-9-]+)*)@([a-z0-9]{2,}(\.[a-z0-9-]{2,})*\.[a-z]{2,4})$/", $email)){
+	if (strstr($email, '@') && strstr($email, '.')) {
+		if (preg_match("/^([_a-z0-9]+([\._a-z0-9-]+)*)@([a-z0-9]{2,}(\.[a-z0-9-]{2,})*\.[a-z]{2,4})$/", $email)) {
 			$return = true;
 		}
 	}
 	return $return;
 }
 
-function usetcookie($var, $value, $life_time = 0, $prefix = 1) {
+function usetcookie($var, $value, $life_time = 0, $prefix = 1)
+{
 	global $cookiepre, $cookiepath, $time_stamp, $cookiedomain;
-	return setcookie(($prefix ? $cookiepre : '').$var, $value,
-	$life_time ? $time_stamp + $life_time : 0, $cookiepath,
-	$cookiedomain, $_SERVER['SERVER_PORT'] == 443 ? 1 : 0);
+	return setcookie(($prefix ? $cookiepre : '') . $var,
+		$value,
+		$life_time ? $time_stamp + $life_time : 0,
+		$cookiepath,
+		$cookiedomain,
+		$_SERVER['SERVER_PORT'] == 443 ? 1 : 0
+	);
 }
 
-function uclearcookies() {
+function uclearcookies()
+{
 	return usetcookie('auth', '', -86400 * 365);
 }
 
-function fileext($filename) {
-	return substr(($t=strrchr($filename,'.'))!==false?".".$t:'',1);
+function fileext($filename)
+{
+	return substr(($t = strrchr($filename, '.')) !== false ? "." . $t : '', 1);
 }
 
-function pb_htmlspecialchar($string, $force = false) {
-	if($force){
-		if(is_array($string)) {
-			foreach($string as $key => $val) {
+function pb_htmlspecialchar($string, $force = false)
+{
+	if ($force) {
+		if (is_array($string)) {
+			foreach ($string as $key => $val) {
 				$string[$key] = pb_htmlspecialchar($val, $force);
 			}
 		} else {
@@ -309,83 +321,85 @@ function pb_htmlspecialchar($string, $force = false) {
 	return $string;
 }
 
-function pb_remove_xss($val) {
-   $val = preg_replace('/([\x00-\x08,\x0b-\x0c,\x0e-\x19])/', '', $val);  
-   $search = 'abcdefghijklmnopqrstuvwxyz'; 
-   $search .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';  
-   $search .= '1234567890!@#$%^&*()'; 
-   $search .= '~`";:?+/={}[]-_|\'\\'; 
-   for ($i = 0; $i < strlen($search); $i++) { 
-      // ;? matches the ;, which is optional 
-      // 0{0,7} matches any padded zeros, which are optional and go up to 8 chars 
- 
-      // @ @ search for the hex values 
-      $val = preg_replace('/(&#[xX]0{0,8}'.dechex(ord($search[$i])).';?)/i', $search[$i], $val); // with a ; 
-      // @ @ 0{0,7} matches '0' zero to seven times  
-      $val = preg_replace('/(&#0{0,8}'.ord($search[$i]).';?)/', $search[$i], $val); // with a ; 
-   } 
- 
-   // now the only remaining whitespace attacks are \t, \n, and \r 
-   $ra1 = Array('javascript', 'vbscript', 'expression', 'applet', 'meta', 'xml', 'blink', 'link', 'style', 'script', 'embed', 'object', 'iframe', 'frame', 'frameset', 'ilayer', 'layer', 'bgsound', 'title', 'base'); 
-   $ra2 = Array('onabort', 'onactivate', 'onafterprint', 'onafterupdate', 'onbeforeactivate', 'onbeforecopy', 'onbeforecut', 'onbeforedeactivate', 'onbeforeeditfocus', 'onbeforepaste', 'onbeforeprint', 'onbeforeunload', 'onbeforeupdate', 'onblur', 'onbounce', 'oncellchange', 'onchange', 'onclick', 'oncontextmenu', 'oncontrolselect', 'oncopy', 'oncut', 'ondataavailable', 'ondatasetchanged', 'ondatasetcomplete', 'ondblclick', 'ondeactivate', 'ondrag', 'ondragend', 'ondragenter', 'ondragleave', 'ondragover', 'ondragstart', 'ondrop', 'onerror', 'onerrorupdate', 'onfilterchange', 'onfinish', 'onfocus', 'onfocusin', 'onfocusout', 'onhelp', 'onkeydown', 'onkeypress', 'onkeyup', 'onlayoutcomplete', 'onload', 'onlosecapture', 'onmousedown', 'onmouseenter', 'onmouseleave', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onmousewheel', 'onmove', 'onmoveend', 'onmovestart', 'onpaste', 'onpropertychange', 'onreadystatechange', 'onreset', 'onresize', 'onresizeend', 'onresizestart', 'onrowenter', 'onrowexit', 'onrowsdelete', 'onrowsinserted', 'onscroll', 'onselect', 'onselectionchange', 'onselectstart', 'onstart', 'onstop', 'onsubmit', 'onunload'); 
-   $ra = array_merge($ra1, $ra2); 
- 
-   $found = true; // keep replacing as long as the previous round replaced something 
-   while ($found == true) { 
-      $val_before = $val; 
-      for ($i = 0; $i < sizeof($ra); $i++) { 
-         $pattern = '/'; 
-         for ($j = 0; $j < strlen($ra[$i]); $j++) { 
-            if ($j > 0) { 
-               $pattern .= '(';  
-               $pattern .= '(&#[xX]0{0,8}([9ab]);)'; 
-               $pattern .= '|';  
-               $pattern .= '|(&#0{0,8}([9|10|13]);)'; 
-               $pattern .= ')*'; 
-            } 
-            $pattern .= $ra[$i][$j]; 
-         } 
-         $pattern .= '/i';  
-         $replacement = substr($ra[$i], 0, 2).'<x>'.substr($ra[$i], 2); // add in <> to nerf the tag  
-         $val = preg_replace($pattern, $replacement, $val); // filter out the hex tags  
-         if ($val_before == $val) {  
-            // no replacements were made, so exit the loop  
-            $found = false;  
-         }  
-      }  
-   }  
-   return $val;  
+function pb_remove_xss($val)
+{
+	$val = preg_replace('/([\x00-\x08,\x0b-\x0c,\x0e-\x19])/', '', $val);
+	$search = 'abcdefghijklmnopqrstuvwxyz';
+	$search .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$search .= '1234567890!@#$%^&*()';
+	$search .= '~`";:?+/={}[]-_|\'\\';
+	for ($i = 0; $i < strlen($search); $i++) {
+		// ;? matches the ;, which is optional 
+		// 0{0,7} matches any padded zeros, which are optional and go up to 8 chars 
+
+		// @ @ search for the hex values 
+		$val = preg_replace('/(&#[xX]0{0,8}' . dechex(ord($search[$i])) . ';?)/i', $search[$i], $val); // with a ; 
+		// @ @ 0{0,7} matches '0' zero to seven times  
+		$val = preg_replace('/(&#0{0,8}' . ord($search[$i]) . ';?)/', $search[$i], $val); // with a ; 
+	}
+
+	// now the only remaining whitespace attacks are \t, \n, and \r 
+	$ra1 = array('javascript', 'vbscript', 'expression', 'applet', 'meta', 'xml', 'blink', 'link', 'style', 'script', 'embed', 'object', 'iframe', 'frame', 'frameset', 'ilayer', 'layer', 'bgsound', 'title', 'base');
+	$ra2 = array('onabort', 'onactivate', 'onafterprint', 'onafterupdate', 'onbeforeactivate', 'onbeforecopy', 'onbeforecut', 'onbeforedeactivate', 'onbeforeeditfocus', 'onbeforepaste', 'onbeforeprint', 'onbeforeunload', 'onbeforeupdate', 'onblur', 'onbounce', 'oncellchange', 'onchange', 'onclick', 'oncontextmenu', 'oncontrolselect', 'oncopy', 'oncut', 'ondataavailable', 'ondatasetchanged', 'ondatasetcomplete', 'ondblclick', 'ondeactivate', 'ondrag', 'ondragend', 'ondragenter', 'ondragleave', 'ondragover', 'ondragstart', 'ondrop', 'onerror', 'onerrorupdate', 'onfilterchange', 'onfinish', 'onfocus', 'onfocusin', 'onfocusout', 'onhelp', 'onkeydown', 'onkeypress', 'onkeyup', 'onlayoutcomplete', 'onload', 'onlosecapture', 'onmousedown', 'onmouseenter', 'onmouseleave', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onmousewheel', 'onmove', 'onmoveend', 'onmovestart', 'onpaste', 'onpropertychange', 'onreadystatechange', 'onreset', 'onresize', 'onresizeend', 'onresizestart', 'onrowenter', 'onrowexit', 'onrowsdelete', 'onrowsinserted', 'onscroll', 'onselect', 'onselectionchange', 'onselectstart', 'onstart', 'onstop', 'onsubmit', 'onunload');
+	$ra = array_merge($ra1, $ra2);
+
+	$found = true; // keep replacing as long as the previous round replaced something 
+	while ($found == true) {
+		$val_before = $val;
+		for ($i = 0; $i < sizeof($ra); $i++) {
+			$pattern = '/';
+			for ($j = 0; $j < strlen($ra[$i]); $j++) {
+				if ($j > 0) {
+					$pattern .= '(';
+					$pattern .= '(&#[xX]0{0,8}([9ab]);)';
+					$pattern .= '|';
+					$pattern .= '|(&#0{0,8}([9|10|13]);)';
+					$pattern .= ')*';
+				}
+				$pattern .= $ra[$i][$j];
+			}
+			$pattern .= '/i';
+			$replacement = substr($ra[$i], 0, 2) . '<x>' . substr($ra[$i], 2); // add in <> to nerf the tag  
+			$val = preg_replace($pattern, $replacement, $val); // filter out the hex tags  
+			if ($val_before == $val) {
+				// no replacements were made, so exit the loop  
+				$found = false;
+			}
+		}
+	}
+	return $val;
 }
 
 function pb_get_client_ip($type = "long")
 {
-	if(getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
+	if (getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
 		$onlineip = getenv('HTTP_CLIENT_IP');
-	} elseif(getenv('HTTP_X_FORWARDED_FOR') && strcasecmp(getenv('HTTP_X_FORWARDED_FOR'), 'unknown')) {
+	} elseif (getenv('HTTP_X_FORWARDED_FOR') && strcasecmp(getenv('HTTP_X_FORWARDED_FOR'), 'unknown')) {
 		$onlineip = getenv('HTTP_X_FORWARDED_FOR');
-	} elseif(getenv('REMOTE_ADDR') && strcasecmp(getenv('REMOTE_ADDR'), 'unknown')) {
+	} elseif (getenv('REMOTE_ADDR') && strcasecmp(getenv('REMOTE_ADDR'), 'unknown')) {
 		$onlineip = getenv('REMOTE_ADDR');
-	} elseif(isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], 'unknown')) {
+	} elseif (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], 'unknown')) {
 		$onlineip = $_SERVER['REMOTE_ADDR'];
 	}
 	preg_match("/[\d\.]{7,15}/", $onlineip, $onlineipmatches);
 	$onlineip = $onlineipmatches[0] ? $onlineipmatches[0] : 'unknown';
-	if($onlineip=='unknown') return $onlineip;
-	if($type=="long"){
+	if ($onlineip == 'unknown') return $onlineip;
+	if ($type == "long") {
 		return pb_ip2long($onlineip);
-	}else{
+	} else {
 		return $onlineip;
 	}
 }
 
 function pb_ip2long($ip)
 {
-	return sprintf("%u",ip2long($ip));
+	return sprintf("%u", ip2long($ip));
 }
 
-function pb_addslashes($string) {
-	if(is_array($string)) {
-		foreach($string as $key => $val) {
+function pb_addslashes($string)
+{
+	if (is_array($string)) {
+		foreach ($string as $key => $val) {
 			$string[$key] = pb_addslashes($val);
 		}
 	} else {
@@ -394,13 +408,14 @@ function pb_addslashes($string) {
 	return $string;
 }
 
-function stripslashes_recursive(&$array) {
-	while(list($key,$var) = each($array)) {
-		if ($key != 'argc' && $key != 'argv' && (strtoupper($key) != $key || ''.intval($key) == "$key")) {
+function stripslashes_recursive(&$array)
+{
+	while (list($key, $var) = each($array)) {
+		if ($key != 'argc' && $key != 'argv' && (strtoupper($key) != $key || '' . intval($key) == "$key")) {
 			if (is_string($var)) {
 				$array[$key] = stripslashes($var);
 			}
-			if (is_array($var))  {
+			if (is_array($var)) {
 				$array[$key] = stripslashes_recursive($var);
 			}
 		}
@@ -410,16 +425,16 @@ function stripslashes_recursive(&$array) {
 
 function stripslashes_deep($value)
 {
-    if(isset($value)) {
-        $value = is_array($value) ?
-            array_map('stripslashes_deep', $value) :
-            stripslashes($value);
-    }
-    return $value;
+	if (isset($value)) {
+		$value = is_array($value) ?
+			array_map('stripslashes_deep', $value) : stripslashes($value);
+	}
+	return $value;
 }
 
 if (!function_exists('getmicrotime')) {
-	function getmicrotime() {
+	function getmicrotime()
+	{
 		list($usec, $sec) = explode(' ', microtime());
 		return ((float)$usec + (float)$sec);
 	}
@@ -427,33 +442,35 @@ if (!function_exists('getmicrotime')) {
 
 function pb_get_host($http = true)
 {
-	if ( isset( $_SERVER['HTTPS'] ) && ( strtolower( $_SERVER['HTTPS'] ) != 'off' ) ) {
+	if (isset($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) != 'off')) {
 		$ul_protocol = 'https';
-	}else{
+	} else {
 		$ul_protocol = 'http';
 	}
-	if($http) {
-		$return = $ul_protocol."://".$_SERVER['HTTP_HOST'];
+	if ($http) {
+		$return = $ul_protocol . "://" . $_SERVER['HTTP_HOST'];
 	} else {
 		$return = $_SERVER['HTTP_HOST'];
 	}
 	return $return;
 }
 
-function uses() {
+function uses()
+{
 	$args = func_get_args();
-	foreach($args as $arg) {
+	foreach ($args as $arg) {
 		$class_name = strtolower($arg);
-		include(LIB_PATH . "core/controllers/".$class_name. '_controller.php');
-		if(is_file($model_file = LIB_PATH . "core/models/".$class_name. '.php')) include($model_file);
+		include(LIB_PATH . "core/controllers/" . $class_name . '_controller.php');
+		if (is_file($model_file = LIB_PATH . "core/models/" . $class_name . '.php')) include($model_file);
 	}
 }
 
-function using() {
+function using()
+{
 	$args = func_get_args();
-	foreach($args as $arg) {
+	foreach ($args as $arg) {
 		$class_name = strtolower($arg);
-		require_once(LIB_PATH . "core/models/".$class_name. '.php');
+		require_once(LIB_PATH . "core/models/" . $class_name . '.php');
 	}
 }
 
@@ -467,44 +484,45 @@ function pb_get_member_info()
 {
 	global $cookiepre;
 	$user = array();
-	if (!empty($_COOKIE[$cookiepre."auth"])) {
-		list($user['pb_userid'], $user['pb_username'], $user['pb_userpasswd'], $user['is_admin']) = explode("\t", authcode($_COOKIE[$cookiepre."auth"], 'DECODE'));
-	}else{
+	if (!empty($_COOKIE[$cookiepre . "auth"])) {
+		list($user['pb_userid'], $user['pb_username'], $user['pb_userpasswd'], $user['is_admin']) = explode("\t", authcode($_COOKIE[$cookiepre . "auth"], 'DECODE'));
+	} else {
 		list($user['pb_userid'], $user['pb_username'], $user['pb_userpasswd'], $user['is_admin']) = '';
 	}
 	return $user;
 }
 
-function authcode($string, $operation = "ENCODE", $key = '', $expire = 0) {
+function authcode($string, $operation = "ENCODE", $key = '', $expire = 0)
+{
 	global $phpb2b_auth_key;
 	$ckey_length = 4;
 	$key = md5($key ? $key : $phpb2b_auth_key);
 	$keya = md5(substr($key, 0, 16));
 	$keyb = md5(substr($key, 16, 16));
-	$keyc = $ckey_length ? ($operation == 'DECODE' ? substr($string, 0, $ckey_length): substr(md5(microtime()), -$ckey_length)) : '';
+	$keyc = $ckey_length ? ($operation == 'DECODE' ? substr($string, 0, $ckey_length) : substr(md5(microtime()), -$ckey_length)) : '';
 
-	$cryptkey = $keya.md5($keya.$keyc);
+	$cryptkey = $keya . md5($keya . $keyc);
 	$key_length = strlen($cryptkey);
 
-	$string = $operation == 'DECODE' ? base64_decode(substr($string, $ckey_length)) : sprintf('%010d', $expire ? $expire + time() : 0).substr(md5($string.$keyb), 0, 16).$string;
+	$string = $operation == 'DECODE' ? base64_decode(substr($string, $ckey_length)) : sprintf('%010d', $expire ? $expire + time() : 0) . substr(md5($string . $keyb), 0, 16) . $string;
 	$string_length = strlen($string);
 
 	$result = '';
 	$box = range(0, 255);
 
 	$rndkey = array();
-	for($i = 0; $i <= 255; $i++) {
+	for ($i = 0; $i <= 255; $i++) {
 		$rndkey[$i] = ord($cryptkey[$i % $key_length]);
 	}
 
-	for($j = $i = 0; $i < 256; $i++) {
+	for ($j = $i = 0; $i < 256; $i++) {
 		$j = ($j + $box[$i] + $rndkey[$i]) % 256;
 		$tmp = $box[$i];
 		$box[$i] = $box[$j];
 		$box[$j] = $tmp;
 	}
 
-	for($a = $j = $i = 0; $i < $string_length; $i++) {
+	for ($a = $j = $i = 0; $i < $string_length; $i++) {
 		$a = ($a + 1) % 256;
 		$j = ($j + $box[$a]) % 256;
 		$tmp = $box[$a];
@@ -513,43 +531,46 @@ function authcode($string, $operation = "ENCODE", $key = '', $expire = 0) {
 		$result .= chr(ord($string[$i]) ^ ($box[($box[$a] + $box[$j]) % 256]));
 	}
 
-	if($operation == 'DECODE') {
-		if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) == substr(md5(substr($result, 26).$keyb), 0, 16)) {
+	if ($operation == 'DECODE') {
+		if ((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) == substr(md5(substr($result, 26) . $keyb), 0, 16)) {
 			return substr($result, 26);
 		} else {
 			return '';
 		}
 	} else {
-		return $keyc.str_replace('=', '', base64_encode($result));
+		return $keyc . str_replace('=', '', base64_encode($result));
 	}
 }
 
-function L($key, $type = "", $extra = null){
+function L($key, $type = "", $extra = null)
+{
 	$return = $GLOBALS['smarty']->getConfigVars($key);
-	if(empty($return)){
+	if (empty($return)) {
 		$GLOBALS['smarty']->configLoad('default.conf', 'message');
 		$return = $GLOBALS['smarty']->getConfigVars($key);
 	}
 	if (is_array($extra)) {
 		$return = vsprintf($return, $extra);
-	}else{
+	} else {
 		$return = sprintf($return, $extra);
 	}
-	return (!empty($return))?pb_lang_split($return):$key;
+	return (!empty($return)) ? pb_lang_split($return) : $key;
 }
 
-function formhash() {
+function formhash()
+{
 	global $time_stamp, $phpb2b_auth_key;
-	return substr(md5(substr($time_stamp, 0, -4).$phpb2b_auth_key), 16);
+	return substr(md5(substr($time_stamp, 0, -4) . $phpb2b_auth_key), 16);
 }
 
-function pb_submit_check($var) {
+function pb_submit_check($var)
+{
 	$referer = pb_getenv('HTTP_REFERER');
-//	if (is_file(DATA_PATH.'antispam'.DS.'index.php')) {
-//		require(DATA_PATH.'antispam'.DS.'index.php');
-//	}
-	if(!empty($_POST[$var]) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-		if((empty($referer) || preg_replace("/https?:\/\/([^\:\/]+).*/i", "\\1", $referer) == preg_replace("/([^\:]+).*/", "\\1", pb_getenv('HTTP_HOST'))) && $_POST['formhash'] == formhash()) {
+	//	if (is_file(DATA_PATH.'antispam'.DS.'index.php')) {
+	//		require(DATA_PATH.'antispam'.DS.'index.php');
+	//	}
+	if (!empty($_POST[$var]) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+		if ((empty($referer) || preg_replace("/https?:\/\/([^\:\/]+).*/i", "\\1", $referer) == preg_replace("/([^\:]+).*/", "\\1", pb_getenv('HTTP_HOST'))) && $_POST['formhash'] == formhash()) {
 			return true;
 		}
 	}
@@ -557,8 +578,9 @@ function pb_submit_check($var) {
 	exit;
 }
 
-function parse_highlight($highlight, $return_color = false) {
-	if($highlight) {
+function parse_highlight($highlight, $return_color = false)
+{
+	if ($highlight) {
 		//as like to colorPicker, viewHelper
 		$colorarray = array('#000000', '#FF0000', '#FFA500', '#FFFF00', '#008000', '#00FFFF', '#0000FF', '#800080', '#808080');
 		$string = sprintf('%02d', $highlight);
@@ -574,7 +596,7 @@ function parse_highlight($highlight, $return_color = false) {
 		$style .= $stylestr[0] ? 'font-weight: bold;' : '';
 		$style .= $stylestr[1] ? 'font-style: italic;' : '';
 		$style .= $stylestr[2] ? 'text-decoration: underline;' : '';
-		$style .= $string[1] ? 'color: '.$colorarray[$string[1]] : '';
+		$style .= $string[1] ? 'color: ' . $colorarray[$string[1]] : '';
 		$style .= '"';
 	} else {
 		$style = '';
@@ -586,39 +608,39 @@ function pb_get_attachmenturl($src, $path = '', $size = '', $force = false, $att
 {
 	global $attachment_dir, $attachment_url;
 	$attach_url = '';
-	$default_thumb_img = STATICURL. 'images/nopicture_small.gif';
+	$default_thumb_img = STATICURL . 'images/nopicture_small.gif';
 	if (empty($size)) {
 		$size = "small";
 	}
 	switch ($size) {
 		case "small":
-			$scope = ".".$size;
+			$scope = "." . $size;
 			break;
 		case "middle":
-			$scope = ".".$size;
+			$scope = "." . $size;
 			break;
 		case "country":
-			return '<img src="'.STATICURL.'images/country/'.$src.'"/>';
+			return '<img src="' . STATICURL . 'images/country/' . $src . '"/>';
 			break;
 		case "group":
-			return '<img src="'.STATICURL.'images/group/'.$src.'"/>';
+			return '<img src="' . STATICURL . 'images/group/' . $src . '"/>';
 			break;
 		default:
 			$scope = "";
 			break;
 	}
 	if (!empty($scope)) {
-		$default_thumb_img = STATICURL. 'images/nopicture_'.$size.'.gif';
+		$default_thumb_img = STATICURL . 'images/nopicture_' . $size . '.gif';
 	}
 	if ($force) {
-		$default_thumb_img = STATICURL.'images/nopicture_'.$force.'.gif';
+		$default_thumb_img = STATICURL . 'images/nopicture_' . $force . '.gif';
 	}
-	$attach_url = $attach_path?$attachment_url.$src : $src;
+	$attach_url = $attach_path ? $attachment_url . $src : $src;
 	$img =  $src ? $attach_url : $default_thumb_img;
-	if ($scope && ($img!=$default_thumb_img)) {
-		$img.="{$scope}.jpg";
+	if ($scope && ($img != $default_thumb_img)) {
+		$img .= "{$scope}.jpg";
 	}
-	return $path.$img;
+	return $path . $img;
 }
 
 
@@ -626,37 +648,38 @@ function capt_check($capt_name)
 {
 	global $_POST, $G, $smarty, $charset;
 	$capt_require = array(
-	"capt_logging",
-	"capt_register",
-	"capt_post_free",
-	"capt_add_market",
-	"capt_login_admin",
-	"capt_apply_friendlink",
-	"capt_service"
+		"capt_logging",
+		"capt_register",
+		"capt_post_free",
+		"capt_add_market",
+		"capt_login_admin",
+		"capt_apply_friendlink",
+		"capt_service"
 	);
 	if (in_array($capt_name, $capt_require)) {
 		$t = decbin($G['setting']['capt_auth']);
 		$capt_auth = sprintf("%07d", $t);
 		$key = array_search($capt_name, $capt_require);
-		if($capt_auth[$key]){
+		if ($capt_auth[$key]) {
 			if (!empty($_POST['data'])) {
-				include(LIB_PATH. "securimage/securimage.php");
+				include(LIB_PATH . "securimage/securimage.php");
 				$img = new Securimage();
 				$post_code = trim($_POST['data'][$capt_name]);
-				header('Content-Type: text/html; charset='.$charset);
-				if(!$img->check($post_code)){
+				header('Content-Type: text/html; charset=' . $charset);
+				if (!$img->check($post_code)) {
 					flash('invalid_capt', null, 0);
 				}
 			}
 			$smarty->assign("ifcapt", true);
-		}else{
+		} else {
 			$smarty->assign("ifcapt", false);
 		}
 	}
 }
 
 
-function am() {
+function am()
+{
 	$r = array();
 	$args = func_get_args();
 	foreach ($args as $a) {
@@ -674,43 +697,45 @@ function header_sent($msg)
 	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'" />
+<meta http-equiv="Content-Type" content="text/html; charset=' . $charset . '" />
 </head>
 <body>
 <div>
-'.$msg.'
+' . $msg . '
 </div>
 </body>
 </html>';
 }
 
-function check_proxy(){
+function check_proxy()
+{
 	$v = getenv("HTTP_VIA");
 	$f = getenv("HTTP_X_FORWARDED_FOR");
 	$c = getenv("HTTP_XROXY_CONNECTION");
 	$o = getenv("HTTP_PRAGMA");
-	if ( ($v=="")&&($f=="")&&($c=="")&&($o=="") ) return false;
+	if (($v == "") && ($f == "") && ($c == "") && ($o == "")) return false;
 	return true;
 }
 
-function cache_read($file = null, $item = null, $prefix = true, $remove_params = null) {
+function cache_read($file = null, $item = null, $prefix = true, $remove_params = null)
+{
 	global $app_lang;
 	$return = false;
-	if($prefix) $file_name = CACHE_COMMON_PATH. 'cache_'.$file.'.php';
-	else $file_name = CACHE_COMMON_PATH. $file.'.php';
-//	$file_name = CACHE_ROOT. $app_lang. DS. 'cache_'.$file.'.php';
-	if(!is_file($file_name)) return $return;
+	if ($prefix) $file_name = CACHE_COMMON_PATH . 'cache_' . $file . '.php';
+	else $file_name = CACHE_COMMON_PATH . $file . '.php';
+	//	$file_name = CACHE_ROOT. $app_lang. DS. 'cache_'.$file.'.php';
+	if (!is_file($file_name)) return $return;
 	$_required = require($file_name);
 	if (empty($item)) {
 		$item = $file;
 	}
-	if(isset($_PB_CACHE[$item])){
+	if (isset($_PB_CACHE[$item])) {
 		$return = $_PB_CACHE[$item];
-	}elseif(!empty($_PB_CACHE[$file])){
+	} elseif (!empty($_PB_CACHE[$file])) {
 		$return = $_PB_CACHE[$file];
-	}elseif(!empty($_PB_CACHE)){
+	} elseif (!empty($_PB_CACHE)) {
 		$return = $_PB_CACHE;
-	}else{
+	} else {
 		$return = $_required;
 	}
 	/**
@@ -725,23 +750,24 @@ function cache_read($file = null, $item = null, $prefix = true, $remove_params =
 			foreach ($remove_params as $val) {
 				unset($return[$val]);
 			}
-		}else{
+		} else {
 			unset($return[$remove_params]);
 		}
 	}
 	return $return;
 }
 
-function array_map_recursive($fn, $arr) {
-    $ret = array();
-    if (!empty($arr)) {
-	    foreach ($arr as $key => $val) {
-	        $ret[$key] = is_array($val)
-	            ? array_map_recursive($fn, $val)
-	            : $fn($val);
-	    }
-    }
-    return $ret;
+function array_map_recursive($fn, $arr)
+{
+	$ret = array();
+	if (!empty($arr)) {
+		foreach ($arr as $key => $val) {
+			$ret[$key] = is_array($val)
+				? array_map_recursive($fn, $val)
+				: $fn($val);
+		}
+	}
+	return $ret;
 }
 
 function df($timestamp = null, $format = null)
@@ -753,7 +779,7 @@ function df($timestamp = null, $format = null)
 	}
 	if (!empty($format)) {
 		$return = date($format, $timestamp);
-	}else{
+	} else {
 		$return = date("Y-m-d", $timestamp);
 	}
 	return $return;
@@ -763,14 +789,15 @@ function sens_str($content, $to = "***")
 {
 	$str = $content;
 	$badword = cache_read("words", "words");
-	if(!empty($badword)){
-		$badword1 = array_combine($badword,array_fill(0,count($badword),$to));
-		$str = strtr($content, $badword1);	
+	if (!empty($badword)) {
+		$badword1 = array_combine($badword, array_fill(0, count($badword), $to));
+		$str = strtr($content, $badword1);
 	}
 	return $str;
 }
 
-function pb_lang_enabled($lang_name, $languages) {
+function pb_lang_enabled($lang_name, $languages)
+{
 	return in_array($lang_name, $languages);
 }
 
@@ -783,14 +810,14 @@ function pb_lang_enabled($lang_name, $languages) {
 function pb_lang_merge($inputs)
 {
 	global $G, $app_lang;
-//	if(!empty($G['languages']))
+	//	if(!empty($G['languages']))
 	$_languages = array_keys(unserialize($G['setting']['languages']));
-//	else
-//	$_languages[] = $app_lang;
+	//	else
+	//	$_languages[] = $app_lang;
 	$ret = '';
 	$inputs = array_filter($inputs);
-	foreach ($inputs as $key=>$val) {
-		if(pb_lang_enabled($key, $_languages)) $ret.="[:".$key."]".$val;
+	foreach ($inputs as $key => $val) {
+		if (pb_lang_enabled($key, $_languages)) $ret .= "[:" . $key . "]" . $val;
 	}
 	return $ret;
 }
@@ -798,8 +825,8 @@ function pb_lang_merge($inputs)
 function pb_lang_split_recursive($arr)
 {
 	$ret = array();
-	if(!empty($arr))
-	$ret = array_map_recursive("pb_lang_split", $arr);
+	if (!empty($arr))
+		$ret = array_map_recursive("pb_lang_split", $arr);
 	return $ret;
 }
 
@@ -811,68 +838,69 @@ function pb_lang_split_recursive($arr)
  * @param boolean $all if return all
  * @return string or array
  */
-function pb_lang_split($text, $all = false) {
+function pb_lang_split($text, $all = false)
+{
 	global $G, $app_lang;
 	$lang_name = $app_lang;
 	//convert to array	
-	if(!empty($G['setting']['languages'])) 
+	if (!empty($G['setting']['languages']))
 		$_languages = array_keys(unserialize($G['setting']['languages']));
-	else 
+	else
 		$_languages[] = $lang_name;
 	$ret = '';
 	$split_regex = "#(<!--[^>]*[^\/]-->|\[:[-:a-z]{3,5}\])#ism";
 	$current_language = "";
 	$result = array();
-	foreach($_languages as $language) {
+	foreach ($_languages as $language) {
 		$result[$language] = "";
 	}
-	$blocks = preg_split($split_regex, $text, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
-	foreach($blocks as $block) {
-		if(preg_match("#^\[:([-:a-z]{3,5})\]$#ism", $block, $matches)) {
-			if(pb_lang_enabled($matches[1], $_languages)) {
+	$blocks = preg_split($split_regex, $text, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+	foreach ($blocks as $block) {
+		if (preg_match("#^\[:([-:a-z]{3,5})\]$#ism", $block, $matches)) {
+			if (pb_lang_enabled($matches[1], $_languages)) {
 				$current_language = $matches[1];
 			} else {
 				$current_language = "invalid";
 			}
 			continue;
 		}
-		if($current_language == "") {
-			foreach($_languages as $language) {
+		if ($current_language == "") {
+			foreach ($_languages as $language) {
 				$result[$language] .= $block;
 			}
-		} elseif($current_language != "invalid") {
+		} elseif ($current_language != "invalid") {
 			$result[$current_language] .= $block;
 		}
 	}
-	if($all) return $result;
-	else{
+	if ($all) return $result;
+	else {
 		$result = array_filter($result);
-		if(isset($result[$lang_name])) $ret = $result[$lang_name];
-		if(!empty($ret)) return $ret;
-		elseif(current($result)) return current($result);//get the first
-//		elseif(current($result)) return current($result)."[".key($result)."]";
-		else return $text;//return orignal
+		if (isset($result[$lang_name])) $ret = $result[$lang_name];
+		if (!empty($ret)) return $ret;
+		elseif (current($result)) return current($result); //get the first
+		//		elseif(current($result)) return current($result)."[".key($result)."]";
+		else return $text; //return orignal
 	}
 }
 
 function clear_html($string)
 {
 	$farr = array(
-	"/\s+/",
-	"/<(\/?)(script|i?frame|style|html|body|title|link|meta|\?|\%)([^>]*?)>/isU",
-	"/(<[^>]*)on[a-zA-Z]+\s*=([^>]*>)/isU",
+		"/\s+/",
+		"/<(\/?)(script|i?frame|style|html|body|title|link|meta|\?|\%)([^>]*?)>/isU",
+		"/(<[^>]*)on[a-zA-Z]+\s*=([^>]*>)/isU",
 	);
 	$tarr = array(
-	" ",
-	"��\1\2\3��",
-	"\1\2",
+		" ",
+		"��\1\2\3��",
+		"\1\2",
 	);
-	if(is_array($string)) {
-		foreach($string as $key => $val) {
+	if (is_array($string)) {
+		foreach ($string as $key => $val) {
 			$str[$key] = clear_html($val);
 		}
 	} else {
-		$str = preg_replace( $farr,$tarr,$string);
+		$str = preg_replace($farr, $tarr, $string);
 	}
 	return $str;
 }
@@ -880,19 +908,19 @@ function clear_html($string)
 function pb_hidestr($string)
 {
 	$ret = '';
-	if(empty($string)){ 
-		return false; 
+	if (empty($string)) {
+		return false;
 	}
 	$show = array('m_0', 'm_1', 'm_2', 'm_3', 'm_8', 'm_9', 'm_10', 'm_16', 'm_19', 'm_20', 'm_22', 'm_33', 'm_34', 'm_37', 'm_38', 'm_40', 'm_44', 'm_45', 'm_46', 'm_48');
 	$hide = array('m_4', 'm_5', 'm_6', 'm_7', 'm_11', 'm_12', 'm_13', 'm_14', 'm_15', 'm_17', 'm_18', 'm_21', 'm_23', 'm_24', 'm_25', 'm_26', 'm_27', 'm_28', 'm_29', 'm_30', 'm_31', 'm_32', 'm_35', 'm_36', 'm_39', 'm_41', 'm_42', 'm_43', 'm_47', 'm_49');
-	for($i=0;$i<strlen($string);$i++){
-		$flag = mt_rand(0,1);
-		if($flag){
+	for ($i = 0; $i < strlen($string); $i++) {
+		$flag = mt_rand(0, 1);
+		if ($flag) {
 			$show_style = array_rand($show);
-			$ret .="<span class='".$show[$show_style]."'>".$string[$i]."</span>";
-		}else{
+			$ret .= "<span class='" . $show[$show_style] . "'>" . $string[$i] . "</span>";
+		} else {
 			$hide_style = array_rand($hide);
-			$ret .="<span class='".$hide[$hide_style]."'>".mt_rand(0,1000)."</span>";
+			$ret .= "<span class='" . $hide[$hide_style] . "'>" . mt_rand(0, 1000) . "</span>";
 			$i--;
 		}
 	}
@@ -907,26 +935,27 @@ function pb_hidestr($string)
  * @param unknown_type $sub_key maybe sub,children,child
  * @return unknown
  */
-function pb_format_tree( $datas, $pid = null, $sub_key = 'sub' ) {
-    $op = array();
-    foreach( $datas as $item ) {
-        if( $item['parent_id'] == $pid ) {
-            $op[$item['id']] = array(
-                'id' => $item['id'],
-                'url' => $item['url'],
-                'level' => $item['level'],
-                'name' => $item['name'],
-                'parent_id' => $item['parent_id']
-            );
-            // using recursion
-            $op[$item['id']][$sub_key] = array();
-            $children =  pb_format_tree( $datas, $item['id'] );
-            if( $children ) {
-                $op[$item['id']][$sub_key] = $children;
-            }
-        }
-    }
-    return $op;
+function pb_format_tree($datas, $pid = null, $sub_key = 'sub')
+{
+	$op = array();
+	foreach ($datas as $item) {
+		if ($item['parent_id'] == $pid) {
+			$op[$item['id']] = array(
+				'id' => $item['id'],
+				'url' => $item['url'],
+				'level' => $item['level'],
+				'name' => $item['name'],
+				'parent_id' => $item['parent_id']
+			);
+			// using recursion
+			$op[$item['id']][$sub_key] = array();
+			$children =  pb_format_tree($datas, $item['id']);
+			if ($children) {
+				$op[$item['id']][$sub_key] = $children;
+			}
+		}
+	}
+	return $op;
 }
 
 function pb_configmake($lang, $exit = true)
@@ -934,193 +963,263 @@ function pb_configmake($lang, $exit = true)
 	global $charset;
 	//read the csv files at languages.
 	$language_files = array();
-	$handler = opendir(PHPB2B_ROOT.'languages/');
-    while (($lang_dir = readdir($handler)) !== false) {
-	if ($lang_dir != "." && $lang_dir != ".." && is_dir(PHPB2B_ROOT.'languages/'.$lang_dir)) {
-			$lang_dirs[] = $lang_dir ;
-	   }
+	$handler = opendir(PHPB2B_ROOT . 'languages/');
+	while (($lang_dir = readdir($handler)) !== false) {
+		if ($lang_dir != "." && $lang_dir != ".." && is_dir(PHPB2B_ROOT . 'languages/' . $lang_dir)) {
+			$lang_dirs[] = $lang_dir;
+		}
 	}
-    closedir($handler);
-	if(!in_array($lang, $lang_dirs)){
+	closedir($handler);
+	if (!in_array($lang, $lang_dirs)) {
 		header_sent("Wrong with application language.");
 		exit;
 	}
-	require_once SOURCE_PATH. 'Excel/reader.php';
+	require_once SOURCE_PATH . 'Excel/reader.php';
 	$reader = new Spreadsheet_Excel_Reader();
-	foreach(glob(PHPB2B_ROOT.'languages/'.$lang.'/*.csv') as $single){
-		$language_files[basename($single, ".csv")] = PHPB2B_ROOT.'languages/'.$lang.'/'.basename($single);
+	foreach (glob(PHPB2B_ROOT . 'languages/' . $lang . '/*.csv') as $single) {
+		$language_files[basename($single, ".csv")] = PHPB2B_ROOT . 'languages/' . $lang . '/' . basename($single);
 	}
-	foreach(glob(PHPB2B_ROOT.'languages/'.$lang.'/*.xls') as $single){
-		$language_files[basename($single, ".xls")] = PHPB2B_ROOT.'languages/'.$lang.'/'.basename($single);
+	foreach (glob(PHPB2B_ROOT . 'languages/' . $lang . '/*.xls') as $single) {
+		$language_files[basename($single, ".xls")] = PHPB2B_ROOT . 'languages/' . $lang . '/' . basename($single);
 	}
-	if (!is_dir(PHPB2B_ROOT.'./languages/'.$lang)) {
-		header_sent("Wrong with languages, or language ".$lang." not exists.");
+	if (!is_dir(PHPB2B_ROOT . './languages/' . $lang)) {
+		header_sent("Wrong with languages, or language " . $lang . " not exists.");
 		exit;
 	}
-	if (!is_dir(PHPB2B_ROOT.'data'.DS.'language'.DS.$lang)) {
-		mkdir(PHPB2B_ROOT.'data'.DS.'language'.DS.$lang, 0777, true);
+	if (!is_dir(PHPB2B_ROOT . 'data' . DS . 'language' . DS . $lang)) {
+		mkdir(PHPB2B_ROOT . 'data' . DS . 'language' . DS . $lang, 0777, true);
 	}
-	header("Content-type: text/html; charset=".$charset); 
+	header("Content-type: text/html; charset=" . $charset);
 	if (!empty($language_files)) {
 		ksort($language_files);
-		$read_me = file_get_contents(PHPB2B_ROOT.'./languages/'.$lang.'/readme.txt');
+		$read_me = file_get_contents(PHPB2B_ROOT . './languages/' . $lang . '/readme.txt');
 		if ($charset == "gbk") {
 			//only for gbk chinese
-			$read_me = iconv('gbk', $charset, $read_me);//if your language is utf-8,please delete this line.
+			$read_me = iconv('gbk', $charset, $read_me); //if your language is utf-8,please delete this line.
 		}
-		$config_file = PHPB2B_ROOT.'data'.DS.'language'.DS.$lang.DS.'default.conf';
+		$config_file = PHPB2B_ROOT . 'data' . DS . 'language' . DS . $lang . DS . 'default.conf';
 		//clear the file at config.
-		file_put_contents($config_file, $read_me."\r\n\r\n\r\n");
+		file_put_contents($config_file, $read_me . "\r\n\r\n\r\n");
 		//global
 		$file = $language_files['global'];
-		$fp = fopen($file,'r');
+		$fp = fopen($file, 'r');
 		if (strtolower(fileext($file)) == ".xls") {
 			$reader->setOutputEncoding('utf-8');
 			$reader->read($file);
 			for ($i = 1; $i <= $reader->sheets[0]['numRows']; $i++) {
 				$title = trim($reader->sheets[0]['cells'][$i][1]);
 				$content = trim($reader->sheets[0]['cells'][$i][2]);
-				file_put_contents($config_file, $title." = \"".$content."\"\r\n", FILE_APPEND);
+				file_put_contents($config_file, $title . " = \"" . $content . "\"\r\n", FILE_APPEND);
 			}
-		}else{
+		} else {
 			while ($data = fgetcsv($fp, 1024, ",")) {
 				$title = trim($data[0]);
 				$content = $data[1];
 				if ($charset == "gbk") {
 					//only for gbk chinese
-					$content = iconv('gbk', $charset, $content);//if your language is utf-8,please delete this line.
+					$content = iconv('gbk', $charset, $content); //if your language is utf-8,please delete this line.
 				}
-				file_put_contents($config_file, $title." = \"".$content."\"\r\n", FILE_APPEND);
-			}			
+				file_put_contents($config_file, $title . " = \"" . $content . "\"\r\n", FILE_APPEND);
+			}
 		}
 		fclose($fp);
 		//read csv contents
 		unset($language_files['global']);
-		foreach ($language_files as $key=>$file) {
-			$fp = fopen($file,'r');
-			file_put_contents($config_file, "\r\n[".$key."]\r\n", FILE_APPEND);
+		foreach ($language_files as $key => $file) {
+			$fp = fopen($file, 'r');
+			file_put_contents($config_file, "\r\n[" . $key . "]\r\n", FILE_APPEND);
 			if (strtolower(fileext($file)) == ".xls") {
 				$reader->setOutputEncoding('utf-8');
 				$reader->read($file);
 				for ($i = 1; $i <= $reader->sheets[0]['numRows']; $i++) {
 					$title = trim($reader->sheets[0]['cells'][$i][1]);
 					$content = trim($reader->sheets[0]['cells'][$i][2]);
-					file_put_contents($config_file, $title." = \"".$content."\"\r\n", FILE_APPEND);
+					file_put_contents($config_file, $title . " = \"" . $content . "\"\r\n", FILE_APPEND);
 				}
-			}else{
-				while ($data = fgetcsv($fp,1024, ",")) {
+			} else {
+				while ($data = fgetcsv($fp, 1024, ",")) {
 					$title = trim($data[0]);
 					$content = $data[1];
 					if ($charset == "gbk") {
 						//only for gbk chinese
-						$content = iconv('gbk', $charset, $content);//if your language is utf-8,please delete this line.
+						$content = iconv('gbk', $charset, $content); //if your language is utf-8,please delete this line.
 					}
-					file_put_contents($config_file, $title." = \"".$content."\"\r\n", FILE_APPEND);
+					file_put_contents($config_file, $title . " = \"" . $content . "\"\r\n", FILE_APPEND);
 				}
 			}
 			fclose($fp);
 		}
-		if($exit){
+		if ($exit) {
 			header_sent("Language package reloaded, you can <a href='javascript:location.reload()'>refresh</a> the page.");
 			exit;
-		}else{
-			return ;
+		} else {
+			return;
 		}
-	}else{
-		header_sent("Wrong with language maken, or language ".$lang." not exists.");
+	} else {
+		header_sent("Wrong with language maken, or language " . $lang . " not exists.");
 		exit;
 	}
 }
 
-function pb_attack_filter($StrFiltKey,$StrFiltValue,$ArrFiltReq){
-	if(is_array($StrFiltValue))
-	{
-		$StrFiltValue=@implode(",", $StrFiltValue);
+function pb_attack_filter($StrFiltKey, $StrFiltValue, $ArrFiltReq)
+{
+	if (is_array($StrFiltValue)) {
+		$StrFiltValue = @implode(",", $StrFiltValue);
 	}
-	if (preg_match("/".$ArrFiltReq."/is",$StrFiltValue)==1){
+	if (preg_match("/" . $ArrFiltReq . "/is", $StrFiltValue) == 1) {
 		echo $StrFiltValue;
 		header_sent("Warning : Illegal operation!");
 		exit();
 	}
 }
-function pb_hack_check(){
-	$getfilter="'|(and|or)\\b.+?(>|<|=|in|like)|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT|UPDATE.+?SET|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE).+?FROM|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
-	$postfilter="\\b(and|or)\\b.{1,6}?(=|>|<|\\bin\\b|\\blike\\b)|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT|UPDATE.+?SET|ascii|load_file|substring|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE).+?FROM|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
-	$_PG=array_merge($_GET,$_POST);
-	foreach($_PG as $key=>$value){
-		pb_attack_filter($key,$value,$getfilter);
-		pb_attack_filter($key,$value,$postfilter);
+function pb_hack_check()
+{
+	$getfilter = "'|(and|or)\\b.+?(>|<|=|in|like)|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT|UPDATE.+?SET|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE).+?FROM|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
+	$postfilter = "\\b(and|or)\\b.{1,6}?(=|>|<|\\bin\\b|\\blike\\b)|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT|UPDATE.+?SET|ascii|load_file|substring|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE).+?FROM|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
+	$_PG = array_merge($_GET, $_POST);
+	foreach ($_PG as $key => $value) {
+		pb_attack_filter($key, $value, $getfilter);
+		pb_attack_filter($key, $value, $postfilter);
 	}
 }
 
-function pb_ismobile() {
-    if (isset ($_SERVER['HTTP_X_WAP_PROFILE']))
-    {
-        return true;
-    } 
-    if (isset ($_SERVER['HTTP_USER_AGENT']))
-    {
-        $clientkeywords = array ('nokia',
-            'sony',
-            'ericsson',
-            'mot',
-            'samsung',
-            'htc',
-            'sgh',
-            'lg',
-            'sharp',
-            'sie-',
-            'philips',
-            'panasonic',
-            'alcatel',
-            'lenovo',
-            'iphone',
-            'ipod',
-            'blackberry',
-            'meizu',
-            'android',
-            'netfront',
-            'symbian',
-            'ucweb',
-            'windowsce',
-            'palm',
-            'operamini',
-            'operamobi',
-            'openwave',
-            'nexusone',
-            'cldc',
-            'midp',
-            'wap',
-            'mobile'
-            ); 
-        if (preg_match("/(" . implode('|', $clientkeywords) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT'])))
-        {
-            return true;
-        } 
-    } 
-    if (isset ($_SERVER['HTTP_ACCEPT']))
-    { 
-        if ((strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') !== false) && (strpos($_SERVER['HTTP_ACCEPT'], 'text/html') === false || (strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') < strpos($_SERVER['HTTP_ACCEPT'], 'text/html'))))
-        {
-            return true;
-        } 
-    } 
-    return false;
+function pb_ismobile()
+{
+	if (isset($_SERVER['HTTP_X_WAP_PROFILE'])) {
+		return true;
+	}
+	if (isset($_SERVER['HTTP_USER_AGENT'])) {
+		$clientkeywords = array(
+			'nokia',
+			'sony',
+			'ericsson',
+			'mot',
+			'samsung',
+			'htc',
+			'sgh',
+			'lg',
+			'sharp',
+			'sie-',
+			'philips',
+			'panasonic',
+			'alcatel',
+			'lenovo',
+			'iphone',
+			'ipod',
+			'blackberry',
+			'meizu',
+			'android',
+			'netfront',
+			'symbian',
+			'ucweb',
+			'windowsce',
+			'palm',
+			'operamini',
+			'operamobi',
+			'openwave',
+			'nexusone',
+			'cldc',
+			'midp',
+			'wap',
+			'mobile'
+		);
+		if (preg_match("/(" . implode('|', $clientkeywords) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT']))) {
+			return true;
+		}
+	}
+	if (isset($_SERVER['HTTP_ACCEPT'])) {
+		if ((strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') !== false) && (strpos($_SERVER['HTTP_ACCEPT'], 'text/html') === false || (strpos($_SERVER['HTTP_ACCEPT'], 'vnd.wap.wml') < strpos($_SERVER['HTTP_ACCEPT'], 'text/html')))) {
+			return true;
+		}
+	}
+	return false;
 }
 
 //rebuild a array
-function pb_rebuild_array($arr){ 
-	static $tmp=array();
-	for($i=0; $i<count($arr); $i++){
-		if(is_array($arr[$i])) 
+function pb_rebuild_array($arr)
+{
+	static $tmp = array();
+	for ($i = 0; $i < count($arr); $i++) {
+		if (is_array($arr[$i]))
 			pb_rebuild_array($arr[$i]);
-		else 
-			$tmp[]=$arr[$i];
+		else
+			$tmp[] = $arr[$i];
 	}
 	return $tmp;
 }
 
-function pb_inject_check($str) {     
-	return preg_match('/select|from|where|insert|and|update|import|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile/is', $str); 
+function pb_inject_check($str)
+{
+	return preg_match('/select|from|where|insert|and|update|import|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile/is', $str);
 }
-?>
+
+if (!function_exists('mysql_connect')) {
+	function mysql_connect($dbhost, $dbuser, $dbpass)
+	{
+		global $dbport;
+		global $dbname;
+		global $mysqli;
+		if (empty($dbport)) {
+			$dbport = 3306;
+		}
+		$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass, $dbname);
+		return $mysqli;
+	}
+	function mysql_pconnect($dbhost, $dbuser, $dbpass)
+	{
+		global $dbport;
+		global $dbname;
+		global $mysqli;
+		if (empty($dbport)) {
+			$dbport = 3306;
+		}
+		$mysqli = mysqli_connect("$dbhost:$dbport", $dbuser, $dbpass, $dbname);
+		return $mysqli;
+	}
+	function mysql_select_db($dbname)
+	{
+		global $mysqli;
+		return mysqli_select_db($mysqli, $dbname);
+	}
+	function mysql_fetch_array($result)
+	{
+		return mysqli_fetch_array($result);
+	}
+	function mysql_fetch_assoc($result)
+	{
+		return mysqli_fetch_assoc($result);
+	}
+	function mysql_fetch_row($result)
+	{
+		return mysqli_fetch_row($result);
+	}
+	function mysql_query($query)
+	{
+		global $mysqli;
+		return mysqli_query($mysqli, $query);
+	}
+	function mysql_escape_string($data)
+	{
+		global $mysqli;
+		return mysqli_real_escape_string($mysqli, $data);
+	}
+	function mysql_real_escape_string($data)
+	{
+		return mysql_real_escape_string($data);
+	}
+	function mysql_get_server_info()
+	{
+		global $mysqli;
+		return mysqli_get_server_info($mysqli);
+	}
+	function mysql_errno()
+	{
+		global $mysqli;
+		return mysqli_errno($mysqli);
+	}
+	function mysql_close()
+	{
+		global $mysqli;
+		return mysqli_close($mysqli);
+	}
+}

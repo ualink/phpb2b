@@ -10,11 +10,10 @@ if( !ini_get('safe_mode') ){
 }
 require("../libraries/common.inc.php");
 require("session_cp.inc.php");
-require(LIB_PATH. "db_mysql.inc.php");
+require(LIB_PATH. "db_mysqli.inc.php");
 uses("log");
 $log = new Logs();
-$db = new DB_Sql();
-$conn = $db->connect($dbname,$dbhost,$dbuser,$dbpasswd);
+$db = new Db_Mysqli($dbhost, $dbuser, $dbpasswd, $dbname);
 $tpl_file = "db";
 $sizelimit = 204800;//default 2MB
 if(!$backupdir = $pdb->GetOne("SELECT valued FROM {$tb_prefix}settings WHERE variable='backup_dir'")) {

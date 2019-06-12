@@ -19,11 +19,11 @@ if($tb_prefix == "pb_") $tb_prefix = "pb_".strtolower(pb_radom(3))."_";
 </tr>
 <tr>
 <th align="right"><?php echo $db_passwd;?> : </th>
-<td><input name="dbpw" type="password" id="dbpw" value="<?php echo $dbpasswd;?>" style="width:120px" /></td>
+<td><input name="dbpw" type="password" id="dbpw" value="" style="width:120px" /></td>
 </tr>
 <tr>
 <th align="right"><?php echo $db_name;?> : </th>
-<td><input name="dbname" type="text" id="dbname" value="<?php echo $dbname;?>" style="width:120px" />
+<td><input name="dbname" type="text" id="dbname" value="" style="width:120px" />
         <?php echo $if_not_exist_then;?> : <label for="db_create1"><input name="db[create]" type="radio" id="db_create1" checked="checked" value="1" /><?php echo $create_new_db;?></label><label for="db_create2"><input name="db[create]" type="radio" id="db_create2" value="2" /><?php echo $not_install;?></label></td>
 </tr>
 <tr>
