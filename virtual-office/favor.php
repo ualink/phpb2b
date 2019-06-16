@@ -19,7 +19,7 @@ if (isset($_POST['del'])) {
 	}
 	if(!empty($_ids)) $_ids = implode(",", $_ids);
 	$ids = "(".$_ids.")";
-	$sql = "DELETE FROM {$tb_prefix}favorites WHERE id IN ".$ids." AND member_id=".$the_memberid;
+	$sql = "DELETE FROM {$tb_prefix}favorites WHERE id IN ".$ids." AND member_id='".$the_memberid."'";
 	$res = $pdb->Execute($sql);
 	if (!$res) {
 		flash("action_failed");
@@ -28,10 +28,11 @@ if (isset($_POST['del'])) {
 if(isset($_POST['do']) && isset($_POST['id'])){
 	//check limit
 	$type_id = 1;
-	$f_limit = $pdb->GetOne($sql = "SELECT count(id) FROM {$tb_prefix}favorites WHERE type_id='".$type_id."' AND member_id=".$the_memberid);
-	if ($trade_model->checkExist($_POST['id'])) {
+	$f_limit = $pdb->GetOne($sql = "SELECT count(id) FROM {$tb_prefix}favorites WHERE type_id='".$type_id."' AND member_id='".$the_memberid."'");
+	$tid = intval($_POST['id']);
+	if ($trade_model->checkExist($tid)) {
 		if ($g['max_favorite']==0 or $g['max_favorite']>$f_limit) {
-			$sql = "INSERT INTO {$tb_prefix}favorites (target_id,member_id,type_id,created,modified) VALUE (".$_POST['id'].",".$the_memberid.",".$type_id.",".$time_stamp.",".$time_stamp.")";
+			$sql = "INSERT INTO {$tb_prefix}favorites (target_id,member_id,type_id,created,modified) VALUE (".$id.",'".$the_memberid."','".$type_id."','".$time_stamp."','".$time_stamp."')";
 			$result = $pdb->Execute($sql);
 		}else{
 			flash("post_max");
