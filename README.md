@@ -8,11 +8,11 @@ PHPB2B is an opensource and free b2b program.
 Some Handy Links
 ----------------
 
-[PHPB2B](http://phpb2b.ualink.net) - The very rapid alibaba b2b clone script.
+[PHPB2B](http://www.phpb2b.com/) - The very rapid alibaba b2b clone script.
 
 [BBS](http://bbs.phpb2b.com) - THE PHPB2B Forum.
 
-[DEMO](http://demo.phpb2b.com/) - PHPB2B Demonstration.
+[DEMO](http://demo.phpb2b.com/en6.0) - PHPB2B Demonstration.
 
 Get Support!
 ------------
