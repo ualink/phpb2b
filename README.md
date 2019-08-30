@@ -10,7 +10,6 @@ Our goal is to enable more enterprises to quickly establish industry e-commerce 
 It is expected that PHPB2B will become the first choice for enterprises to move towards e-commerce.
 
 ## Some Handy Links
-----------------
 
 [PHPB2B](http://www.phpb2b.com/) - The very rapid alibaba b2b clone script.
 
@@ -19,8 +18,6 @@ It is expected that PHPB2B will become the first choice for enterprises to move 
 [DEMO](http://demo.phpb2b.com/en6.0) - PHPB2B Demonstration.
 
 ## Get Support!
-------------
-
 [GitHub Issues](https://github.com/ulinke/phpb2b/issues) - Got issues? Please tell us!
 
 [![Demo Status](http://demo.phpb2b.com/en6.0/static/images/logo.jpg)](http://demo.phpb2b.com/cn6.0/redirect.php?app_lang=en-us)
