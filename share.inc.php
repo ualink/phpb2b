@@ -24,7 +24,6 @@ if(!MAGIC_QUOTES_GPC) {
 }
 $style_name = !empty($G['setting']['site_style'])?$G['setting']['site_style']:"red";
 $theme_name = !empty($G['setting']['site_theme'])?$G['setting']['site_theme']:$theme_name;
-//if(is_dir(PHPB2B_ROOT. "templates/".$app_lang."/")) $theme_name = $app_lang;
 $sections = array('site','message');
 $smarty->configLoad('default.conf', $sections);
 $ADODB_FETCH_MODE = ADODB_FETCH_ASSOC;
