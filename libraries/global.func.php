@@ -1015,6 +1015,9 @@ function pb_configmake($lang, $exit = true)
 			while ($data = fgetcsv($fp, 1024, ",")) {
 				$title = trim($data[0]);
 				$content = $data[1];
+				if(strpos($content, "\r\n")!==false){
+                    $content = strstr($content, "\r\n", true);
+                }
 				if ($charset == "gbk") {
 					//only for gbk chinese
 					$content = iconv('gbk', $charset, $content); //if your language is utf-8,please delete this line.
@@ -1040,6 +1043,11 @@ function pb_configmake($lang, $exit = true)
 				while ($data = fgetcsv($fp, 1024, ",")) {
 					$title = trim($data[0]);
 					$content = $data[1];
+                    if(strpos($content, "\r\n")!==false){
+                        $content = strstr($content, "\r\n", true);
+                    }elseif(strpos($content, "\n")!==false){
+                        $content = strstr($content, "\n", true);
+                    }
 					if ($charset == "gbk") {
 						//only for gbk chinese
 						$content = iconv('gbk', $charset, $content); //if your language is utf-8,please delete this line.
