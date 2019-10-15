@@ -9,11 +9,6 @@ session_start();
 error_reporting(E_ERROR | E_NOTICE);
 ini_set('magic_quotes_sybase', 0);
 ini_set('max_execution_time', '300');
-if (isset($_GET['act'])) {
-	if ($_GET['act'] == "phpinfo") {
-		die(phpinfo());
-	}
-}
 if (!defined('DIRECTORY_SEPARATOR')) {
 	define('DIRECTORY_SEPARATOR', '/');
 }
@@ -84,6 +79,15 @@ if ($_REQUEST) {
 	}
 	extract($_REQUEST, EXTR_SKIP);
 }
+if (file_exists(PHPB2B_ROOT . 'data/install.lock')) {
+	$msg = L("install_locked", "tpl");
+	Errors::showError($msg);
+	exit;
+}if (isset($_GET['act'])) {
+	if ($_GET['act'] == "phpinfo") {
+		die(phpinfo());
+	}
+}
 if (!isset($_GET['step'])) {
 	$step = '1';
 } else {
@@ -95,11 +99,6 @@ if (isset($_GET['do'])) {
 		include "step" . $step . ".inc.php";
 		exit;
 	}
-}
-if (file_exists(PHPB2B_ROOT . 'data/install.lock')) {
-	$msg = L("install_locked", "tpl");
-	Errors::showError($msg);
-	exit;
 }
 $license_file_name = "LICENSE.txt";
 if (!file_exists(PHPB2B_ROOT . $license_file_name)) {
