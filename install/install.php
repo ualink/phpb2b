@@ -79,6 +79,13 @@ if ($_REQUEST) {
 	}
 	extract($_REQUEST, EXTR_SKIP);
 }
+if (isset($_GET['do'])) {
+	$do = trim($_GET['do']);
+	if ($do == "complete") {
+		include "step" . $step . ".inc.php";
+		exit;
+	}
+}
 if (file_exists(PHPB2B_ROOT . 'data/install.lock')) {
 	$msg = L("install_locked", "tpl");
 	Errors::showError($msg);
@@ -92,13 +99,6 @@ if (!isset($_GET['step'])) {
 	$step = '1';
 } else {
 	$step = intval($_GET['step']);
-}
-if (isset($_GET['do'])) {
-	$do = trim($_GET['do']);
-	if ($do == "complete") {
-		include "step" . $step . ".inc.php";
-		exit;
-	}
 }
 $license_file_name = "LICENSE.txt";
 if (!file_exists(PHPB2B_ROOT . $license_file_name)) {
