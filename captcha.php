@@ -18,8 +18,8 @@ if (!empty($_GET['do'])) {
 	}
 }
 $img->code_length = 4;
-if (is_file('data/ttffonts/COOLVETI.ttf')){
-	$img->ttf_file = 'data/ttffonts/COOLVETI.ttf';
+if (is_file(dirname(__FILE__) . '/data/ttffonts/COOLVETI.ttf')){
+	$img->ttf_file = dirname(__FILE__) . '/data/ttffonts/COOLVETI.ttf';
 }else{
 	$img->gd_font_file = 3;
 }

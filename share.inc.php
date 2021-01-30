@@ -10,7 +10,6 @@ $theme_name = "default";//templet name, default as 'default'
  * templates directory, DO NOT change.
  */
 $tpl_dir = "templates";
-//$limit = 10;//site every page set.
 $pos = 0;
 if (isset($_GET['pos'])) {
 	$pos = intval($_GET['pos']);
@@ -32,7 +31,6 @@ $theme_img_name = !empty($style_name)?"style/".$style_name."/":'';
 $smarty->setTemplateDir(PHPB2B_ROOT .$tpl_dir.DS."site".DS.$theme_name.DS, 'main');
 $smarty->flash_layout = $theme_name."/flash";
 $smarty->assign("theme_img_path", $tpl_dir. "/site/".$theme_name."/");
-//$smarty->assign("theme_style_path", "templates/site/".$style_name."/");
 $smarty->assign("theme_style_name", $style_name);
 $smarty->assign("theme_img_name", $tpl_dir. "/site/".$theme_name."/".$theme_img_name);
 $smarty->assign('theme_name', $theme_name);
