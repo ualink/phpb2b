@@ -28,7 +28,7 @@ It is expected that PHPB2B will become the first choice for enterprises to move 
 ## 安全漏洞说明 / Security Vulnerabilities
 For security vulnerabilities, please contact us via ``service#ualink.net`` and do not post on GitHub Issue.
 
-提交安全漏洞，请直接联系我们：service#ualink.net。您也可以通过[先知安全服务平台](https://xianzhi.aliyun.com)、[360补天](https://loudong.360.cn/)、[国家信息安全漏洞共享平台](http://www.cnvd.org.cn)等平台向我们提交。**请不要在GitHub Issue等公开领域发布和漏洞有关的信息，更不要百度翻译成英文后向我们提交，我们看得懂汉字。** 
+提交安全漏洞，请直接联系我们：service@ualink.net。您也可以通过[先知安全服务平台](https://xianzhi.aliyun.com)、[360补天](https://loudong.360.cn/)、[国家信息安全漏洞共享平台](http://www.cnvd.org.cn)等平台向我们提交。**请不要在GitHub Issue等公开领域发布和漏洞有关的信息，更不要百度翻译成英文后向我们提交，我们看得懂汉字。** 
 
 ## 社区说明 / Community Statement
 1. 使用交流及开发建议，请转向[PHPB2B论坛](http://bbs.phpb2b.com/)；
