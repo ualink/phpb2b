@@ -6,5 +6,11 @@
 .project
 .settings
 
+# phpb2b
+configs/config.inc.php
+data/cache
+data/templates_c
+data/templates_cache
+
 # windows thumbnail cache
 Thumbs.db
