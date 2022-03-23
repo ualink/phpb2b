@@ -1190,11 +1190,16 @@ function pb_attack_filter($StrFiltKey, $StrFiltValue, $ArrFiltReq)
         exit();
     }
 }
-function pb_hack_check()
+
+function pb_hack_check($arr = [])
 {
     $getfilter = "'|(and|or)\\b.+?(>|<|=|in|like)|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT|UPDATE.+?SET|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE).+?FROM|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)";
     $postfilter = '\\b(and|or)\\b.{1,6}?(=|>|<|\\bin\\b|\\blike\\b)|\\/\\*.+?\\*\\/|<\\s*script\\b|\\bEXEC\\b|UNION.+?SELECT|UPDATE.+?SET|ascii|load_file|substring|INSERT\\s+INTO.+?VALUES|(SELECT|DELETE).+?FROM|(CREATE|ALTER|DROP|TRUNCATE)\\s+(TABLE|DATABASE)';
-    $_PG = array_merge($_GET, $_POST);
+    if (empty($arr)) {
+        $_PG = array_merge($_GET, $_POST);
+    } else {
+        $_PG = $arr;
+    }
     foreach ($_PG as $key => $value) {
         pb_attack_filter($key, $value, $getfilter);
         pb_attack_filter($key, $value, $postfilter);
