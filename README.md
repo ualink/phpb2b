@@ -3,7 +3,7 @@ PHPB2B
 
 [![PHPB2B](http://www.phpb2b.com/media/image/logo.png)](http://www.phpb2b.com)
 
-PHPB2B is a free and open source B2B program provided by the Ualink community, and has been committed to providing excellent open source e-commerce solutions to enterprises. Since the first edition was released in 2007, it has a history of 12 years. It is one of the few open source B2B systems that continuously provide updates.
+PHPB2B is a free and open source B2B program provided by the Ualink community, and has been committed to providing excellent open source e-commerce solutions to enterprises. Since the first edition was released in 2007, it has a history of 15 years until 2022. It is one of the best open source B2B systems that continuously provide updates.
 
 Our goal is to enable more enterprises to quickly establish industry e-commerce websites, without paying attention to program development and tedious settings, so that enterprises focus on operation. For users, it can facilitate transactions and find buyers on the platform. For developers, it also has powerful customizability, rich plug-in interfaces and exquisite theme templates.
 
