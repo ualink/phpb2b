@@ -11,6 +11,7 @@ nginx.htaccess
 # phpb2b
 configs/config.inc.php
 data/cache
+data/language
 data/templates_c
 data/templates_cache
 
