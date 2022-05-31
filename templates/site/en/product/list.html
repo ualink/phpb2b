@@ -1,0 +1,101 @@
+{assign var="page_title" value="$page_title"}
+{assign var="nav_id" value="$nav_id"}
+{include file="header.html"}
+<link href="{$theme_img_path}css/index_global.css" rel="stylesheet" type="text/css" />
+<link href="{$theme_img_path}css/buy_list.css" rel="stylesheet" type="text/css" />
+<div class="breadline">{$position}</div>
+   <div class="tbody">
+        <div class="float_left">	
+             <div class="line_top">  
+                <div class="left_title_bg">
+                  <div class="navbg">
+                    <div>{lang search_result}</div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <div class="leftbar_bgcolor">
+                  <ul>
+                    <li class="width_02">{lang products_picture}</li>
+                    <li class="width_03">{lang supply_information_company}</li>
+                    <li class="width_04">{lang all_area}</li>
+                    <li class="width_04">{lang reputation_index}</li>
+                    <li class="width_04">{lang online_contact}</li>
+
+                  </ul>
+                  <div class="clear"></div>
+                </div>
+            
+                   {foreach from=$items name=product item="item"}
+                 <div class="list_product">
+                  <ul>
+                  <li class="width_02">
+                  <a href="{$item.url}"><img src="{$item.thumb}" border=0 alt="{$item.name}" width="80" height="80"></a></li>
+                    <li class="width_03">
+                      <div>
+                        <ul>
+        
+                          <li class="font14"><strong><a href="{$item.url}" title="{$item.name}">{$item.name}</a></strong><font color="#999999" class="font12">{$item.pubdate}</font></li>
+                          <li class="pad_top_5px break">{lang abstract}{$item.content|truncate:100}</li>
+						  <li class="pad_top_5px break">{lang publisher} {if $item.companyname}<a href="space.php?userid={$item.username}">{$item.companyname}</a>{else}{$item.username}{/if}</li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="width_04">{if $item.area_id1}{$Areas[1][$item.area_id1]}<br />{$Areas[2][$item.area_id2]}{/if}</li>
+                    <li class="width_04"><img src="{$item.gradeimg}" alt="{$item.gradename}" ></li>
+                    <li class="width_04"> <span>{$item.im}</span><br />
+                    <span class="two">
+                    {if $item.companyname!=""}
+                    <a href="space.php?do=feedback&userid={$item.username}">{lang station_message}</a>
+                    {else}
+                    <a href="virtual-office/pms.php?do=send&to={$item.username}">{lang send_message}</a>
+                    {/if}
+                    </span></li>
+                      
+                  </ul>
+                  <div class="clear"></div>
+                </div>
+                  {/foreach}
+                <div class="bg_gary">
+                <div class="pad_top_10px">
+                  <div class="page">{$ByPages}</div>
+                </div>
+                <div class="pad6">
+                  <div style="padding:10px 0;">Want to display your products? It's FREE! <a href="#" target="_blank" title="Post My Product"><img src="{$theme_img_path}images/btn_03.gif" border="0" align="absmiddle" /></a></div>
+                </div>
+ 				<div class="pad6">
+				<!-- {if $OtherIndustry} -->
+					{foreach from=$OtherIndustry item=item key=key}
+					{if $key==$smarty.get.industryid}
+					Category &raquo; <a href="index.php?do=product&action=lists&industryid={$key}">{$item}</a><hr>
+					{else}
+					<a href="index.php?do=product&action=lists&industryid={$key}">{$item}</a>
+					{/if}
+					{/foreach}
+				<!-- {/if} -->
+				</div>
+               </div>
+              </div>
+	   </div>
+	    <div class="float_right">
+             <div class="pad_top_10px"  style="text-align:left;">
+                <div class="title_green"><span class="span_more"><a href="index.php?do=announce&action=lists"><img border="0" src="{$theme_img_path}images/more_blue.gif" alt="Busy Times" /></a></span>Announcements</div>
+            
+                <div class="border_green">
+                    <div class="featured" style="background:#FBFFF5; padding:2px; overflow:hidden;">
+                        <ul>         
+		{pb:announce infolen=40 row=5 name=item}
+                            <li class="margin_bottom_5px">
+                               <a href="{$item.url}">{$item.title}</a>
+                           </li>
+		{/pb:announce}
+                        </ul>
+                    </div>
+                </div>
+            </div>	 
+    </div>
+    <div class="clear"></div>
+    <script>
+$("#SearchFrm").attr("action","index.php");
+$("#topMenuProduct").addClass("search_tag_a");
+</script>
+{include file="footer.html"}

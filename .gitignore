@@ -5,6 +5,8 @@
 .buildpath
 .project
 .settings
+nginx.htaccess
+.htaccess
 
 # phpb2b
 configs/config.inc.php

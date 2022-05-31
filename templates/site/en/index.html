@@ -1,0 +1,148 @@
+<!-- {assign var="metakeywords" value="$site_description"} -->
+<!-- {assign var="metadescription" value="$site_description"} -->
+<!-- {assign var="do" value="offer"} -->
+<!-- {assign var="home_title" value=$_G.site_name} -->
+<!--{include file="header.html" page_title="$home_title" nav_id=1}-->
+<link href="{$theme_img_path}css/lnav.css" rel="stylesheet" type="text/css" />
+<link href="{$theme_img_path}css/smallslider.css" rel="stylesheet" type="text/css" />
+<script src="{$theme_img_path}js/jquery.smallslider.js"></script>
+<!-- {literal} -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $(function(){
+		$('#flashbox').smallslider();
+    });
+});
+</script> 
+<!-- {/literal} -->
+<div class="adv">
+	<!-- {ads typeid=1 row="8" name="ads"} --><span><!-- {$ads.link} --></span><!-- {/ads} -->
+</div>
+<div id="main">
+	<div id="lmain">
+			<div class="lbtitle">{lang industry_sort}</div>
+			<ul id="lnav">
+			<!--{get var="IndustryList" from="industry"}-->
+			{foreach from=$IndustryList item=item0 key=key0 name=level_0}
+			    <li><a href="index.php?do=product&action=lists&industryid={$item0.id}">{$item0.name}</a>
+					{if $item0.sub}
+                      <ul>
+						{foreach from=$item0.sub name=level_1_industry item=level1 key=key_level1}
+                         <li><a href="index.php?do=product&action=lists&industryid={$level2.id}" title="{$level1.name}" class="typeboxlet01">{$level1.name}</a></li>
+                        {/foreach}
+                        </ul>
+					{/if}
+             	</li>
+			{/foreach}
+				<div class="view-all"><img src="{$theme_img_path}images/v4/bi.gif">&nbsp;<a href="index.php?do=topic">View All Categories</a></div>
+			</ul>
+			<div class="lgtitle">{lang newest_company}</div>
+            <ul class="srlist">
+			{pb:company row=10 name="item"}
+			<li>{$item.link}</li>
+			{/pb:company}
+			</ul>	
+	</div>
+	<div id="mrmain">
+			<div style="float:left;width:420px;margin:0 20px 0 0;overflow:hidden">
+				<div id="flashbox" class="smallslider">
+				  <ul>
+					<!--{ads typeid=5 force=n row=10 name=ads5}-->
+					 <li><a href="{$ads5.url}" target="_blank">{$ads5.src}</a></li>
+					<!--{/ads}-->
+				  </ul>
+				</div>
+				<div class="clear"></div>
+				<div class="blank6"></div>
+				<div class="mbtitle">{lang new_offer}</div>
+				<div class="ltlmain">
+					<ul id="scroll_sell" class="ltllist" style="float:left; width:200px;height:100px;overflow:hidden;list-style:none;">
+						{pb:offer typeid="2" row=10 name="item"}
+							<li> {$item.link}</li>
+						{/pb:offer}
+					</ul>
+					<div style="float:left; height:100px; width:4px;margin:0px 2px 0px 2px;border-left:1px dashed #CCCCCC;margin-left:"></div>
+					<ul id="scroll_buy" class="ltllist" style="width:200px;height:100px;float:left;list-style:none;overflow:hidden;">
+						{pb:offer  typeid="1" row=10 name="item"}
+							<li> {$item.link}</li>
+						{/pb:offer}
+					</ul>
+				</div>
+			</div>
+			<div class="login">
+				<span class="login_bg_left"></span>
+				<span class="login_bg_middle">
+
+					<div class="login_buyer"><a href="{$SiteUrl}virtual-office/offer.php?do=edit&typeid=1">buyer login</a></div>
+					<div class="login_seller"><a href="{$SiteUrl}virtual-office/offer.php?do=edit&typeid=2">seller login</a></div>
+					<div>
+						<span style="margin:0 10px 0 0;" class="login_lr">
+							<div class="login_lr_tip">Already our Member</div>
+							<div class="login_lr_link"><a href="logging.php">Sign in Here</a></div>
+						</span>
+
+						<span class="login_lr">
+							<div class="login_lr_tip">New to B2B</div>
+							<div class="login_lr_link"><a class="Und0a0" href="member.php">Join FREE !</a></div>
+						</span>
+					</div>
+					<div class="login_gold"><a href="purchase.php?do=charge">Premium Services</a></div>
+				</span>
+
+				<span class="login_bg_right"></span>
+			</div>
+            <div class="clear"></div>
+			<div class="ads_img">
+               <!--{ads typeid=2 name="ads1"}--><span>{$ads1.link}</span><!--{/ads}-->
+			</div>
+	</div>
+	<div id="bmrmain">
+        <div id="mmain">
+            <div class="mbtitle">{lang hot_product}</div>
+            <div style="clear:both"></div>
+            <div class="hp_main">
+                 <div class="hp_list">
+                    <ul class="hp_list_photo">
+                    {pb:product row=9 type="image" titlelen="10" name="item"}
+                        <li><a href="{$item.url}" title=""><img src="{$item.src}" width="75" height="75" alt="{$item.title}" /></a><a href="{$item.url}" title="{$item.title}"><em>{$item.title}</em></a></li>
+                        {/pb:product}
+                        <div class="clear"></div>
+                     </ul>
+                </div>
+            </div>
+         </div>		
+			<div id="rmain">
+				<div class="rbtitle">Hot fair and expo<a href="index.php?do=fair&action=lists"><img src="{$theme_img_path}images/icon_more.gif" /></a></div>
+				<div class="rg_main_content">
+			    <ul class="rglist">
+                	{pb:fair row=10 magic="y" infolen="18" titlelen=40 name="item"}
+				     <li>{$item.link}</li>
+                    {/pb:fair}
+                </ul>
+				</div>
+                
+                <div class="rbtitle">Latest News<a href="index.php?do=news&action=lists"><img src="{$theme_img_path}images/icon_more.gif" /></a></div>
+				<div class="rg_main_content">
+			    <ul class="rglist">
+                	{pb:news row=14 name="item"}
+							<li><a href="{$item.url}" title="{$item.title}">{$item.title}</a></li>
+							{/pb:news}
+                </ul>
+				</div>
+                
+	        </div>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div  style="width:958px;padding-top:5px;padding-bottom:5px;">
+      <div style="width:956px;background:url({$theme_img_path}images/blue_title_show.gif) repeat;height:25px;border-left:1px solid #87B4B7;border-right:1px solid #87B4B7;	font-family: 'Times New Roman';font-size: 14px;font-weight: bold;text-indent:10px;line-height:22px;color:#133b62;">{lang friend_links}</div>
+       <div style="position:relative;border:1px solid #b7c8d9;border-top:none;padding:10px;overflow:auto;">
+	   {pb:friendlink name="item" row=15}
+			<a href="{$item.url}" title="{$item.tip}" target="_blank">{$item.title}</a>&nbsp;&nbsp;
+		{/pb:friendlink}
+       </div> 
+    </div>
+    <div class="clear"></div>
+    <!--{include file="footer.html"}-->

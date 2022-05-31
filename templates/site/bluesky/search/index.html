@@ -2,29 +2,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
-<title>{$page_title} - {$site_title}</title>
+<title>{$page_title} - {$_G.site_title}</title>
 <base href="{$SiteUrl}">
 <meta name ="keywords" content="{$metakeywords}">
 <meta name ="description" content="{$metadescription}"> 
-<script src="{$WebRootUrl}scripts/jquery.js"></script>
-<script src="data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<script src="{$WebRootUrl}static/scripts/jquery.js"></script>
+<script src="{$WebRootUrl}data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
 <style type="text/css">
 @import url({$WebRootUrl}{$theme_img_path}css/search.css);
 </style>
 <script>
 var input_keywords = "{lang input_keywords}";
-var select_item = "{$smarty.get.do}";
-var site_name = "{$site_name}";
+var select_item = "{$module}";
+var site_name = "{$_G.site_name}";
 var site_url = "{$SiteUrl}";
 </script>
-<script src="{$WebRootUrl}scripts/jquery/jquery.validate.js"></script>
-<script src="{$WebRootUrl}scripts/validate.js"></script>
+<script src="{$WebRootUrl}static/scripts/jquery/jquery.validate.js"></script>
+<script src="{$WebRootUrl}static/scripts/validate.js"></script>
 <!-- {literal} -->
 <script> 
 $(document).ready(function(){   
 	if($("#item_"+select_item).length>0){
 		$("#item_"+select_item).addClass("stab"); 
-		$("#Do").val(select_item);
+		//$("#Do").val(select_item);
 	}else{
 		$("#nav_items").find('a:first').addClass("stab"); 
 	}
@@ -90,11 +90,10 @@ a.stab { font-weight:bold; color:#000000; text-decoration:none; cursor:default}
 <tr>
 <td style="padding-left: 30px; height: 32px;" nowrap="nowrap">
 <div id="nav_items">
-	  <a href="{the_url module=search do=product action=lists}" id="item_product">{lang product}</a>
-	  <a href="{the_url module=search do=offer action=lists}" id="item_offer">{lang offer}</a>
-	  <a href="{the_url module=search do=company action=lists}" id="item_company">{lang yellow_page}</a>
-	  <a href="{the_url module=search do=market action=lists}" id="item_market">{lang pro_market}</a>
-	  <a href="{the_url module=search do=news action=lists}" id="item_news">{lang information}</a>
+	  <a href="{the_url do=search module=product}" id="item_product">{lang product}</a>
+	  <a href="{the_url do=search module=offer}" id="item_offer">{lang offer}</a>
+	  <a href="{the_url do=search module=company}" id="item_company">{lang yellow_page}</a>
+	  <a href="{the_url do=search module=news}" id="item_news">{lang information}</a>
 </div>
 </td>
 </tr>
@@ -103,8 +102,10 @@ a.stab { font-weight:bold; color:#000000; text-decoration:none; cursor:default}
 
 <table cellpadding="0" cellspacing="1" id="SearchBtn">
 <tbody>
-<form name="search_frm" method="get" action="{$smarty.server.PHP_SELF}">
-<input type="hidden" name="do" id="Do" value="product">
+<form name="search_frm" method="get" action="{$_G.PHP_SELF}">
+<input type="hidden" name="do" id="Do" value="search">
+<input type="hidden" name="action" id="Action" value="lists">
+<input type="hidden" name="module" id="Module" value="{$module|default:product}">
 <tr valign="top"><td style="padding-left: 30px; height: 32px;" nowrap="nowrap">
 <input value="" name="q" id="kw" rel="kw" size="42" maxlength="90"> <span class="btn_wr"><input type="submit" onmouseout="this.className='btn'" onmousedown="this.className='btn btn_h'" class="btn" id="su" value="{lang search}"></span></td></tr>
 </form>
@@ -116,29 +117,29 @@ a.stab { font-weight:bold; color:#000000; text-decoration:none; cursor:default}
 </tbody>
 </table>
   
-<span id="btn1" class="toocle2">&nbsp;<a href="javascript:;" title="{$site_name} {lang set_home_page}" id="sethomepage"></a></span></p>
+<span id="btn1" class="toocle2">&nbsp;<a href="javascript:;" title="{$_G.site_name} {lang set_home_page}" id="sethomepage"></a></span></p>
 <table class="toocle2" id="myurldiv" style="margin: 3px 0pt 20px 28px; width: 550px;" border="0" cellpadding="0" cellspacing="0">
 <tbody>
 <tr>
 <td class="index_4" width="75" height="22">
-<div id="myurl0"><a href="special/?type=industry" target="_blank" class="anmyb2b">{lang industry_category}</a></div>
+<div id="myurl0"><a href="index.php?do=topic&action=industry" target="_blank" class="anmyb2b">{lang industry_category}</a></div>
 </td>
-<!-- {pb:industry level=1 row=5} -->
-    <td class="index_4" width="75"><div id="myurl1"><a href="special/?industryid={$industry.id}" target="_blank" class="an">{$industry.name}</a></div></td>
+<!-- {pb:industry level=1 row=5 name=industry} -->
+    <td class="index_4" width="75"><div id="myurl1"><a href="index.php?do=topic&action=industry&id={$industry.id}" target="_blank" class="an">{$industry.name|pl}</a></div></td>
 <!-- {/pb:industry} -->
-    <td class="index_4"><div id="myurl7"><a href="special/?type=industry" class="an">{lang more}&raquo;</a></div></td>
+    <td class="index_4"><div id="myurl7"><a href="index.php?do=topic&action=industry" class="an">{lang more}&raquo;</a></div></td>
 </tr>
-  <tr><td class="index_4" height="22"><div id="myurl6"><a href="special/?type=area" target="_blank" class="anmyb2b">{lang area_category}</a></div></td>
-<!-- {pb:area level=1 row=5} -->
-    <td class="index_4"><div id="myurl7"><a href="special/?areaid={$area.id}" class="an">{$area.name}</a></div></td>
+  <tr><td class="index_4" height="22"><div id="myurl6"><a href="index.php?do=topic&action=area" target="_blank" class="anmyb2b">{lang area_category}</a></div></td>
+<!-- {pb:area level=1 row=5 name=area} -->
+    <td class="index_4"><div id="myurl7"><a href="index.php?do=topic&action=area&id={$area.id}" class="an">{$area.name|pl}</a></div></td>
 <!-- {/pb:area} -->
-    <td class="index_4"><div id="myurl7"><a href="special/?type=area" class="an">{lang more}&raquo;</a></div></td>
+    <td class="index_4"><div id="myurl7"><a href="index.php?do=topic&action=area" class="an">{lang more}&raquo;</a></div></td>
 </tr>
 </tbody>
 </table>  
 
 <p>
-<!--{pb:userpage row=15 sep="<span>&nbsp;|&nbsp;</span>"}-->
+<!--{pb:userpage row=15 sep="<span>&nbsp;|&nbsp;</span>" name="page"}-->
 	{$page.link}
 <!--{/pb:userpage}-->
 </p>

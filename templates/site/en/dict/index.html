@@ -1,0 +1,82 @@
+{assign var="page_title" value=#dictionary#}
+{assign var="nav_id" value="11"}
+{assign var="metakeywords" value=#dictionary#}
+{assign var="metadescription" value=#dict_digest_content#}
+{include file="header.html"}
+<style type="text/css">
+@import url({$theme_img_path}general.css);
+@import url({$theme_img_path}effect.css);
+@import url({$theme_img_path}style.css);
+</style>
+<div class="wrapper">
+	<div class="content clearfix">
+	  <div class="main_left_w720">
+	  <div class="title_bar_s5">
+	  <div class="lemma clearfix">
+		<div class="new_lemma">
+		 <h2>{lang latest_words}</h2>
+		 <ul>
+		 {pb:dict row=25 name="item"}
+		  <li>{$item.link}</li>
+		 {/pb:dict}
+		 </ul>
+		</div>
+		<div class="hot_lemma">
+		 <h2>{lang hot_words}</h2>
+		 <ul>
+		 {pb:dict row=25 orderby="hits DESC" name="item"}
+		  <li>{$item.link}</li>
+		 {/pb:dict}
+		 </ul>
+		</div>
+        <div class="clear"></div>
+	  </div>
+   </div>
+	   <div class="blank6"></div>
+	   <div class="lemma_main">
+		 <ul>
+			{foreach from=$Dictypes name=Dicttypes item=item1 key=key1}
+			 <li>
+			  <a href="index.php?do=dict&action=lists&typeid={$item1.id}">{$item1.name}</a>
+				{if $item1.sub}
+				  <p class="clearfix">
+						{foreach from=$item1.sub name=SubDicttypes item=item2 key=key2}
+							<a href="index.php?do=dict&action=lists&typeid={$item2.id}">{$item2.name}</a>
+						{/foreach}
+				  </p>
+				{/if}
+				{if !$smarty.foreach.Dicttypes.last}
+				    <hr class="hr_dashed" />
+				{/if}
+			 </li>
+			{/foreach}
+		 </ul>
+	   </div>
+	  </div>
+	  <div class="main_right_w230">
+	   <div class="title_bar_s1">
+	   <h2>{lang dict_digest}</h2>
+	   </div>
+	   <div class="dictionary">
+		<form name="dict_search_frm" id="dictSearchFrm" action="index.php" method="get">
+		<input type="hidden" name="do" value="dict" />
+		<input type="hidden" name="action" value="lists" />
+		 <p>{lang dict_digest_content}</p>
+		 <p><input name="q" id="queryStr" type="text" class="input_w160"/>&nbsp;<input type="submit" value="{lang search}" class="btn_submit_w45"/></p>
+		</form>
+	   </div>
+	   <div class="blank6"></div>
+		<div class="title_bar_s1">
+	   <h2>{lang announce}</h2>
+	   </div>
+	   <div class="dictionary">
+		<ul>
+			{pb:announce row=4 infolen=35}
+				<li><a href="{$item.url}" target="_blank">{$item.title}</a></li>
+			{/pb:announce}
+		</ul>
+	   </div>
+	  </div>
+	</div>
+</div>
+{include file="footer.html"}

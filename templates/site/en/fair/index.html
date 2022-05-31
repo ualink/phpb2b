@@ -1,0 +1,150 @@
+{assign var="page_title" value=#fair#}
+{assign var="nav_id" value="8"}
+{include file="header.html"}
+<link href="{$theme_img_path}css/fair.css" rel="stylesheet" type="text/css" />
+<link href="{$theme_img_path}css/busy.css" rel="stylesheet" type="text/css" />
+<link href="{$theme_img_path}css/menu_hk.css" rel="stylesheet" type="text/css" />
+<div id="main">
+    <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
+       <tr>
+         <td width="180" align="center" valign="top"><table width="100%"  border="0" cellpadding="1" cellspacing="1" bgcolor="#A0C6DD">
+       <tr>
+
+        <td height="130" align="center" valign="top" style="filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ffffff', endColorStr='#E0EDF5', gradientType='0')"><table width="100%"  border="0" cellpadding="2" cellspacing="1" bgcolor="#A0C6DD">
+
+              <tr>
+
+                <td style="filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ffffff', endColorStr='#E0EDF5', gradientType='0')"><strong>Picture Fairs</strong><div class="exh_con_img">
+			{ads type="focus" from="fair" width="176" height="80"}This text is replaced by the Flash movie.{/ads}
+		 </div></td>
+
+              </tr>
+
+            </table></td>
+
+        </tr>
+
+      </table></td>
+         <td width="600" align="center" valign="top"><table width="590" border="0" cellpadding="0" cellspacing="0">
+           <tr bgcolor="#FFFFFF">
+             <td width="100%"  height="23" background="{$theme_img_path}images/index_en7.gif" class="tradeshow_menu2" style=" cursor:default;text-align:left; padding-left:3px; border-bottom:1px #ccc solid" ><div style="float:left; padding-top:2px;">{lang recommended_fair}</div></td>
+           </tr>
+         </table>
+           <table width="590"   border="0" cellpadding="5" cellspacing="0">
+             <tr>
+               <td valign="top" bgcolor="#FFFFFF" class="t_menu_line"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+               {pb:fair row=24 name="item"}
+                   <tr  bgcolor="#FFFFFF">
+                     <td width="15" align="center"><img src="{$theme_img_path}images/fag.gif" width="8" height="10" /></td>
+                     <td align="left"><strong><a href="{$item.url}" class="font10">{$item.title}</a></strong></td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td align="left">{if $item.typename}<font color="#666666" size="1"><a href="index.php?do=fair&action=lists&typeid={$item.typeid}">[{$item.typename}]</a></font>, {/if}<font color="#666666" size="1">[{$item.pubdate}]</font></td>
+                   </tr>
+               {/pb:fair}
+                   <tr>
+                     <td height="8"></td>
+                   </tr>
+                 </table>
+                   <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                     <tr>
+                       <td align="right"><a href="index.php?do=fair&action=lists&" class="font10">more</a>&nbsp;</td>
+                     </tr>
+                 </table></td>
+             </tr>
+           </table></td>
+         <td width="180" align="center" valign="top"><table width="100%" border="0" cellspacing="0">
+
+        <tr>
+
+          <td height="3"></td>
+
+        </tr>
+
+      </table>
+
+         </td>
+       </tr>
+    </table>
+
+    <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+      <tr>
+    
+        <td height="5"></td>
+    
+      </tr>
+    
+    </table>
+    
+    <table width="960" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+      <tr>
+    
+        <td width="270" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+    
+            <tr>
+    
+              <td height="5"></td>
+    
+            </tr>
+    
+          </table>
+    
+          <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
+    
+            <tr>
+    
+              <td background="{$theme_img_path}images/index_en7.gif"><strong>Latest Expo</strong></td>
+    
+            </tr>
+    
+            <tr>
+    
+              <td bgcolor="#FFFFFF"><table width="100%"  border="0" cellspacing="0" cellpadding="2">
+    {pb:fair row=10 name="item"}
+                  
+                    <tr>
+    
+                      <td>&#8226; <a href="{$item.url}" class="font10">{$item.title}</a> </td>
+    
+                    </tr>
+  {/pb:fair}  
+                </table>
+    
+                <table width="100%"  border="0" cellspacing="0" cellpadding="1">
+    
+                  <tr>
+    
+                    <td align="right" bgcolor="F1F1F1"><a href="index.php?do=fair&action=lists" class="font10">more</a>&nbsp;</td>
+    
+                  </tr>
+    
+                </table></td>
+    
+            </tr>
+    
+          </table></td>
+          </tr>
+        </table>
+</td>    
+       <td width="180" valign="top">&nbsp;</td>
+    
+      </tr>
+    
+    </table>
+    
+    <table width="50%" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+      <tr>
+    
+        <td height="5"></td>
+    
+      </tr>
+    
+    </table>
+
+
+    </div>
+{include file="footer.html"}

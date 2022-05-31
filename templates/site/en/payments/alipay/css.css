@@ -1,0 +1,42 @@
+/* CSS Document */
+
+/* all*/
+body {margin:0px; padding:0px; color:#333; line-height:20px;}
+ul,li,form,p,h1,h2,h3,h4 {margin:0px; padding:0px; list-style-type:none; font-weight:normal; font-size:12px;}
+img {border:0;}
+#box {width:930px; height:560px; margin:0px auto; overflow:hidden; background:#fff; padding:15px; border:2px solid #bbb}
+.clear {margin:0px; padding:0px; clear:both; line-height:0px;  font-size:0px; height:1px; width:100%;}
+.clear1 {margin:0px; padding:0px; clear:both; line-height:0px; clear:both; font-size:0px; height:7px;}
+.line {margin:0px; padding:0px; clear:both; line-height:1px; font-size:0px; height:1px; width:100%; background:url(images/line.jpg) 0 0 repeat-x;}
+a {color:#000; text-decoration:none; line-height:20px;}
+a:hover {color:#B90000; text-decoration:underline;}
+/* all */
+
+.pay {margin-left:20px; background:url(images/logo.gif) 0 0 no-repeat; font-size:24px;  padding-left:150px; height:45px; line-height:40px; position:relative;}
+
+.pay_ts {float:left; width:260px; height:520px; background:#FAFAFA url(images/ts.png) 5px 5px no-repeat; border:1px #DBDBDB solid; padding:10px; position:absolute; right:10px; top:0px; font-size:12px; z-index:2; line-height:25px;}
+.pay_ts p {padding-left:40px; color:#1E9E00; font-weight:bold; font-size:14px; line-height:35px;}
+
+
+.payinput {float:left;}
+.payinput ul {padding-left:20px;}
+.payinput li {padding-top:15px; font-size:14px; width:auto; position:relative;}
+.payinput li p {float:left; width:80px; text-align:right; font-size:14px; font-weight:bold;}
+.payinput span { position:absolute; left:300px; top:15px; font-size:12px; color:#666; width:300px; line-height:18px;}
+
+.input200 {width:200px; height:18px; border:1px #ccc solid;}
+.input175 {width:175px; height:18px; border:1px #ccc solid;}
+.inputtext {width:200px; height:80px; border:1px #ccc solid;}
+.submit1 {background:url(images/submit.jpg) 0 0 no-repeat; height:51px; width:143px; border:0px; font-size:16px; font-weight:bold; cursor:pointer; line-height:51px; text-align:center; color:#333;}
+
+.success {margin:0 auto; background:url(images/success.png) 0 0 no-repeat; width:700px; height:50px; padding-left:40px; font-size:20px; line-height:30px; border-bottom:1px #ccc solid;}
+.fail {margin:0 auto; background:url(images/fail.png) 0 0 no-repeat; width:700px; height:50px; padding-left:40px; font-size:20px; line-height:30px; border-bottom:1px #ccc solid;}
+
+.successinfo {margin:0 auto; width:660px;}
+.successinfo li {padding-top:10px; font-size:14px;}
+.successinfo li p {float:left; width:150px; text-align:right; font-size:14px; font-weight:bold;}
+.successinfo li span {float:left; width:410px; text-align:left; font-size:14px;}
+
+
+.ts {margin:30px auto; background:#f5f5f5 url(images/ts.png) 10px 10px no-repeat; width:700px; height:130px; colr:#666; padding-top:20px; padding-left:50px; font-size:12px; line-height:25px; border:1px #ccc solid;}
+.ts p {font-size:14px; color:#ff6600;}

@@ -1,0 +1,26 @@
+{assign var="page_title" value="$page_title"}
+{include file="header.html"}
+<link href="{$theme_img_path}css/sitemap.css" rel="stylesheet" type="text/css" />
+<div id="main">
+   <div class="bread_line">{$position}</div>
+    <div class="title_bg">
+          <div>{lang offer_info}</div>
+    </div>
+    <div class="sitemap_list">
+      <ul>
+         <li><a href="buy/">{lang Buy}</a> - <a href="sell/">{lang supply}</a> - <a href="index.php?do=offer&action=lists&typeid=8">{lang inventory}</a> - <a href="index.php?do=offer&action=lists&typeid=5">{lang merchants}</a> - <a href="index.php?do=offer&action=lists&typeid=6">{lang join}</a> - <a href="index.php?do=offer&action=lists&typeid=4">{lang cooperation}</a> - <a href="index.php?do=offer&action=lists&typeid=3">{lang agent}</a> - <a href="index.php?do=offer&action=lists&typeid=7">{lang wholesale}</a></li>
+      </ul>	
+    </div>
+
+    <div class="title_bg">
+          <div>{lang important_channel}</div>
+    </div>
+    <div class="sitemap_list">
+      <ul>
+         <li><a href="company/">{lang yellow_page}</a> - <a href="index.php?do=company&action=lists&type=commend">{lang recommend_company_database}</a> - <a href="index.php?do=product">{lang nventory}</a> - <a href="index.php?do=news">{lang information}</a> - <a href="index.php?do=market">{lang professional_market}</a> - <a href="index.php?do=fair">{lang fair}</a></li>
+    
+      </ul>	
+    </div>
+
+ </div>
+    {include file="footer.html"}

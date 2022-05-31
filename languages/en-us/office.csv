@@ -37,7 +37,7 @@
 "account_product","product information section! "
 "offer_n","supply and demand information:"
 "stating","statistics"
-"offer_post_attention","<strong>¡¾Note¡¿: </strong> <br>1. Review and after the commencement of business information in order to use retransmission function. <br>2. The information has been released, please do not repeatedly published, if found will be immediately removed. <br>3. Please update outdated information, do not want to re-date information online, please delete it. <br>4. If it is sent information, we recommend that you use every day, "resend" feature to update the information, so that top-ranking information. <br>5. To modify the content of business information for the modification of information only and does not update the information in the rankings. "
+"offer_post_attention","<strong>Note: </strong> <br>1. Review and after the commencement of business information in order to use retransmission function. <br>2. The information has been released, please do not repeatedly published, if found will be immediately removed. <br>3. Please update outdated information, do not want to re-date information online, please delete it. <br>4. If it is sent information, we recommend that you use every day, "resend" feature to update the information, so that top-ranking information. <br>5. To modify the content of business information for the modification of information only and does not update the information in the rankings. "
 "product_management","Product Management"
 "self_advertising","self-advertising"
 "ads_list","ad listings"
@@ -70,7 +70,8 @@
 "copy_to_clipboard","Copy to Clipboard"
 "old_password","Old Password:"
 "repeat","repeat"
-"password_description","<strong>¡¾Note¡¿: </strong> <br><span class='zi'> 1. Please do not use and user name are identical password. <br> 2. Password suggestions length between 6-20, try to use a combination of numbers and letters. <br></span> "
+"password_description","<strong>ï¿½ï¿½Noteï¿½ï¿½: </strong> <br><span class='zi'> 1. Please do not use and user name are identical password. <br> 
+2. Password suggestions length between 6-20, try to use a combination of numbers and letters. <br></span> "
 "company_en_name","Company Name in English:"
 "sectors","Sector:"
 "employees_number","Employee:"

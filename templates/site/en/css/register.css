@@ -1,0 +1,64 @@
+@charset "utf-8";
+
+select,input,textarea{font-family:Tahoma; font-size:12px;}
+.box_reg{background:#f2f6fb; height:1%; border:1px solid #3a89c2;}
+.pad_bottom_10px{padding-bottom:10px;}
+.float_right{float:right;}
+.tit{overflow:hidden;}
+.tit span{float:right; font-size:12px; padding-right:5px; font-weight:100;}
+.tit .title_left_bg{background:url(../images/title_left_bg.gif) no-repeat; height:27px; width:11px; float:left;}
+.tit .title_right_bg{background:url(../images/title_right_bg.gif) no-repeat; float:left; width:3px; text-align:center; height:27px;  }
+.tit .title_c_bg{background:url(../images/title_c_bg.gif) repeat-x; padding-left:6px; width:940px; float:left;line-height:27px;font-size:14px; font-weight:bold;}
+.bread_line{padding:10px 0 20px 0; line-height:21px;}
+.tit_tishi{padding-bottom:5px;}
+.tit_tishi span{ color:#f00;}
+.tit_tishi li{ line-height:18px}
+.tit_change{ text-align:right; padding:5px 0; caption-side:#666}
+.register{padding:20px 0 ;}
+.register span{ color:#f00}
+.register li{ float:left; display:block}
+.register_lf{ width:230px; text-align:right; padding:0 5px; height:20px; line-height:20px; font-weight:bold}
+.register_rht{ width:516px; padding:1px 5px}
+.register_rht_lf{ float:left; width:106px; padding-top:3px;}
+.register_rht_rht{ float:left; width:200px}
+.register_ts_2{ color:#999; padding:3px 0; font-size:11px;}
+.x{ font-size:16px; font-weight:bold; padding:0 5px}
+.register_ts{ border:1px solid #ff6600; background: url(../images/error_bang.gif)  no-repeat 5px center #ffeeee;  padding:3px 3px 3px 26px; color:#ff0000}
+.bot{ text-align:center; padding:10px 0}
+.code_input{float:left;padding:0 10px 0 0;}
+.code_number{float:left;padding:0 0 0 10px;}
+.PwdMeterBase{margin-bottom:5px;width:248px;}
+.PwdBack{height:14px;background-image:url(../images/password_meter_grey.gif);background-position:center center;background-repeat: no-repeat;}
+.PwdMeter{width:0;background-image:url(../images/password_meter.gif);background-position:center center;background-repeat: no-repeat;height:14px; font-size:11px;color:#666;}
+
+/*  new-tt  */
+.register_title{padding:5px 0 10px 0;line-height:26px;}
+.register_txt_bold{font-weight:bold;font-size:12px;}
+.register_point_color{color:#FF6600;padding-right:14px;font-size:20px;}
+.register_point_color_x{color:#FF6600;padding-right:3px;font-size:11px;}
+
+.line_point{margin-left:30px;height:3px; background-image:url(../images/line_point.gif);}
+.register_txt_x{font-size:12px;color:#000000; padding-left:22px;overflow:auto;}
+.register_txt_x_a{font-size:12px;color:#000000; padding-left:28px;overflow:auto;}
+.register_txt_x .left_tx_r{width:155px; float:left;text-align:right; padding-right:10px;}
+.register_txt_x .left_tx_r_a{width:175px; float:left;text-align:right; padding-right:10px;}
+.register_txt_x .right_tx_r{float:left}
+.textbox_bg_flag
+{background-image:url(../images/flag_china_icon.gif);background-position: left center;background-repeat:no-repeat; padding-left:30px; margin-left:1px; width:160px;}
+.register_button_x{font-size:12px;color:#000000; margin:10px 0px 10px 300px; height:30px;}
+
+.reg_member_list th { font-size:14px;}
+.registercheck {
+float:left;
+width:200px;
+}
+.registercheck .registerpic {
+float:left;
+}
+.registercheck p {
+border:medium none;
+float:left;
+margin-left:10px;
+}
+.registerpic2 { margin:5px 0 0 0}
+.registerp2,.registerbutton { padding:0 0 0 240px;}

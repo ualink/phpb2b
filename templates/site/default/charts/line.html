@@ -1,0 +1,12 @@
+﻿<graph numdivlines='8' caption='{$title}' subcaption='' lineThickness='3' showValues='0' numVDivLines='10' formatNumberScale='0' rotateNames='1' decimalPrecision='1' anchorRadius='2' anchorBgAlpha='0' divLineAlpha='20' showAlternateHGridColor='1' yAxisMinValue='800000' shadowAlpha='50' animation='1' baseFontSize='12' showhovercap='1'>
+<categories>
+<!-- {foreach from=$trend_x item=x} -->
+	<category Name='{$x}'/>
+<!-- {/foreach} -->
+</categories>
+<dataset seriesName='{$x_label|default:$_tags}' color='A66EDD' anchorBorderColor='A66EDD' anchorRadius='4'>
+<!-- {foreach from=$trend_y item=y} -->
+	<set value='{$y}' />
+<!-- {/foreach} -->
+</dataset>
+</graph>

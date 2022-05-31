@@ -1,0 +1,78 @@
+{assign var="page_title" value=#search_offer#}
+{include file="header.html"}
+<link href="{$theme_img_path}css/real_buy.css" rel="stylesheet" type="text/css" />
+ <div class="breadline">{$position}</div>
+ <div class="tbody">
+     <div class="float_left">
+	     <div class="title">
+            <div><span><a href="#"><img alt="Latest Buying Leads" src="{$theme_img_path}images/more_white.gif"  /></a></span> Latest Buying Leads</div></div>
+            <div class="border">        
+                <div class="today_new">
+                    <ul>   
+					{pb:offer row=10 name=item item=item}
+                      <li ><a href="{$item.url}" title="{$item.title}">{$item.title}</a></li>
+                    {/pb:offer}
+                    </ul>
+                 </div>     
+              </div>
+			  <div class="blank6"></div>
+          <div class="pad_top_10px">
+              <div class="title"><div><span><a href="#"><img src="{$theme_img_path}images/more_white.gif" alt="Exclusive Buying Leads" /></a></span> {lang commend} {lang seller}</div></div>
+              <div class="border">
+                  <div class="today_new">
+                       <ul>
+					   {pb:company row=8 name=item item=item}
+                            <li ><a href="{$item.url}">{$item.title}</a></li>
+                        {/pb:company}
+                       </ul>
+                   </div>
+              </div>
+         </div>		
+    </div>
+     <div class="float_middle">
+        <div class="pad_top_10px">
+        <div class="middle_title_bg">
+			<div class="navbg">
+               <div>{lang industry_sort}</div>
+            </div> 
+           <div class="clear"></div>
+      </div>
+        <div class="border">
+          <div style="padding:15px;">  
+		  <!--{get var="IndustryList" from="industry"}-->
+		  {foreach from=$IndustryList item=item0 key=key0 name=level_0}
+               <div class="list_txt">
+ 	               <div class="pad_top_3px">
+                        <div class="bold"><a href="index.php?do=offer&action=lists&industryid={$item0.id}">{$item0.name}</a></div>
+						 {if $item0.sub}
+                        <div class="pad_top_3px pad_left_5px">
+                             <ul>
+					{foreach from=$item0.sub name=level_1_industry item=level1 key=key_level1}
+		                         <li>&raquo; <a href="index.php?do=offer&action=lists&industryid={$level1.id}" title="{$level1.name}" class="co_type_f">{$level1.name}</a></li>
+							{/foreach}
+		                      </ul>
+							
+                            <div class="clear"></div>
+                        </div>
+						{/if}
+		           </div>
+            
+         </div>
+		 {/foreach}
+          <div class="clear"></div>
+         </div>
+    </div>
+</div>
+</div>
+     <div class="float_right">     
+        <div>          
+        </div>  
+        <div class="pad_top_10px"></div>	 
+	 </div>
+       <div class="clear"></div>
+</div>
+<script>
+$("#SearchFrm").attr("action","index.php");
+$("#topMenuOffer").addClass("search_tag_a");
+</script>
+{include file="footer.html"}

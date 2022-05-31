@@ -1,0 +1,80 @@
+{assign var="page_title" value="$page_title"}
+{assign var="nav_id" value="$nav_id"}
+{include file="header.html"}
+<link href="{$theme_img_path}css/index_global.css" rel="stylesheet" type="text/css" />
+<link href="{$theme_img_path}css/buy_list.css" rel="stylesheet" type="text/css" />
+<div class="breadline">{$position}</div>
+   <div class="tbody">
+        <div class="float_left">	
+             <div class="line_top">  
+                <div class="left_title_bg">
+                  <div class="navbg">
+                    <div>{lang search_result}</div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <div class="leftbar_bgcolor">
+                  <ul>
+                    <li class="width_02">{lang company}Logo</li>
+                    <li class="width_03">{lang add_time}</li>
+                    <li class="width_04">{lang location}</li>
+                    <li class="width_04">{lang integrity_index}</li>
+                    <li class="width_04">{lang guestbook}</li>
+
+                  </ul>
+                  <div class="clear"></div>
+                </div>
+            
+                   {foreach from=$Items name=company item=item}
+                 <div class="list_product">
+                  <ul>
+                  <li class="width_02"><a href="space.php?userid={$item.userid}">{$item.logosrc}</a></li>
+
+                    <li class="width_03">
+                      <div>
+                        <ul>
+        
+                          <li class="font14"><strong><a href="space.php?userid={$item.userid}" class="external" target="_blank">{$item.name}</a></strong><font color="#999999" class="font12">[{$item.managetype}]<span class="span5">({$item.pubdate|date_format:"%Y-%m-%d"})</span></font></li>
+                          <li class="pad_top_5px break">{$item.description|strip_tags|truncate:100}</li>
+                          <li class="pad_top_5px break">{lang mainly_products}{$item.main_prod}</li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="width_04">{$Areas[1][$item.area_id1]}<br />{$Areas[2][$item.area_id2]}</li>
+                    <li class="width_04">{if $item.gradename}<img src="{$item.gradeimg}" alt="{$item.gradename}" /><br />{/if}<strong>{$item.credits}</strong></li>
+                    <li class="width_04"><a href="space.php?do=feedback&userid={$item.userid}" target="_blank" title="{$item.name}"><span class="im_pms"></span></a></li>
+                  </ul>
+                  <div class="clear"></div>
+                </div>
+                  {/foreach}
+                <div class="bg_gary">
+                <div class="pad_top_10px">
+                  <div class="page">{$ByPages}</div>
+                </div>
+                <div class="pad6">
+                  <div style="padding:10px 0;">Want to display your products? It's FREE! <a href="#"  onclick="redirect('{$SiteUrl}virtual-office/product.php?do=edit');" target="_blank" title="Post My Product"><img src="{$theme_img_path}images/btn_03.gif" border="0" align="absmiddle" /></a></div>
+                </div>
+                </div>
+              </div>
+	   </div>
+	    <div class="float_right">
+             <div class="pad_top_10px"  style="text-align:left;">
+                <div class="title_green"><span class="span_more"><a href="#"><img border="0" src="{$theme_img_path}images/more_blue.gif" alt="Busy Times" /></a></span>{lang newest_company}</div>
+            
+                <div class="border_green">
+                    <div class="featured" style="background:#FBFFF5; padding:2px; overflow:hidden;">
+                        <ul>         
+                           {pb:company row=10 name="item"}
+							<li class="margin_bottom_5px">{$item.link}</li>
+							{/pb:company}
+                        </ul>
+                    </div>
+                </div>
+            </div>	 
+    </div>
+    <div class="clear"></div>
+   <script>
+$("#SearchFrm").attr("action","index.php");
+$("#topMenuCompany").addClass("search_tag_a");
+</script>
+ {include file="footer.html"}

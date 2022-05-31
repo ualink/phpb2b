@@ -49,15 +49,17 @@ jQuery(document).ready(function($) {
 		  <td style="color:{$item.style}"><label for="item_{$item.id}">{$item.title}</label></td>
 		  <td>{$item.directory}</td>
 		  <td>{$item.author}</td>
-		  <td>{if $item.type=="system" and $item.available==1}<a href="templet.php?do=setup&name={$item.name}&id={$item.id}">{lang setup}</a> | {/if}{if $item.picture}<a href="{$item.picture}" title="" rel="lightbox">{lang preview}</a>{else}{lang preview}{/if}</td>
+		  <td>{if $item.is_default==1}<font color="green;">{lang used}</font> | {elseif $item.type=="system" and $item.available==1}<a href="templet.php?do=setup&name={$item.name}&id={$item.id}">{lang setup}</a> | {/if}{if $item.picture}<a href="{$item.picture}" title="" rel="lightbox">{lang preview}</a>{else}{lang preview}{/if}</td>
 		  <td class="handler">
            <ul id="handler_icon">
-            {if $item.available}
+			{if $item.is_default==1}
+            <li><a class="btn_edit" href="templet.php?do=edit&id={$item.id}&type={$item.type}{$addParams}" title="{lang edit}">{lang edit}</a></li>
+            {elseif $item.available}
             <li><a class="btn_edit" href="templet.php?do=edit&id={$item.id}&type={$item.type}{$addParams}" title="{lang edit}">{lang edit}</a></li>
              <li><a class="btn_uninstall" href="templet.php?do=uninstall&type={$item.type}&id={$item.id}{$addParams}" title="{lang uninstall}">{lang uninstall}</a></li>
              {else}
 			 <input type="hidden" name="entry[]" value="{$item.entry}" />
-            <li><a class="btn_install" href="templet.php?entry={$item.entry}&do=install&type={$item.type}{$addParams}" title="{lang install}">{lang insatll}</a></li>
+            <li><a class="btn_install" href="templet.php?entry={$item.entry}&do=install&type={$item.type}{$addParams}" title="{lang install}">{lang install}</a></li>
             {/if}
           </ul>  
 		 </td>

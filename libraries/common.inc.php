@@ -38,7 +38,8 @@ if ($_SERVER['REQUEST_URI']) {
 if (!$admin_runquery) {
     pb_hack_check();
 } //safe check to post, get.
-if (isset($_GET['app_lang'])) {
+if (!empty($app_lang)) {
+} elseif (isset($_GET['app_lang'])) {
     $app_lang = $_GET['app_lang'];
 } elseif (isset($_COOKIE[$cookiepre.'lang'])) {
     $app_lang = $_COOKIE[$cookiepre.'lang'];
@@ -62,19 +63,23 @@ $php_self = pb_getenv('PHP_SELF');
 $base_script = basename($php_self);
 list($basefilename) = explode('.', $base_script);
 define('WEBROOT_DIR', basename(dirname(dirname(__FILE__))));
-if (!defined('URL')) {
+if (empty($absolute_uri)) {
     $s = null;
     if (pb_getenv('HTTPS')) {
         $s = 's';
     }
-    $hosts = 'http'.$s.'://'.pb_getenv('HTTP_HOST');
+    $host_url = pb_getenv('HTTP_HOST');
+    $hosts = 'http'.$s.'://'.$host_url;
     $site_url = htmlspecialchars($hosts.preg_replace("/\/+(api|app)?\/*$/i", '', substr($php_self, 0, strrpos($php_self, '/'))).'/');
+    echo $site_url;
     if (WEBROOT_DIR != 'www' && strpos($site_url, '/'.WEBROOT_DIR)) {
         $site_url = substr($site_url, 0, strpos($site_url, WEBROOT_DIR) + strlen(WEBROOT_DIR)).'/';
     } else {
         $site_url = $hosts.'/';
     }
     define('URL', $site_url);
+} else {
+    define('URL', $absolute_uri);
 }
 $time_start = getmicrotime();
 $time_stamp = time();

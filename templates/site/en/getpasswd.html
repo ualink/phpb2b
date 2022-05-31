@@ -1,0 +1,83 @@
+{assign var="page_title" value=#get_password#}
+{include file="header.html"}
+<link href="{$theme_img_path}css/password.css" rel="stylesheet" type="text/css" />
+ <div class="bread_line">{$position}</div>
+
+  <div class="width_780">
+
+    <div class="pw_top">Forgot Your Member ID or Password?</div>
+
+    <div class="pw_middle">
+
+	  <div class="width_650" id="postf" style="display:block">
+                       <form name="getpasswdfrm" id="getPasswdFrm" method="post" action="getpasswd.php" onsubmit="$('#GoNext').attr('disabled',true);">
+                  <input type="hidden" name="action" value="getpasswd" />
+                  <!-- {formhash} -->
+
+		<div class="pad1 align_c">
+
+		  <ul>
+
+		    <li class="float_left_200">Member ID:</li>
+
+			<li class="float_right_400">
+
+			  <div><input type="text" name="data[username]" value="" id="dataUsername" /></div>
+
+			</li>
+
+		  </ul>
+
+		  <div class="clear"></div>
+
+		</div>
+
+		<div class="pad1 align_c">
+
+		  <ul>
+
+		    <li class="float_left_200">Email Address:</li>
+
+			<li class="float_right_400"><input type="text" name="data[email]" id="UserEmail" value="" /><div >{if $ERRORS}
+                    <p><font color="red" size="3">{$ERRORS}</font></p>
+					{/if}
+               </div>
+
+			</li>
+
+		  </ul>
+
+		  <div class="clear"></div>
+
+		</div>
+
+		<div class="pad1 align_c"><input type="submit" name="go_next" value="{lang send_password_email_next}" id="GoNext" onclick="return login(this);" /></div>
+
+	  </div>
+</form>
+
+	<div class="pw_middle2">
+
+	  <div class="line_top">
+
+	    <ul>
+
+		  <li>If you could not remember your registered e-mail address, please contact us</li>
+
+		  <li>Email: {$service_email}; Telephone: {$service_tel} </li>
+
+		</ul>
+
+	  </div>
+
+	</div>
+
+	<div class="pw_bottom"></div>
+
+  </div>
+      <div class="clear"></div>
+	  <script language="javascript" src="static/scripts/jquery/jquery.validate.js"></script>
+<script language="javascript">
+<!-- {fetch file="static/scripts/validate.js"} -->
+</script>
+<!-- {include file="footer.html"} -->

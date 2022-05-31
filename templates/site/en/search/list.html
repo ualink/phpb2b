@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<title>{$page_title} - {$site_title}</title>
+<base href="{$SiteUrl}">
+<meta name ="keywords" content="{$metakeywords}">
+<meta name ="description" content="{$metadescription}"> 
+<script src="{$WebRootUrl}scripts/jquery.js"></script>
+<script src="data/cache/{$JsLanguage}/locale.js" charset="{$charset}"></script>
+<style type="text/css">
+@import url({$WebRootUrl}{$theme_img_path}css/search.css);
+</style>
+<script>
+var input_keywords = "{lang input_keywords}";
+</script>
+<!-- {literal} -->
+<script>
+$(document).ready(function(){
+	$("#all_cats").click(function(){
+		$("#sub_cats").slideToggle("fast",function(){ $("#all_cats").toggleClass("tbos2"); $("#all_cats").toggleClass("tbos");} );
+	});
+});
+</script>
+<!-- {/literal} -->
+</head>
+<body>
+<!--top-->
+<div id="ie6">
+<p id="u_top"><a href="{$WebRootUrl}">{lang back_portal}</a>&nbsp;|&nbsp;<!-- {if !$pb_username} --><a href="{$WebRootUrl}logging.php" id="lb">{lang pls_login}</a><!-- {else} -->{#hello#|sprintf:$pb_username}&nbsp;|&nbsp;<a href="{$WebRootUrl}redirect.php?url=/virtual-office" target="_officeroom">{lang my_office_room}</a><!-- {/if} --></p>
+<table height="70" cellspacing="0" cellpadding="0" border="0">
+  <form name="search_frm" method="get" action="{$smarty.server.PHP_SELF}">
+  <tbody>
+  <tr>
+    <td nowrap="" valign="top" style="padding-left: 8px; width: 156px; padding-top: 20px; padding-right: 10px;"><a href="{$WebRootUrl}"><img title="logo" src="{$WebRootUrl}{$site_logo}" border=0 alt="{$site_banner_word}"></a></td>
+    <td nowrap="" align="left">
+      <table cellspacing="0" cellpadding="0" border="0" align="left">
+        <tbody>
+        <tr>
+          <td valign="center" class="tab">
+            <div class="Tit">
+			<!-- {foreach from=$top_modules name=module item=module key=key} -->
+			<!-- {if $key eq $smarty.get.do} -->
+			<strong>{$module}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+			<!-- {else} -->
+			<a href="{the_url module=list extra=do,`$key`|typeid|pos|total_count}">{$module}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<!-- {/if} -->
+			<!-- {/foreach} -->
+			</div></td></tr>
+        <tr>
+          <td nowrap><input value="{$smarty.get.q|urldecode}" name="q" id="kw" size="42" maxlength="90"> <input type="hidden" name="do" value="{$smarty.get.do}"> <span class="btn_wr"><input type="submit" onmouseout="this.className='btn'" onmousedown="this.className='btn btn_h'" class="btn" id="su" value="{lang search_now}"></span></td></tr></tbody></table></td>
+    <td nowrap="" align="right" width="100%" valign="center" class="log"><!-- A 468x60 banner --></td></tr></tbody></form></table><!--top-->
+<!--info-->
+<table cellspacing="0" cellpadding="0" class="reinfo">
+  <tbody>
+  <tr>
+    <td nowrap width="125" class="sethome"><div id="gxszHead"><div><strong><a href="javascript:;" onclick="$('#tbd').toggle();">{lang hide_or_show_option}</a></strong></div></div>
+</td>
+    <td nowrap="" align="right">{#search_result_paging#|sprintf:"`$highlight_str`":"`$paging.total`":"`$paging.from`":"`$paging.to`":"`$TimeSpend`"}</td></tr></tbody></table>
+
+<!--info-->
+<!--left column-->
+<div style="border-right: 1px solid rgb(178, 208, 234);" id="tbd" class="med">
+
+<div class="tbt">
+<!-- {foreach from=$modules name=module item=module key=key} -->
+<!-- {if $smarty.foreach.module.iteration==1} -->
+	<div class="tbos" id="all_cats"><a href="javascript:;" id="link_all_cats" class="q">{lang all_of}{$module}</a></div>
+	<div id="sub_cats">
+		<!-- {foreach from=$cats item=item1 key=key1} -->
+		<div class="tbou"><a href="{the_url module=list extra=typeid,`$key1`|pos|total_count}" class="q" style="{if $smarty.get.typeid eq $key1}font-weight:bold;{/if}">{$item1}</a></div>
+		<!-- {/foreach} -->
+	</div>
+	<!-- {else} -->
+<div class="tbos2"><a href="{the_url module=list extra=do,`$key`|typeid|pos|total_count}" class="q">{$module}</a></div>
+<!-- {/if} -->
+<!-- {/foreach} -->
+</div>
+
+<!--similar industry-->
+<div class="xgdh"><div class="xgdhtit">{lang sort_screening}</div>
+<!-- {pb:industry level=1} -->
+<a title="{$industry.title}" href="{the_url module=list extra=do,`$key`|industryid,`$industry.id`}">{$industry.title}</a>
+<!-- {/pb:industry} -->
+</div>
+<div class="xgdh"><div class="xgdhtit">{lang orderby_method}</div>
+<a title="" href="{the_url module=list extra=do,`$smarty.get.do`|orderby,dateline}">{lang sort_by_date}</a>
+</div>
+
+</div>
+<!--left column-->
+
+<!--right adv-->
+<div id="right_adv" style="width:255px;float:right;">
+<table id="mbEnd">
+  <tbody>
+  <tr>
+    <td class="std">
+      <ol id="ad_r">
+		<!-- {pb:company row=5} -->
+		<li style="height: auto; overflow: hidden;">
+        <h3><a title="{$company.name}" target="_blank" href="{$company.url}" id="an1">{$company.name}</a></h3>{lang main_business}{lang colon}{$company.main_prod|truncate_multi:25}
+        </li>
+		<!-- {/pb:company} -->
+	</ol>
+    <div id="aj_sogou0"></div></td>
+  </tr>
+ <tr>
+ 	<td class="r_ads">
+	</td>
+ </tr>
+  </tbody>
+</table>
+</div><!--right adv-->
+<div id="tads" class="tads">
+		<ol>
+		<!-- {adword row=3} -->
+		<li class="tas">
+		<div class="vsta">
+			<h3><a target="_blank" href="{$adword.target_url}" id="pa1">{$adword.title}</a></h3>
+			<span class="ac">{$adword.content}</span>
+			<span><cite>{$adword.url}</cite></span>
+			<table style="margin-top: 4px;" class="slk"><tbody><tr><td style="padding-left: 14px; vertical-align: top;"></td></tr></tbody></table>
+		</div>
+		</li>
+		<!-- {/adword} -->
+		</ol>
+	</div>
+<div id="res" class="med">
+	<div>
+    <ol>
+	<!-- {foreach from=$items name="result" item="item"} -->
+  <li class="g">  
+  <h3 class="r">&nbsp;<a title="{$item.title}" target="_blank" href="{$item.url}" class="l">{$item.title|truncate:20}</a><!-- {if $item.gradeimg} --><a title="{$item.gradename}" href="{$item.url}"><img src="{$item.gradeimg}" alt="{$item.gradename}"></a><!-- {/if} --><cite><!-- {if $item.extra} -->{$item.extra}<!-- {/if} --> - ({$item.pubdate})</cite>
+</h3>
+  <div class="s">
+  <!-- picture -->
+  <div class="tbt2">
+  <!-- {if $item.picture or $item.image} -->
+  <a target="_blank" href="{$item.url}"><img height="70" width="79" src="{$WebRootUrl}{$item.thumb}"></a>
+  <!-- {/if} -->
+  </div><!-- picture END -->
+  {$item.digest|truncate:100}
+  
+  </div>
+  
+  </li>
+  <!-- {foreachelse} -->
+	<div id="no_result" style="font-size: 14px; line-height: 200%; color: #000000; text-align: center; padding-top: 40px; width: 560px; word-wrap: break-word;">
+	<img src="{$WebRootUrl}{$theme_img_path}images/no_result.png">&nbsp;&nbsp;{$no_result_tip}</div>
+  <!-- {/foreach} -->
+  </ol></div>
+  
+<!-- adv2 -->
+<div style="width: 90%;" id="tadsb" class="c">
+<ol style="padding: 0px;" id="ad_b">
+</ol></div><!-- adv2 -->
+<!-- PAGE -->
+<br>  
+<div class="p"><div class="jogger"><!-- {pager rowcount=$paging.total limit=10 txt_prev=#prev_page# txt_next=#next_page#} --></div></div><br>
+<!-- PAGE END -->
+
+<div class="kgd">
+<div id="rs">
+<table cellpadding="0">
+<tbody>
+<tr>
+<th class="tt" rowspan="2">{lang similar_search}</th>
+<!-- {foreach from=$similar_search item=item name=similar} -->
+<th><a href="{the_url module=list extra=q,`$item.title`|total_count|pos|typeid}">{$item.title}</a>
+</th><td></td>
+<!-- {if $smarty.foreach.similar.iteration is div by 5} -->
+<th></th>
+</tr><tr>
+<!-- {/if} -->
+<!-- {/foreach} -->
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- similar search END-->
+</div>
+
+<!-- kw2 -->
+<div style="line-height: 0pt; height: 1px;"></div>
+<div style="margin-top: 1.4em; text-align: center;" class="clr">
+
+<div style="clear: both; padding-left: 130px; background: none repeat scroll 0% 0% rgb(255, 255, 255); overflow: hidden; height: 50px; text-align: left;">
+<form name="f1" action="{$smarty.server.PHP_SELF}"><span style="margin-bottom: 7px; height: 22px;"><input value="{$smarty.get.q|urldecode}" name="q" id="kw" rel="kw" size="42" maxlength="90"> <input type="hidden" name="do" value="{$smarty.get.do}"> <span class="btn_wr"><input type="submit" onmouseout="this.className='btn'" onmousedown="this.className='btn btn_h'" class="btn" id="su" value="{lang search_now}"></span></form></div>
+</div>
+
+<div id="ft"><p>
+<!--{pb:userpage row=15 sep="<span>&nbsp;|&nbsp;</span>"}-->
+	{$page.link}
+<!--{/pb:userpage}-->
+</p>
+
+<p id="b">{lang copyright}&copy;&nbsp;{lang service_hotline}{$service_tel}&nbsp;{lang service_email}:{mailto text="`$service_email`" address="`$service_email`" encode="javascript"}</p>
+</div>
+</div>
+<script language="javascript" src="static/scripts/highlight.js"></script>
+<!-- {if $highlight_str} -->
+<script>
+$('#res div:not("#no_result,#rs")').highlight('{$highlight_str}');
+</script>
+<!-- {/if} -->
+</body>
+</html>

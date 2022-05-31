@@ -1,0 +1,20 @@
+{assign var="page_title" value="$page_title"}
+{assign var="nav_id" value="$nav_id"}
+{include file="header.html"}
+<style type="text/css">
+@import url({$theme_img_path}widgets.css);
+</style>
+<div class="wrapper">
+  <div class="content">
+    <div class="tips"><span>{$position}</span></div>
+    <div class="blank"></div>
+    <div class="body_content">
+     <div class="title_bar_s1 txt_center">
+            <h2>{$item.subject}</h2>
+         </div>  
+      <div class="content_bord">{$item.message}</div>
+       <div class="blank"></div>
+    </div>
+    </div>
+</div>
+{include file="footer.html"}
