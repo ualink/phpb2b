@@ -4,6 +4,14 @@ var menu = {$ActionMenus};
 var currTab = 'dashboard';
 var firstOpen = [];
 </script>
+<style>
+iframe {
+display: block; /* iframes are inline by default */
+border: none; /* Reset default border */
+height: 100vh; /* Viewport-relative units */
+width: 100vw;
+}
+</style>
 <script type="text/javascript" src="{$admin_theme_path}js/index.js" charset="{$charset}"></script>
 <div class="back_nav">
     <div class="back_nav_list">
@@ -37,7 +45,7 @@ var firstOpen = [];
 		</div>
     </div>
     <div id="right">
-        <iframe frameborder="0" style="display:none;" width="100%" id="workspace" name="workspace"></iframe>
+        <iframe frameborder="0" width="100%" id="workspace" name="workspace"></iframe>
     </div>
     <div class="clear"></div>
 </div>
