@@ -7,7 +7,7 @@
  */
 define('IN_PHPB2B', true);
 define('PHPB2B_ROOT', substr(dirname(__FILE__), 0, -9));
-define('MAGIC_QUOTES_GPC', function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc());
+define('MAGIC_QUOTES_GPC', ini_set('magic_quotes_runtime', 0) ? true : false);
 if (!defined('DIRECTORY_SEPARATOR')) {
     define('DIRECTORY_SEPARATOR', '/');
 }
