@@ -38,8 +38,7 @@ if ($_SERVER['REQUEST_URI']) {
 if (!$admin_runquery) {
     pb_hack_check();
 } //safe check to post, get.
-if (!empty($app_lang)) {
-} elseif (isset($_GET['app_lang'])) {
+if (isset($_GET['app_lang'])) {
     $app_lang = $_GET['app_lang'];
 } elseif (isset($_COOKIE[$cookiepre.'lang'])) {
     $app_lang = $_COOKIE[$cookiepre.'lang'];
