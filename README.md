@@ -9,17 +9,18 @@ Our goal is to enable more enterprises to quickly establish industry e-commerce 
 
 It is expected that PHPB2B will become the first choice for enterprises to move towards e-commerce.
 
-## Some Handy Links
+## 演示网站 / Some Demos
+
+[DEMO CN](http://demo.phpb2b.com/cn6.0) - PHPB2B Simple Chinese Demonstration.
+
+[DEMO EN](http://demo.phpb2b.com/en6.0) - PHPB2B English Demonstration.
+
+## 技术支持 / Get Support!
+[GitHub Issues](https://github.com/ulinke/phpb2b/issues) - Got issues? Please tell us!
 
 [DOCUMENT](http://www.phpb2b.com/) - The documents for PHPB2B.
 
 [BBS](http://bbs.phpb2b.com) - THE PHPB2B Forum.
-
-[DEMO CN](http://demo.phpb2b.com/cn6.0) - PHPB2B Simple Chinese Demonstration.
-[DEMO EN](http://demo.phpb2b.com/en6.0) - PHPB2B English Demonstration.
-
-## Get Support!
-[GitHub Issues](https://github.com/ulinke/phpb2b/issues) - Got issues? Please tell us!
 
 [![Demo Status](http://demo.phpb2b.com/en6.0/static/images/logo.jpg)](http://demo.phpb2b.com/cn6.0/redirect.php?app_lang=en-us)
 
